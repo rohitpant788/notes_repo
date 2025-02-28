@@ -1,0 +1,762 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>2.2 The Presentation Layer, DTO and Controllers</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-transparentGray { background-color: undefined; }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="199e8d61-387b-80d9-86f9-db612876e08f" class="page sans"><header><h1 class="page-title">2.2 The Presentation Layer, DTO and Controllers</h1><p class="page-description"></p></header><div class="page-body"><h1 id="199e8d61-387b-80d1-9134-d98d7e72c8e9" class=""><strong>Spring Boot - Presentation Layer &amp; Controller Basics</strong></h1><h2 id="199e8d61-387b-80a6-8144-febc45e516dc" class=""><strong>🌟 Introduction to Web Architecture</strong></h2><ul id="199e8d61-387b-80d7-9393-f0b2b1fb832b" class="bulleted-list"><li style="list-style-type:disc">The <strong>presentation layer</strong> is the first layer in web architecture.</li></ul><ul id="199e8d61-387b-8023-8698-c48825fedb7c" class="bulleted-list"><li style="list-style-type:disc">It is responsible for handling <strong>client communication</strong> via <strong>HTTP connections</strong>.</li></ul><ul id="199e8d61-387b-804f-9a8a-cf6b2d476c75" class="bulleted-list"><li style="list-style-type:disc">It acts as the <strong>entry point</strong> between the client and the Spring Boot application.</li></ul><h3 id="199e8d61-387b-8052-8e00-ca38fa42433e" class=""><strong>👨‍💻 Role of the Controller in Spring Boot</strong></h3><ul id="199e8d61-387b-804a-b3aa-ce2039beaf98" class="bulleted-list"><li style="list-style-type:disc">The <strong>controller</strong> is responsible for:<ul id="199e8d61-387b-8096-a3f5-f487d110c774" class="bulleted-list"><li style="list-style-type:circle">Handling <strong>incoming requests</strong>.</li></ul><ul id="199e8d61-387b-80a3-85e5-cafe0ebf26ac" class="bulleted-list"><li style="list-style-type:circle">Processing the <strong>input from the client</strong>.</li></ul><ul id="199e8d61-387b-8080-bc1d-ecb598dcb4df" class="bulleted-list"><li style="list-style-type:circle">Returning the <strong>output response</strong> back to the client.</li></ul></li></ul><hr id="199e8d61-387b-803a-92de-fe7262b7fb59"/><h2 id="199e8d61-387b-804b-94f3-de3a477c2c65" class=""><strong>🚀 Spring Boot Controllers - Deep Dive</strong></h2><h3 id="199e8d61-387b-803b-a3f0-d69d6a77d3fb" class=""><strong>1️⃣ Dispatcher Servlet</strong></h3><ul id="199e8d61-387b-801a-be1f-fa0f335d07f7" class="bulleted-list"><li style="list-style-type:disc"><strong>Dispatcher Servlet</strong> is the core of Spring MVC.</li></ul><ul id="199e8d61-387b-80a7-9973-eed5482a0818" class="bulleted-list"><li style="list-style-type:disc">When the server starts, the <strong>Dispatcher Servlet scans all controllers</strong> and maps request URLs to appropriate methods.</li></ul><p id="199e8d61-387b-80e5-8518-d98d4c802677" class="">🔹 <strong>Responsibilities of Dispatcher Servlet:</strong></p><ul id="199e8d61-387b-808a-9505-e57fb74e549d" class="bulleted-list"><li style="list-style-type:disc">Maps URLs to <strong>specific methods</strong>.</li></ul><ul id="199e8d61-387b-8017-a76e-e5d48213fbae" class="bulleted-list"><li style="list-style-type:disc">Routes <strong>GET, POST, PUT, DELETE</strong> requests.</li></ul><ul id="199e8d61-387b-80b9-8368-d5ca0bdaa83e" class="bulleted-list"><li style="list-style-type:disc">Delegates requests to appropriate <strong>controllers</strong>.</li></ul><h3 id="199e8d61-387b-8039-bc25-ccf11f8b3bfb" class=""><strong>2️⃣ Creating the First Controller</strong></h3><ol type="1" id="199e8d61-387b-803c-b1a9-f8047b887c7c" class="numbered-list" start="1"><li><strong>Navigate to the controller package in the Spring Boot project.</strong></li></ol><ol type="1" id="199e8d61-387b-805f-86cd-c888158fa94a" class="numbered-list" start="2"><li>Create a new controller class:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="199e8d61-387b-8042-980c-d6151e4b0999" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@RestController
+public class EmployeeController {
+}
+
+</code></pre></li></ol><ol type="1" id="199e8d61-387b-80f6-9f3a-ca9a2731ad9d" class="numbered-list" start="3"><li><strong>Use </strong><code><strong>@RestController</strong></code><strong> Annotation:</strong><ul id="199e8d61-387b-80f5-b9ed-ee13e79d4e60" class="bulleted-list"><li style="list-style-type:disc">Ensures that this class is a REST controller.</li></ul><ul id="199e8d61-387b-80a1-8ff6-c3cc19a18210" class="bulleted-list"><li style="list-style-type:disc">It is a combination of <code>@Controller</code> and <code>@ResponseBody</code>.</li></ul></li></ol><ol type="1" id="199e8d61-387b-80ce-bf38-e6454bfe83eb" class="numbered-list" start="4"><li><strong>Alternative: Use </strong><code><strong>@Controller</strong></code><ul id="199e8d61-387b-8005-8995-fd9864ed6c5e" class="bulleted-list"><li style="list-style-type:disc">If using <code>@Controller</code>, you need to add <code>@ResponseBody</code> to every method manually.</li></ul></li></ol><h3 id="199e8d61-387b-8074-8288-f0fc608543d8" class=""><strong>3️⃣ How </strong><code><strong>@RestController</strong></code><strong> Works</strong></h3><ul id="199e8d61-387b-8089-9ea2-c4ec5b10f1aa" class="bulleted-list"><li style="list-style-type:disc"><code>@RestController</code> is internally:<ul id="199e8d61-387b-801e-9e27-dad6afecd766" class="bulleted-list"><li style="list-style-type:circle"><strong>Extending </strong><code><strong>@Controller</strong></code></li></ul><ul id="199e8d61-387b-80df-bd89-ff7474bf8678" class="bulleted-list"><li style="list-style-type:circle"><strong>Using </strong><code><strong>@ResponseBody</strong></code><strong> to handle responses</strong>.</li></ul></li></ul><p id="199e8d61-387b-8019-9491-e83d0df79a12" class="">🔹 <strong>Example of </strong><code><strong>@ResponseBody</strong></code><strong> with </strong><code><strong>@Controller</strong></code><strong> (without </strong><code><strong>@RestController</strong></code><strong>):</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="199e8d61-387b-805f-8e34-cd3fe32bb80a" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@Controller
+public class EmployeeController {
+    @RequestMapping(&quot;/employee&quot;)
+    @ResponseBody
+    public EmployeeDTO getEmployee() {
+        return new EmployeeDTO(1L, &quot;John&quot;, &quot;john@example.com&quot;, 30);
+    }
+}
+
+</code></pre><p id="199e8d61-387b-8066-b58b-f393cd9a52d0" class="">💡 <strong>With </strong><code><strong>@RestController</strong></code><strong>, </strong><code><strong>@ResponseBody</strong></code><strong> is not needed separately!</strong></p><hr id="199e8d61-387b-80ad-b57b-d06bc72d72d3"/><h2 id="199e8d61-387b-8074-b960-ee79e262908a" class=""><strong>🔗 Understanding Request Mappings</strong></h2><p id="199e8d61-387b-80dd-94c5-def2bb1d7d53" class="">Spring MVC allows handling various HTTP requests using <strong>different mapping annotations</strong>.</p><h3 id="199e8d61-387b-80ff-b5f6-fa50a2b7e1f3" class=""><strong>1️⃣ Request Mapping (</strong><code><strong>@RequestMapping</strong></code><strong>)</strong></h3><ul id="199e8d61-387b-80fc-8719-f118c5f4ba37" class="bulleted-list"><li style="list-style-type:disc">Used at <strong>class level</strong> to define a <strong>common base URL</strong>.</li></ul><ul id="199e8d61-387b-8026-b592-deb633907b47" class="bulleted-list"><li style="list-style-type:disc">Example:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="199e8d61-387b-80c0-a148-eda4e5c2881d" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@RestController
+@RequestMapping(&quot;/employees&quot;) // Base URL
+public class EmployeeController {
+}
+
+</code></pre></li></ul><ul id="199e8d61-387b-80c3-a13c-c012deccbb8b" class="bulleted-list"><li style="list-style-type:disc">Now, any mapping inside this class will <strong>append to </strong><code><strong>/employees</strong></code>.</li></ul><h3 id="199e8d61-387b-8085-8000-e5f7d9a1d4b8" class=""><strong>2️⃣ Types of HTTP Mappings</strong></h3><table id="199e8d61-387b-80c8-946b-c8a0e4d41af5" class="simple-table"><tbody><tr id="199e8d61-387b-806e-bf95-ee16344edf5e"><td id="_X&gt;b" class="">Annotation</td><td id="W~hw" class="">Request Type</td><td id="GVy&lt;" class="">Purpose</td></tr><tr id="199e8d61-387b-80bc-8038-e7728a8f0d34"><td id="_X&gt;b" class=""><code>@GetMapping</code></td><td id="W~hw" class="">GET</td><td id="GVy&lt;" class="">Fetch Data</td></tr><tr id="199e8d61-387b-8054-bbbf-c5344e8e104c"><td id="_X&gt;b" class=""><code>@PostMapping</code></td><td id="W~hw" class="">POST</td><td id="GVy&lt;" class="">Create Resource</td></tr><tr id="199e8d61-387b-8093-952f-cc7090d1b67f"><td id="_X&gt;b" class=""><code>@PutMapping</code></td><td id="W~hw" class="">PUT</td><td id="GVy&lt;" class="">Update Entire Resource</td></tr><tr id="199e8d61-387b-8024-a2cb-f222de672ef6"><td id="_X&gt;b" class=""><code>@DeleteMapping</code></td><td id="W~hw" class="">DELETE</td><td id="GVy&lt;" class="">Remove Resource</td></tr><tr id="199e8d61-387b-806d-b65e-fafd5c6cdbbd"><td id="_X&gt;b" class=""><code>@PatchMapping</code></td><td id="W~hw" class="">PATCH</td><td id="GVy&lt;" class="">Modify Partial Resource</td></tr></tbody></table><hr id="199e8d61-387b-80d3-9d81-ecd28af5c96b"/><h2 id="199e8d61-387b-80aa-8d39-d48fcb0c2292" class=""><strong>🟢 Implementing GET Request (</strong><code><strong>@GetMapping</strong></code><strong>)</strong></h2><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="199e8d61-387b-80f4-ab55-e5044a186a2b" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@GetMapping(&quot;/{id}&quot;)
+public EmployeeDTO getEmployeeById(@PathVariable Long id) {
+    return new EmployeeDTO(id, &quot;John Doe&quot;, &quot;john@example.com&quot;, 30);
+}
+
+</code></pre><h3 id="199e8d61-387b-8090-93bd-e26b1931af3d" class=""><strong>📝 Explanation:</strong></h3><ol type="1" id="199e8d61-387b-804e-b603-d47eacd1204e" class="numbered-list" start="1"><li><code><strong>@GetMapping(&quot;/{id}&quot;)</strong></code> → Maps <code>GET /employees/{id}</code>.</li></ol><ol type="1" id="199e8d61-387b-8049-a22b-d7ae1f50ea0a" class="numbered-list" start="2"><li><code><strong>@PathVariable Long id</strong></code> → Extracts <code>{id}</code> from the URL.</li></ol><ol type="1" id="199e8d61-387b-809b-83f7-e08971bd151b" class="numbered-list" start="3"><li>Returns an <strong>EmployeeDTO</strong> object.</li></ol><h3 id="199e8d61-387b-8014-8a08-e6664850a4c3" class=""><strong>🧩 Path Variables vs Request Parameters</strong></h3><table id="199e8d61-387b-8066-b6d9-e8ce1bd1b72d" class="simple-table"><tbody><tr id="199e8d61-387b-8093-b954-e7aaddd71f7e"><td id="auhG" class="">Approach</td><td id="o?Qh" class="">Example URL</td><td id="\|s~" class="">Use Case</td></tr><tr id="199e8d61-387b-80d7-b1c6-e8fe51e4bf6f"><td id="auhG" class=""><strong>Path Variable (</strong><code><strong>@PathVariable</strong></code><strong>)</strong></td><td id="o?Qh" class=""><code>/employees/1</code></td><td id="\|s~" class="">Mandatory data like <code>id</code></td></tr><tr id="199e8d61-387b-80f6-b2bd-fb92841f1406"><td id="auhG" class=""><strong>Request Parameter (</strong><code><strong>@RequestParam</strong></code><strong>)</strong></td><td id="o?Qh" class=""><code>/employees?sortBy=name</code></td><td id="\|s~" class="">Optional filters/sorting</td></tr></tbody></table><p id="199e8d61-387b-8043-8fbc-da6b8746ec40" class="">🔹 <strong>Example of Request Parameters:</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="199e8d61-387b-8020-9d6f-c427c3470928" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@GetMapping
+public String getAllEmployees(@RequestParam(required = false) String sortBy) {
+    return &quot;Sorting by: &quot; + sortBy;
+}
+
+</code></pre><ul id="199e8d61-387b-8089-904d-c1ba1503a5fa" class="bulleted-list"><li style="list-style-type:disc"><code>@RequestParam(required = false)</code> makes the parameter <strong>optional</strong>.</li></ul><hr id="199e8d61-387b-8000-8db5-fd281d3850e5"/><h2 id="199e8d61-387b-803b-ac8d-fd849501c159" class=""><strong>🟠 Implementing POST Request (</strong><code><strong>@PostMapping</strong></code><strong>)</strong></h2><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="199e8d61-387b-804c-945c-d7f165513d94" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@PostMapping
+public EmployeeDTO createEmployee(@RequestBody EmployeeDTO employeeDTO) {
+    employeeDTO.setId(100L);
+    return employeeDTO;
+}
+
+</code></pre><h3 id="199e8d61-387b-805e-a651-e3a2d53fc107" class=""><strong>📝 Explanation:</strong></h3><ol type="1" id="199e8d61-387b-80dd-8527-c73dc158796f" class="numbered-list" start="1"><li><code><strong>@PostMapping</strong></code> → Handles <code>POST /employees</code>.</li></ol><ol type="1" id="199e8d61-387b-80d2-a70f-d15fc6466147" class="numbered-list" start="2"><li><code><strong>@RequestBody EmployeeDTO employeeDTO</strong></code>:<ul id="199e8d61-387b-80f0-9520-de6d601276d7" class="bulleted-list"><li style="list-style-type:disc">Accepts JSON input and maps it to <code>EmployeeDTO</code>.</li></ul><ul id="199e8d61-387b-8061-8b7f-dda3395f95e7" class="bulleted-list"><li style="list-style-type:disc">Uses <strong>Jackson library</strong> to <strong>automatically convert JSON to Java object</strong>.</li></ul></li></ol><ol type="1" id="199e8d61-387b-80b5-ad1a-e5b49fb0e6eb" class="numbered-list" start="3"><li><strong>Returns the saved employee</strong>.</li></ol><p id="199e8d61-387b-80c4-b2bb-c985d8e36335" class="">📌 <strong>Sending JSON in Postman:</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="199e8d61-387b-80e9-8d8d-e2cbdc8cba6e" class="code"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">json
+CopyEdit
+{
+  &quot;name&quot;: &quot;Ram&quot;,
+  &quot;email&quot;: &quot;ram@example.com&quot;,
+  &quot;age&quot;: 23
+}
+
+</code></pre><ul id="199e8d61-387b-8091-8c36-c5146e80c0b4" class="bulleted-list"><li style="list-style-type:disc">Response:</li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="199e8d61-387b-8042-98ef-cd12965619c9" class="code"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">json
+CopyEdit
+{
+  &quot;id&quot;: 100,
+  &quot;name&quot;: &quot;Ram&quot;,
+  &quot;email&quot;: &quot;ram@example.com&quot;,
+  &quot;age&quot;: 23
+}
+
+</code></pre><hr id="199e8d61-387b-804a-b8ca-febd5cc352db"/><h2 id="199e8d61-387b-8082-b034-dededc975803" class=""><strong>🟣 Implementing PUT Request (</strong><code><strong>@PutMapping</strong></code><strong>)</strong></h2><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="199e8d61-387b-8060-a932-e883be49f55c" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@PutMapping(&quot;/{id}&quot;)
+public String updateEmployee(@PathVariable Long id, @RequestBody EmployeeDTO updatedEmployee) {
+    return &quot;Updated Employee ID: &quot; + id;
+}
+
+</code></pre><h3 id="199e8d61-387b-8093-b5f6-c982bbb2b41c" class=""><strong>📝 Explanation:</strong></h3><ul id="199e8d61-387b-809c-8880-d6cd27a3a71a" class="bulleted-list"><li style="list-style-type:disc"><strong>PUT is used for full updates</strong>.</li></ul><ul id="199e8d61-387b-8054-abb9-cc2393669e33" class="bulleted-list"><li style="list-style-type:disc">Requires:<ul id="199e8d61-387b-80ef-b09e-de1b8538ce86" class="bulleted-list"><li style="list-style-type:circle"><code>@PathVariable Long id</code> to specify <strong>which employee to update</strong>.</li></ul><ul id="199e8d61-387b-809b-a7f3-d6866aa7d37f" class="bulleted-list"><li style="list-style-type:circle"><code>@RequestBody EmployeeDTO</code> for <strong>new values</strong>.</li></ul></li></ul><hr id="199e8d61-387b-80e8-856e-f9894d654a56"/><h2 id="199e8d61-387b-8044-a054-f6843a3146d5" class=""><strong>🔴 Implementing DELETE Request (</strong><code><strong>@DeleteMapping</strong></code><strong>)</strong></h2><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="199e8d61-387b-809b-9b1c-f5628f890e5e" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@DeleteMapping(&quot;/{id}&quot;)
+public String deleteEmployee(@PathVariable Long id) {
+    return &quot;Deleted Employee ID: &quot; + id;
+}
+
+</code></pre><h3 id="199e8d61-387b-80d2-9db0-fdd7adbd90e0" class=""><strong>📝 Explanation:</strong></h3><ul id="199e8d61-387b-80b2-85b1-d71e0adc4d6e" class="bulleted-list"><li style="list-style-type:disc">Maps <code>DELETE /employees/{id}</code>.</li></ul><ul id="199e8d61-387b-8055-9e0f-ee8be2136557" class="bulleted-list"><li style="list-style-type:disc">Deletes the employee <strong>identified by </strong><code><strong>id</strong></code>.</li></ul><hr id="199e8d61-387b-803d-b100-f48aa7504d0b"/><h2 id="199e8d61-387b-80a3-9e87-f79ac9bb945d" class=""><strong>🟡 Component Scanning in Spring Boot</strong></h2><h3 id="199e8d61-387b-8012-b9cb-deda49275977" class=""><strong>🔍 How Spring Boot Detects Controllers</strong></h3><ol type="1" id="199e8d61-387b-803b-ae76-c1ef60c97353" class="numbered-list" start="1"><li><strong>Spring Boot automatically scans components</strong>.</li></ol><ol type="1" id="199e8d61-387b-80b7-9f08-d88fd7f3ccb6" class="numbered-list" start="2"><li><code><strong>@SpringBootApplication</strong></code> enables scanning.</li></ol><ol type="1" id="199e8d61-387b-8053-bd90-e5b7750e4149" class="numbered-list" start="3"><li>Uses <code><strong>@ComponentScan</strong></code> to locate beans.</li></ol><p id="199e8d61-387b-80d9-a93b-fe7b21175d2c" class="">💡 <strong>Ensures controllers are detected without manual configuration!</strong></p><hr id="199e8d61-387b-8075-96c3-eb8567660407"/><h2 id="199e8d61-387b-8030-be60-c58adfff92f6" class=""><strong>✅ Summary - Quick Revision</strong></h2><table id="199e8d61-387b-80ed-90cb-cd62620d3dda" class="simple-table"><tbody><tr id="199e8d61-387b-80ca-b445-c978dab7c310"><td id="\twx" class="">Topic</td><td id="AynP" class="">Key Points</td></tr><tr id="199e8d61-387b-8072-b6a9-e0c00af71960"><td id="\twx" class=""><strong>Presentation Layer</strong></td><td id="AynP" class="">Handles client-server interaction.</td></tr><tr id="199e8d61-387b-807a-844c-c1409c173e53"><td id="\twx" class=""><strong>Controller Role</strong></td><td id="AynP" class="">Manages incoming requests.</td></tr><tr id="199e8d61-387b-801f-8de8-fb2f78468e09"><td id="\twx" class=""><strong>Dispatcher Servlet</strong></td><td id="AynP" class="">Maps requests to methods.</td></tr><tr id="199e8d61-387b-80d0-a07f-f58a9a6d6b93"><td id="\twx" class=""><code><strong>@RestController</strong></code></td><td id="AynP" class="">Combines <code>@Controller</code> + <code>@ResponseBody</code>.</td></tr><tr id="199e8d61-387b-8086-bc7a-e12562fec79e"><td id="\twx" class=""><strong>GET Request</strong></td><td id="AynP" class="">Uses <code>@GetMapping</code> + <code>@PathVariable</code>.</td></tr><tr id="199e8d61-387b-80b8-b659-da6d1b44ccc3"><td id="\twx" class=""><strong>POST Request</strong></td><td id="AynP" class="">Uses <code>@PostMapping</code> + <code>@RequestBody</code>.</td></tr><tr id="199e8d61-387b-8063-9878-d441bfbb9299"><td id="\twx" class=""><strong>PUT Request</strong></td><td id="AynP" class="">Uses <code>@PutMapping</code> + <code>@RequestBody</code>.</td></tr><tr id="199e8d61-387b-801d-b326-d594e48d7b3c"><td id="\twx" class=""><strong>DELETE Request</strong></td><td id="AynP" class="">Uses <code>@DeleteMapping</code>.</td></tr><tr id="199e8d61-387b-80df-aba8-d7e938e5aca9"><td id="\twx" class=""><strong>Path Variables</strong></td><td id="AynP" class="">Used for mandatory parameters.</td></tr><tr id="199e8d61-387b-80ed-bd59-fb8850eab87a"><td id="\twx" class=""><strong>Request Params</strong></td><td id="AynP" class="">Used for optional filters/sorting.</td></tr><tr id="199e8d61-387b-80ec-b124-ea00d94dcad4"><td id="\twx" class=""><strong>Jackson Library</strong></td><td id="AynP" class="">Converts JSON ↔ Java Object.</td></tr><tr id="199e8d61-387b-8047-8fe8-fbddd9913382"><td id="\twx" class=""><strong>Component Scanning</strong></td><td id="AynP" class="">Auto-detects controllers.</td></tr></tbody></table><hr id="199e8d61-387b-8063-9a79-cb11dc472150"/><p id="199e8d61-387b-802a-93b2-f70d1587ae58" class="">🔥 <strong>Interview Tip:</strong></p><ul id="199e8d61-387b-8001-87d4-fabfc04b16be" class="bulleted-list"><li style="list-style-type:disc">Understand the <strong>difference between GET, POST, PUT, DELETE, PATCH</strong>.</li></ul><ul id="199e8d61-387b-8070-a9f3-e7174e04383f" class="bulleted-list"><li style="list-style-type:disc">Be clear on <strong>Path Variables vs Request Parameters</strong>.</li></ul><ul id="199e8d61-387b-80a1-85fe-c15fd4d5cd41" class="bulleted-list"><li style="list-style-type:disc">Know how <strong>Spring Boot handles request mapping automatically</strong>.</li></ul><hr id="199e8d61-387b-8044-b9b8-f70f091bfa8c"/><p id="199e8d61-387b-8048-9d77-cb7c8f8635a8" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

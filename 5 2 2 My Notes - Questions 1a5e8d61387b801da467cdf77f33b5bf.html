@@ -1,0 +1,810 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>5.2.2 My Notes - Questions</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-transparentGray { background-color: undefined; }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1a5e8d61-387b-801d-a467-cdf77f33b5bf" class="page sans"><header><h1 class="page-title">5.2.2 My Notes - Questions</h1><p class="page-description"></p></header><div class="page-body"><p id="1a5e8d61-387b-803d-bbff-d043a736ff14" class="">I have created a <strong>Spring Boot application</strong> with <strong>Spring Security enabled</strong> by simply adding the Spring Security dependency in my <code>pom.xml</code>.</p><ol type="1" id="1a5e8d61-387b-8093-bf24-ce0d6c500c2d" class="numbered-list" start="1"><li>When I <strong>launch my application</strong>, I see the log message:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a5e8d61-387b-8098-b236-f7c167d0629d" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">Using generated security password: &lt;random-password&gt;</code></pre><ul id="1a5e8d61-387b-8014-a43e-e3f4bc95cb6e" class="bulleted-list"><li style="list-style-type:disc">The <strong>default username</strong> is <code>user</code>.</li></ul><ul id="1a5e8d61-387b-80dc-a3d1-cc78b3c0fef8" class="bulleted-list"><li style="list-style-type:disc">When I try to access any secured <strong>GET API</strong>, the browser <strong>prompts for authentication</strong>.</li></ul></li></ol><ol type="1" id="1a5e8d61-387b-808c-a5e5-fafcc79d0101" class="numbered-list" start="2"><li>After <strong>logging in</strong>, I noticed that in the <strong>network call for the login endpoint</strong>, a <strong>CSRF token is being generated</strong>.<ul id="1a5e8d61-387b-8048-a4d6-f24a7174774d" class="bulleted-list"><li style="list-style-type:disc">The CSRF token is <strong>hidden in the login form</strong>.</li></ul><ul id="1a5e8d61-387b-8057-ae33-d06e7e437318" class="bulleted-list"><li style="list-style-type:disc">On each <strong>page refresh (before logging in)</strong>, a <strong>new CSRF token is generated</strong>.</li></ul><ul id="1a5e8d61-387b-8043-8108-f0f32d767cf4" class="bulleted-list"><li style="list-style-type:disc"><strong>After logging in</strong>, I can see a <strong>JSESSIONID cookie</strong> inside the browser’s application storage.</li></ul></li></ol><p id="1a5e8d61-387b-80d9-b452-f892dd0bf1cd" class="">
+</p><p id="1a5e8d61-387b-8071-80e3-fc7f24fef108" class="">Also , <br/><br/></p><p id="1a5e8d61-387b-80a3-932a-fe78e55ac251" class="">I have a <strong>Spring Boot application</strong> with <strong>Spring Security enabled</strong> and a <strong>React frontend</strong>.</p><ol type="1" id="1a5e8d61-387b-8032-a615-f5bcf649e216" class="numbered-list" start="1"><li><strong>When I first implemented authentication</strong>, I <strong>disabled CSRF protection</strong> in Spring Security (<code>.csrf().disable()</code>).</li></ol><ol type="1" id="1a5e8d61-387b-8023-abff-d20fef69524e" class="numbered-list" start="2"><li><strong>Later, it was identified as a security vulnerability</strong>, and now I need to <strong>enable CSRF protection</strong>.</li></ol><ol type="1" id="1a5e8d61-387b-801c-9bd5-d3c9a1947d84" class="numbered-list" start="3"><li>Since my <strong>UI is React-based</strong>, I need to understand <strong>what changes are required on both the backend and frontend</strong> to support CSRF protection correctly.</li></ol><h3 id="1a5e8d61-387b-80d0-8af1-e7b473216c8b" class=""><strong>My Questions:</strong></h3><ol type="1" id="1a5e8d61-387b-8094-a4bd-fd8b5e15196e" class="numbered-list" start="1"><li><strong>Where is the CSRF token stored after login?</strong></li></ol><ol type="1" id="1a5e8d61-387b-80a1-ad58-e5054dfc8b10" class="numbered-list" start="2"><li><strong>Do I need to pass the CSRF token for every request after login?</strong></li></ol><ol type="1" id="1a5e8d61-387b-80b1-84da-d9ccc355a7f5" class="numbered-list" start="3"><li><strong>I see that my application sets a </strong><code><strong>JSESSIONID</strong></code><strong> cookie after login. Does this </strong><code><strong>JSESSIONID</strong></code><strong> derive from both the CSRF token and my password for security?</strong></li></ol><ol type="1" id="1a5e8d61-387b-809f-a302-f97bc05d5104" class="numbered-list" start="4"><li><strong>What changes are required in my Spring Security configuration to re-enable CSRF?</strong></li></ol><ol type="1" id="1a5e8d61-387b-80e9-8064-ea87d4ff3680" class="numbered-list" start="5"><li><strong>How should my React frontend handle CSRF protection?</strong></li></ol><ol type="1" id="1a5e8d61-387b-802b-a224-f351d4004adc" class="numbered-list" start="6"><li><strong>Can you frame some interview questions around Spring Security, CSRF, and session management?</strong></li></ol><p id="1a5e8d61-387b-8060-afff-ee1992bfea5c" class="">
+</p><p id="1a5e8d61-387b-80e2-bc3d-ec44d2f73bd6" class="">Answers : </p><ul id="1a5e8d61-387b-8095-afef-f3b25e4f01cd" class="toggle"><li><details open=""><summary>Answers :</summary><h2 id="1a5e8d61-387b-80ac-9f2b-f956fc44fa35" class=""><strong>1️⃣ Where is the CSRF Token Stored After Login?</strong></h2><p id="1a5e8d61-387b-80f4-84d2-dc2e621935f5" class="">✅ <strong>After login, Spring Security stores the CSRF token in the session (</strong><code><strong>JSESSIONID</strong></code><strong>).</strong></p><p id="1a5e8d61-387b-806e-abd1-e4b9cd997358" class="">📌 <strong>What happens before login?</strong></p><ul id="1a5e8d61-387b-80ee-9e71-e3558f8efc60" class="bulleted-list"><li style="list-style-type:disc">A <strong>new CSRF token is generated on each page refresh</strong>.</li></ul><ul id="1a5e8d61-387b-80f9-bd30-e57620d01480" class="bulleted-list"><li style="list-style-type:disc">Since the user is <strong>not yet authenticated</strong>, no session (<code>JSESSIONID</code>) is assigned.</li></ul><p id="1a5e8d61-387b-80d7-b0fb-d1cc2288b67b" class="">📌 <strong>What happens after login?</strong></p><ul id="1a5e8d61-387b-8057-8773-fe1c468fc59e" class="bulleted-list"><li style="list-style-type:disc">The <strong>CSRF token is now tied to the authenticated session (</strong><code><strong>JSESSIONID</strong></code><strong>)</strong>.</li></ul><ul id="1a5e8d61-387b-805b-8dda-f64ee34ab1b2" class="bulleted-list"><li style="list-style-type:disc">The <strong>CSRF token remains the same across requests</strong> until the session expires.</li></ul><p id="1a5e8d61-387b-809a-8914-d7acf4863544" class="">✅ <strong>How to access the CSRF token after login?</strong></p><p id="1a5e8d61-387b-8077-9c78-d0ec59ae8795" class="">Spring Security provides an endpoint to fetch the CSRF token:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a5e8d61-387b-8003-a075-c1e307bbc1a9" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">
+GET /csrf</code></pre><p id="1a5e8d61-387b-8020-89c7-d1dd5d3ce1f6" class="">Response:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a5e8d61-387b-8036-99b0-faac24863fcc" class="code"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">
+{
+    &quot;headerName&quot;: &quot;X-CSRF-TOKEN&quot;,
+    &quot;parameterName&quot;: &quot;_csrf&quot;,
+    &quot;token&quot;: &quot;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855&quot;
+}
+
+</code></pre><hr id="1a5e8d61-387b-80cb-ae16-eb00fd23c32b"/><h2 id="1a5e8d61-387b-80fe-89b3-d64053f9cdb4" class=""><strong>2️⃣ Do I Need to Pass the CSRF Token After Login?</strong></h2><p id="1a5e8d61-387b-809a-9ba2-fee0f3705ab4" class="">✅ <strong>Yes, but only for non-GET requests (POST, PUT, DELETE, etc.).</strong></p><p id="1a5e8d61-387b-80ff-8d94-d21c3401389d" class="">📌 <strong>How CSRF Protection Works in Spring Security?</strong></p><ul id="1a5e8d61-387b-80e7-bf7c-d8af5020a416" class="bulleted-list"><li style="list-style-type:disc">CSRF tokens are <strong>required for state-changing requests</strong> (like <code>POST</code>, <code>PUT</code>, <code>DELETE</code>).</li></ul><ul id="1a5e8d61-387b-80e2-ab68-fc63223ba3bc" class="bulleted-list"><li style="list-style-type:disc"><strong>GET requests do not require CSRF tokens</strong> since they do not modify server-side state.</li></ul><ul id="1a5e8d61-387b-805b-81c0-e12ef05b191a" class="bulleted-list"><li style="list-style-type:disc"><strong>CSRF is automatically handled by Spring Security when using session-based authentication (</strong><code><strong>JSESSIONID</strong></code><strong>)</strong>.</li></ul><p id="1a5e8d61-387b-80dc-b875-c0566649fece" class="">📌 <strong>Example: Sending CSRF Token in a </strong><code><strong>POST</strong></code><strong> Request</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a5e8d61-387b-8006-b1e9-e5b080ac14f5" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">POST /submit-form
+Headers:
+    X-CSRF-TOKEN: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+
+</code></pre><p id="1a5e8d61-387b-802c-8321-fede8e5215b2" class="">✅ If using <strong>cookies for authentication (</strong><code><strong>JSESSIONID</strong></code><strong>)</strong>, the <strong>CSRF token is automatically managed</strong>.</p><p id="1a5e8d61-387b-800d-b243-f818f2e12bcb" class="">🚨 If using <strong>JWT authentication</strong>, CSRF can be disabled (<code>.csrf().disable()</code>) since tokens prevent CSRF attacks.</p><hr id="1a5e8d61-387b-8026-8736-e197ddbe2d1f"/><h2 id="1a5e8d61-387b-80c5-8ce4-e52c3f7c4db8" class=""><strong>3️⃣ Does </strong><code><strong>JSESSIONID</strong></code><strong> Derive From Both CSRF Token and Password?</strong></h2><p id="1a5e8d61-387b-805c-84fd-eb7be8e118a5" class="">❌ <strong>No, </strong><code><strong>JSESSIONID</strong></code><strong> is NOT derived from the CSRF token and password.</strong></p><p id="1a5e8d61-387b-80b0-8cdc-eb14827312e2" class="">📌 <strong>What is </strong><code><strong>JSESSIONID</strong></code><strong>?</strong></p><ul id="1a5e8d61-387b-80e6-ae62-dff252647ae4" class="bulleted-list"><li style="list-style-type:disc"><code>JSESSIONID</code> is <strong>a randomly generated session identifier</strong> that Spring Security uses for session-based authentication.</li></ul><ul id="1a5e8d61-387b-80a2-8901-e15086d2f981" class="bulleted-list"><li style="list-style-type:disc">It <strong>does NOT contain CSRF tokens or passwords</strong>.</li></ul><p id="1a5e8d61-387b-80c7-87cd-c1e53c1f7377" class="">📌 <strong>How are CSRF and JSESSIONID Related?</strong></p><ul id="1a5e8d61-387b-80bf-b52b-d2f1eb68ece5" class="bulleted-list"><li style="list-style-type:disc"><strong>Before login:</strong> The CSRF token is refreshed on every request.</li></ul><ul id="1a5e8d61-387b-80b9-ba14-cccbac04c219" class="bulleted-list"><li style="list-style-type:disc"><strong>After login:</strong> The CSRF token is linked to the session (<code>JSESSIONID</code>).</li></ul><ul id="1a5e8d61-387b-80b6-a507-ee37ade119a1" class="bulleted-list"><li style="list-style-type:disc"><strong>If session expires (</strong><code><strong>JSESSIONID</strong></code><strong> is cleared), CSRF token also resets.</strong></li></ul><p id="1a5e8d61-387b-802d-a5ed-e3b9323df610" class="">🚨 <strong>Misconception:</strong></p><ul id="1a5e8d61-387b-8086-a45f-efe832548d22" class="bulleted-list"><li style="list-style-type:disc"><code>JSESSIONID</code> is <strong>not derived from the password</strong>.</li></ul><ul id="1a5e8d61-387b-8053-8306-e77a8b38ef16" class="bulleted-list"><li style="list-style-type:disc">It is <strong>a secure session cookie</strong>, but it <strong>does not store authentication credentials</strong>.</li></ul><hr id="1a5e8d61-387b-80df-b7ea-c74a8a2e44b1"/><h2 id="1a5e8d61-387b-80b2-9248-c450123f16ae" class=""><strong>4️⃣ What Changes Are Required in Spring Security Configuration?</strong></h2><h3 id="1a5e8d61-387b-80a2-92db-f7a41a7354c1" class=""><strong>Previously Disabled CSRF (Vulnerable Code)</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a5e8d61-387b-8035-9b55-da687d2e7283" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">@Configuration
+@EnableWebSecurity
+public class SecurityConfig {
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+            .csrf().disable() // ❌ Disabling CSRF (Security Risk)
+            .authorizeRequests()
+                .anyRequest().authenticated()
+            .and()
+            .formLogin();
+        return http.build();
+    }
+}
+
+</code></pre><h3 id="1a5e8d61-387b-80f0-b12f-ff3059ece83e" class=""><strong>Updated Configuration (Enabling CSRF)</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a5e8d61-387b-80fd-94a3-f774ee65b894" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">@Configuration
+@EnableWebSecurity
+public class SecurityConfig {
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+            .csrf()
+                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()) // ✅ Store CSRF in Cookie
+            .and()
+            .authorizeRequests()
+                .anyRequest().authenticated()
+            .and()
+            .formLogin();
+        return http.build();
+    }
+}
+
+</code></pre><p id="1a5e8d61-387b-8006-a245-d295be83abac" class="">📌 <strong>Changes:</strong></p><ul id="1a5e8d61-387b-80fd-a7f1-f42361d9d618" class="bulleted-list"><li style="list-style-type:disc"><strong>Re-enabled CSRF protection.</strong></li></ul><ul id="1a5e8d61-387b-80e8-adf3-eaaf1006cd1c" class="bulleted-list"><li style="list-style-type:disc"><strong>CSRF token is now stored in a cookie</strong> (<code>XSRF-TOKEN</code>).</li></ul><ul id="1a5e8d61-387b-80b4-957e-f05b896184de" class="bulleted-list"><li style="list-style-type:disc">This ensures <strong>React can access the CSRF token in requests</strong>.</li></ul><hr id="1a5e8d61-387b-8027-bc42-cad33cc6981b"/><h2 id="1a5e8d61-387b-80c9-a673-e48150d74831" class=""><strong>5️⃣ What Changes Are Required in My React Frontend?</strong></h2><p id="1a5e8d61-387b-8093-ac41-e29f3ebf37c3" class="">Since CSRF is enabled, the React app must:</p><ol type="1" id="1a5e8d61-387b-8038-954d-d18e5f89f2da" class="numbered-list" start="1"><li><strong>Read the CSRF token from cookies.</strong></li></ol><ol type="1" id="1a5e8d61-387b-805b-9ccc-c73913c7b545" class="numbered-list" start="2"><li><strong>Include it in all non-GET requests.</strong></li></ol><h3 id="1a5e8d61-387b-8034-922e-cac4ed9672d5" class=""><strong>Step 1: Fetch CSRF Token from Backend</strong></h3><p id="1a5e8d61-387b-8047-b893-ca727338a3d3" class="">Add an API call in <code>useEffect()</code> to fetch the CSRF token from <code>/csrf</code> and store it:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a5e8d61-387b-8093-b6a5-e771c8282cb5" class="code"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all">useEffect(() =&gt; {
+    fetch(&#x27;/csrf&#x27;, { credentials: &#x27;include&#x27; })
+        .then(response =&gt; response.json())
+        .then(data =&gt; {
+            localStorage.setItem(&#x27;csrfToken&#x27;, data.token);
+        })
+        .catch(error =&gt; console.error(&quot;Error fetching CSRF token&quot;, error));
+}, []);
+
+</code></pre><hr id="1a5e8d61-387b-80af-924d-dd2111514ba1"/><h3 id="1a5e8d61-387b-8066-a255-c9c6000e5140" class=""><strong>Step 2: Attach CSRF Token to Every API Request</strong></h3><p id="1a5e8d61-387b-8028-a3ea-e87d3f4c61f4" class="">Modify Axios (or Fetch API) to <strong>send the CSRF token in headers</strong>:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a5e8d61-387b-8016-83ca-ef5575be57cc" class="code"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all">import axios from &quot;axios&quot;;
+
+const apiClient = axios.create({
+    baseURL: &quot;http://localhost:8080&quot;,
+    withCredentials: true, // Include cookies (JSESSIONID)
+});
+
+apiClient.interceptors.request.use((config) =&gt; {
+    const csrfToken = localStorage.getItem(&quot;csrfToken&quot;);
+    if (csrfToken) {
+        config.headers[&quot;X-CSRF-TOKEN&quot;] = csrfToken; // Attach CSRF token
+    }
+    return config;
+});
+
+export default apiClient;
+
+</code></pre><p id="1a5e8d61-387b-80d6-ab8b-c0847e414662" class="">✅ <strong>Now, all </strong><code><strong>POST</strong></code><strong>, </strong><code><strong>PUT</strong></code><strong>, and </strong><code><strong>DELETE</strong></code><strong> requests will automatically include the CSRF token.</strong></p><hr id="1a5e8d61-387b-8031-8ba8-d83ecae631fb"/><h2 id="1a5e8d61-387b-80db-99ed-dabe43972232" class=""><strong>6️⃣ Updated Interview Questions</strong></h2><table id="1a5e8d61-387b-809e-8c60-ebe86cf13d85" class="simple-table"><tbody><tr id="1a5e8d61-387b-8036-8043-ee3676a3c89e"><td id="nZ?y" class=""><strong>Category</strong></td><td id="=DMT" class=""><strong>Question</strong></td></tr><tr id="1a5e8d61-387b-809d-a4c4-d495699cf4e1"><td id="nZ?y" class=""><strong>Spring Security Basics</strong></td><td id="=DMT" class="">1. What is Spring Security, and how does it handle authentication?</td></tr><tr id="1a5e8d61-387b-80a9-b3cb-ce5ffb23a55b"><td id="nZ?y" class=""><strong>CSRF Protection</strong></td><td id="=DMT" class="">2. What is CSRF (Cross-Site Request Forgery), and how does Spring Security protect against it?</td></tr><tr id="1a5e8d61-387b-807b-9c8f-f188f3334bfa"><td id="nZ?y" class=""><strong>CSRF Token Storage</strong></td><td id="=DMT" class="">3. Where is the CSRF token stored before and after login in Spring Security?</td></tr><tr id="1a5e8d61-387b-8031-b466-d30bf43c1214"><td id="nZ?y" class=""><strong>CSRF in Frontend</strong></td><td id="=DMT" class="">4. How should a React frontend handle CSRF tokens in API requests?</td></tr><tr id="1a5e8d61-387b-8039-bf9f-f7f5e4ba1f13"><td id="nZ?y" class=""><strong>Handling CSRF in API Calls</strong></td><td id="=DMT" class="">5. When should we send a CSRF token in API requests? Do GET requests need it?</td></tr><tr id="1a5e8d61-387b-809b-ab38-dcda22e358e3"><td id="nZ?y" class=""><strong>Session-Based Authentication</strong></td><td id="=DMT" class="">6. What is <code>JSESSIONID</code>, and how does Spring Security use it for authentication?</td></tr><tr id="1a5e8d61-387b-802c-8ab3-ea28069e7d5f"><td id="nZ?y" class=""><strong>CSRF &amp; JWT</strong></td><td id="=DMT" class="">7. If I am using JWT-based authentication, do I still need CSRF protection?</td></tr><tr id="1a5e8d61-387b-804f-b5e5-f060c133931e"><td id="nZ?y" class=""><strong>Disabling CSRF</strong></td><td id="=DMT" class="">8. How can you disable CSRF protection in Spring Security, and when should you do it?</td></tr><tr id="1a5e8d61-387b-8069-b781-ef2bf76afe9e"><td id="nZ?y" class=""><strong>Enabling CSRF for React</strong></td><td id="=DMT" class="">9. What backend and frontend changes are needed to enable CSRF in a React-Spring Boot app?</td></tr></tbody></table><hr id="1a5e8d61-387b-80c8-ae75-f83f5a6809c7"/><h2 id="1a5e8d61-387b-8007-802d-f26ffd36bc7b" class=""><strong>7️⃣ Summary</strong></h2><table id="1a5e8d61-387b-80b7-ba00-d031ece5f000" class="simple-table"><tbody><tr id="1a5e8d61-387b-808d-892b-ea285f0e2ddc"><td id="eeO[" class="">Concept</td><td id="nk@;" class="">Explanation</td></tr><tr id="1a5e8d61-387b-8004-ac9a-f0a7801f1feb"><td id="eeO[" class=""><strong>Where is CSRF stored after login?</strong></td><td id="nk@;" class="">Stored in <strong>session (</strong><code><strong>JSESSIONID</strong></code><strong>)</strong>.</td></tr><tr id="1a5e8d61-387b-80ff-a0bf-f191ab15be49"><td id="eeO[" class=""><strong>How to enable CSRF in Spring Security?</strong></td><td id="nk@;" class="">Use <code>CookieCsrfTokenRepository.withHttpOnlyFalse()</code>.</td></tr><tr id="1a5e8d61-387b-8077-9bb8-d41f89f0031c"><td id="eeO[" class=""><strong>How to handle CSRF in React?</strong></td><td id="nk@;" class="">Store CSRF token in <code>localStorage</code> and attach it in headers.</td></tr><tr id="1a5e8d61-387b-8091-b59b-dcf995c14883"><td id="eeO[" class=""><strong>Why was CSRF initially disabled?</strong></td><td id="nk@;" class="">Some APIs (e.g., JWT-based) don’t require it.</td></tr><tr id="1a5e8d61-387b-803d-9806-cc78b8077911"><td id="eeO[" class=""><strong>Does CSRF affect GET requests?</strong></td><td id="nk@;" class="">❌ No, only <code>POST</code>, <code>PUT</code>, <code>DELETE</code>.</td></tr></tbody></table><p id="1a5e8d61-387b-802c-b74e-c87a92ecd339" class="">✅ <strong>Final Answer:</strong></p><ul id="1a5e8d61-387b-8099-adef-fd62a319798e" class="bulleted-list"><li style="list-style-type:disc">Re-enable CSRF in <strong>Spring Security (</strong><code><strong>CookieCsrfTokenRepository</strong></code><strong>)</strong>.</li></ul><ul id="1a5e8d61-387b-8073-8916-ca17cf236f82" class="bulleted-list"><li style="list-style-type:disc">Fetch CSRF token from <code>/csrf</code> and <strong>store it in React’s </strong><code><strong>localStorage</strong></code>.</li></ul><ul id="1a5e8d61-387b-8005-926a-e74ff5ce325d" class="bulleted-list"><li style="list-style-type:disc">Attach CSRF token in <strong>every </strong><code><strong>POST</strong></code><strong>, </strong><code><strong>PUT</strong></code><strong>, </strong><code><strong>DELETE</strong></code><strong> request</strong> from React.</li></ul></details></li></ul><p id="1a5e8d61-387b-804f-ac17-c0bf05d73e7b" class="">
+</p><p id="1a5e8d61-387b-806e-86bf-fc98af6abb8f" class="">
+</p><p id="1a5e8d61-387b-80fd-9018-c1fd33cb8aa7" class="">
+</p><p id="1a5e8d61-387b-80a3-b38a-c1d2120c6987" class="">
+</p><p id="1a5e8d61-387b-805f-8fc3-f795d8cc1797" class="">
+</p><ul id="1a5e8d61-387b-80a1-b7f3-c678697c7f08" class="toggle"><li><details open=""><summary>Question : <strong>How Basic Auth with CSRF filter works ? </strong></summary><h3 id="1a5e8d61-387b-80fc-9b0e-cd61ea2d9762" class=""><strong>1️⃣ Default Authentication in Spring Boot</strong></h3><p id="1a5e8d61-387b-807f-af36-fa9714deb207" class="">✅ <strong>Yes, by default, Spring Security provides form-based authentication</strong>, where:</p><ul id="1a5e8d61-387b-8095-9d63-ed75ece8c6c3" class="bulleted-list"><li style="list-style-type:disc">A <strong>login form</strong> is presented asking for <strong>username</strong> and <strong>password</strong>.</li></ul><ul id="1a5e8d61-387b-8086-a522-e4b59f7eb147" class="bulleted-list"><li style="list-style-type:disc">On <strong>successful login</strong>, a <code>JSESSIONID</code> cookie is created <strong>to maintain the session</strong>.</li></ul><ul id="1a5e8d61-387b-80de-87bf-dd859a7ea7f6" class="bulleted-list"><li style="list-style-type:disc"><strong>CSRF protection is enabled by default</strong>.</li></ul><hr id="1a5e8d61-387b-8054-a944-fc1849dc51fb"/><h3 id="1a5e8d61-387b-8092-8b26-ee9ef03ac7e3" class=""><strong>2️⃣ CSRF Token Generation Before Login</strong></h3><p id="1a5e8d61-387b-800d-8185-c7b600483422" class="">✅ <strong>Before authentication (not logged in)</strong>:</p><ul id="1a5e8d61-387b-80f7-a3bd-e297de793846" class="bulleted-list"><li style="list-style-type:disc">On <strong>every page refresh</strong>, a <strong>new CSRF token is generated</strong> because <strong>there is no active session (</strong><code><strong>JSESSIONID</strong></code><strong>) yet</strong>.</li></ul><ul id="1a5e8d61-387b-80fb-83a5-e16a69f1b319" class="bulleted-list"><li style="list-style-type:disc">The CSRF token can be retrieved via:Or from a <strong>response header</strong> (if configured).<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a5e8d61-387b-8001-a3fd-eda4f1f4a709" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">bash
+CopyEdit
+GET /csrf
+
+</code></pre></li></ul><p id="1a5e8d61-387b-8051-a440-f2f5b46ef5fb" class="">📌 <strong>Important:</strong> Since there is <strong>no active session before login</strong>, the CSRF token keeps changing on every refresh.</p><hr id="1a5e8d61-387b-80f6-9959-c6a33d4648dc"/><h3 id="1a5e8d61-387b-8000-97b4-f25f8232be4b" class=""><strong>3️⃣ Authentication Request Flow (Username + Password + CSRF Token)</strong></h3><p id="1a5e8d61-387b-8007-8119-de7c713d800e" class="">✅ <strong>How the UI sends login details</strong>:</p><ul id="1a5e8d61-387b-8040-985f-d5224fc79aea" class="bulleted-list"><li style="list-style-type:disc">The <strong>username, password, and CSRF token</strong> are sent from the frontend to the backend.</li></ul><ul id="1a5e8d61-387b-8016-b650-ec825e16fc17" class="bulleted-list"><li style="list-style-type:disc">Example login request:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a5e8d61-387b-80da-895a-c8db27938abc" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">http
+CopyEdit
+POST /login
+Headers:
+    X-CSRF-TOKEN: &lt;csrf-token&gt;
+Body:
+    username: &quot;admin&quot;
+    password: &quot;password&quot;
+
+</code></pre></li></ul><p id="1a5e8d61-387b-807c-9e11-df1e316128f5" class="">📌 <strong>What happens in the backend?</strong></p><ol type="1" id="1a5e8d61-387b-804c-8abc-e037a473b7b4" class="numbered-list" start="1"><li><strong>Spring Security validates credentials</strong>.</li></ol><ol type="1" id="1a5e8d61-387b-801b-a14a-f3901bff0899" class="numbered-list" start="2"><li><strong>If valid</strong>, a <code>JSESSIONID</code> is created and stored <strong>in a secure, HttpOnly cookie</strong>.</li></ol><ol type="1" id="1a5e8d61-387b-805e-a1cc-e87c79e75522" class="numbered-list" start="3"><li>The CSRF token <strong>now gets tied to this session (</strong><code><strong>JSESSIONID</strong></code><strong>)</strong>.</li></ol><p id="1a5e8d61-387b-808b-b2d4-f044b50e6d4e" class="">✅ <strong>Key Point:</strong></p><p id="1a5e8d61-387b-8091-b3fd-e930775c5f26" class="">Once logged in, the CSRF token <strong>stays the same</strong> across requests (as long as the session is valid).</p><hr id="1a5e8d61-387b-80b8-9814-f5195999f420"/><h3 id="1a5e8d61-387b-80ce-a6c1-fe6aa53e2e00" class=""><strong>4️⃣ Storing &amp; Using </strong><code><strong>JSESSIONID</strong></code><strong> and CSRF in UI</strong></h3><p id="1a5e8d61-387b-80e2-8754-d0a8456dcd83" class="">✅ <strong>After login:</strong></p><ul id="1a5e8d61-387b-8074-82be-d722b47c2ece" class="bulleted-list"><li style="list-style-type:disc"><code>JSESSIONID</code> is <strong>stored in a secure, HttpOnly cookie</strong>.</li></ul><ul id="1a5e8d61-387b-8049-b480-ede714329f91" class="bulleted-list"><li style="list-style-type:disc">The <strong>CSRF token can be retrieved</strong> using <code>/csrf</code> and stored in the frontend (<code>localStorage</code> or state).</li></ul><ul id="1a5e8d61-387b-801b-9ecc-d31ddad0e11d" class="bulleted-list"><li style="list-style-type:disc">The CSRF token must be included in <strong>subsequent </strong><code><strong>POST</strong></code><strong>, </strong><code><strong>PUT</strong></code><strong>, </strong><code><strong>DELETE</strong></code><strong> requests</strong>.</li></ul><p id="1a5e8d61-387b-802d-bff3-fe5142a28f81" class="">📌 <strong>Example: Fetching CSRF Token in React</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a5e8d61-387b-8006-80f1-e1fd87047114" class="code"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all">javascript
+CopyEdit
+useEffect(() =&gt; {
+    fetch(&#x27;/csrf&#x27;, { credentials: &#x27;include&#x27; })
+        .then(response =&gt; response.json())
+        .then(data =&gt; {
+            localStorage.setItem(&#x27;csrfToken&#x27;, data.token);
+        })
+        .catch(error =&gt; console.error(&quot;Error fetching CSRF token&quot;, error));
+}, []);
+
+</code></pre><p id="1a5e8d61-387b-80ac-b032-ed02c2012568" class="">📌 <strong>Example: Sending CSRF Token in Axios</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a5e8d61-387b-80b6-b846-c1a29cd96b75" class="code"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all">javascript
+CopyEdit
+apiClient.interceptors.request.use((config) =&gt; {
+    const csrfToken = localStorage.getItem(&quot;csrfToken&quot;);
+    if (csrfToken) {
+        config.headers[&quot;X-CSRF-TOKEN&quot;] = csrfToken;
+    }
+    return config;
+});
+
+</code></pre><p id="1a5e8d61-387b-80a3-952d-fb410812fe6c" class="">✅ <strong>Key Takeaways:</strong></p><ul id="1a5e8d61-387b-802f-ac68-cb7a67cc53f6" class="bulleted-list"><li style="list-style-type:disc"><code>JSESSIONID</code> is stored <strong>as a secure, HttpOnly cookie</strong>.</li></ul><ul id="1a5e8d61-387b-80ae-b83a-d05275770924" class="bulleted-list"><li style="list-style-type:disc">The <strong>CSRF token is NOT stored in cookies by default</strong>, but it can be retrieved using <code>/csrf</code>.</li></ul><ul id="1a5e8d61-387b-804d-9325-d6e7e8d6ee13" class="bulleted-list"><li style="list-style-type:disc">The <strong>frontend must manually include the CSRF token in state-changing requests</strong>.</li></ul><hr id="1a5e8d61-387b-8059-b801-ec8e67ba088f"/><h3 id="1a5e8d61-387b-8061-860c-d19a0aee8df1" class=""><strong>5️⃣ What Happens If </strong><code><strong>JSESSIONID</strong></code><strong> Expires?</strong></h3><p id="1a5e8d61-387b-806f-8fba-d10e2a69e424" class="">✅ <strong>If the session (</strong><code><strong>JSESSIONID</strong></code><strong>) is invalidated</strong> (user logs out, session timeout, etc.):</p><ol type="1" id="1a5e8d61-387b-8040-9d9e-e69f14f77535" class="numbered-list" start="1"><li><strong>The CSRF token becomes invalid</strong>, since it was linked to the session.</li></ol><ol type="1" id="1a5e8d61-387b-803b-9c04-c2b395d1e9cb" class="numbered-list" start="2"><li><strong>The frontend must fetch a new CSRF token</strong> (triggering a <code>/csrf</code> request).</li></ol><ol type="1" id="1a5e8d61-387b-807f-a037-eb9740d23e01" class="numbered-list" start="3"><li>Any <strong>subsequent requests with the old CSRF token will fail</strong>.</li></ol><p id="1a5e8d61-387b-8011-87f3-c87bdbfbd30f" class="">🚨 <strong>Security Behavior:</strong></p><ul id="1a5e8d61-387b-80e1-97e4-e4c9a6b8ef9e" class="bulleted-list"><li style="list-style-type:disc">If the session expires, even <strong>if an attacker has an old CSRF token</strong>, it will no longer work because it was tied to an expired session.</li></ul><hr id="1a5e8d61-387b-8066-a75f-d7780d005c5e"/><h3 id="1a5e8d61-387b-8055-912c-e0af4d2a587d" class=""><strong>6️⃣ Refining Your Understanding</strong></h3><table id="1a5e8d61-387b-80c1-b25d-f09e5a89cd0e" class="simple-table"><tbody><tr id="1a5e8d61-387b-8038-902f-c960f141a43f"><td id="U@]\" class="">Statement</td><td id="Dzcy" class="">Correct?</td><td id="lL:S" class="">Explanation</td></tr><tr id="1a5e8d61-387b-804d-8a78-e50f533714a6"><td id="U@]\" class=""><strong>&quot;Spring Boot provides form-based login by default.&quot;</strong></td><td id="Dzcy" class="">✅ Yes</td><td id="lL:S" class="">A login form is presented where users enter credentials.</td></tr><tr id="1a5e8d61-387b-8067-9690-de48f7d6390b"><td id="U@]\" class=""><strong>&quot;On each refresh before login, a new CSRF token is generated.&quot;</strong></td><td id="Dzcy" class="">✅ Yes</td><td id="lL:S" class="">Since there’s no session, the CSRF token keeps changing.</td></tr><tr id="1a5e8d61-387b-80fd-b7e4-f2695f082f50"><td id="U@]\" class=""><strong>&quot;Username, password, and CSRF token are sent to the backend during login.&quot;</strong></td><td id="Dzcy" class="">✅ Yes</td><td id="lL:S" class="">Spring Security requires a valid CSRF token in <code>POST /login</code>.</td></tr><tr id="1a5e8d61-387b-8078-8017-c52a2640fcab"><td id="U@]\" class=""><strong>&quot;Based on this, a JSESSIONID is generated and stored in a cookie.&quot;</strong></td><td id="Dzcy" class="">✅ Yes</td><td id="lL:S" class=""><code>JSESSIONID</code> is created upon successful authentication.</td></tr><tr id="1a5e8d61-387b-8017-bdbf-f21aaa424ffd"><td id="U@]\" class=""><strong>&quot;JSESSIONID is stored in the backend and also passed as a cookie.&quot;</strong></td><td id="Dzcy" class="">✅ Yes</td><td id="lL:S" class="">The backend keeps track of the session; the browser stores <code>JSESSIONID</code>.</td></tr><tr id="1a5e8d61-387b-801e-9c63-d40f39331cb0"><td id="U@]\" class=""><strong>&quot;CSRF can be retrieved using </strong><code><strong>/csrf</strong></code><strong> or some response header.&quot;</strong></td><td id="Dzcy" class="">✅ Yes</td><td id="lL:S" class="">The CSRF token is available from <code>/csrf</code> and must be sent in requests.</td></tr><tr id="1a5e8d61-387b-809b-b0de-c2520bb6b537"><td id="U@]\" class=""><strong>&quot;CSRF is stored as a cookie in the frontend.&quot;</strong></td><td id="Dzcy" class="">❌ No</td><td id="lL:S" class="">By default, CSRF is NOT stored in cookies, but the frontend can fetch and store it.</td></tr><tr id="1a5e8d61-387b-8029-910f-d132039e81e8"><td id="U@]\" class=""><strong>&quot;If the session (</strong><code><strong>JSESSIONID</strong></code><strong>) expires, CSRF protection stops working.&quot;</strong></td><td id="Dzcy" class="">✅ Yes</td><td id="lL:S" class="">A new session requires a new CSRF token, and old ones become invalid.</td></tr></tbody></table><hr id="1a5e8d61-387b-803f-bc8d-c8977d17de8a"/><h3 id="1a5e8d61-387b-8056-bd62-c578808a7e1a" class=""><strong>7️⃣ Final Summary</strong></h3><table id="1a5e8d61-387b-80b2-906f-ec46f012c7cc" class="simple-table"><tbody><tr id="1a5e8d61-387b-8085-ae21-d72b3f9fffb9"><td id="To\Y" class="">Concept</td><td id="JM?@" class="">Explanation</td></tr><tr id="1a5e8d61-387b-8067-b74f-ea0b386087f2"><td id="To\Y" class=""><strong>Before login</strong></td><td id="JM?@" class="">CSRF token changes on every refresh because there&#x27;s no session.</td></tr><tr id="1a5e8d61-387b-80db-9f34-c89ba634a09f"><td id="To\Y" class=""><strong>Login request</strong></td><td id="JM?@" class="">UI sends <strong>username, password, and CSRF token</strong>.</td></tr><tr id="1a5e8d61-387b-8070-b9b5-c147ff98c56c"><td id="To\Y" class=""><strong>After login</strong></td><td id="JM?@" class=""><code>JSESSIONID</code> is stored <strong>as a cookie</strong>, and CSRF is now linked to this session.</td></tr><tr id="1a5e8d61-387b-8086-b3e5-f0a18570f39f"><td id="To\Y" class=""><strong>Subsequent requests</strong></td><td id="JM?@" class="">CSRF token must be included in <code>POST</code>, <code>PUT</code>, <code>DELETE</code> requests.</td></tr><tr id="1a5e8d61-387b-8003-9f07-fad2dc6875b0"><td id="To\Y" class=""><strong>Session expiration</strong></td><td id="JM?@" class="">If <code>JSESSIONID</code> expires, the CSRF token also becomes invalid.</td></tr></tbody></table><p id="1a5e8d61-387b-80da-b60e-cf10730e752e" class="">✅ <strong>Final Confirmation:</strong></p><ul id="1a5e8d61-387b-8024-82d4-c7c2ebd625f1" class="bulleted-list"><li style="list-style-type:disc"><strong>Your understanding is correct, except for the point that CSRF is stored in cookies.</strong></li></ul><ul id="1a5e8d61-387b-8099-ba1b-e920947d6647" class="bulleted-list"><li style="list-style-type:disc"><strong>CSRF is linked to </strong><code><strong>JSESSIONID</strong></code><strong>, so if the session expires, the CSRF token also stops working.</strong></li></ul><ul id="1a5e8d61-387b-80dd-9b27-e34fe078b9a6" class="bulleted-list"><li style="list-style-type:disc"><strong>Frontend must explicitly fetch and include the CSRF token in requests.</strong></li></ul></details></li></ul><p id="1a5e8d61-387b-8077-aaec-fbc0282471c0" class="">
+</p><ul id="1a5e8d61-387b-8018-8741-e2a2f8cd7f89" class="toggle"><li><details open=""><summary>Question : CSRF header is required for all non GET </summary><h3 id="1a5e8d61-387b-809d-91c2-e55095e0c158" class=""><strong>1️⃣ CSRF Token Requirement in Requests</strong></h3><ul id="1a5e8d61-387b-80a3-951e-f23787dd9c52" class="bulleted-list"><li style="list-style-type:disc"><strong>For </strong><code><strong>GET</strong></code><strong> requests</strong> → ❌ <strong>CSRF token is NOT required</strong>.</li></ul><ul id="1a5e8d61-387b-80f3-bfdb-dc657b2d1ba9" class="bulleted-list"><li style="list-style-type:disc"><strong>For </strong><code><strong>POST</strong></code><strong>, </strong><code><strong>PUT</strong></code><strong>, </strong><code><strong>DELETE</strong></code><strong>, </strong><code><strong>PATCH</strong></code><strong> requests</strong> → ✅ <strong>CSRF token IS required</strong>.</li></ul><p id="1a5e8d61-387b-8076-b3b5-cc2f7123db23" class="">📌 <strong>Why?</strong></p><ul id="1a5e8d61-387b-8013-b769-d6063f107775" class="bulleted-list"><li style="list-style-type:disc"><code>GET</code> requests <strong>do not modify server-side state</strong>, so CSRF protection <strong>is not necessary</strong>.</li></ul><ul id="1a5e8d61-387b-803a-b533-c4c4cf00e96b" class="bulleted-list"><li style="list-style-type:disc"><code>POST</code>, <code>PUT</code>, <code>DELETE</code>, and <code>PATCH</code> <strong>change data on the server</strong>, making them vulnerable to CSRF attacks.</li></ul><p id="1a5e8d61-387b-803f-8416-d2d71a11724f" class="">✅ <strong>Example of Requests When CSRF is Required</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a5e8d61-387b-8013-8225-d88283e960f7" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">http
+CopyEdit
+POST /api/orders
+Headers:
+    X-CSRF-TOKEN: &lt;csrf-token&gt;
+
+</code></pre><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a5e8d61-387b-8039-b106-e7a4ff3dd9d7" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">http
+CopyEdit
+DELETE /api/orders/1
+Headers:
+    X-CSRF-TOKEN: &lt;csrf-token&gt;
+
+</code></pre><p id="1a5e8d61-387b-8098-b181-eb34172f16f6" class="">🚨 <strong>If CSRF is missing from these requests, Spring Security will reject them with a 403 Forbidden error.</strong></p><hr id="1a5e8d61-387b-8020-95b0-fe4fae7a3e9d"/><h3 id="1a5e8d61-387b-80b8-b014-fe2d58e896cf" class=""><strong>2️⃣ Summary of CSRF Behavior</strong></h3><table id="1a5e8d61-387b-8011-bc9d-e580ac1a3dce" class="simple-table"><tbody><tr id="1a5e8d61-387b-8065-9357-eb396836c744"><td id="[OdW" class="">Request Type</td><td id="N&gt;}_" class="">CSRF Token Required?</td><td id="?\vk" class="">Reason</td></tr><tr id="1a5e8d61-387b-8042-9a91-d1556be58cd2"><td id="[OdW" class=""><code>GET</code></td><td id="N&gt;}_" class="">❌ No</td><td id="?\vk" class="">Doesn&#x27;t modify server data</td></tr><tr id="1a5e8d61-387b-8074-a33b-de03711b43fa"><td id="[OdW" class=""><code>HEAD</code></td><td id="N&gt;}_" class="">❌ No</td><td id="?\vk" class="">Only retrieves headers</td></tr><tr id="1a5e8d61-387b-801f-81f2-f3ace82262c2"><td id="[OdW" class=""><code>OPTIONS</code></td><td id="N&gt;}_" class="">❌ No</td><td id="?\vk" class="">Used for preflight requests</td></tr><tr id="1a5e8d61-387b-8073-ad1d-ecf6195c4993"><td id="[OdW" class=""><code>POST</code></td><td id="N&gt;}_" class="">✅ Yes</td><td id="?\vk" class="">Creates/modifies data</td></tr><tr id="1a5e8d61-387b-804a-934e-c9d38c7e1d21"><td id="[OdW" class=""><code>PUT</code></td><td id="N&gt;}_" class="">✅ Yes</td><td id="?\vk" class="">Updates data</td></tr><tr id="1a5e8d61-387b-8046-8028-d5d025645e42"><td id="[OdW" class=""><code>DELETE</code></td><td id="N&gt;}_" class="">✅ Yes</td><td id="?\vk" class="">Removes data</td></tr><tr id="1a5e8d61-387b-806e-9dea-f2396c991e50"><td id="[OdW" class=""><code>PATCH</code></td><td id="N&gt;}_" class="">✅ Yes</td><td id="?\vk" class="">Partially updates data</td></tr></tbody></table><p id="1a5e8d61-387b-8006-878e-d87d56b16fe0" class="">✅ <strong>Final Confirmation:</strong></p><ul id="1a5e8d61-387b-80d5-976e-db307cb39546" class="bulleted-list"><li style="list-style-type:disc"><strong>CSRF is required for all state-changing requests (</strong><code><strong>POST</strong></code><strong>, </strong><code><strong>PUT</strong></code><strong>, </strong><code><strong>DELETE</strong></code><strong>, </strong><code><strong>PATCH</strong></code><strong>).</strong></li></ul><ul id="1a5e8d61-387b-8090-8602-e77e085f1fa4" class="bulleted-list"><li style="list-style-type:disc"><strong>CSRF is NOT required for </strong><code><strong>GET</strong></code><strong> requests.</strong></li></ul><ul id="1a5e8d61-387b-809d-a70e-dff05f18a0e8" class="bulleted-list"><li style="list-style-type:disc"><strong>If the CSRF token is missing in a protected request, Spring Security will reject the request.</strong></li></ul></details></li></ul></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

@@ -1,0 +1,704 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>2.1 Introduction To Spring Boot Web MVC, MVC Architecture</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-transparentGray { background-color: undefined; }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="198e8d61-387b-80eb-b7f5-f7db8c591c31" class="page sans"><header><h1 class="page-title">2.1 Introduction To Spring Boot Web MVC, MVC Architecture</h1><p class="page-description"></p></header><div class="page-body"><h2 id="198e8d61-387b-809e-9a1c-ee94997a6f49" class=""><strong>🌟 Introduction to Spring Boot Web</strong></h2><ul id="198e8d61-387b-8074-afbb-d116dd1a5a13" class="bulleted-list"><li style="list-style-type:disc"><strong>Spring Boot Web</strong> is used to build web services and RESTful APIs.</li></ul><ul id="198e8d61-387b-800f-900d-fe57a2d70fd0" class="bulleted-list"><li style="list-style-type:disc">This module focuses on the <strong>backend</strong> (not frontend), teaching how to create APIs, manage databases, and interact with web services.</li></ul><h3 id="198e8d61-387b-8016-abb5-cd2ff5d678c8" class=""><strong>📌 Why Web Services?</strong></h3><ul id="198e8d61-387b-808f-bea1-e76aa2ea92fc" class="bulleted-list"><li style="list-style-type:disc">Before the internet, data was physically accessed; now, it&#x27;s remotely accessible via web services.</li></ul><ul id="198e8d61-387b-8040-b500-d3f6c1213c06" class="bulleted-list"><li style="list-style-type:disc">Example: <strong>Instagram Feeds</strong> – Data is stored in a database, and web services fetch it for the user.</li></ul><ul id="198e8d61-387b-80f4-8a15-d43f1fbb4253" class="bulleted-list"><li style="list-style-type:disc">Web services enable <strong>clients</strong> to retrieve data from remote databases.</li></ul><h3 id="198e8d61-387b-80c9-bdcb-ef63fe0736d3" class=""><strong>📌 What Are APIs?</strong></h3><ul id="198e8d61-387b-8080-b442-e8c539de0df8" class="bulleted-list"><li style="list-style-type:disc"><strong>APIs (Application Programming Interfaces)</strong> allow communication between web services and applications.</li></ul><ul id="198e8d61-387b-8005-aa52-c5300448265e" class="bulleted-list"><li style="list-style-type:disc">As a <strong>backend developer</strong>, you are responsible for:<ul id="198e8d61-387b-8098-ae46-e5234e73851d" class="bulleted-list"><li style="list-style-type:circle">Building APIs &amp; web services.</li></ul><ul id="198e8d61-387b-8086-99eb-c1f9bb3419c0" class="bulleted-list"><li style="list-style-type:circle">Ensuring no <strong>single point of failure</strong>.</li></ul><ul id="198e8d61-387b-8063-a546-e25ef221b3f2" class="bulleted-list"><li style="list-style-type:circle">Creating robust and <strong>scalable</strong> solutions.</li></ul></li></ul><hr id="198e8d61-387b-8048-ae43-d889396ef71c"/><h2 id="198e8d61-387b-8090-a0f7-f595b3e5ac4b" class=""><strong>🌟 Understanding RESTful APIs</strong></h2><ul id="198e8d61-387b-8052-83e8-d1fc2560264b" class="bulleted-list"><li style="list-style-type:disc"><strong>REST (Representational State Transfer)</strong> is a widely used web standard.</li></ul><ul id="198e8d61-387b-80ee-984b-d6ebdd03f9be" class="bulleted-list"><li style="list-style-type:disc"><strong>Stateless nature</strong>: Each API request contains all necessary data; no session is maintained at the backend.</li></ul><ul id="198e8d61-387b-801b-b991-f04950f93902" class="bulleted-list"><li style="list-style-type:disc">REST APIs support:<ul id="198e8d61-387b-8025-aed7-e2bc897c24a9" class="bulleted-list"><li style="list-style-type:circle"><strong>Headers</strong> for metadata.</li></ul><ul id="198e8d61-387b-8005-b4f6-c24c5b411224" class="bulleted-list"><li style="list-style-type:circle"><strong>Multiple request types</strong>: <code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>PATCH</code>, <code>DELETE</code>.</li></ul></li></ul><h3 id="198e8d61-387b-80a8-b1c1-d307bd55d5c2" class=""><strong>📌 CRUD Operations in REST</strong></h3><table id="198e8d61-387b-807b-8b29-d260aeecf17e" class="simple-table"><tbody><tr id="198e8d61-387b-80e5-80cb-cad71b45035b"><td id="VXPL" class="">HTTP Method</td><td id="D}pG" class="">Operation</td><td id="r~do" class="">Example</td></tr><tr id="198e8d61-387b-8016-94aa-e406654640f8"><td id="VXPL" class=""><strong>GET</strong></td><td id="D}pG" class="">Fetch data</td><td id="r~do" class="">Viewing Instagram posts</td></tr><tr id="198e8d61-387b-80fd-b236-c9a7faeb33b1"><td id="VXPL" class=""><strong>POST</strong></td><td id="D}pG" class="">Create data</td><td id="r~do" class="">Uploading a reel</td></tr><tr id="198e8d61-387b-80c9-84b8-ec89bd58d54d"><td id="VXPL" class=""><strong>PUT</strong></td><td id="D}pG" class="">Update data</td><td id="r~do" class="">Updating reel caption</td></tr><tr id="198e8d61-387b-8003-8f27-f962260d22e2"><td id="VXPL" class=""><strong>PATCH</strong></td><td id="D}pG" class="">Partial update</td><td id="r~do" class="">Changing only the caption</td></tr><tr id="198e8d61-387b-8021-9c3e-fa7f55545ad9"><td id="VXPL" class=""><strong>DELETE</strong></td><td id="D}pG" class="">Remove data</td><td id="r~do" class="">Deleting a post</td></tr></tbody></table><hr id="198e8d61-387b-80dd-a9b0-c58489b213a4"/><h2 id="198e8d61-387b-8066-80c9-d1a88fff500b" class=""><strong>🌟 Spring Boot Web Dependency</strong></h2><ul id="198e8d61-387b-8019-97b1-fda719dbf6c9" class="bulleted-list"><li style="list-style-type:disc">To use Spring Boot for web services, we need <strong>Spring Boot Starter Web</strong> dependency.</li></ul><ul id="198e8d61-387b-80a7-a86d-f48ab1c512a6" class="bulleted-list"><li style="list-style-type:disc">This includes:<ul id="198e8d61-387b-803f-9d6e-d2f513be8703" class="bulleted-list"><li style="list-style-type:circle"><strong>Spring Boot Starter</strong>: Core features like dependency injection.</li></ul><ul id="198e8d61-387b-8077-8fd5-d264db57c2ad" class="bulleted-list"><li style="list-style-type:circle"><strong>Jackson</strong>: Converts JSON/XML ↔ Java Objects.</li></ul><ul id="198e8d61-387b-80b0-b4e4-d4dfa0465bcb" class="bulleted-list"><li style="list-style-type:circle"><strong>Spring MVC</strong>: Implements the <strong>MVC Architecture</strong>.</li></ul><ul id="198e8d61-387b-8033-a3fb-d0a92763cf3a" class="bulleted-list"><li style="list-style-type:circle"><strong>Embedded Tomcat Server</strong>: Runs the application on <strong>port 8080</strong> by default.</li></ul></li></ul><hr id="198e8d61-387b-8098-8a3f-cfd6b54b2c51"/><h2 id="198e8d61-387b-804d-ab30-f8f4c2b4db31" class=""><strong>🌟 Running a Spring Boot Web Application</strong></h2><ol type="1" id="198e8d61-387b-804f-881a-f79d8df8cbac" class="numbered-list" start="1"><li><strong>Use Spring Initializer</strong> to create a Spring Boot project.</li></ol><ol type="1" id="198e8d61-387b-8059-a63f-cfd7f8108749" class="numbered-list" start="2"><li>Select:<ul id="198e8d61-387b-80fc-a975-c36a99fbe2f2" class="bulleted-list"><li style="list-style-type:disc"><strong>Maven</strong> as the build tool.</li></ul><ul id="198e8d61-387b-80c7-a776-c938958179a9" class="bulleted-list"><li style="list-style-type:disc"><strong>Java</strong> as the language.</li></ul><ul id="198e8d61-387b-8014-a255-d8a28a130916" class="bulleted-list"><li style="list-style-type:disc"><strong>Spring Boot Version</strong> (e.g., 3.3.0).</li></ul><ul id="198e8d61-387b-807d-a0d3-ff49186acb67" class="bulleted-list"><li style="list-style-type:disc"><strong>Spring Boot Starter Web</strong> dependency.</li></ul></li></ol><ol type="1" id="198e8d61-387b-8057-ba16-d031cf226d59" class="numbered-list" start="3"><li>Generate, unzip, and open in <strong>IntelliJ IDEA</strong>.</li></ol><ol type="1" id="198e8d61-387b-80e4-8b01-f44f25b12896" class="numbered-list" start="4"><li>Run the application:<ul id="198e8d61-387b-807b-ba13-d08a56fde3d5" class="bulleted-list"><li style="list-style-type:disc">Tomcat server starts on <strong>port 8080</strong>.</li></ul><ul id="198e8d61-387b-8069-a26d-f66a5a364e40" class="bulleted-list"><li style="list-style-type:disc">Open <code>localhost:8080</code> in a browser to verify.</li></ul></li></ol><hr id="198e8d61-387b-8098-831e-fe7ea97cb98b"/><h2 id="198e8d61-387b-806e-9008-f0e6c89eeb5e" class=""><strong>🌟 MVC Architecture in Spring Boot</strong></h2><h3 id="198e8d61-387b-8058-8f95-ec4000f08caf" class=""><strong>📌 What is MVC?</strong></h3><ul id="198e8d61-387b-80e8-84ed-cf37d597777f" class="bulleted-list"><li style="list-style-type:disc"><strong>MVC (Model-View-Controller)</strong> is an architecture that separates logic into different layers.</li></ul><ul id="198e8d61-387b-805b-a423-ca384c57598b" class="bulleted-list"><li style="list-style-type:disc"><strong>Why MVC?</strong><ul id="198e8d61-387b-805a-9d4e-d495577c2828" class="bulleted-list"><li style="list-style-type:circle"><strong>Scalability</strong>: Keeps code organized.</li></ul><ul id="198e8d61-387b-8052-975c-eba9e55ac066" class="bulleted-list"><li style="list-style-type:circle"><strong>Maintainability</strong>: Easier debugging and enhancements.</li></ul><ul id="198e8d61-387b-8012-ad08-c7ed68f45fcf" class="bulleted-list"><li style="list-style-type:circle"><strong>Loose Coupling</strong>: Different components work independently.</li></ul></li></ul><h3 id="198e8d61-387b-8078-86c5-cdf262918b8d" class=""><strong>📌 Layers in MVC</strong></h3><table id="198e8d61-387b-8091-99aa-c57d20983a5a" class="simple-table"><tbody><tr id="198e8d61-387b-802e-98ae-d4bc2e646a52"><td id="kYzb" class="">Layer</td><td id="BEBE" class="">Function</td><td id="&gt;Y[w" class="">Spring Boot Component</td></tr><tr id="198e8d61-387b-80da-895a-df91f2d83fa9"><td id="kYzb" class=""><strong>Model</strong></td><td id="BEBE" class="">Data representation</td><td id="&gt;Y[w" class=""><strong>Entities &amp; Repositories</strong></td></tr><tr id="198e8d61-387b-8087-b15f-fa234a405cae"><td id="kYzb" class=""><strong>View</strong></td><td id="BEBE" class="">User interface (not used in backend)</td><td id="&gt;Y[w" class="">-</td></tr><tr id="198e8d61-387b-80f2-8150-c4ef39af5889"><td id="kYzb" class=""><strong>Controller</strong></td><td id="BEBE" class="">Handles API requests</td><td id="&gt;Y[w" class=""><strong>Controllers</strong></td></tr></tbody></table><h3 id="198e8d61-387b-80f0-9cd9-d0cfdc20dedd" class=""><strong>📌 Flow of Data in MVC</strong></h3><ol type="1" id="198e8d61-387b-80bc-9f68-d57bf27ffdd9" class="numbered-list" start="1"><li><strong>Client sends a request</strong> → <code>Controller</code></li></ol><ol type="1" id="198e8d61-387b-80d6-9c31-c3c13a482d8a" class="numbered-list" start="2"><li><strong>Controller processes request</strong> &amp; logs/authenticates it.</li></ol><ol type="1" id="198e8d61-387b-807f-bc93-f7c8c403c21e" class="numbered-list" start="3"><li><strong>Controller sends data to Service Layer</strong> for <strong>business logic</strong>.</li></ol><ol type="1" id="198e8d61-387b-800d-9af6-d880d03994a2" class="numbered-list" start="4"><li><strong>Service Layer communicates with Repository Layer</strong> to interact with the <strong>database</strong>.</li></ol><ol type="1" id="198e8d61-387b-8057-b16e-caf9e5a867d2" class="numbered-list" start="5"><li><strong>Database processes data</strong> and returns a response.</li></ol><ol type="1" id="198e8d61-387b-80c3-a7f0-d31532b7adce" class="numbered-list" start="6"><li><strong>Service Layer sends processed data back</strong> to <code>Controller</code>.</li></ol><ol type="1" id="198e8d61-387b-8043-be7f-fbe9955b7083" class="numbered-list" start="7"><li><strong>Controller sends response to Client</strong>.</li></ol><hr id="198e8d61-387b-80f1-ac36-f65417b632b2"/><h2 id="198e8d61-387b-8043-a2eb-ea905b8a8ba4" class=""><strong>🌟 Spring Boot Project Structure</strong></h2><p id="198e8d61-387b-80d3-bbd9-edab4e1e2f9b" class="">📌 <strong>Organizing Code Using Packages</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="198e8d61-387b-80e0-95f4-e83dc842291a" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">scss
+CopyEdit
+com.example.springbootweb
+│── controllers    (Handles API requests)
+│── services       (Business logic)
+│── repositories   (Database interactions)
+│── dtos           (Data Transfer Objects)
+│── entities       (Database tables)
+│── configs        (Configuration files)
+│── utils          (Utility/helper classes)
+
+</code></pre><ul id="198e8d61-387b-80fc-9d31-c4d186fee178" class="bulleted-list"><li style="list-style-type:disc"><strong>Controllers</strong>: Handle incoming requests.</li></ul><ul id="198e8d61-387b-8069-8dfd-c73c5a3c7fc2" class="bulleted-list"><li style="list-style-type:disc"><strong>Services</strong>: Contain <strong>business logic</strong>.</li></ul><ul id="198e8d61-387b-80c7-b96c-feebe392f0c2" class="bulleted-list"><li style="list-style-type:disc"><strong>Repositories</strong>: Interface with the database.</li></ul><ul id="198e8d61-387b-805f-b99b-cb0bf50a9b05" class="bulleted-list"><li style="list-style-type:disc"><strong>DTOs (Data Transfer Objects)</strong>: Prevent exposing direct database entities to clients.</li></ul><hr id="198e8d61-387b-80b2-af49-c96e0b85860f"/><h2 id="198e8d61-387b-8093-8453-e3162369e2fc" class=""><strong>🌟 Detailed Look at Spring Boot Dependencies</strong></h2><h3 id="198e8d61-387b-80e1-9672-e259ce0280ff" class=""><strong>📌 Important Dependencies in </strong><code><strong>pom.xml</strong></code></h3><ol type="1" id="198e8d61-387b-80ab-b51e-f435a1fc3bbf" class="numbered-list" start="1"><li><strong>Spring Boot Starter Web</strong> → Provides:<ul id="198e8d61-387b-8064-b6f8-e2606b67a264" class="bulleted-list"><li style="list-style-type:disc"><code>Spring Boot Starter</code></li></ul><ul id="198e8d61-387b-8058-a0af-c10117146747" class="bulleted-list"><li style="list-style-type:disc"><code>Spring Boot Starter JSON</code></li></ul><ul id="198e8d61-387b-8083-b1d2-c74fdbb81ef6" class="bulleted-list"><li style="list-style-type:disc"><code>Spring Boot Starter Tomcat</code></li></ul><ul id="198e8d61-387b-80a8-be39-eaa6987afcb7" class="bulleted-list"><li style="list-style-type:disc"><code>Spring Boot Starter MVC</code></li></ul></li></ol><ol type="1" id="198e8d61-387b-8055-bc59-e926d732a7a1" class="numbered-list" start="2"><li><strong>Jackson</strong> → Converts JSON ↔ Java Objects.</li></ol><ol type="1" id="198e8d61-387b-80c7-85c3-f1ac85f27661" class="numbered-list" start="3"><li><strong>Spring MVC</strong> → Implements Model-View-Controller architecture.</li></ol><ol type="1" id="198e8d61-387b-8028-aecc-e1bcea64333f" class="numbered-list" start="4"><li><strong>Embedded Tomcat Server</strong> → Runs on <code>localhost:8080</code>.</li></ol><hr id="198e8d61-387b-80d3-a18d-eeadbd29f963"/><h2 id="198e8d61-387b-8023-8dd4-fdf6d6ab094f" class=""><strong>🌟 Deep Dive into Layers</strong></h2><h3 id="198e8d61-387b-801f-acb5-d0eff8b0d261" class=""><strong>📌 Presentation Layer (Controllers)</strong></h3><ul id="198e8d61-387b-806b-82f4-c26573d7a8ef" class="bulleted-list"><li style="list-style-type:disc"><strong>Receives HTTP requests</strong>.</li></ul><ul id="198e8d61-387b-80b2-9142-f36638e040d7" class="bulleted-list"><li style="list-style-type:disc"><strong>Performs Authentication</strong> (Is the user logged in?).</li></ul><ul id="198e8d61-387b-804f-9200-faa2719544ab" class="bulleted-list"><li style="list-style-type:disc"><strong>Transforms JSON → Java Objects (DTOs)</strong>.</li></ul><ul id="198e8d61-387b-80df-8f95-e02a3b8518a9" class="bulleted-list"><li style="list-style-type:disc"><strong>Passes data to Service Layer</strong>.</li></ul><h3 id="198e8d61-387b-801e-8ae8-f027890cf79b" class=""><strong>📌 Business Layer (Services)</strong></h3><ul id="198e8d61-387b-8071-8114-c957134e7dd3" class="bulleted-list"><li style="list-style-type:disc"><strong>Handles business logic</strong>.</li></ul><ul id="198e8d61-387b-80cb-9bf4-f01ffd77888c" class="bulleted-list"><li style="list-style-type:disc"><strong>Validates incoming data</strong>.</li></ul><ul id="198e8d61-387b-8046-bc49-eef780383a12" class="bulleted-list"><li style="list-style-type:disc"><strong>Performs Authorization</strong> (Is the user allowed to perform the action?).</li></ul><h3 id="198e8d61-387b-80e1-a8be-d138e866a567" class=""><strong>📌 Persistence Layer (Repositories)</strong></h3><ul id="198e8d61-387b-80c9-a960-f1cef0320ace" class="bulleted-list"><li style="list-style-type:disc"><strong>Interacts with the database</strong>.</li></ul><ul id="198e8d61-387b-80e1-90ce-f83e826d8c54" class="bulleted-list"><li style="list-style-type:disc"><strong>Defines queries using JPQL (Java Persistence Query Language)</strong>.</li></ul><ul id="198e8d61-387b-8063-97d6-e20ab3776d65" class="bulleted-list"><li style="list-style-type:disc"><strong>Uses Hibernate to manage database operations</strong>.</li></ul><hr id="198e8d61-387b-80cc-839c-ca497e82a8b4"/><h2 id="198e8d61-387b-802a-81ef-d593e48065bc" class=""><strong>🌟 Key Features of MVC Architecture</strong></h2><table id="198e8d61-387b-8016-a2be-cf4342103bb2" class="simple-table"><tbody><tr id="198e8d61-387b-8051-bcde-eb201ccfa60a"><td id="hCs~" class="">Feature</td><td id="&lt;yMP" class="">Benefit</td></tr><tr id="198e8d61-387b-809a-a594-d54213241e0b"><td id="hCs~" class=""><strong>Separation of Concerns</strong></td><td id="&lt;yMP" class="">Each layer handles a specific task</td></tr><tr id="198e8d61-387b-8022-b058-dc1be6a470b1"><td id="hCs~" class=""><strong>Reusability</strong></td><td id="&lt;yMP" class="">Same service logic can be used in different APIs</td></tr><tr id="198e8d61-387b-80fe-ab77-d0ec3b4778a5"><td id="hCs~" class=""><strong>Testability</strong></td><td id="&lt;yMP" class="">Layers can be tested independently</td></tr><tr id="198e8d61-387b-8091-b7e3-ec4ec1f0127b"><td id="hCs~" class=""><strong>Scalability</strong></td><td id="&lt;yMP" class="">Large projects can be divided among teams</td></tr></tbody></table><hr id="198e8d61-387b-8004-8e9f-e87cbac248f7"/><h2 id="198e8d61-387b-80bc-ae9b-e71ee84e18b1" class=""><strong>🌟 Understanding DTO vs Entity</strong></h2><table id="198e8d61-387b-80c3-a310-c2a1c72c0bcb" class="simple-table"><tbody><tr id="198e8d61-387b-80a0-ae83-d51408944159"><td id="GxsJ" class="">Type</td><td id="fRqD" class="">Purpose</td></tr><tr id="198e8d61-387b-80ab-807f-df993ef56ca1"><td id="GxsJ" class=""><strong>DTO (Data Transfer Object)</strong></td><td id="fRqD" class="">Used to send/receive data between API and frontend</td></tr><tr id="198e8d61-387b-80a5-9f55-fdb7171f7ae5"><td id="GxsJ" class=""><strong>Entity</strong></td><td id="fRqD" class="">Represents database table</td></tr></tbody></table><p id="198e8d61-387b-8034-90b0-edc98081acb9" class="">📌 <strong>Why Use DTOs?</strong></p><ul id="198e8d61-387b-8087-be6c-cb4421288a93" class="bulleted-list"><li style="list-style-type:disc">Prevents exposing <strong>database structure</strong>.</li></ul><ul id="198e8d61-387b-803a-9533-d8f473e2dd73" class="bulleted-list"><li style="list-style-type:disc">Avoids security issues like <strong>SQL Injection</strong>.</li></ul><hr id="198e8d61-387b-80db-94a6-f66b61c4eae2"/><h2 id="198e8d61-387b-8077-8245-ff1eb1506dfc" class=""><strong>🌟 Summary for Quick Revision</strong></h2><ol type="1" id="198e8d61-387b-8017-8092-c3c45147f2b9" class="numbered-list" start="1"><li><strong>Spring Boot Starter Web</strong> → Adds web support.</li></ol><ol type="1" id="198e8d61-387b-80b8-82da-c36ca6c00267" class="numbered-list" start="2"><li><strong>REST API</strong> follows <strong>stateless architecture</strong>.</li></ol><ol type="1" id="198e8d61-387b-803d-b8e8-d82a117bf479" class="numbered-list" start="3"><li><strong>CRUD Operations</strong> use <code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>PATCH</code>, <code>DELETE</code>.</li></ol><ol type="1" id="198e8d61-387b-809d-b9e3-e1f3760e0afb" class="numbered-list" start="4"><li><strong>Spring Boot runs on embedded Tomcat</strong> (port <code>8080</code> by default).</li></ol><ol type="1" id="198e8d61-387b-800f-a37b-fd2db77f1ebe" class="numbered-list" start="5"><li><strong>MVC Architecture</strong>:<ul id="198e8d61-387b-8094-8dfd-f1fb220b6e0b" class="bulleted-list"><li style="list-style-type:disc"><strong>Controller</strong> → Handles API requests.</li></ul><ul id="198e8d61-387b-8097-aa23-ed707945308b" class="bulleted-list"><li style="list-style-type:disc"><strong>Service</strong> → Implements business logic.</li></ul><ul id="198e8d61-387b-80e5-8e52-d8b216017369" class="bulleted-list"><li style="list-style-type:disc"><strong>Repository</strong> → Connects to the database.</li></ul></li></ol><ol type="1" id="198e8d61-387b-809d-a7e2-e942adb478e4" class="numbered-list" start="6"><li><strong>Spring Boot Dependencies</strong>:<ul id="198e8d61-387b-80e4-b32b-dace385d7c29" class="bulleted-list"><li style="list-style-type:disc"><code>Spring Boot Starter Web</code> (includes MVC, Jackson, Tomcat).</li></ul></li></ol><ol type="1" id="198e8d61-387b-8065-bd3d-c1c3dd830786" class="numbered-list" start="7"><li><strong>Project Structure</strong>:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="198e8d61-387b-80c7-b4e1-ff7a3a0f2ad2" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">pgsql
+CopyEdit
+controllers/ → Handles API endpoints
+services/ → Implements business logic
+repositories/ → Manages database
+dtos/ → Data Transfer Objects
+entities/ → Database tables
+
+</code></pre></li></ol><ol type="1" id="198e8d61-387b-8026-b715-d1cac4f4e9fb" class="numbered-list" start="8"><li><strong>DTO vs Entity</strong>:<ul id="198e8d61-387b-80d7-8b8e-e7e822f4a993" class="bulleted-list"><li style="list-style-type:disc"><strong>DTO</strong>: Used for API communication.</li></ul><ul id="198e8d61-387b-8017-bbe1-fea3d507e836" class="bulleted-list"><li style="list-style-type:disc"><strong>Entity</strong>: Maps to database tables.</li></ul></li></ol><ol type="1" id="198e8d61-387b-80e7-935e-f663d686d8bc" class="numbered-list" start="9"><li><strong>Security Considerations</strong>:<ul id="198e8d61-387b-8075-8fd8-fe0b2add83ef" class="bulleted-list"><li style="list-style-type:disc">Avoid exposing <strong>Entities</strong>.</li></ul><ul id="198e8d61-387b-80b7-81a5-f98c91a44813" class="bulleted-list"><li style="list-style-type:disc">Use <strong>DTOs</strong> to prevent SQL Injection.</li></ul></li></ol><hr id="198e8d61-387b-80a3-9c1c-e321905f34f6"/><h2 id="198e8d61-387b-8024-ad06-f15892ce8d9c" class=""><strong>🌟 What&#x27;s Next?</strong></h2><ul id="198e8d61-387b-8054-b494-c7998ea42cd7" class="bulleted-list"><li style="list-style-type:disc"><strong>Next Module:</strong> Deep dive into each <strong>layer separately</strong>.</li></ul><ul id="198e8d61-387b-80cc-8cbb-c56bd4dcd86d" class="bulleted-list"><li style="list-style-type:disc">Learning <strong>Spring Data JPA</strong> for database management.</li></ul><ul id="198e8d61-387b-8044-bc75-da6c0a29d834" class="bulleted-list"><li style="list-style-type:disc">Understanding <strong>multi-service architecture</strong>.</li></ul><hr id="198e8d61-387b-8015-ab0f-ddfa62c2b64f"/><p id="198e8d61-387b-80ff-b274-fb19135ba8b9" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

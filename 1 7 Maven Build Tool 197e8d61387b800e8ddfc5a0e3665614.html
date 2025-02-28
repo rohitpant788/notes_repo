@@ -1,0 +1,729 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>1.7 Maven Build Tool</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-transparentGray { background-color: undefined; }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="197e8d61-387b-800e-8ddf-c5a0e3665614" class="page sans"><header><h1 class="page-title">1.7 Maven Build Tool</h1><p class="page-description"></p></header><div class="page-body"><h2 id="197e8d61-387b-8040-b31a-dfbaa8daef0c" class=""><strong>🔹 Introduction to Maven</strong></h2><p id="197e8d61-387b-80dc-b6fc-c708c6398bce" class="">Maven is a <strong>build automation</strong> and <strong>project management</strong> tool for Java applications. It plays a crucial role in <strong>dependency management</strong>, <strong>build automation</strong>, and <strong>deployment</strong>.</p><h3 id="197e8d61-387b-803d-a483-eecda075e381" class=""><strong>📢 Key Takeaways:</strong></h3><p id="197e8d61-387b-80cb-b79e-cbbe4e165c9e" class="">✅ Maven is not specific to Spring Boot; it works for any Java project.</p><p id="197e8d61-387b-8042-9da1-c47429d620aa" class="">✅ It helps manage dependencies and automates project builds.</p><p id="197e8d61-387b-80b5-a8b1-f9b9b6001904" class="">✅ Applications can be <strong>packaged</strong>, <strong>tested</strong>, and <strong>deployed</strong> using Maven.</p><p id="197e8d61-387b-80f2-8bad-ede5b52d6e7d" class="">✅ Maven Central Repository hosts various dependencies that can be pulled into projects.</p><hr id="197e8d61-387b-8074-a05d-dbb119487133"/><h2 id="197e8d61-387b-80e7-8ca3-ec0b783f4614" class=""><strong>🔹 Maven as a Chef 🍽️ (Analogy)</strong></h2><p id="197e8d61-387b-8099-88fc-fc289e20e240" class="">Think of Maven as a <strong>chef</strong> who wants to cook a dish.</p><ul id="197e8d61-387b-80dc-acda-ceab4f44b6a5" class="bulleted-list"><li style="list-style-type:disc"><strong>Recipe (pom.xml)</strong> → Defines what is needed.</li></ul><ul id="197e8d61-387b-80cd-af1b-fcf8dc8750af" class="bulleted-list"><li style="list-style-type:disc"><strong>Ingredients (Dependencies)</strong> → Pulled from Maven repositories.</li></ul><ul id="197e8d61-387b-806a-92d7-fbdb1ad335a4" class="bulleted-list"><li style="list-style-type:disc"><strong>Final Dish (Packaged Application - JAR/WAR)</strong> → Built and ready for deployment.</li></ul><p id="197e8d61-387b-806a-8e8c-c350bf28d868" class="">Maven <strong>orchestrates</strong> everything: it <strong>fetches dependencies</strong>, <strong>compiles code</strong>, <strong>runs tests</strong>, and <strong>packages the project</strong> for deployment.</p><hr id="197e8d61-387b-807a-afe7-e0b220fa5c79"/><h2 id="197e8d61-387b-80ad-a4e2-d870e7af86b5" class=""><strong>🔹 What is </strong><code><strong>pom.xml</strong></code><strong>?</strong></h2><p id="197e8d61-387b-8058-a707-fa3b4e39883e" class="">POM = <strong>Project Object Model</strong> (An XML file that contains project configurations).</p><h3 id="197e8d61-387b-80af-acad-d82e0beb1742" class=""><strong>📢 What does </strong><code><strong>pom.xml</strong></code><strong> define?</strong></h3><ul id="197e8d61-387b-8082-9415-ccdd77fc15de" class="bulleted-list"><li style="list-style-type:disc"><strong>Java version</strong></li></ul><ul id="197e8d61-387b-8064-9e29-eaafbf1cf3db" class="bulleted-list"><li style="list-style-type:disc"><strong>Dependencies (Libraries used in the project)</strong></li></ul><ul id="197e8d61-387b-8008-a799-ce587e60a2c4" class="bulleted-list"><li style="list-style-type:disc"><strong>Plugins</strong></li></ul><ul id="197e8d61-387b-803f-b92f-c726f60d27d4" class="bulleted-list"><li style="list-style-type:disc"><strong>Repositories (like Maven Central)</strong></li></ul><ul id="197e8d61-387b-80d1-9840-def9dc9916bd" class="bulleted-list"><li style="list-style-type:disc"><strong>Project metadata</strong></li></ul><p id="197e8d61-387b-809a-bcc7-d5acbff62fcd" class="">Developers specify dependencies in <code>pom.xml</code>, and <strong>Maven handles everything else</strong>.</p><hr id="197e8d61-387b-8073-bb7c-ed19f98f3d5b"/><h2 id="197e8d61-387b-80eb-abf6-e31388194b13" class=""><strong>🔹 Maven&#x27;s Role in Dependency Management</strong></h2><p id="197e8d61-387b-809c-90cc-dc51e472b653" class="">✅ <strong>Automatic dependency resolution</strong> – No need to manually download JARs.</p><p id="197e8d61-387b-809e-a317-e65e4614d21c" class="">✅ <strong>Transitive dependencies</strong> – If dependency A requires dependency B, Maven fetches both.</p><p id="197e8d61-387b-807c-ba63-e79d1ff71b20" class="">✅ <strong>Versioning &amp; Conflict Resolution</strong> – Handles different versions of dependencies.</p><p id="197e8d61-387b-8088-9c37-e6ba8764dcb6" class="">📌 <strong>Example</strong>: Spring Boot starter dependencies (<code>spring-boot-starter-web</code>, etc.) are all managed in <code>pom.xml</code> via Maven.</p><hr id="197e8d61-387b-8072-b157-ece404f88f61"/><h2 id="197e8d61-387b-80aa-b69a-d6580c90729d" class=""><strong>🔹 Maven Build Automation 🔄</strong></h2><p id="197e8d61-387b-8094-a220-c6d6d5906e2b" class="">Maven automates the entire <strong>build process</strong>, including:</p><p id="197e8d61-387b-8075-b054-c3d136d99b13" class="">✅ Compilation</p><p id="197e8d61-387b-8020-a2af-f14725a753a2" class="">✅ Testing</p><p id="197e8d61-387b-80c4-b447-d227caac3269" class="">✅ Packaging</p><p id="197e8d61-387b-800a-8b4e-ef717d00c36b" class="">✅ Deployment</p><p id="197e8d61-387b-80b4-9062-df47bb19ba01" class="">💡 <strong>Maven Build Lifecycle:</strong></p><p id="197e8d61-387b-8022-83cc-f7112dd44aee" class="">Each phase in Maven&#x27;s build lifecycle is called a <strong>goal</strong>.</p><h3 id="197e8d61-387b-803d-8461-f6cf06f13d68" class=""><strong>📢 Maven Build Phases (Goals)</strong></h3><table id="197e8d61-387b-800d-88bd-f5e8668f837c" class="simple-table"><tbody><tr id="197e8d61-387b-80d6-9eec-dad527a487d9"><td id="nJ&gt;&lt;" class="">Phase</td><td id="anJm" class="">Description</td></tr><tr id="197e8d61-387b-8089-b267-e371cef7f595"><td id="nJ&gt;&lt;" class=""><code>validate</code></td><td id="anJm" class="">Checks if project structure and dependencies are correct.</td></tr><tr id="197e8d61-387b-80d2-b8bd-cbdb26c62f0d"><td id="nJ&gt;&lt;" class=""><code>compile</code></td><td id="anJm" class="">Compiles Java source files.</td></tr><tr id="197e8d61-387b-80e8-80a5-f4a575e33404"><td id="nJ&gt;&lt;" class=""><code>test</code></td><td id="anJm" class="">Runs unit tests using JUnit/TestNG.</td></tr><tr id="197e8d61-387b-8077-b15a-e8270752f716"><td id="nJ&gt;&lt;" class=""><code>package</code></td><td id="anJm" class="">Creates a JAR/WAR file.</td></tr><tr id="197e8d61-387b-80be-af66-d78f5be97f46"><td id="nJ&gt;&lt;" class=""><code>install</code></td><td id="anJm" class="">Installs JAR/WAR into the local repository.</td></tr><tr id="197e8d61-387b-80c1-a71d-e60580b24804"><td id="nJ&gt;&lt;" class=""><code>deploy</code></td><td id="anJm" class="">Deploys packaged application to a remote repository.</td></tr></tbody></table><hr id="197e8d61-387b-8032-8142-d39900da7afb"/><h2 id="197e8d61-387b-806a-9f5c-cf027028fe21" class=""><strong>🔹 Running Maven Commands in Terminal</strong></h2><h3 id="197e8d61-387b-8049-8dcc-cf1f07dce64d" class=""><strong>1️⃣ Compiling Code</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="197e8d61-387b-803e-97a5-cb8bc248bf32" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">sh
+CopyEdit
+./mvnw compile
+
+</code></pre><p id="197e8d61-387b-80d2-b413-ed6028abf513" class="">🔹 This compiles the Java code and generates <code>.class</code> files in the <code>target</code> folder.</p><hr id="197e8d61-387b-8023-9881-f0864fdae366"/><h3 id="197e8d61-387b-8098-bf1b-e18da6c12e78" class=""><strong>2️⃣ Creating a JAR/WAR File</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="197e8d61-387b-80b8-aa65-c49feded4d8b" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">sh
+CopyEdit
+./mvnw package
+
+</code></pre><p id="197e8d61-387b-8086-9bb7-c92fe193b0c0" class="">🔹 Packages the application as a JAR or WAR file.</p><p id="197e8d61-387b-801f-a1c6-e4bfa90de4b2" class="">📌 <strong>Example Output:</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="197e8d61-387b-80d0-9eea-df74b7a9648f" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">sh
+CopyEdit
+target/Introduction-to-SpringBoot-0.0.2.jar
+
+</code></pre><p id="197e8d61-387b-803f-b77f-c9e6651de24c" class="">This JAR file can now be shared and executed.</p><hr id="197e8d61-387b-807c-ae46-d9b61d65d92a"/><h3 id="197e8d61-387b-802e-bf33-e862b42c6393" class=""><strong>3️⃣ Running the Packaged JAR File</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="197e8d61-387b-8078-a865-e94730c1831a" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">sh
+CopyEdit
+java -jar target/Introduction-to-SpringBoot-0.0.2.jar
+
+</code></pre><p id="197e8d61-387b-8035-be35-d00ad1b342d8" class="">✅ If Java is installed, this will <strong>start the Spring Boot application</strong>.</p><hr id="197e8d61-387b-80e5-a417-c3231d6034f5"/><h3 id="197e8d61-387b-8063-82a7-eb20114beed2" class=""><strong>4️⃣ Cleaning Build Files</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="197e8d61-387b-808d-8118-efc7812c406f" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">sh
+CopyEdit
+./mvnw clean
+
+</code></pre><p id="197e8d61-387b-8053-a743-cda9edd86a21" class="">✅ Deletes previous build files (removes <code>target/</code> folder).</p><hr id="197e8d61-387b-80e6-afa1-fc86e1ae08be"/><h3 id="197e8d61-387b-8022-bbf6-c3828a567781" class=""><strong>5️⃣ Running Tests</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="197e8d61-387b-803e-a7d4-ef77fb8f08cb" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">sh
+CopyEdit
+./mvnw test
+
+</code></pre><p id="197e8d61-387b-80f4-8517-d3cf88c4b07e" class="">✅ Runs test cases.</p><p id="197e8d61-387b-80e0-bcea-e8dd3c151b25" class="">📌 <strong>Example Test Output:</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="197e8d61-387b-80f0-9428-e87121eba33e" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">sh
+CopyEdit
+1 test passed!
+
+</code></pre><hr id="197e8d61-387b-8046-9ecd-c0bb74dbc21a"/><h3 id="197e8d61-387b-8075-b8e5-e7601a58ef3b" class=""><strong>6️⃣ Installing the JAR Locally</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="197e8d61-387b-8009-a879-d8cd4065e70a" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">sh
+CopyEdit
+./mvnw install
+
+</code></pre><p id="197e8d61-387b-804b-a6ec-fc58a5a464c6" class="">✅ Installs the JAR in the <strong>local Maven repository</strong>, making it available for other projects.</p><hr id="197e8d61-387b-8004-88f7-c27dd9068ac8"/><h3 id="197e8d61-387b-8063-b43c-f6b9fb9270b2" class=""><strong>7️⃣ Deploying to a Remote Repository</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="197e8d61-387b-8006-a24d-fef98226a6f8" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">sh
+CopyEdit
+./mvnw deploy
+
+</code></pre><p id="197e8d61-387b-8049-a76d-c9f074b7897d" class="">✅ Deploys the built project to <strong>Maven Central</strong> or other repositories.</p><hr id="197e8d61-387b-80e5-8395-fe8382e2358a"/><h2 id="197e8d61-387b-8062-81d7-e19ea7c59025" class=""><strong>🔹 Running the Spring Boot Application with Maven</strong></h2><p id="197e8d61-387b-807d-8dbf-e80f7915b867" class="">Instead of using <code>java -jar</code>, we can use:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="197e8d61-387b-80b8-ab8f-ffc9c3394af5" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">sh
+CopyEdit
+./mvnw spring-boot:run
+
+</code></pre><p id="197e8d61-387b-8094-8901-d6d02728e852" class="">✅ This will start the Spring Boot application.</p><hr id="197e8d61-387b-80da-a4f6-d11d1b584560"/><h2 id="197e8d61-387b-809a-bf41-ed8d8bb300df" class=""><strong>🔹 Creating a Docker Image with Maven</strong></h2><p id="197e8d61-387b-80ac-afe3-cb578ba5d67f" class="">Maven can also be used to build <strong>Docker images</strong> for deployment.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="197e8d61-387b-8038-a15b-f1e058e4adeb" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">sh
+CopyEdit
+./mvnw spring-boot:build-image
+
+</code></pre><p id="197e8d61-387b-8097-b3a4-dcc036634992" class="">🚀 <strong>Docker support</strong> will be covered later in the course.</p><hr id="197e8d61-387b-8089-bbaf-d41085f0d325"/><h2 id="197e8d61-387b-80a1-9df7-f7130e8ded20" class=""><strong>📝 Summary for Quick Revision (Interview Guide)</strong></h2><table id="197e8d61-387b-8013-b47d-cdc5c3f58078" class="simple-table"><tbody><tr id="197e8d61-387b-80c2-96bb-e78dd9c72767"><td id="\OiY" class="">Topic</td><td id="px|E" class="">Key Point</td></tr><tr id="197e8d61-387b-8047-b17a-df798033623f"><td id="\OiY" class=""><strong>What is Maven?</strong></td><td id="px|E" class="">A build automation &amp; dependency management tool for Java.</td></tr><tr id="197e8d61-387b-80bb-a9b1-cfcf7d73bc4c"><td id="\OiY" class=""><strong>What is </strong><code><strong>pom.xml</strong></code><strong>?</strong></td><td id="px|E" class="">Defines project configuration, dependencies, and plugins.</td></tr><tr id="197e8d61-387b-8004-ade3-d976a8947428"><td id="\OiY" class=""><strong>Maven Build Lifecycle</strong></td><td id="px|E" class=""><code>validate</code>, <code>compile</code>, <code>test</code>, <code>package</code>, <code>install</code>, <code>deploy</code>.</td></tr><tr id="197e8d61-387b-80af-8005-e6b5acab77c9"><td id="\OiY" class=""><strong>Dependency Management</strong></td><td id="px|E" class="">Automatically resolves dependencies from Maven Central.</td></tr><tr id="197e8d61-387b-80e6-9b15-f30043f325f1"><td id="\OiY" class=""><strong>Running Tests</strong></td><td id="px|E" class=""><code>./mvnw test</code> – Executes test cases.</td></tr><tr id="197e8d61-387b-80ba-9a65-e118cc2f2f2c"><td id="\OiY" class=""><strong>Packaging</strong></td><td id="px|E" class=""><code>./mvnw package</code> – Creates a JAR/WAR.</td></tr><tr id="197e8d61-387b-8056-89c7-f62ac34ead8a"><td id="\OiY" class=""><strong>Deploying</strong></td><td id="px|E" class=""><code>./mvnw deploy</code> – Uploads to a remote repository.</td></tr><tr id="197e8d61-387b-8091-a963-d5589238acaf"><td id="\OiY" class=""><strong>Running Spring Boot</strong></td><td id="px|E" class=""><code>./mvnw spring-boot:run</code> – Starts the application.</td></tr><tr id="197e8d61-387b-80fd-85c1-c4bc7faf5a6c"><td id="\OiY" class=""><strong>Cleaning Build Files</strong></td><td id="px|E" class=""><code>./mvnw clean</code> – Removes <code>target/</code> folder.</td></tr></tbody></table><hr id="197e8d61-387b-8042-8330-cd17d1c1bb84"/><p id="197e8d61-387b-80d6-96b1-d402f048f7d9" class="">✅ <strong>Maven simplifies Spring Boot development by managing dependencies, automating builds, and facilitating deployment.</strong></p><p id="197e8d61-387b-807a-a6d9-e30dc521f599" class="">🔥 <strong>It is a crucial tool for Java developers, especially in large-scale enterprise applications!</strong> 🚀</p><hr id="197e8d61-387b-80f6-bf66-dcaf40bc1291"/><p id="197e8d61-387b-80cb-8ac4-fcef3ca1e738" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

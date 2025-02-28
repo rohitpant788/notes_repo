@@ -1,0 +1,798 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>3.4 Sorting and Pagination in Spring Data Jpa</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-transparentGray { background-color: undefined; }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="19fe8d61-387b-80da-8085-d49e90ffd781" class="page sans"><header><h1 class="page-title">3.4 Sorting and Pagination in Spring Data Jpa</h1><p class="page-description"></p></header><div class="page-body"><h3 id="19fe8d61-387b-807b-8f6a-ee9ec69d5f5d" class=""><strong>Spring Boot: Sorting and Pagination with Spring Data JPA</strong></h3><hr id="19fe8d61-387b-80a3-a519-cc02460e551a"/><h2 id="19fe8d61-387b-8017-adab-d7ab483e40ed" class=""><strong>📌 Introduction</strong></h2><p id="19fe8d61-387b-8090-8e56-f4e16cbb4df6" class="">In this session, we will explore how to <strong>sort</strong> and <strong>paginate</strong> data in a <strong>Spring Boot</strong> application using <strong>Spring Data JPA</strong>. These concepts are crucial when working with large datasets, as they help in <strong>optimizing performance</strong> and <strong>enhancing the user experience</strong>. We will cover:</p><ul id="19fe8d61-387b-8078-8f00-effdc88dbf4f" class="bulleted-list"><li style="list-style-type:disc"><strong>Sorting</strong> with <code>OrderBy</code>, <code>Sort</code>, and <strong>dynamic sorting</strong>.</li></ul><ul id="19fe8d61-387b-80e7-8701-cc5992f3a479" class="bulleted-list"><li style="list-style-type:disc"><strong>Pagination</strong> with <code>Pageable</code> and <code>PageRequest</code>.</li></ul><ul id="19fe8d61-387b-8081-a5b6-fff56363ce85" class="bulleted-list"><li style="list-style-type:disc"><strong>Combining Sorting &amp; Pagination</strong> for optimal data retrieval.</li></ul><hr id="19fe8d61-387b-80ba-a47e-d80d91685e22"/><h2 id="19fe8d61-387b-8000-83ae-f71d5422cf1a" class=""><strong>🔍 Filtering and Sorting Data</strong></h2><p id="19fe8d61-387b-80ae-b4cb-c5145ae9a69b" class="">Before we begin sorting, let’s understand the basics of <strong>filtering</strong> in Spring Data JPA.</p><h3 id="19fe8d61-387b-8094-9e0e-f9effd34fe78" class=""><strong>➡️ Filtering by Fields</strong></h3><p id="19fe8d61-387b-8070-bfee-d7ad3f8393e6" class="">Spring Data JPA allows us to <strong>filter records</strong> based on different fields using method naming conventions.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19fe8d61-387b-803f-a696-d8aad198c6a9" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+List&lt;ProductEntity&gt; findByTitle(String title);
+
+</code></pre><p id="19fe8d61-387b-80a2-902b-da1936f1456e" class="">💡 <strong>Example:</strong> Fetches products <strong>by title</strong>.</p><h3 id="19fe8d61-387b-8026-a7f9-e46dda1c5822" class=""><strong>➡️ Sorting with Method Naming</strong></h3><p id="19fe8d61-387b-8066-a2ab-f1076b39f80c" class="">We can <strong>sort</strong> by adding <code>OrderBy</code> in the method name.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19fe8d61-387b-8099-9c7b-c94babc73e7c" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+List&lt;ProductEntity&gt; findByTitleOrderByPrice(String title);
+
+</code></pre><p id="19fe8d61-387b-8050-8513-df81a44f2cf0" class="">💡 <strong>Example:</strong> Returns products <strong>filtered by title</strong> and <strong>sorted by price</strong>.</p><hr id="19fe8d61-387b-80bb-9225-c850ed52aa78"/><h2 id="19fe8d61-387b-80e6-943b-cc6f9bf7ecdc" class=""><strong>📌 Implementing Sorting</strong></h2><p id="19fe8d61-387b-8021-8ac9-dd25deb2a428" class="">Sorting allows us to order data based on a <strong>specific field</strong>, such as <strong>price, title, quantity, etc.</strong>.</p><h3 id="19fe8d61-387b-80d8-a22b-df1bdfb25211" class=""><strong>➡️ Defining </strong><code><strong>ProductRepository</strong></code><strong> with Sorting</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19fe8d61-387b-8063-9127-ee5f8a37a4f4" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@Repository
+public interface ProductRepository extends JpaRepository&lt;ProductEntity, Long&gt; {
+
+    // Sorting by Title
+    List&lt;ProductEntity&gt; findByTitleOrderByPrice(String title);
+
+    // Dynamic Sorting using Sort Parameter
+    List&lt;ProductEntity&gt; findAll(Sort sort);
+
+    // Pagination with Sorting
+    Page&lt;ProductEntity&gt; findAll(Pageable pageable);
+}
+
+</code></pre><h3 id="19fe8d61-387b-8085-9132-f1e4d3664a9b" class=""><strong>➡️ Sorting with a REST API</strong></h3><p id="19fe8d61-387b-80dd-b16e-da0d139b5e2d" class="">We expose an API to <strong>sort products dynamically</strong>.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19fe8d61-387b-80fd-b917-cca71318ea95" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@RestController
+@RequestMapping(&quot;/products&quot;)
+public class ProductController {
+
+    private final ProductRepository productRepository;
+
+    public ProductController(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
+
+    @GetMapping(&quot;/sorted&quot;)
+    public List&lt;ProductEntity&gt; getAllProductsSorted(@RequestParam(defaultValue = &quot;id&quot;) String sortBy) {
+        return productRepository.findAll(Sort.by(sortBy));
+    }
+}
+
+</code></pre><p id="19fe8d61-387b-80b0-9014-ccf7dba4bca4" class="">💡 <strong>API Call:</strong> <code>http://localhost:8080/products/sorted?sortBy=price</code></p><hr id="19fe8d61-387b-8077-97dc-c04503288d4c"/><h2 id="19fe8d61-387b-8050-a0a5-f7a8d8705707" class=""><strong>📌 Advanced Sorting Techniques</strong></h2><h3 id="19fe8d61-387b-8006-9d00-dcfe818f1917" class=""><strong>➡️ Sorting by Multiple Fields</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19fe8d61-387b-80af-8178-eb979b022183" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+Sort sort = Sort.by(Sort.Order.desc(&quot;quantity&quot;), Sort.Order.asc(&quot;price&quot;));
+List&lt;ProductEntity&gt; sortedProducts = productRepository.findAll(sort);
+
+</code></pre><p id="19fe8d61-387b-803d-b57a-eafe86f7fd21" class="">💡 <strong>Primary Sort:</strong> <strong>Descending</strong> order by <code>quantity</code></p><p id="19fe8d61-387b-80fa-a106-ce8c68726424" class="">💡 <strong>Secondary Sort:</strong> <strong>Ascending</strong> order by <code>price</code></p><h3 id="19fe8d61-387b-80be-8a78-c68a329954a4" class=""><strong>➡️ Dynamic Sorting in API</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19fe8d61-387b-80f6-bf24-e9494fdb3da2" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@GetMapping(&quot;/sorted-multiple&quot;)
+public List&lt;ProductEntity&gt; getAllProductsSortedByMultipleFields() {
+    Sort sort = Sort.by(
+        Sort.Order.desc(&quot;quantity&quot;),
+        Sort.Order.asc(&quot;price&quot;)
+    );
+    return productRepository.findAll(sort);
+}
+
+</code></pre><p id="19fe8d61-387b-80f0-9f13-c81ab066f796" class="">💡 <strong>API Call:</strong> <code>http://localhost:8080/products/sorted-multiple</code></p><hr id="19fe8d61-387b-8078-94c8-f8a46b8d61c1"/><h2 id="19fe8d61-387b-80b4-bae8-c689722023a3" class=""><strong>📌 Implementing Pagination</strong></h2><p id="19fe8d61-387b-80d9-9965-cf51796bc328" class="">Pagination helps in <strong>retrieving a subset of records</strong>, reducing <strong>load</strong> on the database.</p><h3 id="19fe8d61-387b-807b-94dd-d2afc39beee5" class=""><strong>➡️ Using </strong><code><strong>Pageable</strong></code></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19fe8d61-387b-8073-8ab6-f95bbcdbe82f" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+Pageable pageable = PageRequest.of(0, 5); // Page 0, 5 records per page
+Page&lt;ProductEntity&gt; page = productRepository.findAll(pageable);
+
+</code></pre><h3 id="19fe8d61-387b-8040-882b-c428dd02f729" class=""><strong>➡️ </strong><code><strong>ProductRepository</strong></code><strong> for Pagination</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19fe8d61-387b-80f7-8928-cc683b985a9e" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@Repository
+public interface ProductRepository extends JpaRepository&lt;ProductEntity, Long&gt; {
+
+    // Pagination: Find All with Pageable
+    Page&lt;ProductEntity&gt; findAll(Pageable pageable);
+}
+
+</code></pre><h3 id="19fe8d61-387b-80e4-a4fe-f73ac05a6a85" class=""><strong>➡️ API for Pagination</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19fe8d61-387b-8020-8671-fb59833d64b8" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@GetMapping(&quot;/paginated&quot;)
+public Page&lt;ProductEntity&gt; getPaginatedProducts(
+    @RequestParam(defaultValue = &quot;0&quot;) int page,
+    @RequestParam(defaultValue = &quot;5&quot;) int size) {
+    return productRepository.findAll(PageRequest.of(page, size));
+}
+
+</code></pre><p id="19fe8d61-387b-800c-bd88-d53b7a2f2722" class="">💡 <strong>API Call:</strong> <code>http://localhost:8080/products/paginated?page=1&amp;size=5</code></p><hr id="19fe8d61-387b-80f1-abce-c55d565a6e32"/><h2 id="19fe8d61-387b-807a-98d3-cd548ed787ac" class=""><strong>📌 Sorting &amp; Pagination Together</strong></h2><p id="19fe8d61-387b-80e4-a98e-f60fa3f650ab" class="">We can <strong>combine sorting and pagination</strong> for optimal data retrieval.</p><h3 id="19fe8d61-387b-80c9-a982-fb54af64f089" class=""><strong>➡️ </strong><code><strong>ProductRepository</strong></code><strong> for Pagination with Sorting</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19fe8d61-387b-80ca-a489-dbfd194e773c" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@Repository
+public interface ProductRepository extends JpaRepository&lt;ProductEntity, Long&gt; {
+
+    // Pagination with Sorting
+    Page&lt;ProductEntity&gt; findAll(Pageable pageable);
+}
+
+</code></pre><h3 id="19fe8d61-387b-80ec-a9d3-eb3852c8b3ba" class=""><strong>➡️ API for Sorting &amp; Pagination</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19fe8d61-387b-8097-b5af-c9a5e19f62dc" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@GetMapping(&quot;/paginated-sorted&quot;)
+public Page&lt;ProductEntity&gt; getPaginatedSortedProducts(
+    @RequestParam(defaultValue = &quot;0&quot;) int page,
+    @RequestParam(defaultValue = &quot;5&quot;) int size,
+    @RequestParam(defaultValue = &quot;id&quot;) String sortBy) {
+
+    Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
+    return productRepository.findAll(pageable);
+}
+
+</code></pre><p id="19fe8d61-387b-801f-8fae-ea89ef27f4db" class="">💡 <strong>API Call:</strong> <code>http://localhost:8080/products/paginated-sorted?page=0&amp;size=5&amp;sortBy=price</code></p><hr id="19fe8d61-387b-80bd-90c0-f2774549c656"/><h2 id="19fe8d61-387b-8077-bcfb-d5a9c488a8dd" class=""><strong>📌 Filtering + Sorting + Pagination Together</strong></h2><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19fe8d61-387b-80c8-884c-c5de70cb6beb" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@GetMapping(&quot;/filtered-paginated-sorted&quot;)
+public Page&lt;ProductEntity&gt; getFilteredPaginatedSortedProducts(
+    @RequestParam(defaultValue = &quot;0&quot;) int page,
+    @RequestParam(defaultValue = &quot;5&quot;) int size,
+    @RequestParam(defaultValue = &quot;id&quot;) String sortBy,
+    @RequestParam(defaultValue = &quot;&quot;) String title) {
+
+    Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
+    return productRepository.findByTitleContainingIgnoreCase(title, pageable);
+}
+
+</code></pre><p id="19fe8d61-387b-8091-9d8c-e0d1b3ef9e8b" class="">💡 <strong>API Call:</strong> <code>http://localhost:8080/products/filtered-paginated-sorted?page=1&amp;size=5&amp;sortBy=price&amp;title=coca</code></p><hr id="19fe8d61-387b-8009-aad1-d02e6165ed3e"/><h2 id="19fe8d61-387b-8078-96f4-f22b039420e0" class=""><strong>📌 Summary Table</strong></h2><table id="19fe8d61-387b-8030-85b1-fc30fa771db5" class="simple-table"><tbody><tr id="19fe8d61-387b-80f5-bdc3-c3ee89e0c52b"><td id="ZG]y" class=""><strong>Feature</strong></td><td id="M&lt;a&gt;" class=""><strong>Method</strong></td><td id="\q@l" class=""><strong>Usage</strong></td></tr><tr id="19fe8d61-387b-800a-b739-fdea2ee83159"><td id="ZG]y" class=""><strong>Basic Sorting</strong></td><td id="M&lt;a&gt;" class=""><code>findByTitleOrderByPrice</code></td><td id="\q@l" class="">Sort using method names</td></tr><tr id="19fe8d61-387b-808e-b1a3-f2ddcdca1127"><td id="ZG]y" class=""><strong>Dynamic Sorting</strong></td><td id="M&lt;a&gt;" class=""><code>Sort.by(sortBy)</code></td><td id="\q@l" class="">Pass sorting field dynamically</td></tr><tr id="19fe8d61-387b-80d1-b6e2-cf5dd3bab777"><td id="ZG]y" class=""><strong>Multiple Sorting Fields</strong></td><td id="M&lt;a&gt;" class=""><code>Sort.by(Sort.Order.desc(&quot;quantity&quot;), Sort.Order.asc(&quot;price&quot;))</code></td><td id="\q@l" class="">Sort using multiple fields</td></tr><tr id="19fe8d61-387b-8064-8d0f-f87818a8b0c6"><td id="ZG]y" class=""><strong>Pagination</strong></td><td id="M&lt;a&gt;" class=""><code>PageRequest.of(page, size)</code></td><td id="\q@l" class="">Fetch paginated results</td></tr><tr id="19fe8d61-387b-8049-b846-d79ca6d36403"><td id="ZG]y" class=""><strong>Sorting + Pagination</strong></td><td id="M&lt;a&gt;" class=""><code>PageRequest.of(page, size, Sort.by(sortBy))</code></td><td id="\q@l" class="">Combine sorting and pagination</td></tr><tr id="19fe8d61-387b-807f-8ae1-eb1ad00dae39"><td id="ZG]y" class=""><strong>Filtering + Sorting + Pagination</strong></td><td id="M&lt;a&gt;" class=""><code>findByTitleContainingIgnoreCase(title, pageable)</code></td><td id="\q@l" class="">Combine all three features</td></tr></tbody></table><hr id="19fe8d61-387b-8034-935f-ca3c2348f8a2"/><h2 id="19fe8d61-387b-80e5-ab6a-db1e6a134479" class=""><strong>📌 Key Takeaways</strong></h2><p id="19fe8d61-387b-80d2-a23c-d2c2934f0b3a" class="">✅ <strong>Sorting:</strong></p><ul id="19fe8d61-387b-8039-b3a1-feae8f4df6a1" class="bulleted-list"><li style="list-style-type:disc">Can be done using <strong>method names</strong> (<code>OrderBy</code>).</li></ul><ul id="19fe8d61-387b-8029-811e-e74eee8d1acc" class="bulleted-list"><li style="list-style-type:disc">More flexible using <code><strong>Sort.by()</strong></code>.</li></ul><ul id="19fe8d61-387b-8035-ab0b-da8c631016e8" class="bulleted-list"><li style="list-style-type:disc">Supports <strong>multiple field sorting</strong>.</li></ul><p id="19fe8d61-387b-8086-8e30-f6b78a98956b" class="">✅ <strong>Pagination:</strong></p><ul id="19fe8d61-387b-8020-a4eb-dbf1382a52bb" class="bulleted-list"><li style="list-style-type:disc">Uses <code>Pageable</code> and <code>PageRequest</code>.</li></ul><ul id="19fe8d61-387b-8017-b347-f7e7fd10b753" class="bulleted-list"><li style="list-style-type:disc">Prevents <strong>overloading the database</strong>.</li></ul><ul id="19fe8d61-387b-801f-ad84-fed96a8088e9" class="bulleted-list"><li style="list-style-type:disc">Uses <code>findAll(Pageable pageable)</code>.</li></ul><p id="19fe8d61-387b-8000-9980-f99f09da59df" class="">✅ <strong>Sorting &amp; Pagination Together:</strong></p><ul id="19fe8d61-387b-80f8-af3f-da49a82f08d7" class="bulleted-list"><li style="list-style-type:disc">Combine <code>PageRequest.of(page, size, Sort.by(sortBy))</code> for best performance.</li></ul><hr id="19fe8d61-387b-80d9-aa70-f1f6e24abfa5"/><h2 id="19fe8d61-387b-807b-b738-e814729f7e18" class=""><strong>🚀 Final Thoughts</strong></h2><p id="19fe8d61-387b-8021-a505-f189899d41cb" class="">Sorting and Pagination are essential in <strong>real-world applications</strong> to <strong>enhance performance</strong> and <strong>user experience</strong>. Mastering <code>Sort</code>, <code>Pageable</code>, and <code>PageRequest</code> will help in building <strong>efficient</strong> and <strong>scalable</strong> applications.</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

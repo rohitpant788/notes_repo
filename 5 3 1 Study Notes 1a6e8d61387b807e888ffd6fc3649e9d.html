@@ -1,0 +1,726 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>5.3.1 Study Notes</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-transparentGray { background-color: undefined; }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1a6e8d61-387b-807e-888f-fd6fc3649e9d" class="page sans"><header><h1 class="page-title">5.3.1 Study Notes</h1><p class="page-description"></p></header><div class="page-body"><h2 id="1a6e8d61-387b-80a3-83ff-f50dc8d33200" class="">📌 <strong>Introduction</strong></h2><p id="1a6e8d61-387b-8053-bcbc-ef8c72d6a4b0" class="">In the previous session, we discussed the <strong>internal workings of Spring Security</strong>. Today, we will <strong>dive deeper</strong> into the security flow and examine the code-level details to fully understand authentication in Spring Boot.</p><hr id="1a6e8d61-387b-80fa-ac23-e16130f3ccdf"/><h2 id="1a6e8d61-387b-8092-9aea-ca629c2b82f5" class=""><strong>🔹 Recap: Spring Security Authentication Flow</strong></h2><h3 id="1a6e8d61-387b-809a-9fca-c3fc813b4f02" class="">📍 <strong>Authentication Request Flow</strong></h3><p id="1a6e8d61-387b-80ed-84ff-c317724f8051" class="">1️⃣ <strong>Client sends authentication request</strong></p><ul id="1a6e8d61-387b-80ef-af6e-c0645d46c100" class="bulleted-list"><li style="list-style-type:disc">When Spring Security is configured, an <strong>auto-configuration process</strong> registers a <strong>security filter chain</strong> inside the existing filter chain.</li></ul><ul id="1a6e8d61-387b-8002-a526-d412842042fc" class="bulleted-list"><li style="list-style-type:disc">Every authentication request <strong>first goes through the security filter chain</strong> before reaching the authentication mechanism.</li></ul><p id="1a6e8d61-387b-803d-bcd4-e3efcebe24be" class="">2️⃣ <strong>Authentication request is passed to Authentication Manager</strong></p><ul id="1a6e8d61-387b-804d-9b49-de1187ad3717" class="bulleted-list"><li style="list-style-type:disc">The <strong>Authentication Manager</strong> is responsible for verifying user authentication requests.</li></ul><ul id="1a6e8d61-387b-8085-bd7a-c6f2747f7648" class="bulleted-list"><li style="list-style-type:disc">It delegates authentication to <strong>one or more Authentication Providers</strong>.</li></ul><p id="1a6e8d61-387b-8097-be9c-d141f10a70f8" class="">3️⃣ <strong>Authentication Providers handle different authentication methods</strong></p><ul id="1a6e8d61-387b-80a6-9e10-d74cc806d18d" class="bulleted-list"><li style="list-style-type:disc"><strong>DAO Authentication Provider</strong>: Handles <strong>username &amp; password-based authentication</strong>.</li></ul><ul id="1a6e8d61-387b-80a3-a610-e8bdda377b82" class="bulleted-list"><li style="list-style-type:disc"><strong>OAuth2 Authentication Provider</strong>: Handles authentication via <strong>Google, Facebook, GitHub, etc.</strong></li></ul><ul id="1a6e8d61-387b-80f0-b371-e9636c272598" class="bulleted-list"><li style="list-style-type:disc"><strong>In-Memory Authentication Provider</strong>: Fetches user details from memory.</li></ul><p id="1a6e8d61-387b-80a9-80f7-f332f9c65daa" class="">4️⃣ <strong>DAO Authentication Provider fetches user details</strong></p><ul id="1a6e8d61-387b-8071-82e3-da2aabccd7d4" class="bulleted-list"><li style="list-style-type:disc">It interacts with <strong>UserDetailsService</strong> to fetch <strong>username, hashed password, and authorities</strong> from the database.</li></ul><ul id="1a6e8d61-387b-8047-865b-fea054d24f18" class="bulleted-list"><li style="list-style-type:disc">Password is compared using <strong>Password Encoder</strong>.</li></ul><p id="1a6e8d61-387b-800a-b5e9-e0d1aa41e8da" class="">5️⃣ <strong>User is authenticated and stored in Security Context</strong></p><ul id="1a6e8d61-387b-80ce-933e-c0d012ed07c2" class="bulleted-list"><li style="list-style-type:disc">If authentication is successful, the <strong>Security Context Holder</strong> stores the authenticated user details.</li></ul><ul id="1a6e8d61-387b-806f-a92f-e2cf81579357" class="bulleted-list"><li style="list-style-type:disc">All subsequent requests use this authenticated user.</li></ul><hr id="1a6e8d61-387b-809c-8f41-d22036953380"/><h2 id="1a6e8d61-387b-80a3-b741-c3dd6ec0bf6d" class=""><strong>🔹 Spring Security Filter Chain</strong></h2><p id="1a6e8d61-387b-809b-957f-ffc3ab759260" class="">The below <strong>diagram illustrates how Spring Security integrates with the Servlet filter chain.</strong></p><figure id="1a6e8d61-387b-806c-a4e9-f846465fbbad" class="image"><a href="image.png"><img style="width:816px" src="image.png"/></a></figure><p id="1a6e8d61-387b-806b-b036-d9e5666d9870" class="">✔️ <strong>Spring Security Filter Chain Breakdown</strong>:</p><ul id="1a6e8d61-387b-80bc-b5db-e2838b5a2cfe" class="bulleted-list"><li style="list-style-type:disc">Requests first pass through <strong>Servlet Filters</strong>.</li></ul><ul id="1a6e8d61-387b-8042-9c5f-cd64f75e21ea" class="bulleted-list"><li style="list-style-type:disc"><code>DelegatingFilterProxy</code> ensures that <strong>Spring Security&#x27;s </strong><code><strong>FilterChainProxy</strong></code><strong> is invoked</strong>.</li></ul><ul id="1a6e8d61-387b-801e-8ced-fba825124425" class="bulleted-list"><li style="list-style-type:disc"><code>FilterChainProxy</code> processes multiple security-related filters, including:<ul id="1a6e8d61-387b-800f-8c89-f36987f75659" class="bulleted-list"><li style="list-style-type:circle"><code>CorsFilter</code></li></ul><ul id="1a6e8d61-387b-80a6-9590-cd2ba54308bd" class="bulleted-list"><li style="list-style-type:circle"><code>CsrfFilter</code></li></ul><ul id="1a6e8d61-387b-80d3-b5f6-cb40223425b2" class="bulleted-list"><li style="list-style-type:circle"><code>LogoutFilter</code></li></ul><ul id="1a6e8d61-387b-80c7-aa00-ce785b61bd84" class="bulleted-list"><li style="list-style-type:circle"><code>UsernamePasswordAuthenticationFilter</code></li></ul><ul id="1a6e8d61-387b-800e-b927-d1a5f30d34d5" class="bulleted-list"><li style="list-style-type:circle"><code>BearerTokenAuthenticationFilter</code></li></ul></li></ul><hr id="1a6e8d61-387b-809f-9627-f6c8002ece1a"/><h2 id="1a6e8d61-387b-80ea-990a-e50383eeb4ca" class=""><strong>🔹 Step-by-Step Deep Dive into Authentication Flow</strong></h2><h3 id="1a6e8d61-387b-80b0-ab46-d06a42abdc45" class=""><strong>📍 1. Authentication Request Handling</strong></h3><p id="1a6e8d61-387b-80cd-b26e-c0f8d3f84bdd" class="">✔️ <strong>Client logs in</strong> → Request reaches the <strong>Security Filter Chain</strong> → Passed to <strong>Authentication Manager</strong></p><p id="1a6e8d61-387b-80e2-b609-f5b9c986f74f" class="">✔️ <strong>Authentication Manager</strong> is an <strong>interface</strong> that contains the <code>authenticate()</code> method.</p><p id="1a6e8d61-387b-80bf-bcbd-c6e1fca8a15b" class="">✔️ Inside the login controller:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a6e8d61-387b-8027-88e2-f52b94baec28" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">
+Authentication auth = new UsernamePasswordAuthenticationToken(email, password);
+Authentication authenticatedUser = authenticationManager.authenticate(auth);
+</code></pre><p id="1a6e8d61-387b-8079-b547-d61145f07675" class="">✔️ The <code>authenticate()</code> method receives an authentication object, which is initially <strong>not authenticated</strong>.</p><hr id="1a6e8d61-387b-806b-9915-eb925f5f6338"/><h3 id="1a6e8d61-387b-80c1-9248-f9582804211e" class=""><strong>📍 2. Authentication Manager &amp; Provider Manager</strong></h3><p id="1a6e8d61-387b-807f-9d0c-ed8df1ceba79" class="">✔️ <strong>Authentication Manager</strong> is implemented by <code>ProviderManager</code>.</p><p id="1a6e8d61-387b-80c0-9edd-cb805d4eace8" class="">✔️ <code>ProviderManager</code> maintains a <strong>list of Authentication Providers</strong>.</p><p id="1a6e8d61-387b-802e-afd5-cb6ed85857c4" class="">✔️ It iterates over <strong>each authentication provider</strong> to find a suitable one.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a6e8d61-387b-80fe-bd8b-c1cd67425dc3" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+for (AuthenticationProvider provider : providers) {
+    if (provider.supports(auth.getClass())) {
+        return provider.authenticate(auth);
+    }
+}
+
+</code></pre><p id="1a6e8d61-387b-80ff-85a9-f6ac04eb3eb5" class="">✔️ If a provider <strong>supports</strong> the request, it will handle authentication.</p><hr id="1a6e8d61-387b-8038-a8b0-e2bcd5f2ca2d"/><h3 id="1a6e8d61-387b-80b8-8ec0-eee4c75fd564" class=""><strong>📍 3. Authentication Providers (DAO, OAuth2, In-Memory)</strong></h3><p id="1a6e8d61-387b-8099-96a5-f2c222462eb5" class="">✔️ <code>AuthenticationProvider</code> is an interface implemented by multiple classes:</p><ul id="1a6e8d61-387b-800f-a742-d2a7f43e7cdf" class="bulleted-list"><li style="list-style-type:disc"><strong>DAO Authentication Provider</strong> → Uses <code>UserDetailsService</code></li></ul><ul id="1a6e8d61-387b-80e6-bf98-d150b645c8c6" class="bulleted-list"><li style="list-style-type:disc"><strong>OAuth2 Authentication Provider</strong> → Uses <code>OIDC</code></li></ul><ul id="1a6e8d61-387b-8019-8b36-fe48a36f0bc9" class="bulleted-list"><li style="list-style-type:disc"><strong>In-Memory Authentication Provider</strong> → Uses predefined users</li></ul><p id="1a6e8d61-387b-8074-af00-eb229253f9ae" class="">✔️ <code>DAOAuthenticationProvider</code> authenticates <strong>username/password-based requests</strong>.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a6e8d61-387b-8055-ac28-e799effd8abe" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">UserDetails userDetails = userDetailsService.loadUserByUsername(username);</code></pre><p id="1a6e8d61-387b-800d-97fc-eeff60495fc1" class="">✔️ If the <strong>password matches</strong>, authentication succeeds.</p><hr id="1a6e8d61-387b-8042-86b3-ca6f3a8f05fd"/><h3 id="1a6e8d61-387b-8076-b620-efd7a9ef3762" class=""><strong>📍 4. UserDetailsService &amp; User Entity</strong></h3><p id="1a6e8d61-387b-8071-bdea-d7bad4dde0eb" class="">✔️ <code>UserDetailsService</code> fetches user details from <strong>database or memory</strong>.<br/>✔️ <br/><code>UserDetails</code> is an <strong>interface</strong> with:</p><ul id="1a6e8d61-387b-807c-860c-c28ea84de66d" class="bulleted-list"><li style="list-style-type:disc"><code>getUsername()</code></li></ul><ul id="1a6e8d61-387b-80ef-a543-c1bdbdb8857d" class="bulleted-list"><li style="list-style-type:disc"><code>getPassword()</code></li></ul><ul id="1a6e8d61-387b-80f1-ba38-f27fe8a9c6c5" class="bulleted-list"><li style="list-style-type:disc"><code>getAuthorities()</code></li></ul><p id="1a6e8d61-387b-80c2-a343-fe1c5260e41c" class="">✔️ <strong>Implementing </strong><code><strong>UserDetailsService</strong></code></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a6e8d61-387b-807c-930e-dddf2b2b0017" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">
+@Service
+public class UserService implements UserDetailsService {
+    private final UserRepository userRepository;
+
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        return userRepository.findByEmail(email)
+            .orElseThrow(() -&gt; new UsernameNotFoundException(&quot;User not found&quot;));
+    }
+}</code></pre><p id="1a6e8d61-387b-808f-b09d-fec83cdfa14e" class="">✔️ <strong>Creating User Entity</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a6e8d61-387b-80a8-a6b1-f8862a302024" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@Entity
+public class User implements UserDetails {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String email;
+    private String password;
+
+    @Override
+    public String getUsername() { return email; }
+    @Override
+    public String getPassword() { return password; }
+    @Override
+    public Collection&lt;? extends GrantedAuthority&gt; getAuthorities() { return List.of(); }
+}
+
+</code></pre><hr id="1a6e8d61-387b-8066-82b6-d7f72dcbc340"/><h3 id="1a6e8d61-387b-8076-a5db-d2efc4e81a23" class=""><strong>📍 5. Password Encoding for Security</strong></h3><p id="1a6e8d61-387b-80c1-98eb-f82e32571876" class="">✔️ <strong>Passwords must always be stored in an encoded format</strong> to prevent exposure.<br/>✔️ <br/><strong>Password Encoders available in Spring Security:</strong></p><ul id="1a6e8d61-387b-8027-9bb4-d07af85879e5" class="bulleted-list"><li style="list-style-type:disc"><code>BCryptPasswordEncoder</code></li></ul><ul id="1a6e8d61-387b-8040-8379-ec21ed364379" class="bulleted-list"><li style="list-style-type:disc"><code>SCryptPasswordEncoder</code></li></ul><ul id="1a6e8d61-387b-80a9-b8f9-e7af22afd0da" class="bulleted-list"><li style="list-style-type:disc"><code>Pbkdf2PasswordEncoder</code></li></ul><p id="1a6e8d61-387b-8026-91fe-c7d8931a2e27" class="">✔️ <strong>Encoding and Matching Passwords</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a6e8d61-387b-801b-a847-cafe89dca371" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">PasswordEncoder encoder = new BCryptPasswordEncoder();
+String encodedPassword = encoder.encode(&quot;password123&quot;);
+
+boolean matches = encoder.matches(&quot;password123&quot;, encodedPassword);
+</code></pre><p id="1a6e8d61-387b-8088-8a3b-c518f5feb445" class="">✔️ The system <strong>compares the hashed password from the request</strong> with the <strong>stored hash</strong>.</p><hr id="1a6e8d61-387b-80ed-8e82-dfe0bc135656"/><h3 id="1a6e8d61-387b-8039-99e8-f9c6a77c520f" class=""><strong>📍 6. Authentication Flow Diagram</strong></h3><figure id="1a6e8d61-387b-8017-979a-cfacbbb34466" class="image"><a href="image%201.png"><img style="width:1472.984375px" src="image%201.png"/></a></figure><p id="1a6e8d61-387b-8037-a041-dd02747a307e" class="">✔️ <strong>Spring Security Authentication Flow Breakdown</strong>:</p><ul id="1a6e8d61-387b-80f4-82c0-fe81bc6ac621" class="bulleted-list"><li style="list-style-type:disc"><code>AuthenticationManager</code> delegates authentication to <code>ProviderManager</code>.</li></ul><ul id="1a6e8d61-387b-8044-857a-d4d3a57dac60" class="bulleted-list"><li style="list-style-type:disc"><code>ProviderManager</code> loops through <code>AuthenticationProviders</code>.</li></ul><ul id="1a6e8d61-387b-80ac-b8ca-e52b2a2ca636" class="bulleted-list"><li style="list-style-type:disc"><code>DaoAuthenticationProvider</code> fetches user details from <code>UserDetailsService</code>.</li></ul><ul id="1a6e8d61-387b-80e2-890b-e6b842d7a38e" class="bulleted-list"><li style="list-style-type:disc"><code>PasswordEncoder</code> encodes &amp; matches passwords.</li></ul><ul id="1a6e8d61-387b-800f-96b6-c39d1259c425" class="bulleted-list"><li style="list-style-type:disc">Authenticated user is stored in <code>SecurityContextHolder</code>.</li></ul><hr id="1a6e8d61-387b-8092-b28a-c879a625baaa"/><h2 id="1a6e8d61-387b-8082-80dd-cc57b56b98d9" class=""><strong>🔹 Core Components of Spring Security</strong></h2><table id="1a6e8d61-387b-80ae-a069-f4edaee97351" class="simple-table"><tbody><tr id="1a6e8d61-387b-80c2-985f-e7dc7e2d6680"><td id="uY~N" class="">Component</td><td id="WHwk" class="">Description</td></tr><tr id="1a6e8d61-387b-80f6-b3f8-e4c4bcb883b6"><td id="uY~N" class=""><strong>UserDetails</strong></td><td id="WHwk" class="">Interface containing <code>getUsername()</code>, <code>getPassword()</code>, <code>getAuthorities()</code></td></tr><tr id="1a6e8d61-387b-80f0-a89c-e6606f7025c3"><td id="uY~N" class=""><strong>UserDetailsService</strong></td><td id="WHwk" class="">Interface for fetching user data from database/memory</td></tr><tr id="1a6e8d61-387b-8044-8ba0-c26a6f1e5297"><td id="uY~N" class=""><strong>AuthenticationManager</strong></td><td id="WHwk" class="">Interface managing authentication requests</td></tr><tr id="1a6e8d61-387b-80ca-bf29-ee15ce0b6197"><td id="uY~N" class=""><strong>ProviderManager</strong></td><td id="WHwk" class="">Implements <code>AuthenticationManager</code>, maintains a list of <code>AuthenticationProvider</code></td></tr><tr id="1a6e8d61-387b-80d3-8ea7-ffb232afb678"><td id="uY~N" class=""><strong>DAOAuthenticationProvider</strong></td><td id="WHwk" class="">Handles username/password-based authentication</td></tr><tr id="1a6e8d61-387b-80fe-b19a-fca1927fbba3"><td id="uY~N" class=""><strong>OAuth2AuthenticationProvider</strong></td><td id="WHwk" class="">Handles authentication via Google, Facebook, etc.</td></tr><tr id="1a6e8d61-387b-8087-84de-f32abed725a3"><td id="uY~N" class=""><strong>PasswordEncoder</strong></td><td id="WHwk" class="">Securely hashes passwords before storing</td></tr><tr id="1a6e8d61-387b-8089-a485-d99516873066"><td id="uY~N" class=""><strong>SecurityContextHolder</strong></td><td id="WHwk" class="">Stores the authenticated user session</td></tr></tbody></table><hr id="1a6e8d61-387b-802e-9b55-e6b4ef24e410"/><h2 id="1a6e8d61-387b-8005-90d8-d9cb5d18c338" class=""><strong>🔹 Summary for Quick Revision</strong></h2><p id="1a6e8d61-387b-80da-b9c2-da88df9a869f" class="">✅ <strong>Authentication Flow:</strong></p><ul id="1a6e8d61-387b-8007-8d89-d27323d86181" class="bulleted-list"><li style="list-style-type:disc">Request → <code>SecurityFilterChain</code> → <code>AuthenticationManager</code> → <code>ProviderManager</code> → <code>DAOAuthenticationProvider</code> → <code>UserDetailsService</code> → <code>PasswordEncoder</code> → <code>SecurityContextHolder</code></li></ul><p id="1a6e8d61-387b-80e2-8b47-fce228b2f300" class="">✅ <strong>Key Interfaces &amp; Implementations:</strong></p><ul id="1a6e8d61-387b-802d-93e5-d5a72a35dfa2" class="bulleted-list"><li style="list-style-type:disc"><code>AuthenticationManager</code> → <code>ProviderManager</code></li></ul><ul id="1a6e8d61-387b-80da-a5e8-fceccfedd2d2" class="bulleted-list"><li style="list-style-type:disc"><code>AuthenticationProvider</code> → <code>DAOAuthenticationProvider</code></li></ul><ul id="1a6e8d61-387b-80eb-9389-ff6fef696665" class="bulleted-list"><li style="list-style-type:disc"><code>UserDetailsService</code> → Fetches user from DB</li></ul><ul id="1a6e8d61-387b-804c-af28-f0ff1bd1da92" class="bulleted-list"><li style="list-style-type:disc"><code>UserDetails</code> → Stores user info</li></ul><ul id="1a6e8d61-387b-8032-9c8c-d1230e4bc782" class="bulleted-list"><li style="list-style-type:disc"><code>PasswordEncoder</code> → Hashes passwords</li></ul><p id="1a6e8d61-387b-80d4-a571-f8c7c9be0f18" class="">
+</p><h2 id="1a6e8d61-387b-80a5-b202-fd53a950da9f" class=""><strong>Final Summary: Authentication Flow in Spring Security</strong></h2><table id="1a6e8d61-387b-80eb-8955-c355963ce924" class="simple-table"><tbody><tr id="1a6e8d61-387b-80dc-888e-d84aa2882c17"><td id="bdph" class="">Step</td><td id="eOU`" class="" style="width:542px">Description</td></tr><tr id="1a6e8d61-387b-80dd-a665-f9f1349bd5e1"><td id="bdph" class=""><strong>1. User Login</strong></td><td id="eOU`" class="" style="width:542px">Client sends a login request with username &amp; password</td></tr><tr id="1a6e8d61-387b-80f9-832b-c33b7f7ab02b"><td id="bdph" class=""><strong>2. Security Filters</strong></td><td id="eOU`" class="" style="width:542px">Request goes through Security Filter Chain (<code>UsernamePasswordAuthenticationFilter</code>)</td></tr><tr id="1a6e8d61-387b-80ee-8cbe-d248bd9909f5"><td id="bdph" class=""><strong>3. AuthenticationManager</strong></td><td id="eOU`" class="" style="width:542px"><code>AuthenticationManager</code> delegates authentication to <code>ProviderManager</code></td></tr><tr id="1a6e8d61-387b-8059-9057-ccc59b6010b2"><td id="bdph" class=""><strong>4. ProviderManager</strong></td><td id="eOU`" class="" style="width:542px"><code>ProviderManager</code> iterates through <code>AuthenticationProviders</code></td></tr><tr id="1a6e8d61-387b-802f-846d-ddaa8060a5ab"><td id="bdph" class=""><strong>5. DaoAuthenticationProvider</strong></td><td id="eOU`" class="" style="width:542px"><code>DaoAuthenticationProvider</code> fetches user details via <code>UserDetailsService</code></td></tr><tr id="1a6e8d61-387b-80ef-b5eb-cb1701acb1e7"><td id="bdph" class=""><strong>6. UserDetailsService</strong></td><td id="eOU`" class="" style="width:542px">Retrieves user from <strong>database/in-memory</strong></td></tr><tr id="1a6e8d61-387b-80d7-b13f-c5cb1c623884"><td id="bdph" class=""><strong>7. Password Encoding</strong></td><td id="eOU`" class="" style="width:542px">Encodes &amp; matches password using <code>PasswordEncoder</code></td></tr><tr id="1a6e8d61-387b-80c8-b0ee-f14ce3880718"><td id="bdph" class=""><strong>8. Authentication Success</strong></td><td id="eOU`" class="" style="width:542px">If successful, authenticated user is stored in <code>SecurityContextHolder</code></td></tr><tr id="1a6e8d61-387b-8034-b193-dfa27434b6e0"><td id="bdph" class=""><strong>9. Access Secured Resources</strong></td><td id="eOU`" class="" style="width:542px">Authenticated user can access protected endpoints</td></tr></tbody></table><p id="1a6e8d61-387b-80fc-ab51-e4d630e57bda" class="">✅ <strong>Security Best Practices:</strong></p><ul id="1a6e8d61-387b-809c-8626-fd3d5d887f7f" class="bulleted-list"><li style="list-style-type:disc"><strong>Always hash passwords</strong> before storing in the database.</li></ul><ul id="1a6e8d61-387b-8034-8fd9-efde3ce622f0" class="bulleted-list"><li style="list-style-type:disc"><strong>Use a strong password encoder</strong> like BCrypt.</li></ul><ul id="1a6e8d61-387b-805f-b00f-fe0e4d36f1f3" class="bulleted-list"><li style="list-style-type:disc"><strong>Store authentication tokens securely</strong> (JWT recommended).</li></ul><ul id="1a6e8d61-387b-807a-bf2e-cb9f873cf88e" class="bulleted-list"><li style="list-style-type:disc"><strong>Restrict access using roles &amp; authorities</strong>.</li></ul><hr id="1a6e8d61-387b-8071-a952-e8a71f47ab31"/></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

@@ -1,0 +1,802 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>2.7 Exception Handling in Spring Boot Web MVC</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-transparentGray { background-color: undefined; }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="19be8d61-387b-808d-a750-c002eea97efd" class="page sans"><header><h1 class="page-title">2.7 Exception Handling in Spring Boot Web MVC</h1><p class="page-description"></p></header><div class="page-body"><h2 id="19be8d61-387b-8086-a4cc-edfae60fd7a3" class=""><strong>Introduction</strong></h2><p id="19be8d61-387b-8092-ad54-c4bc055a1bef" class="">Exception handling is a crucial aspect of any application. In Spring Boot MVC, understanding how to handle exceptions properly ensures a smooth user experience and prevents application crashes.</p><p id="19be8d61-387b-80a0-bace-c764083f806c" class="">Before diving into Spring Boot exception handling, it&#x27;s essential to have a strong understanding of core Java exception handling, including:</p><ul id="19be8d61-387b-8015-883c-e973a7d1d615" class="bulleted-list"><li style="list-style-type:disc">Creating custom exceptions.</li></ul><ul id="19be8d61-387b-8078-84b3-daf25e00665f" class="bulleted-list"><li style="list-style-type:disc">Throwing exceptions.</li></ul><ul id="19be8d61-387b-80f1-aab2-ee93fda3574a" class="bulleted-list"><li style="list-style-type:disc">Catching exceptions using <code>try-catch</code>.</li></ul><p id="19be8d61-387b-808d-8cc5-d192999283fc" class="">This guide covers <strong>exception handling in Spring Boot MVC</strong> in a structured manner.</p><hr id="19be8d61-387b-806e-b42e-e26b7490bf74"/><h2 id="19be8d61-387b-800a-9671-e277dc1d957f" class=""><strong>Why Do We Need Exception Handling?</strong></h2><h3 id="19be8d61-387b-80da-b715-d1b1c7860dff" class=""><strong>1. Preventing Application Crashes</strong></h3><ul id="19be8d61-387b-8039-ae1d-c9ef2c73ba89" class="bulleted-list"><li style="list-style-type:disc">If exceptions are not handled, the application may crash.</li></ul><ul id="19be8d61-387b-80b6-a159-e4fea37b7426" class="bulleted-list"><li style="list-style-type:disc">Example: A <strong>divide by zero error</strong> can lead to a runtime exception.</li></ul><ul id="19be8d61-387b-8097-94ba-c601ca87552f" class="bulleted-list"><li style="list-style-type:disc">Solution: Use a <strong>try-catch block</strong> to gracefully handle errors.</li></ul><h3 id="19be8d61-387b-8013-a6d3-d8d6fd8a2ce1" class=""><strong>2. Providing User-Friendly Error Responses</strong></h3><ul id="19be8d61-387b-8037-a863-e30c8b83aa06" class="bulleted-list"><li style="list-style-type:disc">When users pass invalid input, they should receive a meaningful message.</li></ul><ul id="19be8d61-387b-8032-8e4b-d53b60e75ea5" class="bulleted-list"><li style="list-style-type:disc">Example: If a user tries to fetch an employee by ID that doesn’t exist, they should receive a <strong>404 Not Found</strong> response instead of a generic error.</li></ul><h3 id="19be8d61-387b-805d-8a29-e67ec5e3b11e" class=""><strong>3. Facilitating Debugging and Maintenance</strong></h3><ul id="19be8d61-387b-8043-a2bc-dfb189d955e8" class="bulleted-list"><li style="list-style-type:disc">Logging errors helps developers debug issues effectively.</li></ul><ul id="19be8d61-387b-8068-9a8a-c8a5c77a88e7" class="bulleted-list"><li style="list-style-type:disc">Developers can track errors from logs and fix them before they escalate.</li></ul><h3 id="19be8d61-387b-800e-bbab-f162c9f919d1" class=""><strong>4. Ensuring Consistent Error Handling Across the Application</strong></h3><ul id="19be8d61-387b-804a-936b-eff6b67d3adc" class="bulleted-list"><li style="list-style-type:disc">A uniform error-handling mechanism makes it easier for frontend developers to understand and process errors correctly.</li></ul><hr id="19be8d61-387b-808e-b027-eee01da124d8"/><h2 id="19be8d61-387b-8003-8ab2-ca9ec27e2a17" class=""><strong>Exception Handling in Spring Boot MVC</strong></h2><p id="19be8d61-387b-802d-9b1e-e29588f5065d" class="">Spring Boot provides various ways to handle exceptions:</p><ol type="1" id="19be8d61-387b-80bc-9b12-c02cc166e763" class="numbered-list" start="1"><li><strong>Using </strong><code><strong>@ExceptionHandler</strong></code><strong> (Controller-Level Exception Handling)</strong></li></ol><ol type="1" id="19be8d61-387b-80fb-8cd4-d38a138f5539" class="numbered-list" start="2"><li><strong>Using </strong><code><strong>@RestControllerAdvice</strong></code><strong> (Global Exception Handling)</strong></li></ol><ol type="1" id="19be8d61-387b-80b5-b764-f67153ecf4d7" class="numbered-list" start="3"><li><strong>Creating Custom Exceptions</strong></li></ol><ol type="1" id="19be8d61-387b-8030-bd94-e7f13024a29d" class="numbered-list" start="4"><li><strong>Handling Validation Errors Gracefully</strong></li></ol><p id="19be8d61-387b-80c3-a291-ce58bf80fc51" class="">Let&#x27;s explore each approach step by step.</p><hr id="19be8d61-387b-80dd-b515-d6c46208e302"/><h2 id="19be8d61-387b-80c0-a0c0-db0718b1a20e" class=""><strong>1. Handling Exceptions at the Controller Level (</strong><code><strong>@ExceptionHandler</strong></code><strong>)</strong></h2><p id="19be8d61-387b-80ce-9fb0-dba4982eba63" class="">The <code>@ExceptionHandler</code> annotation allows us to handle exceptions within a specific controller.</p><h3 id="19be8d61-387b-8072-99ba-fb63f4bce6ea" class=""><strong>Example: Handling &quot;Employee Not Found&quot; Exception</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19be8d61-387b-80dc-ad5d-e4ce63f9a6bc" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@Controller
+public class EmployeeController {
+
+    @ExceptionHandler(NoSuchElementException.class)
+    public ResponseEntity&lt;String&gt; handleEmployeeNotFound(NoSuchElementException ex) {
+        return new ResponseEntity&lt;&gt;(&quot;Employee was not found&quot;, HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping(&quot;/employees/{id}&quot;)
+    public EmployeeDTO getEmployeeById(@PathVariable Long id) {
+        return employeeService.getEmployeeById(id)
+                .orElseThrow(() -&gt; new NoSuchElementException(&quot;Employee not found&quot;));
+    }
+}
+
+</code></pre><h3 id="19be8d61-387b-80f3-8818-c88b0b159b4d" class=""><strong>Explanation:</strong></h3><ul id="19be8d61-387b-807e-9d29-e084b7880411" class="bulleted-list"><li style="list-style-type:disc">If an <strong>employee is not found</strong>, a <code>NoSuchElementException</code> is thrown.</li></ul><ul id="19be8d61-387b-80f4-b855-fd061777cf9b" class="bulleted-list"><li style="list-style-type:disc">The <code>handleEmployeeNotFound</code> method <strong>intercepts the exception</strong> and returns a <strong>404 Not Found</strong> response.</li></ul><h3 id="19be8d61-387b-80f0-b87c-cef200af5961" class=""><strong>Problem With This Approach</strong></h3><ul id="19be8d61-387b-80c4-a29f-f4e3078a20a3" class="bulleted-list"><li style="list-style-type:disc">It works <strong>only within this controller</strong>.</li></ul><ul id="19be8d61-387b-80c9-a721-fafd6031c3dd" class="bulleted-list"><li style="list-style-type:disc">If we have multiple controllers, we need to <strong>duplicate the exception handling logic</strong>.</li></ul><hr id="19be8d61-387b-8025-b6f0-c53585796dbc"/><h2 id="19be8d61-387b-8071-83dc-df00badac184" class=""><strong>2. Handling Exceptions Globally (</strong><code><strong>@RestControllerAdvice</strong></code><strong>)</strong></h2><p id="19be8d61-387b-809d-8bc2-e02ef2559bbc" class="">Instead of handling exceptions in individual controllers, we can create a <strong>global exception handler</strong>.</p><h3 id="19be8d61-387b-80a7-949c-e9e71b12c85e" class=""><strong>Step 1: Create a Global Exception Handler</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19be8d61-387b-80bc-980e-f711097fe7a8" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@RestControllerAdvice
+public class GlobalExceptionHandler {
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity&lt;ApiError&gt; handleResourceNotFound(ResourceNotFoundException ex) {
+        ApiError error = new ApiError(HttpStatus.NOT_FOUND, ex.getMessage());
+        return new ResponseEntity&lt;&gt;(error, HttpStatus.NOT_FOUND);
+    }
+}
+
+</code></pre><h3 id="19be8d61-387b-80ec-8e96-ed3729c5857f" class=""><strong>Step 2: Create a Custom Exception</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19be8d61-387b-80a0-8113-e931d5b98660" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+public class ResourceNotFoundException extends RuntimeException {
+    public ResourceNotFoundException(String message) {
+        super(message);
+    }
+}
+
+</code></pre><h3 id="19be8d61-387b-8029-ab9d-ca3e62eddf3e" class=""><strong>Step 3: Modify Controller to Use Custom Exception</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19be8d61-387b-8080-a8d8-e31abaa7815e" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@GetMapping(&quot;/employees/{id}&quot;)
+public EmployeeDTO getEmployeeById(@PathVariable Long id) {
+    return employeeService.getEmployeeById(id)
+            .orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Employee not found&quot;));
+}
+
+</code></pre><h3 id="19be8d61-387b-809f-8aad-d8f775e432a3" class=""><strong>Why is this better?</strong></h3><ul id="19be8d61-387b-80cc-ab1b-f4d90a4a35a3" class="bulleted-list"><li style="list-style-type:disc">Exception handling is <strong>centralized</strong>.</li></ul><ul id="19be8d61-387b-8042-a970-e1bf414aeefb" class="bulleted-list"><li style="list-style-type:disc">Works for <strong>all controllers</strong> in the application.</li></ul><ul id="19be8d61-387b-80db-901b-d50587e75281" class="bulleted-list"><li style="list-style-type:disc">Ensures <strong>consistent error messages</strong>.</li></ul><hr id="19be8d61-387b-808c-a76d-fbdf55a6cd9d"/><h2 id="19be8d61-387b-80f5-b5dc-fa5d7905e2f2" class=""><strong>3. Creating a Custom Error Response</strong></h2><p id="19be8d61-387b-80ea-be2c-e86bbf5e8149" class="">Instead of returning plain text error messages, we should return a structured <strong>JSON response</strong>.</p><h3 id="19be8d61-387b-8027-88e5-d662649d563a" class=""><strong>Step 1: Create an </strong><code><strong>ApiError</strong></code><strong> Class</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19be8d61-387b-80ab-9a9f-d10b3798b1ef" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@Data
+@Builder
+public class ApiError {
+    private HttpStatus status;
+    private String message;
+}
+
+</code></pre><h3 id="19be8d61-387b-80cc-aa92-ecbc8015931e" class=""><strong>Step 2: Modify the Exception Handler to Use </strong><code><strong>ApiError</strong></code></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19be8d61-387b-80b6-b4ef-e60be64a4e5d" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">
+@ExceptionHandler(ResourceNotFoundException.class)
+public ResponseEntity&lt;ApiError&gt; handleResourceNotFound(ResourceNotFoundException ex) {
+    ApiError error = ApiError.builder()
+            .status(HttpStatus.NOT_FOUND)
+            .message(ex.getMessage())
+            .build();
+    return new ResponseEntity&lt;&gt;(error, HttpStatus.NOT_FOUND);
+}
+
+</code></pre><h3 id="19be8d61-387b-802f-9af3-d7484f0146ea" class=""><strong>Now, the error response will look like this:</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19be8d61-387b-8061-b20f-ebd5dc1c3805" class="code"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">
+{
+    &quot;status&quot;: &quot;NOT_FOUND&quot;,
+    &quot;message&quot;: &quot;Employee not found&quot;
+}
+
+</code></pre><hr id="19be8d61-387b-80e1-8c1b-f54b4049fd5a"/><h2 id="19be8d61-387b-8066-8a55-fe67eb6d022b" class=""><strong>4. Handling Validation Errors</strong></h2><p id="19be8d61-387b-8083-bf34-c66ba7ee2d7f" class="">Spring Boot provides built-in validation using <code>@Valid</code> and <code>@Validated</code>.</p><h3 id="19be8d61-387b-80e4-b23c-f4f0fb2ac1bc" class=""><strong>Step 1: Apply Validation to DTO</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19be8d61-387b-8084-a3c3-e457d16e691c" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+public class EmployeeDTO {
+
+    @NotNull(message = &quot;Name cannot be null&quot;)
+    @Size(min = 3, message = &quot;Name should have at least 3 characters&quot;)
+    private String name;
+
+    @Min(value = 18, message = &quot;Age must be at least 18&quot;)
+    private int age;
+}
+
+</code></pre><h3 id="19be8d61-387b-806c-819c-d6cee0eb85c0" class=""><strong>Step 2: Handle Validation Errors in </strong><code><strong>GlobalExceptionHandler</strong></code></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19be8d61-387b-80a7-80c0-c9ac6c722575" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">
+@ExceptionHandler(MethodArgumentNotValidException.class)
+public ResponseEntity&lt;ApiError&gt; handleValidationErrors(MethodArgumentNotValidException ex) {
+    List&lt;String&gt; errors = ex.getBindingResult().getAllErrors()
+            .stream()
+            .map(DefaultMessageSourceResolvable::getDefaultMessage)
+            .collect(Collectors.toList());
+
+    ApiError error = ApiError.builder()
+            .status(HttpStatus.BAD_REQUEST)
+            .message(&quot;Input validation failed&quot;)
+            .subErrors(errors)
+            .build();
+    return new ResponseEntity&lt;&gt;(error, HttpStatus.BAD_REQUEST);
+}
+
+</code></pre><h3 id="19be8d61-387b-8069-83e7-f9d301bffc38" class=""><strong>Error Response Example:</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19be8d61-387b-8042-bcdb-ff6c339031da" class="code"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">
+{
+    &quot;status&quot;: &quot;BAD_REQUEST&quot;,
+    &quot;message&quot;: &quot;Input validation failed&quot;,
+    &quot;subErrors&quot;: [
+        &quot;Name should have at least 3 characters&quot;,
+        &quot;Age must be at least 18&quot;
+    ]
+}
+
+</code></pre><hr id="19be8d61-387b-8099-a034-ea7214b820f1"/><h2 id="19be8d61-387b-8072-9b8b-e9d202999261" class=""><strong>5. Handling All Other Exceptions</strong></h2><p id="19be8d61-387b-8085-afbf-fd749854d610" class="">To handle all unexpected exceptions, we create a generic exception handler:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19be8d61-387b-8070-b999-c7f16e6f8943" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">
+@ExceptionHandler(Exception.class)
+public ResponseEntity&lt;ApiError&gt; handleAllExceptions(Exception ex) {
+    ApiError error = ApiError.builder()
+            .status(HttpStatus.INTERNAL_SERVER_ERROR)
+            .message(&quot;An unexpected error occurred: &quot; + ex.getMessage())
+            .build();
+    return new ResponseEntity&lt;&gt;(error, HttpStatus.INTERNAL_SERVER_ERROR);
+}
+
+</code></pre><hr id="19be8d61-387b-80fb-943b-e811e01489f9"/><h2 id="19be8d61-387b-805c-bbdb-cf1b5b52d464" class=""><strong>Summary</strong></h2><table id="19be8d61-387b-8089-9312-e5efd79dd1b5" class="simple-table"><tbody><tr id="19be8d61-387b-80e6-98b5-fbade0f5c9d5"><td id="ynAX" class=""><strong>Feature</strong></td><td id="DyF~" class=""><strong>Implementation</strong></td></tr><tr id="19be8d61-387b-8096-a2a0-d52482835282"><td id="ynAX" class=""><strong>Controller-Level Handling</strong></td><td id="DyF~" class=""><code>@ExceptionHandler</code> in a controller.</td></tr><tr id="19be8d61-387b-80d7-b525-e40dd4aa440c"><td id="ynAX" class=""><strong>Global Exception Handling</strong></td><td id="DyF~" class=""><code>@RestControllerAdvice</code> for centralized handling.</td></tr><tr id="19be8d61-387b-80cc-b40d-ca15a5baa891"><td id="ynAX" class=""><strong>Custom Exception</strong></td><td id="DyF~" class=""><code>ResourceNotFoundException</code> for meaningful errors.</td></tr><tr id="19be8d61-387b-8050-b2d0-e951b5963632"><td id="ynAX" class=""><strong>Structured Error Response</strong></td><td id="DyF~" class="">Use <code>ApiError</code> class for detailed responses.</td></tr><tr id="19be8d61-387b-80d0-ad0d-e7fa0a7b0be7"><td id="ynAX" class=""><strong>Validation Error Handling</strong></td><td id="DyF~" class=""><code>@Valid</code> annotation and <code>MethodArgumentNotValidException</code> handler.</td></tr><tr id="19be8d61-387b-8026-a5e6-d09204f22ca0"><td id="ynAX" class=""><strong>Handling All Exceptions</strong></td><td id="DyF~" class="">A generic <code>Exception.class</code> handler for unknown errors.</td></tr></tbody></table><hr id="19be8d61-387b-802a-8ae0-ed0616a71dff"/><h2 id="19be8d61-387b-8068-9cf4-cebff9e4f26e" class=""><strong>Key Takeaways for Interviews</strong></h2><ol type="1" id="19be8d61-387b-80a7-bfd9-d60500b3289c" class="numbered-list" start="1"><li><strong>How does Spring Boot handle exceptions?</strong><ul id="19be8d61-387b-8085-8725-d982be1916b0" class="bulleted-list"><li style="list-style-type:disc">Using <code>@ExceptionHandler</code>, <code>@RestControllerAdvice</code>, and custom exception classes.</li></ul></li></ol><ol type="1" id="19be8d61-387b-8051-9dc2-d115b12e3b14" class="numbered-list" start="2"><li><strong>Why use a global exception handler?</strong><ul id="19be8d61-387b-8057-a721-f7c08e1a90d9" class="bulleted-list"><li style="list-style-type:disc">Ensures uniform error responses across all controllers.</li></ul></li></ol><ol type="1" id="19be8d61-387b-80d3-882b-fc5e080775ec" class="numbered-list" start="3"><li><strong>How to return structured JSON error responses?</strong><ul id="19be8d61-387b-803f-aac6-ec765d6eea00" class="bulleted-list"><li style="list-style-type:disc">Use a custom <code>ApiError</code> class.</li></ul></li></ol><ol type="1" id="19be8d61-387b-8064-a32f-fbb77bfd575a" class="numbered-list" start="4"><li><strong>How to handle validation errors?</strong><ul id="19be8d61-387b-80ba-8dd6-d96927f3fe06" class="bulleted-list"><li style="list-style-type:disc">Use <code>@Valid</code> annotation and <code>MethodArgumentNotValidException</code> handler.</li></ul></li></ol><hr id="19be8d61-387b-8058-a157-d95c3033c134"/></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

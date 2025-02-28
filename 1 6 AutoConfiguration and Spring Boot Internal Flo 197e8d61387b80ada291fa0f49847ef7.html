@@ -1,0 +1,696 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>1.6 AutoConfiguration and Spring Boot Internal Flow</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-transparentGray { background-color: undefined; }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="197e8d61-387b-80ad-a291-fa0f49847ef7" class="page sans"><header><h1 class="page-title">1.6 AutoConfiguration and Spring Boot Internal Flow</h1><p class="page-description"></p></header><div class="page-body"><h2 id="197e8d61-387b-8012-88e0-f6b40393c841" class=""><strong>🔥 Key Topics Covered</strong></h2><ol type="1" id="197e8d61-387b-8022-86ba-cb138ce2b668" class="numbered-list" start="1"><li><strong>Understanding </strong><code><strong>pom.xml</strong></code><strong> and Maven in Spring Boot</strong></li></ol><ol type="1" id="197e8d61-387b-8056-a0cc-cdb73e6f3391" class="numbered-list" start="2"><li><strong>Spring Boot Auto-Configuration</strong></li></ol><ol type="1" id="197e8d61-387b-8062-816d-c897a05dc2e0" class="numbered-list" start="3"><li><strong>How Auto-Configuration Works Internally</strong></li></ol><ol type="1" id="197e8d61-387b-8068-bb7a-eb72ec17cc38" class="numbered-list" start="4"><li><strong>Spring Boot Internal Flow – Behind the Scenes</strong></li></ol><ol type="1" id="197e8d61-387b-8051-82d7-fd7b0399b7be" class="numbered-list" start="5"><li><strong>Core Features of Auto-Configuration</strong></li></ol><ol type="1" id="197e8d61-387b-8054-9f45-c55efa5c0206" class="numbered-list" start="6"><li><strong>Property Sources and Conditional Configuration</strong></li></ol><ol type="1" id="197e8d61-387b-80c1-8e77-c8d63e440425" class="numbered-list" start="7"><li><strong>Spring Boot Startup Lifecycle &amp; Internal Execution Flow</strong></li></ol><hr id="197e8d61-387b-8077-847d-ddc50547ca46"/><h2 id="197e8d61-387b-8062-b0ec-e8e96682a5c0" class=""><strong>🛠️ Understanding </strong><code><strong>pom.xml</strong></code><strong> and Maven in Spring Boot</strong></h2><ul id="197e8d61-387b-80ad-bdb7-dab873702cb3" class="bulleted-list"><li style="list-style-type:disc"><code>pom.xml</code> is the Project Object Model file in Maven.</li></ul><ul id="197e8d61-387b-8029-bf9a-cc6f11f53408" class="bulleted-list"><li style="list-style-type:disc"><strong>Purpose of </strong><code><strong>pom.xml</strong></code>:<ul id="197e8d61-387b-8052-8fd8-d06d86142e8f" class="bulleted-list"><li style="list-style-type:circle">Manages dependencies.</li></ul><ul id="197e8d61-387b-804d-a4f2-fcbb807f3aaf" class="bulleted-list"><li style="list-style-type:circle">Defines project configurations (Java version, starter dependencies, etc.).</li></ul><ul id="197e8d61-387b-807b-9a68-d9e0044c16d4" class="bulleted-list"><li style="list-style-type:circle">Ensures dependencies are correctly loaded into the <strong>classpath</strong>.</li></ul></li></ul><ul id="197e8d61-387b-80cd-8d28-e001cba0214e" class="bulleted-list"><li style="list-style-type:disc">Maven fetches dependencies from <strong>Maven Central Repository</strong> (<code>https://mvnrepository.com/</code>).</li></ul><ul id="197e8d61-387b-80e9-91c4-f672d4bed5ee" class="bulleted-list"><li style="list-style-type:disc"><strong>Example:</strong> If you add <code>spring-boot-starter-web</code> dependency, it automatically loads related libraries (like Tomcat).</li></ul><p id="197e8d61-387b-80c9-9916-ec23d9a05139" class="">🔹 <strong>Spring Boot Starter Parent:</strong></p><ul id="197e8d61-387b-80f0-b309-d31276a4a262" class="bulleted-list"><li style="list-style-type:disc">This <strong>includes many third-party libraries</strong> and manages their versions.</li></ul><ul id="197e8d61-387b-80c7-aa0b-c69b536a6250" class="bulleted-list"><li style="list-style-type:disc">We don’t need to specify dependency versions manually since Spring Boot <strong>manages them internally</strong>.</li></ul><ul id="197e8d61-387b-809e-a0a4-e575847980cd" class="bulleted-list"><li style="list-style-type:disc">The <code>spring-boot-dependencies</code> section contains predefined dependency versions.</li></ul><hr id="197e8d61-387b-807b-95f3-dd3bb9a1a8be"/><h2 id="197e8d61-387b-8025-9793-e2dceb5eccb2" class=""><strong>⚡ What is Auto-Configuration in Spring Boot?</strong></h2><ul id="197e8d61-387b-8087-b651-f25e4ddd0be6" class="bulleted-list"><li style="list-style-type:disc"><strong>Auto-Configuration is a mechanism in Spring Boot</strong> that automatically configures the application <strong>based on the dependencies present in the classpath</strong>.</li></ul><ul id="197e8d61-387b-80b1-8df1-c433b0a43d6e" class="bulleted-list"><li style="list-style-type:disc">Instead of <strong>manually configuring</strong> every dependency, Spring Boot <strong>detects dependencies</strong> and applies <strong>predefined configurations</strong>.</li></ul><ul id="197e8d61-387b-8015-9002-eeb82a12fef6" class="bulleted-list"><li style="list-style-type:disc"><strong>Example:</strong><ul id="197e8d61-387b-8009-bb8c-cd2292cb817c" class="bulleted-list"><li style="list-style-type:circle">Adding <code>spring-boot-starter-web</code> auto-configures:<ul id="197e8d61-387b-802e-8008-edabe56bed03" class="bulleted-list"><li style="list-style-type:square"><strong>Embedded Tomcat server</strong></li></ul><ul id="197e8d61-387b-8082-869a-ee77c4e8abdb" class="bulleted-list"><li style="list-style-type:square"><strong>Spring MVC</strong></li></ul></li></ul><ul id="197e8d61-387b-807d-99c9-d555df0b0c70" class="bulleted-list"><li style="list-style-type:circle"><strong>Without needing manual setup!</strong></li></ul></li></ul><p id="197e8d61-387b-8036-a3de-d48935813b1e" class="">✅ <strong>Auto-Configuration ensures developers focus on business logic</strong> instead of configuration.</p><hr id="197e8d61-387b-80c8-b1da-d7f98710c83c"/><h2 id="197e8d61-387b-8094-bcf9-e86cd5bab997" class=""><strong>🔍 How Auto-Configuration Works?</strong></h2><ol type="1" id="197e8d61-387b-80e1-82b8-c81c2682f016" class="numbered-list" start="1"><li><strong>Spring Boot scans dependencies in the classpath.</strong></li></ol><ol type="1" id="197e8d61-387b-8068-8d1c-c172bb280709" class="numbered-list" start="2"><li><strong>It loads corresponding auto-configuration files.</strong></li></ol><ol type="1" id="197e8d61-387b-8075-8350-c71c07402a1a" class="numbered-list" start="3"><li><strong>Each dependency has a predefined auto-configuration class.</strong></li></ol><ol type="1" id="197e8d61-387b-8017-85bb-fe32d22ea63e" class="numbered-list" start="4"><li><strong>It checks various conditions before applying configurations</strong> using conditional annotations:<ul id="197e8d61-387b-8067-8001-d8bc903027b0" class="bulleted-list"><li style="list-style-type:disc"><code>@ConditionalOnClass</code></li></ul><ul id="197e8d61-387b-80ca-9f6f-f36c508235b0" class="bulleted-list"><li style="list-style-type:disc"><code>@ConditionalOnMissingBean</code></li></ul><ul id="197e8d61-387b-8098-b52f-ec9912d85950" class="bulleted-list"><li style="list-style-type:disc"><code>@ConditionalOnProperty</code></li></ul><ul id="197e8d61-387b-8010-a0f9-cb67a2e9e7dc" class="bulleted-list"><li style="list-style-type:disc"><code>@ConditionalOnBean</code></li></ul></li></ol><p id="197e8d61-387b-8040-8a2a-cbc4e3d69cce" class="">Example:</p><ul id="197e8d61-387b-806b-a27c-ceddac197fd5" class="bulleted-list"><li style="list-style-type:disc"><strong>JPA Auto-Configuration (</strong><code><strong>spring-boot-starter-data-jpa</strong></code><strong>)</strong><ul id="197e8d61-387b-80df-801e-ea0f672e9c5e" class="bulleted-list"><li style="list-style-type:circle">If <strong>JPA classes are found in the classpath</strong>, it <strong>auto-configures</strong> Hibernate.</li></ul><ul id="197e8d61-387b-8022-bc63-e916160c44cd" class="bulleted-list"><li style="list-style-type:circle">If a <strong>DataSource bean is not defined manually</strong>, it creates a <strong>default in-memory H2 database</strong>.</li></ul></li></ul><p id="197e8d61-387b-8003-a108-e4302ac90bdc" class="">📌 <strong>Auto-Configuration files are found in:</strong></p><ul id="197e8d61-387b-8063-984e-c4a6c38e941e" class="bulleted-list"><li style="list-style-type:disc"><code>META-INF/spring.factories</code></li></ul><ul id="197e8d61-387b-8073-b7e0-daaeea6a7375" class="bulleted-list"><li style="list-style-type:disc"><code>META-INF/spring-autoconfigure-metadata.properties</code></li></ul><p id="197e8d61-387b-8067-bf51-d9bfbce0cae3" class="">🔹 <strong>Spring Boot Auto-Configuration internally maintains 152 different auto-configurations</strong> for different use cases (like JPA, Web, Security, etc.).</p><hr id="197e8d61-387b-8005-b10b-f0c31ce7f43d"/><h2 id="197e8d61-387b-8029-b33b-cf6261658d1e" class=""><strong>🔎 Spring Boot Internal Flow – What Happens When You Click &quot;Run&quot;?</strong></h2><ol type="1" id="197e8d61-387b-8082-8c1e-fae437941a8a" class="numbered-list" start="1"><li><strong>📌 Initialization Phase</strong><ul id="197e8d61-387b-8027-a196-fd253d068ca4" class="bulleted-list"><li style="list-style-type:disc">The <strong>main class</strong> of the Spring Boot application is <strong>annotated with</strong> <code>@SpringBootApplication</code>.</li></ul><ul id="197e8d61-387b-80d5-a2b4-c9591e6af7e0" class="bulleted-list"><li style="list-style-type:disc"><strong>This annotation combines:</strong><ul id="197e8d61-387b-80f1-9b70-c1008edbe728" class="bulleted-list"><li style="list-style-type:circle"><code>@SpringBootConfiguration</code> (Marks it as a configuration class)</li></ul><ul id="197e8d61-387b-8079-ad35-c7ff40092496" class="bulleted-list"><li style="list-style-type:circle"><code>@EnableAutoConfiguration</code> (Enables auto-configuration)</li></ul><ul id="197e8d61-387b-80c1-b1fe-ec7505f9b2ce" class="bulleted-list"><li style="list-style-type:circle"><code>@ComponentScan</code> (Scans and registers Beans)</li></ul></li></ul></li></ol><ol type="1" id="197e8d61-387b-8005-bf69-d71206f7a1f0" class="numbered-list" start="2"><li><strong>🔍 Classpath Scanning</strong><ul id="197e8d61-387b-8038-a98f-e2faa02ca9d6" class="bulleted-list"><li style="list-style-type:disc">Spring Boot scans the project’s <strong>classpath</strong> for:<ul id="197e8d61-387b-8057-907f-c8fd488f4dbc" class="bulleted-list"><li style="list-style-type:circle">Components (<code>@Component</code>, <code>@Service</code>, <code>@Repository</code>)</li></ul><ul id="197e8d61-387b-8037-8d5c-f6f09b883150" class="bulleted-list"><li style="list-style-type:circle">Beans (<code>@Bean</code>)</li></ul><ul id="197e8d61-387b-80f4-858f-e2b465f34642" class="bulleted-list"><li style="list-style-type:circle">Auto-Configurations</li></ul></li></ul></li></ol><ol type="1" id="197e8d61-387b-8064-b4fe-d4fbb3180bf7" class="numbered-list" start="3"><li><strong>📦 Application Context Creation</strong><ul id="197e8d61-387b-8016-b382-f1dd8f524d4e" class="bulleted-list"><li style="list-style-type:disc">The <strong>Spring ApplicationContext</strong> is created.</li></ul><ul id="197e8d61-387b-801c-8157-f0aee1b78e08" class="bulleted-list"><li style="list-style-type:disc">This is the <strong>core container</strong> that manages <strong>Beans and Dependencies</strong>.</li></ul></li></ol><ol type="1" id="197e8d61-387b-8025-8401-ce06705ccfdf" class="numbered-list" start="4"><li><strong>⚙️ Auto-Configuration Execution</strong><ul id="197e8d61-387b-80d6-b110-fca75796f2cf" class="bulleted-list"><li style="list-style-type:disc">Auto-Configuration is applied based on the detected dependencies.</li></ul><ul id="197e8d61-387b-807e-a606-d68d54f89eb1" class="bulleted-list"><li style="list-style-type:disc">Example:<ul id="197e8d61-387b-806e-93eb-e6a61dd0e163" class="bulleted-list"><li style="list-style-type:circle">If <code>spring-boot-starter-web</code> is in the classpath, Spring Boot:<ul id="197e8d61-387b-80e9-bff4-d4feb8a09f34" class="bulleted-list"><li style="list-style-type:square">Configures <strong>Tomcat Server</strong>.</li></ul><ul id="197e8d61-387b-80ed-a9ba-c6f3206d23b4" class="bulleted-list"><li style="list-style-type:square">Registers <strong>Spring MVC components</strong>.</li></ul><ul id="197e8d61-387b-8033-9592-d42dc36d08c3" class="bulleted-list"><li style="list-style-type:square">Sets up <strong>default request handling</strong>.</li></ul></li></ul></li></ul></li></ol><ol type="1" id="197e8d61-387b-8038-8c69-f8cf0345a012" class="numbered-list" start="5"><li><strong>📌 External Configuration Loading</strong><ul id="197e8d61-387b-80e3-b34e-f218521d4eb7" class="bulleted-list"><li style="list-style-type:disc">Configuration properties are loaded from:<ul id="197e8d61-387b-80e6-bdb4-e00d10003c87" class="bulleted-list"><li style="list-style-type:circle"><code>application.properties</code> or <code>application.yml</code></li></ul><ul id="197e8d61-387b-8033-9c59-cc925547643f" class="bulleted-list"><li style="list-style-type:circle">Environment Variables</li></ul><ul id="197e8d61-387b-807f-b7ab-d9150254fd82" class="bulleted-list"><li style="list-style-type:circle">Command-line arguments</li></ul></li></ul></li></ol><ol type="1" id="197e8d61-387b-8078-bd0f-f1eb6bb2d4d3" class="numbered-list" start="6"><li><strong>🚀 Embedded Web Server Startup</strong><ul id="197e8d61-387b-8019-9943-d74361b21dc2" class="bulleted-list"><li style="list-style-type:disc">If a <strong>web dependency</strong> exists, Spring Boot starts an <strong>embedded web server</strong> (Tomcat, Jetty, or Undertow).</li></ul><ul id="197e8d61-387b-80b1-a81f-d7fa7c4cff69" class="bulleted-list"><li style="list-style-type:disc">If no web dependency exists, <strong>only core Beans are initialized</strong>.</li></ul></li></ol><ol type="1" id="197e8d61-387b-80f0-a043-d5d743834aeb" class="numbered-list" start="7"><li><strong>🎯 Application Ready State</strong><ul id="197e8d61-387b-80c9-b92e-fc1f7aca4446" class="bulleted-list"><li style="list-style-type:disc">Beans are fully initialized.</li></ul><ul id="197e8d61-387b-80ab-9dc0-d89939b0fc7d" class="bulleted-list"><li style="list-style-type:disc">PostConstruct methods (<code>@PostConstruct</code>) are executed.</li></ul><ul id="197e8d61-387b-80e9-84a6-e2e7966f5b2c" class="bulleted-list"><li style="list-style-type:disc">Application starts handling requests.</li></ul></li></ol><hr id="197e8d61-387b-80e2-9e60-fa3fa3434221"/><h2 id="197e8d61-387b-80b5-bec6-edaf31b0a433" class=""><strong>🔑 Core Features of Auto-Configuration</strong></h2><h3 id="197e8d61-387b-80fd-aa28-ccac287c39f0" class=""><strong>📍 Property Sources &amp; Auto-Configuration</strong></h3><ul id="197e8d61-387b-8002-9357-e382b124859d" class="bulleted-list"><li style="list-style-type:disc">Spring Boot loads <strong>configuration properties from different sources</strong>:<ol type="1" id="197e8d61-387b-80e4-81c6-f3cb9738a3d9" class="numbered-list" start="1"><li><strong>Command-Line Arguments</strong></li></ol><ol type="1" id="197e8d61-387b-805d-b83e-fe844b2552f5" class="numbered-list" start="2"><li><strong>System Properties</strong></li></ol><ol type="1" id="197e8d61-387b-80d1-9f24-c4b42da2f51c" class="numbered-list" start="3"><li><strong>Environment Variables</strong></li></ol><ol type="1" id="197e8d61-387b-803e-b4b4-fefb9dd69f68" class="numbered-list" start="4"><li><code><strong>application.properties</strong></code><strong> / </strong><code><strong>application.yml</strong></code></li></ol></li></ul><p id="197e8d61-387b-80ec-abff-df61ae5cfaf6" class="">🔹 <strong>Priority Order</strong>:</p><ul id="197e8d61-387b-80ac-9a4a-e955fa5282d9" class="bulleted-list"><li style="list-style-type:disc">If the same property is defined in multiple places, <strong>the one with higher precedence overrides the others</strong>.</li></ul><ul id="197e8d61-387b-807e-8ff0-ee64ab3250a4" class="bulleted-list"><li style="list-style-type:disc"><strong>Example:</strong><ul id="197e8d61-387b-8032-bc7b-d22bcbe2bb11" class="bulleted-list"><li style="list-style-type:circle">If <code>server.port</code> is defined in both <code>application.properties</code> and environment variables, <strong>the environment variable value is used</strong>.</li></ul></li></ul><h3 id="197e8d61-387b-8046-be60-e16cc93ee4cf" class=""><strong>📍 Conditional Beans &amp; Conditional Configurations</strong></h3><ul id="197e8d61-387b-8065-9102-ef137221ac61" class="bulleted-list"><li style="list-style-type:disc">Auto-Configuration files <strong>use conditionals</strong> to determine if a bean should be loaded.</li></ul><ul id="197e8d61-387b-8090-aa92-ef51b901d392" class="bulleted-list"><li style="list-style-type:disc">Commonly used annotations:<ul id="197e8d61-387b-8073-9e0c-edaa8765513e" class="bulleted-list"><li style="list-style-type:circle"><code>@ConditionalOnClass</code> → Loads if a specific class exists.</li></ul><ul id="197e8d61-387b-8025-ab38-da3461b60764" class="bulleted-list"><li style="list-style-type:circle"><code>@ConditionalOnMissingBean</code> → Loads only if a specific bean is <strong>not already defined</strong>.</li></ul><ul id="197e8d61-387b-800f-9997-e01863b2421f" class="bulleted-list"><li style="list-style-type:circle"><code>@ConditionalOnProperty</code> → Loads if a property exists in <code>application.properties</code>.</li></ul></li></ul><p id="197e8d61-387b-80f2-9472-c498079d8274" class=""><strong>Example:</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="197e8d61-387b-8014-a38d-f168c6a6e71b" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@Configuration
+@ConditionalOnClass(DataSource.class)
+public class DataSourceAutoConfiguration {
+    @Bean
+    @ConditionalOnMissingBean
+    public DataSource dataSource() {
+        return new HikariDataSource();
+    }
+}
+
+</code></pre><ul id="197e8d61-387b-80cb-b74d-f1f97bca597d" class="bulleted-list"><li style="list-style-type:disc">If <code>DataSource</code> class is in the classpath, Spring Boot <strong>auto-configures</strong> a <code>DataSource</code> bean.</li></ul><ul id="197e8d61-387b-80a5-a922-cd155a722ef2" class="bulleted-list"><li style="list-style-type:disc">If a user manually defines a <code>DataSource</code> bean, <strong>this auto-configuration is skipped</strong>.</li></ul><hr id="197e8d61-387b-80a3-8c88-c63429b9d742"/><h2 id="197e8d61-387b-8006-8ac4-c39cb047c66e" class=""><strong>📢 Summary – Key Takeaways for Interviews</strong></h2><h3 id="197e8d61-387b-800b-96d7-c0f36b7e3d3b" class="">✅ <strong>Auto-Configuration</strong></h3><ol type="1" id="197e8d61-387b-8043-a860-c0a876de800b" class="numbered-list" start="1"><li><strong>Eliminates manual configuration</strong> by <strong>automatically configuring</strong> Beans <strong>based on dependencies</strong>.</li></ol><ol type="1" id="197e8d61-387b-80ed-8a96-ec99c23f6f09" class="numbered-list" start="2"><li><strong>Uses </strong><code><strong>@EnableAutoConfiguration</strong></code><strong> internally</strong> to <strong>scan and apply default configurations</strong>.</li></ol><ol type="1" id="197e8d61-387b-80d1-b8f4-e7262a769535" class="numbered-list" start="3"><li>Uses <strong>predefined conditions (</strong><code><strong>@ConditionalOnClass</strong></code><strong>, </strong><code><strong>@ConditionalOnProperty</strong></code><strong>)</strong> to apply configurations only when needed.</li></ol><h3 id="197e8d61-387b-8070-95a3-f361b6e57fe3" class="">✅ <strong>Spring Boot Internal Flow</strong></h3><ol type="1" id="197e8d61-387b-804b-b2b7-f97efedc4f8b" class="numbered-list" start="1"><li><strong>Initialization</strong> → <code>@SpringBootApplication</code> is processed.</li></ol><ol type="1" id="197e8d61-387b-8077-a42e-d8accf85210a" class="numbered-list" start="2"><li><strong>Classpath Scanning</strong> → Components &amp; dependencies are detected.</li></ol><ol type="1" id="197e8d61-387b-8071-b321-d940dceb56e3" class="numbered-list" start="3"><li><strong>ApplicationContext Creation</strong> → Manages Beans &amp; their dependencies.</li></ol><ol type="1" id="197e8d61-387b-8081-9a05-f81c1dadf5d6" class="numbered-list" start="4"><li><strong>Auto-Configuration Execution</strong> → Applies necessary configurations.</li></ol><ol type="1" id="197e8d61-387b-808c-b019-d26cecfb93eb" class="numbered-list" start="5"><li><strong>Property Sources Loaded</strong> → External configurations are applied.</li></ol><ol type="1" id="197e8d61-387b-803b-a2be-cf5b6bae6fc3" class="numbered-list" start="6"><li><strong>Embedded Server Starts</strong> → Tomcat/Jetty/Undertow is launched if needed.</li></ol><ol type="1" id="197e8d61-387b-8082-a994-c0db4e4e8237" class="numbered-list" start="7"><li><strong>Application Ready</strong> → Beans are initialized &amp; requests are handled.</li></ol><h3 id="197e8d61-387b-807a-87d5-f769c2e75608" class="">✅ <strong>Why is Auto-Configuration Important?</strong></h3><ul id="197e8d61-387b-8072-a5f9-d2eb8eae4d4a" class="bulleted-list"><li style="list-style-type:disc"><strong>Simplifies development</strong> by <strong>removing boilerplate code</strong>.</li></ul><ul id="197e8d61-387b-8032-b74d-e3cb6bcf9ad6" class="bulleted-list"><li style="list-style-type:disc"><strong>Allows easy customization</strong> by overriding defaults in <code>application.properties</code>.</li></ul><ul id="197e8d61-387b-80a1-9235-faf5e3514d80" class="bulleted-list"><li style="list-style-type:disc"><strong>Boosts productivity</strong> by letting developers focus on <strong>business logic</strong>.</li></ul><hr id="197e8d61-387b-80b8-a8df-d9e6216352d4"/><p id="197e8d61-387b-8079-9f23-f73763d0a576" class="">📌 <strong>Final Thoughts</strong>:</p><ul id="197e8d61-387b-8026-acf1-e118ce05ba09" class="bulleted-list"><li style="list-style-type:disc"><strong>Spring Boot = Spring Framework + Auto-Configuration</strong>.</li></ul><ul id="197e8d61-387b-8016-80ed-f5c633fce485" class="bulleted-list"><li style="list-style-type:disc">Auto-Configuration is <strong>not magic</strong>—it’s just a set of <strong>predefined configurations</strong> based on conditions.</li></ul><ul id="197e8d61-387b-80c0-8955-e206652c0006" class="bulleted-list"><li style="list-style-type:disc"><strong>Understanding Auto-Configuration is crucial for Spring Boot interviews.</strong></li></ul><p id="197e8d61-387b-80a6-8f23-e6cdaef7efa1" class="">🔥 <strong>Practice Tip:</strong> Explore <code>META-INF/spring.factories</code> and <code>META-INF/spring-autoconfigure-metadata.properties</code> to see how Auto-Configuration works internally! 🚀</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

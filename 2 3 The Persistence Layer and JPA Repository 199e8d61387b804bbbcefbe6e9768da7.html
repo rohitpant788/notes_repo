@@ -1,0 +1,764 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>2.3 The Persistence Layer and JPA Repository</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-transparentGray { background-color: undefined; }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="199e8d61-387b-804b-bbce-fbe6e9768da7" class="page sans"><header><h1 class="page-title">2.3 The Persistence Layer and JPA Repository</h1><p class="page-description"></p></header><div class="page-body"><h1 id="199e8d61-387b-80b7-85a4-e8f45601b8c0" class=""><strong>Spring Boot – Persistence Layer (Spring Data JPA &amp; H2 Database)</strong></h1><h2 id="199e8d61-387b-80df-8c6b-ecb1b547198c" class=""><strong>Introduction</strong></h2><ul id="199e8d61-387b-80bf-98b6-fad1da3921c4" class="bulleted-list"><li style="list-style-type:disc">We have explored the <strong>presentation layer</strong> in our Spring Boot Starter Web Dependency project.</li></ul><ul id="199e8d61-387b-80fc-8ef8-dc27b527bf92" class="bulleted-list"><li style="list-style-type:disc">Now, we move to the <strong>persistence layer</strong> – where all database operations happen.</li></ul><ul id="199e8d61-387b-80e0-825a-ea8339552088" class="bulleted-list"><li style="list-style-type:disc">We will take an <strong>introductory look</strong> at this layer before diving deeper into <strong>Spring Data JPA</strong> in the upcoming modules.</li></ul><hr id="199e8d61-387b-80af-b44b-cd190a556216"/><h1 id="199e8d61-387b-8093-b63f-c619361e73d0" class=""><strong>Java Persistence API (JPA) &amp; Hibernate</strong></h1><h2 id="199e8d61-387b-8034-94ed-d0d204fcd8fc" class=""><strong>1. What is JPA?</strong></h2><ul id="199e8d61-387b-800f-81ed-ce13d40bc71c" class="bulleted-list"><li style="list-style-type:disc">JPA stands for <strong>Java Persistence API</strong> (now called <strong>Jakarta Persistence API</strong>).</li></ul><ul id="199e8d61-387b-8070-8947-f1e300230f5a" class="bulleted-list"><li style="list-style-type:disc">JPA is a <strong>specification</strong> that defines how Java applications interact with databases.</li></ul><ul id="199e8d61-387b-801e-bb8a-c4bf93e37ffc" class="bulleted-list"><li style="list-style-type:disc">Hibernate is the most commonly used <strong>JPA provider</strong> (implementation of JPA).</li></ul><h3 id="199e8d61-387b-80b9-86d4-f9bfbfd315aa" class=""><strong>Other JPA Providers</strong></h3><ul id="199e8d61-387b-80e8-9a9d-e6551bf7a9e4" class="bulleted-list"><li style="list-style-type:disc">Hibernate</li></ul><ul id="199e8d61-387b-804b-bfe0-f86ce2217115" class="bulleted-list"><li style="list-style-type:disc">OpenJPA</li></ul><ul id="199e8d61-387b-8041-bc30-fe1d3cf33e3b" class="bulleted-list"><li style="list-style-type:disc">EclipseLink</li></ul><h3 id="199e8d61-387b-80d9-a665-d0b8332f76c0" class=""><strong>Why Use JPA Instead of Direct JDBC?</strong></h3><table id="199e8d61-387b-80c1-ae43-c498ff379629" class="simple-table"><tbody><tr id="199e8d61-387b-80f5-95b4-fe44a08ae7de"><td id="MUUg" class=""><strong>JDBC (Java Database Connectivity)</strong></td><td id="SWh[" class=""><strong>JPA (Java Persistence API)</strong></td></tr><tr id="199e8d61-387b-8001-bc00-f71db23ca8ae"><td id="MUUg" class="">Requires <strong>manual SQL queries</strong></td><td id="SWh[" class="">Uses <strong>object-relational mapping (ORM)</strong></td></tr><tr id="199e8d61-387b-80a6-a731-fac91c409530"><td id="MUUg" class="">Developer must write <strong>boilerplate</strong> SQL code</td><td id="SWh[" class="">JPA <strong>abstracts SQL</strong> and manages queries</td></tr><tr id="199e8d61-387b-8085-b12c-d9e916ba2aa7"><td id="MUUg" class="">No automatic mapping between Java objects and tables</td><td id="SWh[" class=""><strong>Automatic mapping</strong> between Java objects &amp; tables</td></tr><tr id="199e8d61-387b-804b-9b91-ffefc1508822"><td id="MUUg" class="">Manually handles database connections</td><td id="SWh[" class="">JPA manages <strong>connections &amp; transactions</strong></td></tr></tbody></table><hr id="199e8d61-387b-8011-b8d6-edcc4c0e0af9"/><h2 id="199e8d61-387b-806b-ab06-fe57bd76b010" class=""><strong>2. What is Hibernate?</strong></h2><ul id="199e8d61-387b-80ec-806d-f4462b997f64" class="bulleted-list"><li style="list-style-type:disc">Hibernate is an <strong>ORM (Object-Relational Mapping) framework</strong> and acts as a <strong>JPA provider</strong>.</li></ul><ul id="199e8d61-387b-8058-a78a-d2551fe5de4d" class="bulleted-list"><li style="list-style-type:disc">It provides <strong>an abstraction layer</strong> over SQL by <strong>mapping Java objects to database tables</strong>.</li></ul><ul id="199e8d61-387b-807b-b89a-c7c4b104958e" class="bulleted-list"><li style="list-style-type:disc">Hibernate <strong>auto-generates SQL queries</strong> and executes them.</li></ul><h3 id="199e8d61-387b-8003-92c4-f4203ab6a42c" class=""><strong>Key Features of Hibernate</strong></h3><p id="199e8d61-387b-8054-a98b-deb35fd0cfa1" class="">✅ <strong>ORM Mapping</strong> – Converts Java objects into relational database tables.</p><p id="199e8d61-387b-8062-b821-e6063348075f" class="">✅ <strong>Optimized Queries</strong> – Translates <strong>JPQL (Java Persistence Query Language)</strong> to <strong>SQL</strong>.</p><p id="199e8d61-387b-80cd-8616-df3cbb9cb67f" class="">✅ <strong>Automatic Table Creation</strong> – Creates and manages tables based on Java entities.</p><h3 id="199e8d61-387b-8057-b696-ca58afc7caf4" class=""><strong>Hibernate vs. JPA</strong></h3><table id="199e8d61-387b-80ca-82e8-f0f8023d6ab6" class="simple-table"><tbody><tr id="199e8d61-387b-8047-ab74-ffe5e6657863"><td id="i}ZZ" class=""><strong>Feature</strong></td><td id="Hsvb" class=""><strong>JPA</strong></td><td id="uLYe" class=""><strong>Hibernate</strong></td></tr><tr id="199e8d61-387b-80f8-89a5-e48c25a5b856"><td id="i}ZZ" class="">Definition</td><td id="Hsvb" class="">A <strong>specification</strong> (API)</td><td id="uLYe" class="">An <strong>implementation</strong> of JPA</td></tr><tr id="199e8d61-387b-80d9-abd3-f942635ecf85"><td id="i}ZZ" class="">Query Language</td><td id="Hsvb" class="">Uses <strong>JPQL</strong></td><td id="uLYe" class="">Uses <strong>HQL (Hibernate Query Language)</strong></td></tr><tr id="199e8d61-387b-8012-aa44-d74071a6a7f7"><td id="i}ZZ" class="">Configuration</td><td id="Hsvb" class="">Requires a <strong>JPA provider</strong></td><td id="uLYe" class="">Works <strong>independently</strong> as ORM</td></tr></tbody></table><hr id="199e8d61-387b-8065-a5f4-d269f7e7bdbc"/><h2 id="199e8d61-387b-8076-aa64-e79aa61adff5" class=""><strong>3. JDBC &amp; Hibernate Workflow</strong></h2><p id="199e8d61-387b-800a-b33a-c0cba194464c" class="">1️⃣ <strong>Database Connection via JDBC Drivers</strong></p><p id="199e8d61-387b-80cd-a06f-fb8625bbe091" class="">2️⃣ <strong>JPA Manages Database Operations</strong></p><p id="199e8d61-387b-805a-b452-c94038cff38f" class="">3️⃣ <strong>Hibernate Performs ORM Mapping</strong></p><p id="199e8d61-387b-807c-af38-cf04a6c5e18c" class="">4️⃣ <strong>Spring Data JPA Provides Repositories for CRUD Operations</strong></p><hr id="199e8d61-387b-80d9-9c59-ce52edcb2534"/><h1 id="199e8d61-387b-80b8-982d-d49b6143bc7e" class=""><strong>Spring Data JPA – Working with Entities</strong></h1><h2 id="199e8d61-387b-8023-8ff7-e0679d6adc0d" class=""><strong>1. Defining an Entity Class</strong></h2><ul id="199e8d61-387b-80d3-8cbb-c47bce8803ba" class="bulleted-list"><li style="list-style-type:disc">Entities represent <strong>database tables</strong>.</li></ul><ul id="199e8d61-387b-80ee-98ad-f9760ce4c455" class="bulleted-list"><li style="list-style-type:disc">Use <code>@Entity</code> annotation to define an entity class.</li></ul><ul id="199e8d61-387b-80f5-9dd6-e1f3617b7f16" class="bulleted-list"><li style="list-style-type:disc">Example:</li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="199e8d61-387b-8056-a255-d493bea19387" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">
+@Entity
+@Table(name = &quot;employees&quot;)
+public class Employee {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Long id;
+
+  private String name;
+  private String email;
+
+  // Getters, Setters, Constructors
+}
+
+</code></pre><h3 id="199e8d61-387b-80ad-8ead-f39bcf78539c" class=""><strong>Annotations Used:</strong></h3><table id="199e8d61-387b-80da-b39a-df977c34696b" class="simple-table"><tbody><tr id="199e8d61-387b-8087-8080-d46fcefc0e20"><td id="rOtd" class="">Annotation</td><td id="@v?H" class="">Description</td></tr><tr id="199e8d61-387b-8063-a797-fddbd2158303"><td id="rOtd" class=""><code>@Entity</code></td><td id="@v?H" class="">Marks a class as an entity</td></tr><tr id="199e8d61-387b-80c8-9bd2-d9fb896f3b19"><td id="rOtd" class=""><code>@Table(name = &quot;employees&quot;)</code></td><td id="@v?H" class="">Specifies table name</td></tr><tr id="199e8d61-387b-80da-ba43-f5127df2aedd"><td id="rOtd" class=""><code>@Id</code></td><td id="@v?H" class="">Defines the primary key</td></tr><tr id="199e8d61-387b-8082-a37c-efff0933b437"><td id="rOtd" class=""><code>@GeneratedValue(strategy = GenerationType.AUTO)</code></td><td id="@v?H" class="">Auto-generates ID values</td></tr></tbody></table><hr id="199e8d61-387b-801a-a4ba-c88698224932"/><h2 id="199e8d61-387b-80c3-87ce-cf984f4ca656" class=""><strong>2. Repository Layer – CRUD Operations</strong></h2><ul id="199e8d61-387b-80a2-a734-cce83c4e97ee" class="bulleted-list"><li style="list-style-type:disc">The <strong>repository layer</strong> interacts with the database.</li></ul><ul id="199e8d61-387b-80d5-8a08-f82f26182722" class="bulleted-list"><li style="list-style-type:disc">Use <strong>Spring Data JPA</strong> to simplify database operations.</li></ul><h3 id="199e8d61-387b-80d5-9ca7-ce6192d60f36" class=""><strong>Creating a Repository</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="199e8d61-387b-80a6-828c-ff2971bff8e9" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">
+@Repository
+public interface EmployeeRepository extends JpaRepository&lt;Employee, Long&gt; {
+}
+
+</code></pre><h3 id="199e8d61-387b-8045-9328-cfd3555661e9" class=""><strong>Key Benefits of </strong><code><strong>JpaRepository</strong></code></h3><p id="199e8d61-387b-8089-8692-d5834f790f7f" class="">✅ <strong>Predefined Methods</strong> – <code>save()</code>, <code>findById()</code>, <code>findAll()</code>, <code>deleteById()</code>.</p><p id="199e8d61-387b-807b-befa-f8151a493c92" class="">✅ <strong>Auto-implemented CRUD operations</strong> – No need to write SQL queries.</p><p id="199e8d61-387b-802f-a628-c189c10276b9" class="">✅ <strong>Supports Custom Queries</strong> – We can define methods like <code>findByName()</code>.</p><hr id="199e8d61-387b-8098-b34c-dccd576262a1"/><h2 id="199e8d61-387b-8073-b56e-e7c25ffa0eca" class=""><strong>3. Using Repository in Controller</strong></h2><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="199e8d61-387b-8036-883c-eaca403dc8d9" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">
+@RestController
+@RequestMapping(&quot;/employees&quot;)
+public class EmployeeController {
+
+    private final EmployeeRepository employeeRepository;
+
+    @Autowired
+    public EmployeeController(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
+    }
+
+    @GetMapping(&quot;/{id}&quot;)
+    public Employee getEmployeeById(@PathVariable Long id) {
+        return employeeRepository.findById(id).orElse(null);
+    }
+
+    @PostMapping
+    public Employee createEmployee(@RequestBody Employee employee) {
+        return employeeRepository.save(employee);
+    }
+}
+
+</code></pre><h3 id="199e8d61-387b-8020-98d7-dee20d772a44" class=""><strong>Key Points:</strong></h3><p id="199e8d61-387b-80e0-bf4f-de06d1e67467" class="">✅ Inject <code>EmployeeRepository</code> using <code>@Autowired</code>.</p><p id="199e8d61-387b-80c1-bfde-c66837e0d989" class="">✅ Use <code>findById()</code> to fetch employee data.</p><p id="199e8d61-387b-8026-874d-fc8b42063a80" class="">✅ Use <code>save()</code> to persist employee data.</p><hr id="199e8d61-387b-8046-8e09-cf0600358b9a"/><h1 id="199e8d61-387b-8017-b628-e446c6bc1179" class=""><strong>Using H2 Database in Spring Boot</strong></h1><h2 id="199e8d61-387b-8083-9c8c-c3a034f818c1" class=""><strong>1. What is H2 Database?</strong></h2><ul id="199e8d61-387b-8094-b13d-decf603d60e1" class="bulleted-list"><li style="list-style-type:disc">H2 is an <strong>in-memory relational database</strong>.</li></ul><ul id="199e8d61-387b-8063-8f6e-ca2e4ed40cda" class="bulleted-list"><li style="list-style-type:disc">Used for <strong>testing &amp; development</strong> without needing an actual database.</li></ul><ul id="199e8d61-387b-8037-a194-df7117d8afc0" class="bulleted-list"><li style="list-style-type:disc"><strong>Data is lost</strong> when the application stops unless persisted to a file.</li></ul><h2 id="199e8d61-387b-8083-a5ae-e36fcdcd3775" class=""><strong>2. Adding H2 Dependency</strong></h2><p id="199e8d61-387b-8025-9175-c9038785b37c" class="">Add H2 to <code>pom.xml</code>:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="199e8d61-387b-809f-9e8d-d13eb135c44c" class="code"><code class="language-XML" style="white-space:pre-wrap;word-break:break-all">
+&lt;dependency&gt;
+    &lt;groupId&gt;com.h2database&lt;/groupId&gt;
+    &lt;artifactId&gt;h2&lt;/artifactId&gt;
+    &lt;scope&gt;runtime&lt;/scope&gt;
+&lt;/dependency&gt;
+
+</code></pre><h2 id="199e8d61-387b-805f-8f30-fb3a8db6c219" class=""><strong>3. Configuring H2 in </strong><code><strong>application.properties</strong></code></h2><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="199e8d61-387b-805f-a45b-eb9b19fadbf9" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">
+spring.datasource.url=jdbc:h2:file:./data/db
+spring.datasource.username=admin
+spring.datasource.password=admin123
+spring.h2.console.enabled=true
+spring.jpa.hibernate.ddl-auto=update
+
+</code></pre><h3 id="199e8d61-387b-80f0-80b5-da7cd7a2625a" class=""><strong>Key Configurations</strong></h3><p id="199e8d61-387b-8087-85d9-fe64c8620068" class="">✅ <code>spring.h2.console.enabled=true</code> – Enables <strong>H2 Console UI</strong>.</p><p id="199e8d61-387b-80fe-acec-e945f90291f8" class="">✅ <code>spring.datasource.url=jdbc:h2:file:./data/db</code> – Persists data in a file.</p><p id="199e8d61-387b-80a6-8578-de6fe34c44e6" class="">✅ <code>spring.jpa.hibernate.ddl-auto=update</code> – Ensures tables are not dropped.</p><h2 id="199e8d61-387b-80cb-86a4-ef0384e17680" class=""><strong>4. Accessing H2 Console</strong></h2><ul id="199e8d61-387b-8027-974e-d364aae4b180" class="bulleted-list"><li style="list-style-type:disc">Run the application.</li></ul><ul id="199e8d61-387b-80c6-8165-e0faba5028ac" class="bulleted-list"><li style="list-style-type:disc">Open: <code>http://localhost:8080/h2-console</code></li></ul><ul id="199e8d61-387b-80a5-9d22-f2500f17af64" class="bulleted-list"><li style="list-style-type:disc">Enter:<ul id="199e8d61-387b-802b-b087-dec7d5db6306" class="bulleted-list"><li style="list-style-type:circle"><strong>JDBC URL:</strong> <code>jdbc:h2:file:./data/db</code></li></ul><ul id="199e8d61-387b-8000-82c0-f9e46b1ba675" class="bulleted-list"><li style="list-style-type:circle"><strong>Username:</strong> <code>admin</code></li></ul><ul id="199e8d61-387b-8038-82a2-fb71dc5669fb" class="bulleted-list"><li style="list-style-type:circle"><strong>Password:</strong> <code>admin123</code></li></ul></li></ul><ul id="199e8d61-387b-8078-a685-f26c4afcd633" class="bulleted-list"><li style="list-style-type:disc">Click <strong>Connect</strong> to view tables.</li></ul><hr id="199e8d61-387b-80c9-afd4-c683d8d41355"/><h1 id="199e8d61-387b-8058-9f26-f5fac6fe6f62" class=""><strong>Lombok – Simplifying Boilerplate Code</strong></h1><h2 id="199e8d61-387b-80c2-93cf-d6f8d894f484" class=""><strong>1. What is Lombok?</strong></h2><ul id="199e8d61-387b-80f7-b166-c8d08b7834b9" class="bulleted-list"><li style="list-style-type:disc">A Java library to reduce <strong>boilerplate code</strong>.</li></ul><ul id="199e8d61-387b-8048-a9f4-e07bab0e32f0" class="bulleted-list"><li style="list-style-type:disc">Eliminates the need to write <strong>getters, setters, constructors</strong> manually.</li></ul><h2 id="199e8d61-387b-80c0-8404-db1063ded170" class=""><strong>2. Adding Lombok Dependency</strong></h2><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="199e8d61-387b-8032-9ab4-ed2bffe86c99" class="code"><code class="language-XML" style="white-space:pre-wrap;word-break:break-all">xml
+CopyEdit
+&lt;dependency&gt;
+    &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;
+    &lt;artifactId&gt;lombok&lt;/artifactId&gt;
+    &lt;scope&gt;provided&lt;/scope&gt;
+&lt;/dependency&gt;
+
+</code></pre><h2 id="199e8d61-387b-801a-b8ef-deec0b09163c" class=""><strong>3. Using Lombok Annotations</strong></h2><table id="199e8d61-387b-8086-9c60-c6b3994db410" class="simple-table"><tbody><tr id="199e8d61-387b-8038-93d6-c25583ed9704"><td id="p=M@" class=""><strong>Annotation</strong></td><td id="KCHp" class=""><strong>Description</strong></td></tr><tr id="199e8d61-387b-8013-b6e7-fca9c6899df6"><td id="p=M@" class=""><code>@Getter</code></td><td id="KCHp" class="">Generates getter methods</td></tr><tr id="199e8d61-387b-800b-8115-d6f538deaf73"><td id="p=M@" class=""><code>@Setter</code></td><td id="KCHp" class="">Generates setter methods</td></tr><tr id="199e8d61-387b-8029-8adb-ce5633def2b5"><td id="p=M@" class=""><code>@AllArgsConstructor</code></td><td id="KCHp" class="">Generates constructor with all fields</td></tr><tr id="199e8d61-387b-80dc-b90a-e30f3e03ef2a"><td id="p=M@" class=""><code>@NoArgsConstructor</code></td><td id="KCHp" class="">Generates no-arg constructor</td></tr></tbody></table><h3 id="199e8d61-387b-80f4-810a-f6009aa7df65" class=""><strong>Example with Lombok</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="199e8d61-387b-8029-8472-cc2ba0476842" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class Employee {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private String name;
+    private String email;
+}
+
+</code></pre><hr id="199e8d61-387b-8066-aaee-e929df0875d1"/><h1 id="199e8d61-387b-8084-8f61-ce2b527b760c" class=""><strong>Summary – Quick Revision</strong></h1><p id="199e8d61-387b-807a-bbb5-cc9ad16d53b6" class="">✅ <strong>JPA</strong> is a specification, Hibernate is an implementation of JPA.</p><p id="199e8d61-387b-80af-b2d8-c3cd10363b2f" class="">✅ <strong>Spring Data JPA</strong> simplifies database operations using <code>JpaRepository</code>.</p><p id="199e8d61-387b-800b-a933-d91dc916a107" class="">✅ <strong>Entities</strong> represent database tables (<code>@Entity</code>).</p><p id="199e8d61-387b-80fb-8a01-fe0ae46454f2" class="">✅ <strong>H2 Database</strong> is used for testing (<code>spring.h2.console.enabled=true</code>).</p><p id="199e8d61-387b-80a4-b124-ee01639b977b" class="">✅ <strong>Lombok</strong> reduces boilerplate code (<code>@Getter</code>, <code>@Setter</code>).</p><p id="199e8d61-387b-8072-952d-df2f4d72bcd4" class="">✅ <strong>Controller calls Repository</strong>, which interacts with <strong>Database</strong>.</p><p id="199e8d61-387b-8075-be42-c843500d3ced" class="">✅ <strong>H2 Console</strong> provides a UI to query data (<code>http://localhost:8080/h2-console</code>).</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

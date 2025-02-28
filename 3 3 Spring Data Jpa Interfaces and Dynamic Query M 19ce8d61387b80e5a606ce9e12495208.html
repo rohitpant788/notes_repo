@@ -1,0 +1,731 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>3.3 Spring Data Jpa Interfaces and Dynamic Query Methods</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-transparentGray { background-color: undefined; }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="19ce8d61-387b-80e5-a606-ce9e12495208" class="page sans"><header><h1 class="page-title">3.3 Spring Data Jpa Interfaces and Dynamic Query Methods</h1><p class="page-description"></p></header><div class="page-body"><p id="19de8d61-387b-80b7-b948-d1ced378c6b3" class="">
+</p><hr id="19de8d61-387b-8082-87ee-cd60105599a3"/><h3 id="19de8d61-387b-80c6-991a-fd4c36fccf18" class=""><strong>🔍 Introduction</strong></h3><ul id="19de8d61-387b-801a-bbcb-f7fc29e0cd58" class="bulleted-list"><li style="list-style-type:disc">In the last session, we explored <strong>Hibernate</strong> and its role in persisting data.</li></ul><ul id="19de8d61-387b-80ad-bbbf-ecf09c790075" class="bulleted-list"><li style="list-style-type:disc">Today, we will focus on <strong>Spring Data JPA</strong>, which is built on top of JPA and simplifies database access.</li></ul><ul id="19de8d61-387b-802e-8afa-e2f4202e4773" class="bulleted-list"><li style="list-style-type:disc"><strong>Key Concept:</strong> Spring Data JPA <strong>automates DAO method creation</strong> using repositories, eliminating the need for writing SQL queries manually.</li></ul><hr id="19de8d61-387b-80e7-bd1a-ca10d15eb103"/><h3 id="19de8d61-387b-807e-abd3-cb7661f58b4b" class=""><strong>📖 What is Spring Data JPA?</strong></h3><p id="19de8d61-387b-8022-942d-f193f9805a14" class="">✅ <strong>Spring Data JPA</strong> is a part of the larger <strong>Spring Data ecosystem</strong>, providing:</p><ul id="19de8d61-387b-80c9-b786-f9d2ab51b25e" class="bulleted-list"><li style="list-style-type:disc">A <strong>higher-level abstraction</strong> for JPA-based repositories.</li></ul><ul id="19de8d61-387b-80de-9a4b-d12c923f8d2c" class="bulleted-list"><li style="list-style-type:disc">Automatic query generation, reducing boilerplate code.</li></ul><ul id="19de8d61-387b-8072-9bc5-c277988d97fb" class="bulleted-list"><li style="list-style-type:disc">Built-in repository support for common database operations.</li></ul><ul id="19de8d61-387b-80e8-89a0-f438af9f8154" class="bulleted-list"><li style="list-style-type:disc">Support for custom queries (JPQL &amp; SQL).</li></ul><p id="19de8d61-387b-8061-b689-e6f123e257f3" class="">✅ <strong>Why use it?</strong></p><ul id="19de8d61-387b-80ad-9475-c936bffe3f4c" class="bulleted-list"><li style="list-style-type:disc">No need to write SQL queries.</li></ul><ul id="19de8d61-387b-8077-950c-d41d93f4b725" class="bulleted-list"><li style="list-style-type:disc">Reduces development effort.</li></ul><ul id="19de8d61-387b-8044-a5fa-f0208f772486" class="bulleted-list"><li style="list-style-type:disc">Provides <strong>out-of-the-box</strong> pagination and sorting.</li></ul><ul id="19de8d61-387b-80f9-88ae-f593771734d2" class="bulleted-list"><li style="list-style-type:disc">Simplifies <strong>data management</strong> with minimal effort.</li></ul><hr id="19de8d61-387b-800d-ae7a-eb4702aa0b3f"/><h3 id="19de8d61-387b-8097-ab65-deace68808ae" class=""><strong>🗂️ Types of Repositories in Spring Data JPA</strong></h3><p id="19de8d61-387b-80e6-85d7-c324d90d63f0" class="">Spring Data JPA provides different repository interfaces to simplify data operations:</p><table id="19de8d61-387b-80ba-8bc2-fb6933ddfb96" class="simple-table"><tbody><tr id="19de8d61-387b-8076-b362-dfe83b54f3e0"><td id="HLy~" class="">Repository Type</td><td id="Bp|`" class="">Purpose</td></tr><tr id="19de8d61-387b-80f2-8f27-f43c556d41d6"><td id="HLy~" class=""><code><strong>Repository&lt;T, ID&gt;</strong></code></td><td id="Bp|`" class="">Basic repository, no methods defined.</td></tr><tr id="19de8d61-387b-80ec-8e61-c278af30ac93"><td id="HLy~" class=""><code><strong>CrudRepository&lt;T, ID&gt;</strong></code></td><td id="Bp|`" class="">Provides CRUD (Create, Read, Update, Delete) operations.</td></tr><tr id="19de8d61-387b-8016-98ac-c7475be416f8"><td id="HLy~" class=""><code><strong>PagingAndSortingRepository&lt;T, ID&gt;</strong></code></td><td id="Bp|`" class="">Adds support for <strong>pagination and sorting</strong>.</td></tr><tr id="19de8d61-387b-802b-abe5-fb4c315cb6c7"><td id="HLy~" class=""><code><strong>JpaRepository&lt;T, ID&gt;</strong></code></td><td id="Bp|`" class="">Extends <code>CrudRepository</code> and <code>PagingAndSortingRepository</code>.</td></tr></tbody></table><p id="19de8d61-387b-8037-832e-c311bae02e85" class="">🔹 <strong>Best Practice:</strong> Use <code><strong>JpaRepository&lt;T, ID&gt;</strong></code> as it inherits methods from both <code>CrudRepository</code> and <code>PagingAndSortingRepository</code>.</p><hr id="19de8d61-387b-804f-ba00-fe532b49ce6f"/><h3 id="19de8d61-387b-8001-8870-f73563c6de38" class=""><strong>🛠 Creating a Repository in Spring Data JPA</strong></h3><p id="19de8d61-387b-80fa-8647-f6c3027cbaae" class="">📌 <strong>Steps to create a repository:</strong></p><p id="19de8d61-387b-80f9-81c9-d8c515db0323" class="">1️⃣ <strong>Create an Entity:</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19de8d61-387b-8085-a46b-c27fd1511f87" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">@Entity
+public class ProductEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String title;
+    private BigDecimal price;
+    private Integer quantity;
+    private String sku;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+}</code></pre><p id="19de8d61-387b-80b0-99af-ed5b3fb540ee" class="">2️⃣ <strong>Define a Repository Interface:</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19de8d61-387b-803a-8844-e1ba356a0037" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">@Repository
+public interface ProductRepository extends JpaRepository&lt;ProductEntity, Long&gt; {
+}</code></pre><p id="19de8d61-387b-8082-bff1-ee3624d374e5" class="">🚀 <strong>No need to implement CRUD methods manually!</strong> The framework will generate them automatically.</p><hr id="19de8d61-387b-801f-aa25-f8a921c82d88"/><h3 id="19de8d61-387b-80c0-9414-ca24c9e63870" class=""><strong>🧐 How Spring Data JPA Generates Implementation?</strong></h3><ul id="19de8d61-387b-80ef-a774-f0b2fd49fe0c" class="bulleted-list"><li style="list-style-type:disc">We <strong>only define the interface</strong>, but who implements these methods?</li></ul><ul id="19de8d61-387b-80b5-b156-d9e0afa7ba4e" class="bulleted-list"><li style="list-style-type:disc">The answer is <code><strong>SimpleJpaRepository</strong></code>, which is an internal class that provides implementations for repository methods.</li></ul><hr id="19de8d61-387b-8064-8547-dc4d23b3e37a"/><h2 id="19de8d61-387b-8058-b34d-e07aee0429c2" class=""><strong>💡 Spring Data JPA - Query Methods</strong></h2><p id="19de8d61-387b-8081-8a59-dfa2e372f0c4" class="">Spring Data JPA allows us to define <strong>custom query methods</strong> just by following naming conventions.</p><h3 id="19de8d61-387b-8077-8517-fc7304e24b82" class=""><strong>🔹 Query Derivation Rules</strong></h3><p id="19de8d61-387b-8037-b480-ca2751e125e8" class="">1️⃣ Method names must start with:</p><ul id="19de8d61-387b-80d2-a689-e894f515bde3" class="bulleted-list"><li style="list-style-type:disc"><code>findBy</code>, <code>readBy</code>, <code>queryBy</code>, or <code>getBy</code>.</li></ul><ul id="19de8d61-387b-807a-b059-d70c7baf5248" class="bulleted-list"><li style="list-style-type:disc">Example: <code>findByTitle(String title)</code> → Generates <code>SELECT * FROM product WHERE title = ?</code>.</li></ul><p id="19de8d61-387b-8059-9642-dd40f22c46e3" class="">2️⃣ Use <strong>logical operators</strong> (<code>And</code>, <code>Or</code>):</p><ul id="19de8d61-387b-8089-9e4f-ce4ca5e6ee11" class="bulleted-list"><li style="list-style-type:disc"><code>findByTitleAndPrice(String title, BigDecimal price)</code></li></ul><ul id="19de8d61-387b-8013-bf87-f4a45fbeea16" class="bulleted-list"><li style="list-style-type:disc"><code>findByTitleOrPrice(String title, BigDecimal price)</code></li></ul><p id="19de8d61-387b-809f-8fef-e98e3dff10db" class="">3️⃣ Use <strong>Comparison Operators</strong>:</p><ul id="19de8d61-387b-80a7-821d-f63242976202" class="bulleted-list"><li style="list-style-type:disc"><code>findByPriceGreaterThan(BigDecimal price)</code></li></ul><ul id="19de8d61-387b-8095-a63e-e2c18e4956aa" class="bulleted-list"><li style="list-style-type:disc"><code>findByPriceLessThan(BigDecimal price)</code></li></ul><ul id="19de8d61-387b-805f-a531-cc142ce83640" class="bulleted-list"><li style="list-style-type:disc"><code>findByCreatedAtAfter(LocalDateTime date)</code></li></ul><p id="19de8d61-387b-803f-b074-c5bb1c82e4c7" class="">4️⃣ Use <strong>Sorting &amp; Pagination</strong>:</p><ul id="19de8d61-387b-8037-8a30-f808b18921e1" class="bulleted-list"><li style="list-style-type:disc"><code>findByTitleOrderByPriceAsc(String title)</code></li></ul><hr id="19de8d61-387b-80c6-bfae-de154456278b"/><h3 id="19de8d61-387b-805b-913d-c3a65e5eca18" class=""><strong>🔍 Example: Custom Query Methods</strong></h3><h3 id="19de8d61-387b-809d-ba21-ef85a133d57a" class="">✅ <strong>Fetching data based on conditions</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19de8d61-387b-8089-aec7-db098c659a7f" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">// Finds all products with a title
+List&lt;ProductEntity&gt; findByTitle(String title);
+
+// Finds all products with price greater than 100
+List&lt;ProductEntity&gt; findByPriceGreaterThan(BigDecimal price);
+
+// Finds all products where quantity is between 10 and 50
+List&lt;ProductEntity&gt; findByQuantityBetween(int minQty, int maxQty);</code></pre><h3 id="19de8d61-387b-80d5-b004-c3042352562d" class="">✅ <strong>Fetching data using LIKE (Pattern Matching)</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19de8d61-387b-8002-811e-f6bcf8691b97" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">
+// Finds all products where title contains &quot;Choco&quot;
+List&lt;ProductEntity&gt; findByTitleContaining(String keyword);</code></pre><h3 id="19de8d61-387b-801e-be49-d8257cb93f23" class="">✅ <strong>Ignore Case in Queries</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19de8d61-387b-80dd-835f-e98ef598ebbf" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">// Finds all products where title contains a word, case-insensitive
+List&lt;ProductEntity&gt; findByTitleContainingIgnoreCase(String keyword);</code></pre><h3 id="19de8d61-387b-80bb-a370-c165a8f11b88" class="">✅ <strong>Check Existence</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19de8d61-387b-80fd-97fa-d2a589d6a04c" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">// Checks if a product exists by title
+boolean existsByTitle(String title);</code></pre><hr id="19de8d61-387b-80fe-be59-df2aab3e0613"/><h2 id="19de8d61-387b-80ec-a246-d3b6c04fa197" class=""><strong>📌 Writing JPQL Queries using @Query Annotation</strong></h2><p id="19de8d61-387b-8062-a144-dd8c7fd964d3" class="">When predefined method names are <strong>not enough</strong>, we can use <code>@Query</code>.</p><h3 id="19de8d61-387b-8059-a6f9-c63b26cf3d3d" class=""><strong>🔹 Example: Fetch product by title and price</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19de8d61-387b-808d-9a6a-f45cb720bc4a" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">@Query(&quot;SELECT p FROM ProductEntity p WHERE p.title = :title AND p.price = :price&quot;)
+Optional&lt;ProductEntity&gt; findByTitleAndPrice(@Param(&quot;title&quot;) String title, @Param(&quot;price&quot;) BigDecimal price);</code></pre><hr id="19de8d61-387b-8041-8d2b-e727ebd4b3f1"/><h2 id="19de8d61-387b-8095-bfb6-f8ed5273cbf4" class=""><strong>📝 Running JPA Repository in Tests</strong></h2><p id="19de8d61-387b-80a2-9633-f92bf86a215f" class="">We can test JPA repositories using <strong>Spring Boot&#x27;s test framework</strong>.</p><h3 id="19de8d61-387b-80d7-ba65-f20268ea4502" class="">✅ <strong>Example: Saving Data</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19de8d61-387b-8016-99d3-f60804db7ad4" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">@Autowired
+private ProductRepository productRepository;
+
+@Test
+void testSaveProduct() {
+    ProductEntity product = ProductEntity.builder()
+        .title(&quot;Nestle Chocolate&quot;)
+        .price(new BigDecimal(&quot;123.45&quot;))
+        .quantity(12)
+        .sku(&quot;NESTLE234&quot;)
+        .build();
+
+    ProductEntity savedProduct = productRepository.save(product);
+    System.out.println(&quot;Saved Product: &quot; + savedProduct);
+}</code></pre><h3 id="19de8d61-387b-8047-8f6f-cb3e0ac250e8" class="">✅ <strong>Example: Fetching Data</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19de8d61-387b-808c-9413-cc1880632b05" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">@Test
+void testFindProductByTitle() {
+    List&lt;ProductEntity&gt; products = productRepository.findByTitle(&quot;Nestle Chocolate&quot;);
+    products.forEach(System.out::println);
+}</code></pre><hr id="19de8d61-387b-8051-b9f6-d849a9247b35"/><h2 id="19de8d61-387b-8080-96b1-c8704272b33d" class=""><strong>📊 Pagination &amp; Sorting in Spring Data JPA</strong></h2><p id="19de8d61-387b-802f-bf67-d2192ae6ec5d" class="">Spring Data JPA provides <strong>pagination</strong> and <strong>sorting</strong> out of the box.</p><h3 id="19de8d61-387b-8006-bea0-e5488e424559" class="">✅ <strong>Paginated Fetching</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19de8d61-387b-80e0-acae-fba96cad898e" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">
+Page&lt;ProductEntity&gt; findAll(Pageable pageable);
+</code></pre><h3 id="19de8d61-387b-8038-8134-c81c55a7f7e9" class="">✅ <strong>Usage Example</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19de8d61-387b-80bb-a9a1-e3968c46f4dc" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">Page&lt;ProductEntity&gt; page = productRepository.findAll(PageRequest.of(0, 10, Sort.by(&quot;price&quot;).ascending()));</code></pre><hr id="19de8d61-387b-807a-8bfe-f9ccf09a0e20"/><h2 id="19de8d61-387b-80de-8733-e3374f1a96a5" class=""><strong>✅ Summary (Quick Interview Revision)</strong></h2><h3 id="19de8d61-387b-808e-8580-f91399063fde" class=""><strong>1️⃣ What is Spring Data JPA?</strong></h3><ul id="19de8d61-387b-800e-b24c-dff9b6c9b12a" class="bulleted-list"><li style="list-style-type:disc">A <strong>wrapper</strong> around JPA that simplifies database access.</li></ul><ul id="19de8d61-387b-80f8-bffa-fc4ae51fed44" class="bulleted-list"><li style="list-style-type:disc">Uses <strong>repositories</strong> to reduce boilerplate code.</li></ul><h3 id="19de8d61-387b-8025-a91e-d0e68ccefcb8" class=""><strong>2️⃣ Different Repositories in Spring Data JPA</strong></h3><table id="19de8d61-387b-8059-813f-e201d1aaf808" class="simple-table"><tbody><tr id="19de8d61-387b-80bd-a394-cde47fdae8db"><td id="CkP`" class="">Repository Type</td><td id="@}kT" class="">Purpose</td></tr><tr id="19de8d61-387b-806e-a097-f26f283c1e91"><td id="CkP`" class=""><code>CrudRepository</code></td><td id="@}kT" class="">Basic CRUD operations</td></tr><tr id="19de8d61-387b-809e-8610-efac2ef0b193"><td id="CkP`" class=""><code>PagingAndSortingRepository</code></td><td id="@}kT" class="">Adds pagination and sorting</td></tr><tr id="19de8d61-387b-8081-a38e-cdf15d6b2944"><td id="CkP`" class=""><code>JpaRepository</code></td><td id="@}kT" class="">Adds extra JPA-specific methods</td></tr></tbody></table><h3 id="19de8d61-387b-8066-acdd-dca48dbeb8de" class=""><strong>3️⃣ Query Methods &amp; Naming Conventions</strong></h3><table id="19de8d61-387b-8097-b9a9-d3de436212a8" class="simple-table"><tbody><tr id="19de8d61-387b-809b-9fa5-eacc7a74bb5d"><td id="NZUE" class="">Query Type</td><td id="=:\{" class="">Example</td></tr><tr id="19de8d61-387b-8016-912f-e05cb63154fb"><td id="NZUE" class=""><strong>Find by attribute</strong></td><td id="=:\{" class=""><code>findByTitle(String title)</code></td></tr><tr id="19de8d61-387b-800f-9ccd-d80d6ddcfb1d"><td id="NZUE" class=""><strong>Find with conditions</strong></td><td id="=:\{" class=""><code>findByPriceGreaterThan(BigDecimal price)</code></td></tr><tr id="19de8d61-387b-8026-abb4-cadec149b671"><td id="NZUE" class=""><strong>Find with LIKE</strong></td><td id="=:\{" class=""><code>findByTitleContaining(String keyword)</code></td></tr><tr id="19de8d61-387b-8086-9df1-e4c4fa0315ba"><td id="NZUE" class=""><strong>Ignore Case</strong></td><td id="=:\{" class=""><code>findByTitleContainingIgnoreCase(String keyword)</code></td></tr><tr id="19de8d61-387b-8088-9c12-fdb043b9081e"><td id="NZUE" class=""><strong>Check Existence</strong></td><td id="=:\{" class=""><code>existsByTitle(String title)</code></td></tr></tbody></table><h3 id="19de8d61-387b-805e-b9ae-d40753f48ae3" class=""><strong>4️⃣ JPQL Queries</strong></h3><table id="19de8d61-387b-806c-b927-e220ad99bfbe" class="simple-table"><tbody><tr id="19de8d61-387b-808c-8e1c-dccec022bb7c"><td id="YPL{" class="">Query Type</td><td id="n`?@" class="">Example</td></tr><tr id="19de8d61-387b-8019-a097-f04b99bfd922"><td id="YPL{" class="">Fetch with conditions</td><td id="n`?@" class=""><code>@Query(&quot;SELECT p FROM ProductEntity p WHERE p.title = :title&quot;)</code></td></tr><tr id="19de8d61-387b-8009-9a7d-e6f791844c75"><td id="YPL{" class="">Find with multiple conditions</td><td id="n`?@" class=""><code>findByTitleAndPrice(String title, BigDecimal price)</code></td></tr></tbody></table><h3 id="19de8d61-387b-80f5-93d7-f62a26ccebe7" class=""><strong>5️⃣ Key Benefits of Spring Data JPA</strong></h3><p id="19de8d61-387b-8083-b08c-fb68e9d1f4e4" class="">✅ Eliminates need to write SQL.</p><p id="19de8d61-387b-8014-80e1-c5471940954f" class="">✅ Supports <strong>pagination and sorting</strong>.</p><p id="19de8d61-387b-80f6-a7e9-e9fb6fc5a8e8" class="">✅ Provides <strong>automatic query generation</strong>.</p><p id="19de8d61-387b-806c-92d1-effcb8ae006a" class="">✅ Allows writing <strong>custom JPQL &amp; SQL queries</strong>.</p><hr id="19de8d61-387b-80db-96bd-d586c9b9cedc"/><p id="19de8d61-387b-802e-b3a0-e98aa5edd82c" class="">💡 <strong>Next Topic</strong>: <strong>Pagination &amp; Sorting in Spring Data JPA</strong></p><p id="19de8d61-387b-80da-b3ea-f1fce96bfcc2" class="">📌 <strong>Homework:</strong> Try out different method names to generate queries automatically.</p><p id="19de8d61-387b-8059-a59b-c2b12c63e551" class="">🚀 <strong>Stay tuned for advanced Spring Data JPA concepts in the next class!</strong> 🔥</p><p id="19ce8d61-387b-8021-974b-ffb4a7d3d190" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

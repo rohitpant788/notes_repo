@@ -1,0 +1,717 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>1.2 Setting Up A Spring Boot Project</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-transparentGray { background-color: undefined; }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="195e8d61-387b-8095-8abe-f10f532a1a15" class="page sans"><header><h1 class="page-title">1.2 Setting Up A Spring Boot Project</h1><p class="page-description"></p></header><div class="page-body"><h2 id="195e8d61-387b-80e7-9b16-c13968e57ac7" class=""><strong>🌟 Setting Up the Development Environment</strong></h2><h3 id="195e8d61-387b-8072-a609-eda1a0070986" class=""><strong>🔹 Choosing an IDE</strong></h3><ul id="195e8d61-387b-800b-84d7-c049840eeab5" class="bulleted-list"><li style="list-style-type:disc">We need an <strong>Integrated Development Environment (IDE)</strong> to write and manage our Spring Boot applications.</li></ul><ul id="195e8d61-387b-801f-9eea-f15a16f7f8ef" class="bulleted-list"><li style="list-style-type:disc">The recommended IDE for this course is <strong>IntelliJ IDEA</strong> because:<ul id="195e8d61-387b-802d-96b6-cfd3a73e7c6d" class="bulleted-list"><li style="list-style-type:circle">It provides <strong>more functionalities</strong> compared to Eclipse.</li></ul><ul id="195e8d61-387b-8050-b1e8-e462a7a4d327" class="bulleted-list"><li style="list-style-type:circle">It is <strong>highly optimized</strong> for Spring Boot development.</li></ul></li></ul><ul id="195e8d61-387b-8021-a238-c15fca433724" class="bulleted-list"><li style="list-style-type:disc">However, if your company uses Eclipse, you can use it instead.</li></ul><ul id="195e8d61-387b-80b7-9332-e86833b1863c" class="bulleted-list"><li style="list-style-type:disc"><strong>Which edition to choose?</strong><ul id="195e8d61-387b-80aa-b430-c9449b229449" class="bulleted-list"><li style="list-style-type:circle"><strong>Community Edition</strong> (free &amp; sufficient for this course).</li></ul><ul id="195e8d61-387b-8056-8820-e45f967992e6" class="bulleted-list"><li style="list-style-type:circle"><strong>Ultimate Edition</strong> (paid, but you can use it if you have a key from your employer or friends).</li></ul></li></ul><h3 id="195e8d61-387b-80e3-98c5-e3d5946663e6" class=""><strong>🔹 Installing IntelliJ IDEA</strong></h3><ul id="195e8d61-387b-8016-917b-c435b182aca2" class="bulleted-list"><li style="list-style-type:disc">Download the correct version for your <strong>operating system</strong> from the official website.</li></ul><ul id="195e8d61-387b-806d-a7d3-da6d39317d1a" class="bulleted-list"><li style="list-style-type:disc">The installation is straightforward:<ol type="1" id="195e8d61-387b-80f5-a95a-d161ff6a6906" class="numbered-list" start="1"><li>Click <strong>Next → Next</strong> and leave everything as default.</li></ol><ol type="1" id="195e8d61-387b-8081-a3e8-dce82691ed64" class="numbered-list" start="2"><li>Complete the installation.</li></ol></li></ul><ul id="195e8d61-387b-8000-b185-f3e3d8bbf6ce" class="bulleted-list"><li style="list-style-type:disc">If you face <strong>installation issues</strong>, refer to YouTube tutorials for troubleshooting.</li></ul><hr id="195e8d61-387b-8064-a2fd-e235ebc540de"/><h2 id="195e8d61-387b-8049-9d07-dc9b609919f6" class=""><strong>🌟 Creating a Spring Boot Project Using Spring Initializr</strong></h2><h3 id="195e8d61-387b-80bd-bb09-f90e3d59353a" class=""><strong>🔹 What is Spring Initializr?</strong></h3><ul id="195e8d61-387b-80fc-9178-c55174c9797b" class="bulleted-list"><li style="list-style-type:disc">A web-based tool that <strong>generates a Spring Boot starter project</strong> with necessary configurations.</li></ul><ul id="195e8d61-387b-80d0-ac3e-dbe21fe02ecc" class="bulleted-list"><li style="list-style-type:disc">Saves time by <strong>pre-configuring project settings</strong> instead of setting up everything manually.</li></ul><h3 id="195e8d61-387b-8088-ba3b-d681ceeb56b9" class=""><strong>🔹 Steps to Generate a Spring Boot Project</strong></h3><ol type="1" id="195e8d61-387b-807b-84ab-fa4582fa7bd3" class="numbered-list" start="1"><li><strong>Visit</strong> <a href="https://start.spring.io/">Spring Initializr</a></li></ol><ol type="1" id="195e8d61-387b-8065-85fc-c66916ef471c" class="numbered-list" start="2"><li><strong>Select Project Settings:</strong><ul id="195e8d61-387b-8036-99ae-e51293981889" class="bulleted-list"><li style="list-style-type:disc"><strong>Build Tool</strong>: Choose between <strong>Gradle</strong> or <strong>Maven</strong> (we will use Maven, as it is widely used in the industry).</li></ul><ul id="195e8d61-387b-8014-ac48-c49225b5b0f0" class="bulleted-list"><li style="list-style-type:disc"><strong>Language</strong>: Select <strong>Java</strong>.</li></ul><ul id="195e8d61-387b-8049-a530-d7f0cacd430f" class="bulleted-list"><li style="list-style-type:disc"><strong>Spring Boot Version</strong>: Choose a stable version (<strong>avoid SNAPSHOT versions</strong> as they are not stable).</li></ul></li></ol><ol type="1" id="195e8d61-387b-807b-8dcc-ce6c6d99e187" class="numbered-list" start="3"><li><strong>Configure Project Metadata:</strong><ul id="195e8d61-387b-8071-92f1-dcc6c33dd4db" class="bulleted-list"><li style="list-style-type:disc"><strong>Group ID</strong>: Represents your company/organization (e.g., <code>com.coding.shuttle</code>).</li></ul><ul id="195e8d61-387b-80d6-836b-fbd8191b032c" class="bulleted-list"><li style="list-style-type:disc"><strong>Artifact ID</strong>: The project name (<code>introduction-to-spring-boot</code>).</li></ul><ul id="195e8d61-387b-80b9-aab3-f94156aaafb2" class="bulleted-list"><li style="list-style-type:disc"><strong>Name</strong>: The name of the project.</li></ul><ul id="195e8d61-387b-8032-81f6-dc763d4e9c1a" class="bulleted-list"><li style="list-style-type:disc"><strong>Description</strong>: Short description (e.g., &quot;Week 1 Introduction&quot;).</li></ul><ul id="195e8d61-387b-80f6-a581-f27e300918eb" class="bulleted-list"><li style="list-style-type:disc"><strong>Package Name</strong>: Automatically generated as <code>groupID.artifactID</code>.</li></ul></li></ol><ol type="1" id="195e8d61-387b-806c-9f86-f40910a9ba51" class="numbered-list" start="4"><li><strong>Choose Packaging Format:</strong><ul id="195e8d61-387b-803d-8ad5-e499cf8d6333" class="bulleted-list"><li style="list-style-type:disc"><strong>JAR</strong> (Default) – Suitable for standalone applications.</li></ul><ul id="195e8d61-387b-803b-a1e6-c3791ca53aa0" class="bulleted-list"><li style="list-style-type:disc"><strong>WAR</strong> (Used for deploying applications in a web container, covered later).</li></ul></li></ol><ol type="1" id="195e8d61-387b-8035-9d0d-e830279c9348" class="numbered-list" start="5"><li><strong>Select Java Version:</strong><ul id="195e8d61-387b-807f-aec0-df992a4972fc" class="bulleted-list"><li style="list-style-type:disc"><strong>Java 21 (LTS)</strong> or <strong>Java 22 (latest version)</strong>.</li></ul></li></ol><ol type="1" id="195e8d61-387b-808f-af37-fd9e9c39449a" class="numbered-list" start="6"><li><strong>Add Dependencies:</strong><ul id="195e8d61-387b-8074-9316-d5462e9b6a3b" class="bulleted-list"><li style="list-style-type:disc">Dependencies provide <strong>pre-configured functionalities</strong> without needing manual setup.</li></ul><ul id="195e8d61-387b-8088-9652-e3afa6ce9f9b" class="bulleted-list"><li style="list-style-type:disc"><strong>Important dependencies:</strong><ul id="195e8d61-387b-809b-8eb4-f40a2208e124" class="bulleted-list"><li style="list-style-type:circle">✅ <code>Spring Web</code> – Enables web server &amp; MVC setup.</li></ul><ul id="195e8d61-387b-80ed-9383-c38c040a9938" class="bulleted-list"><li style="list-style-type:circle">✅ <code>Spring Security</code> – Adds authentication.</li></ul><ul id="195e8d61-387b-805a-997b-c49e15075af8" class="bulleted-list"><li style="list-style-type:circle">✅ <code>Spring Data JPA</code> – For database integration.</li></ul></li></ul></li></ol><ol type="1" id="195e8d61-387b-8067-a9db-c23d79f58992" class="numbered-list" start="7"><li><strong>Generate and Download the Project</strong><ul id="195e8d61-387b-805f-a179-d80beb8f8791" class="bulleted-list"><li style="list-style-type:disc">Click on <strong>&quot;Generate&quot;</strong> to download the project as a <code>.zip</code> file.</li></ul></li></ol><hr id="195e8d61-387b-8039-910c-d5f8f00270bd"/><h2 id="195e8d61-387b-80f2-ae8d-f958321f86b2" class=""><strong>🌟 Importing the Spring Boot Project into IntelliJ IDEA</strong></h2><h3 id="195e8d61-387b-8069-8508-ee651a9c97e3" class=""><strong>🔹 Steps to Open the Project</strong></h3><ol type="1" id="195e8d61-387b-80af-970e-f6cccc580f30" class="numbered-list" start="1"><li><strong>Extract</strong> the downloaded <code>.zip</code> file.</li></ol><ol type="1" id="195e8d61-387b-806c-b4e1-c1f5846a581c" class="numbered-list" start="2"><li><strong>Open IntelliJ IDEA</strong>.</li></ol><ol type="1" id="195e8d61-387b-802c-b2e5-ff85a65d7a7c" class="numbered-list" start="3"><li>Click on <strong>&quot;Open&quot;</strong> and select the extracted folder.</li></ol><ol type="1" id="195e8d61-387b-80a4-a34a-e83790cde15b" class="numbered-list" start="4"><li><strong>Wait for dependencies to download</strong> (this might take a few minutes).</li></ol><h3 id="195e8d61-387b-8073-83dc-e8fa623268d4" class=""><strong>🔹 Project Structure Overview</strong></h3><ul id="195e8d61-387b-806c-8346-e4f2e68e6bda" class="bulleted-list"><li style="list-style-type:disc"><strong>📂 </strong><code><strong>src/main/java</strong></code> → Contains the Java code.</li></ul><ul id="195e8d61-387b-80af-a5a6-cce6e21c007a" class="bulleted-list"><li style="list-style-type:disc"><strong>📂 </strong><code><strong>src/main/resources</strong></code> → Stores configuration files.</li></ul><ul id="195e8d61-387b-80d0-aeef-e6aa6fee2583" class="bulleted-list"><li style="list-style-type:disc"><strong>📂 </strong><code><strong>src/test/java</strong></code> → Contains test cases.</li></ul><ul id="195e8d61-387b-805c-a69f-c7fd8d5f318d" class="bulleted-list"><li style="list-style-type:disc"><strong>📂 </strong><code><strong>target/</strong></code> → Contains compiled output (<code>.jar</code> or <code>.war</code> files).</li></ul><ul id="195e8d61-387b-8088-9fb5-faa08b877d8f" class="bulleted-list"><li style="list-style-type:disc"><strong>📜 </strong><code><strong>pom.xml</strong></code> → The <strong>Maven configuration file</strong> (similar to <code>package.json</code> in Node.js).</li></ul><ul id="195e8d61-387b-801e-898f-f96f2ca88f4c" class="bulleted-list"><li style="list-style-type:disc"><strong>🔧 </strong><code><strong>application.properties</strong></code> → Used for configuring application settings (e.g., server port).</li></ul><hr id="195e8d61-387b-804b-9dc8-e4f65be1f18f"/><h2 id="195e8d61-387b-8077-a2b3-d5f28c6a48d0" class=""><strong>🌟 Understanding the Main Class and Auto-Configuration in Spring Boot</strong></h2><h3 id="195e8d61-387b-80dc-8151-defbfa21e963" class=""><strong>🔹 The Main Class</strong></h3><ul id="195e8d61-387b-8092-8ab0-fc3a7ef2ecf5" class="bulleted-list"><li style="list-style-type:disc">Located inside <code>src/main/java/your.package/</code></li></ul><ul id="195e8d61-387b-801b-9bec-c2c2ab1cf3c2" class="bulleted-list"><li style="list-style-type:disc">This file contains the <strong>entry point of the application</strong>:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="195e8d61-387b-800f-82cd-e199efee9cb4" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@SpringBootApplication
+public class IntroductionToSpringBootApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(IntroductionToSpringBootApplication.class, args);
+    }
+}
+
+</code></pre></li></ul><ul id="195e8d61-387b-80f5-b685-f7793c2a652a" class="bulleted-list"><li style="list-style-type:disc"><strong>Key annotations:</strong><ul id="195e8d61-387b-808f-9f81-de32718802a4" class="bulleted-list"><li style="list-style-type:circle"><code>@SpringBootApplication</code> → Enables auto-configuration and component scanning.</li></ul><ul id="195e8d61-387b-8045-8194-f95174d512e6" class="bulleted-list"><li style="list-style-type:circle"><code>SpringApplication.run(...)</code> → Starts the application.</li></ul></li></ul><h3 id="195e8d61-387b-8064-96b3-d22cf6ae7574" class=""><strong>🔹 Running the Spring Boot Application</strong></h3><ul id="195e8d61-387b-80c2-afb4-f7e27d2bc444" class="bulleted-list"><li style="list-style-type:disc">Click on the <strong>Run</strong> button in IntelliJ.</li></ul><ul id="195e8d61-387b-80e7-919b-f57515bf384b" class="bulleted-list"><li style="list-style-type:disc">The application will start and initialize a <strong>Tomcat server</strong> (default port: <strong>8080</strong>).</li></ul><ul id="195e8d61-387b-8038-9187-e3fd2881fb41" class="bulleted-list"><li style="list-style-type:disc"><strong>Output:</strong><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="195e8d61-387b-80dc-9583-dbb7f289204a" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">csharp
+CopyEdit
+Tomcat initialized with port 8080
+
+</code></pre></li></ul><h3 id="195e8d61-387b-8094-b0be-fe5174092f3b" class=""><strong>🔹 Changing the Default Server Port</strong></h3><ul id="195e8d61-387b-802e-8dff-f624d99ac6be" class="bulleted-list"><li style="list-style-type:disc">Modify <code>application.properties</code>:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="195e8d61-387b-80e6-9614-cdc3a1142390" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">ini
+CopyEdit
+server.port=9000
+
+</code></pre></li></ul><ul id="195e8d61-387b-8097-b43a-c8208e3db6ef" class="bulleted-list"><li style="list-style-type:disc">Restart the application. The new port will be <strong>9000</strong>.</li></ul><hr id="195e8d61-387b-80b5-b611-d83487433db3"/><h2 id="195e8d61-387b-80bd-94bc-d7fbe8bf9b0b" class=""><strong>🌟 Understanding Dependencies and External Libraries</strong></h2><h3 id="195e8d61-387b-80fc-94ff-c9714c47df9b" class=""><strong>🔹 How Dependencies Work in Spring Boot</strong></h3><ul id="195e8d61-387b-8061-b3d0-e53c65314c23" class="bulleted-list"><li style="list-style-type:disc">Dependencies are defined in the <code><strong>pom.xml</strong></code> file.</li></ul><ul id="195e8d61-387b-8096-8beb-f00193951646" class="bulleted-list"><li style="list-style-type:disc">Example of <strong>Spring Web</strong> dependency:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="195e8d61-387b-80e1-b47d-d15e79824a12" class="code"><code class="language-XML" style="white-space:pre-wrap;word-break:break-all">xml
+CopyEdit
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+&lt;/dependency&gt;
+
+</code></pre></li></ul><ul id="195e8d61-387b-803b-94fe-e1cca8edd331" class="bulleted-list"><li style="list-style-type:disc">Maven <strong>downloads all required libraries</strong> automatically.</li></ul><h3 id="195e8d61-387b-8035-ad35-e1aa1ec0e3b4" class=""><strong>🔹 Viewing Dependencies in IntelliJ</strong></h3><ul id="195e8d61-387b-8002-8e97-eaea4d8c6598" class="bulleted-list"><li style="list-style-type:disc"><strong>Go to &quot;External Libraries&quot;</strong> → You will see all the dependencies added automatically.</li></ul><hr id="195e8d61-387b-804d-a3ae-cbd3fc05c847"/><h2 id="195e8d61-387b-8049-b345-d62045a5554f" class=""><strong>🌟 Introduction to Spring Boot Properties</strong></h2><h3 id="195e8d61-387b-8005-986c-c3cdcd535a67" class=""><strong>🔹 Configuring Properties</strong></h3><ul id="195e8d61-387b-80fc-9b10-cd6b1730b3ff" class="bulleted-list"><li style="list-style-type:disc">Properties are defined in <code><strong>application.properties</strong></code>.</li></ul><ul id="195e8d61-387b-808b-ba71-dfe913262902" class="bulleted-list"><li style="list-style-type:disc">Examples:<ul id="195e8d61-387b-8068-bc83-dcfd46b7f867" class="bulleted-list"><li style="list-style-type:circle">Change <strong>server port</strong>:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="195e8d61-387b-80d3-8db0-de99b6b127b6" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">ini
+CopyEdit
+server.port=9000
+
+</code></pre></li></ul><ul id="195e8d61-387b-8006-ad44-ea2183e90165" class="bulleted-list"><li style="list-style-type:circle">Enable <strong>debug mode</strong>:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="195e8d61-387b-801e-9638-f60b5b5818e5" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">ini
+CopyEdit
+debug=true
+
+</code></pre></li></ul></li></ul><ul id="195e8d61-387b-8062-aa96-e6af9595e3b9" class="bulleted-list"><li style="list-style-type:disc"><strong>Where to find available properties?</strong><ul id="195e8d61-387b-80ed-8733-d375d88a45f4" class="bulleted-list"><li style="list-style-type:circle">Visit <strong>Spring Boot Common Application Properties</strong> documentation.</li></ul></li></ul><hr id="195e8d61-387b-808a-af86-dd8e32c1388f"/><h2 id="195e8d61-387b-8004-85b6-dd026103d022" class=""><strong>🌟 Understanding Test-Driven Development (TDD)</strong></h2><h3 id="195e8d61-387b-80f9-880e-c82387f7589b" class=""><strong>🔹 What is TDD?</strong></h3><ul id="195e8d61-387b-802e-afec-ec5b09140111" class="bulleted-list"><li style="list-style-type:disc"><strong>Test-Driven Development (TDD)</strong> ensures every new functionality has a corresponding test case.</li></ul><ul id="195e8d61-387b-8096-bae3-fd61685c7911" class="bulleted-list"><li style="list-style-type:disc">In <strong>big tech companies</strong>, every code change must have a test.</li></ul><ul id="195e8d61-387b-80a2-87d2-d56a84150b5f" class="bulleted-list"><li style="list-style-type:disc">Tests are located inside <code><strong>src/test/java/</strong></code>.</li></ul><h3 id="195e8d61-387b-8066-a379-f3feb48f0cc5" class=""><strong>🔹 Structure of a Test Class</strong></h3><ul id="195e8d61-387b-80fd-9e5c-f5299002fd6d" class="bulleted-list"><li style="list-style-type:disc">The test file follows the same <strong>package structure</strong> as the main class.</li></ul><ul id="195e8d61-387b-80ab-8859-e1cab9986d67" class="bulleted-list"><li style="list-style-type:disc">Test cases are written using <strong>JUnit</strong>.</li></ul><hr id="195e8d61-387b-8090-be39-e323af4a4971"/><h2 id="195e8d61-387b-809d-bd31-f2c2b404da10" class=""><strong>🌟 Understanding Maven and Build Process</strong></h2><h3 id="195e8d61-387b-808c-8642-f13a1a8e17fb" class=""><strong>🔹 What is Maven?</strong></h3><ul id="195e8d61-387b-80c3-b233-e7175c61fb72" class="bulleted-list"><li style="list-style-type:disc"><strong>Maven is a build automation tool</strong> used to manage project dependencies.</li></ul><ul id="195e8d61-387b-80eb-9a53-d07a5956c39e" class="bulleted-list"><li style="list-style-type:disc">It downloads libraries from <strong>Maven Central Repository</strong>.</li></ul><h3 id="195e8d61-387b-8073-bb21-ea665cce9a23" class=""><strong>🔹 What is </strong><code><strong>pom.xml</strong></code><strong>?</strong></h3><ul id="195e8d61-387b-8012-b5a0-cd0f54bbb7ef" class="bulleted-list"><li style="list-style-type:disc">The <strong>Project Object Model (POM)</strong> file defines project dependencies, build configuration, and plugins.</li></ul><ul id="195e8d61-387b-8069-8f6b-c418931c2765" class="bulleted-list"><li style="list-style-type:disc">Similar to <code><strong>package.json</strong></code> in Node.js.</li></ul><h3 id="195e8d61-387b-80dd-a7ff-c4db5c927176" class=""><strong>🔹 Where Does Maven Store Dependencies?</strong></h3><ul id="195e8d61-387b-8004-8808-ebabc6a0a23b" class="bulleted-list"><li style="list-style-type:disc">Inside the <code>External Libraries</code> section of IntelliJ.</li></ul><hr id="195e8d61-387b-80a5-ada6-ffcbf207dffc"/><h2 id="195e8d61-387b-804c-b85f-c486d57f79fc" class=""><strong>🌟 Summary: Quick Revision for Interviews</strong></h2><table id="195e8d61-387b-80b8-941f-c60ef5368be5" class="simple-table"><tbody><tr id="195e8d61-387b-80d2-9b5b-c426afb1062f"><td id="&gt;M&lt;=" class=""><strong>Concept</strong></td><td id="lcl~" class=""><strong>Key Points</strong></td></tr><tr id="195e8d61-387b-8013-8637-d0e91a795077"><td id="&gt;M&lt;=" class=""><strong>IDE</strong></td><td id="lcl~" class="">Use IntelliJ IDEA (Community Edition is sufficient)</td></tr><tr id="195e8d61-387b-8081-977c-ee5a4c406b8f"><td id="&gt;M&lt;=" class=""><strong>Spring Initializr</strong></td><td id="lcl~" class="">Generates a pre-configured Spring Boot project</td></tr><tr id="195e8d61-387b-80b8-abe7-e6160da11e0d"><td id="&gt;M&lt;=" class=""><strong>Maven vs Gradle</strong></td><td id="lcl~" class="">We use <strong>Maven</strong> as it is widely used</td></tr><tr id="195e8d61-387b-808a-b62c-c7159bb5a69c"><td id="&gt;M&lt;=" class=""><strong>Project Structure</strong></td><td id="lcl~" class="">Organized into <code>src/main/java</code>, <code>resources</code>, <code>test/java</code>, <code>target/</code></td></tr><tr id="195e8d61-387b-809b-91d4-cb1582338547"><td id="&gt;M&lt;=" class=""><strong>Main Class</strong></td><td id="lcl~" class="">Contains <code>@SpringBootApplication</code> and <code>SpringApplication.run()</code></td></tr><tr id="195e8d61-387b-805b-abff-c906a46ea36f"><td id="&gt;M&lt;=" class=""><strong>Tomcat Server</strong></td><td id="lcl~" class="">Auto-configured, default port <strong>8080</strong>, can be changed in <code>application.properties</code></td></tr><tr id="195e8d61-387b-8045-851b-d22a2eb5b93f"><td id="&gt;M&lt;=" class=""><strong>Maven &amp; Dependencies</strong></td><td id="lcl~" class="">Defined in <code>pom.xml</code>, auto-downloaded</td></tr><tr id="195e8d61-387b-8073-87cc-ed18d84e1221"><td id="&gt;M&lt;=" class=""><strong>Test-Driven Development</strong></td><td id="lcl~" class="">Used in big tech companies, ensures functionality doesn&#x27;t break</td></tr><tr id="195e8d61-387b-8097-9d69-d7a85b40cb9c"><td id="&gt;M&lt;=" class=""><strong>Spring Boot Properties</strong></td><td id="lcl~" class="">Configurable settings like <code>server.port=9000</code></td></tr><tr id="195e8d61-387b-8055-8fdf-e4110c223260"><td id="&gt;M&lt;=" class=""><strong>Maven Build</strong></td><td id="lcl~" class="">Manages dependencies and compiles code</td></tr></tbody></table><hr id="195e8d61-387b-802c-a8a5-f06bc890e95a"/><p id="195e8d61-387b-805e-85fb-fa2f42f3d5e3" class="">🚀 <strong>Next Steps:</strong> Start coding inside the <strong>main package</strong> and explore more Spring Boot functionalities!</p><p id="195e8d61-387b-80c4-9e86-d0b46862c16c" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

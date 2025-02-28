@@ -1,0 +1,775 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>1.3 Beans</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-transparentGray { background-color: undefined; }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="195e8d61-387b-802a-ab7a-ca4e8865af3e" class="page sans"><header><h1 class="page-title">1.3 Beans</h1><p class="page-description"></p></header><div class="page-body"><h2 id="196e8d61-387b-805b-901c-cc9626d15811" class=""><strong>🌱 What Are Beans?</strong></h2><ul id="196e8d61-387b-803f-9c34-ceca4f83de90" class="bulleted-list"><li style="list-style-type:disc"><strong>Beans</strong> are the <strong>core building blocks</strong> of a Spring application.</li></ul><ul id="196e8d61-387b-805c-b457-dcb791ac86fa" class="bulleted-list"><li style="list-style-type:disc">Spring <strong>manages their lifecycle and dependencies</strong>, so we <strong>don’t have to create objects manually</strong> using the <code>new</code> keyword.</li></ul><ul id="196e8d61-387b-8029-a536-e293363f5c57" class="bulleted-list"><li style="list-style-type:disc">They are <strong>instantiated, assembled, and managed</strong> by the <strong>Spring IoC (Inversion of Control) container</strong>.</li></ul><ul id="196e8d61-387b-8009-adaf-caa1bb19012d" class="bulleted-list"><li style="list-style-type:disc"><strong>Every Spring Boot application consists of beans</strong> that interact with each other.</li></ul><h3 id="196e8d61-387b-801f-a9c5-f708e493d20f" class=""><strong>💡 Why Are Beans Important?</strong></h3><ul id="196e8d61-387b-8092-bd51-c8894d47630d" class="bulleted-list"><li style="list-style-type:disc">They <strong>eliminate the need for manual object creation</strong>.</li></ul><ul id="196e8d61-387b-806e-9f41-fcdac4b4cad8" class="bulleted-list"><li style="list-style-type:disc">Enable <strong>Dependency Injection (DI)</strong>, which improves code maintainability and testability.</li></ul><ul id="196e8d61-387b-80f1-9208-d7674be015c0" class="bulleted-list"><li style="list-style-type:disc">Reduce <strong>memory management complexity</strong> by <strong>delegating object creation</strong> to Spring.</li></ul><hr id="196e8d61-387b-808a-868c-f0a385de7cb0"/><h2 id="196e8d61-387b-800b-8947-e7edf40a1541" class=""><strong>🛠️ Creating Objects in Java vs Spring Boot Beans</strong></h2><h3 id="196e8d61-387b-806e-88a3-ca433f53eb97" class=""><strong>👉 Traditional Java Object Creation</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="196e8d61-387b-806f-9ca4-f95a9559342b" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+public class Car {
+    private String model;
+    public Car(String model) {
+        this.model = model;
+    }
+}
+
+// Creating an object manually using &#x27;new&#x27;
+Car car = new Car(&quot;Tesla&quot;);
+
+</code></pre><ul id="196e8d61-387b-80b4-bd7c-fba91deacb3c" class="bulleted-list"><li style="list-style-type:disc">Uses <code><strong>new</strong></code><strong> keyword</strong> to create an object.</li></ul><ul id="196e8d61-387b-80ae-8b33-f5334dadaaf8" class="bulleted-list"><li style="list-style-type:disc">Developer <strong>manages the object lifecycle manually</strong>.</li></ul><ul id="196e8d61-387b-8047-9c6e-f2a8d508c60d" class="bulleted-list"><li style="list-style-type:disc">Not scalable for large applications.</li></ul><h3 id="196e8d61-387b-80a7-b7c4-c263725530d8" class=""><strong>👉 Spring Boot Approach (Bean)</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="196e8d61-387b-80da-a700-eaac6ac32d1f" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">
+@Component
+public class Car {
+    public Car() {
+        System.out.println(&quot;Car bean is created!&quot;);
+    }
+}
+
+</code></pre><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="196e8d61-387b-8022-bfec-f0f7da2bdf43" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">
+@Autowired
+private Car car; // No need to use &#x27;new&#x27;! Spring injects the bean automatically
+
+</code></pre><ul id="196e8d61-387b-80ac-b7e9-db717637101e" class="bulleted-list"><li style="list-style-type:disc">Spring <strong>automatically creates and manages objects</strong>.</li></ul><ul id="196e8d61-387b-8061-85ea-e26a757d0c77" class="bulleted-list"><li style="list-style-type:disc"><strong>No need to use </strong><code><strong>new</strong></code><strong> keyword</strong>.</li></ul><ul id="196e8d61-387b-8022-a971-c9ac7d293cff" class="bulleted-list"><li style="list-style-type:disc"><strong>Beans are injected wherever needed</strong>.</li></ul><hr id="196e8d61-387b-80e1-99b6-c4d75195d046"/><h2 id="196e8d61-387b-800a-bef5-e3fa9ef40860" class=""><strong>📝 Official Definition of a Bean</strong></h2><blockquote id="196e8d61-387b-80b7-af9b-fe9145c90a62" class="">&quot;A bean is a managed object that is instantiated, assembled, and managed by the Spring IoC container.&quot;</blockquote><ul id="196e8d61-387b-8044-a98c-ef83973e487e" class="bulleted-list"><li style="list-style-type:disc">Example: A <strong>Car bean</strong> might need dependencies like <strong>engine, model, and color</strong>.</li></ul><ul id="196e8d61-387b-80e9-9655-d94a9e4aa544" class="bulleted-list"><li style="list-style-type:disc">The <strong>Spring framework manages all these dependencies</strong> for us.</li></ul><hr id="196e8d61-387b-80a6-b7b7-fce870c599cc"/><h2 id="196e8d61-387b-8087-8e95-f942e8a21fa0" class=""><strong>🔥 Ways to Define Beans in Spring Boot</strong></h2><h3 id="196e8d61-387b-80a1-ba2a-ebbb36982f89" class=""><strong>1️⃣ Using </strong><code><strong>@Component</strong></code><strong> (Stereotype Annotations)</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="196e8d61-387b-803d-a05f-fe6d1eacab85" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">
+@Component
+public class Apple {
+    public void eatApple() {
+        System.out.println(&quot;Eating an apple 🍏&quot;);
+    }
+}
+
+</code></pre><ul id="196e8d61-387b-8092-9f11-ff2534732111" class="bulleted-list"><li style="list-style-type:disc">Marks the <strong>class as a Spring bean</strong>.</li></ul><ul id="196e8d61-387b-809d-a173-f5c9c1e8b527" class="bulleted-list"><li style="list-style-type:disc"><strong>Spring scans and registers</strong> this bean automatically.</li></ul><h3 id="196e8d61-387b-8002-b379-c75c1d7a8856" class=""><strong>📌 Other Stereotype Annotations</strong></h3><table id="196e8d61-387b-80f6-a6f9-c3cf49abdae3" class="simple-table"><tbody><tr id="196e8d61-387b-80bc-9d54-e348f99813f6"><td id="Xs_}" class="">Annotation</td><td id="?flT" class="">Purpose</td></tr><tr id="196e8d61-387b-804a-8ede-e48725f3160b"><td id="Xs_}" class=""><code>@Component</code></td><td id="?flT" class="">Generic bean declaration</td></tr><tr id="196e8d61-387b-8055-abe1-dc72377023bf"><td id="Xs_}" class=""><code>@Service</code></td><td id="?flT" class="">Declares a <strong>service layer</strong> component</td></tr><tr id="196e8d61-387b-8062-a42f-f46ee1c37f08"><td id="Xs_}" class=""><code>@Repository</code></td><td id="?flT" class="">Declares a <strong>repository (DAO) layer</strong></td></tr><tr id="196e8d61-387b-8029-b858-e74c7b3b8458"><td id="Xs_}" class=""><code>@Controller</code></td><td id="?flT" class="">Declares a <strong>controller (MVC)</strong></td></tr></tbody></table><hr id="196e8d61-387b-80d5-8e99-ef18f283bdd7"/><h3 id="196e8d61-387b-80a0-92a9-e14f4618ced3" class=""><strong>2️⃣ Using </strong><code><strong>@Configuration</strong></code><strong> and </strong><code><strong>@Bean</strong></code></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="196e8d61-387b-8016-9b9b-eff09b9636f3" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">
+@Configuration
+public class AppConfig {
+    @Bean
+    public Apple apple() {
+        return new Apple();
+    }
+}
+
+</code></pre><ul id="196e8d61-387b-80d1-9780-c54e9951f8da" class="bulleted-list"><li style="list-style-type:disc"><strong>Explicitly declares beans</strong> inside a configuration class.</li></ul><ul id="196e8d61-387b-80a0-8618-ebc9f5c2a0f0" class="bulleted-list"><li style="list-style-type:disc">Used when we <strong>want more control over bean creation</strong>.</li></ul><hr id="196e8d61-387b-800b-94ed-fcbed95cd4b7"/><h2 id="196e8d61-387b-80d2-9355-e811f38755be" class=""><strong>💡 Bean Lifecycle in Spring Boot</strong></h2><p id="196e8d61-387b-8040-977f-e7a3fab074ca" class="">Beans go through <strong>several stages</strong> during their lifecycle:</p><h3 id="196e8d61-387b-80b3-b26e-cf5fe733b80d" class=""><strong>🔄 Lifecycle Stages</strong></h3><p id="196e8d61-387b-8088-bace-dc14ec45235b" class="">1️⃣ <strong>Bean Creation</strong></p><ul id="196e8d61-387b-8009-962a-dd91f4221988" class="bulleted-list"><li style="list-style-type:disc">The bean is <strong>instantiated</strong> by Spring.</li></ul><p id="196e8d61-387b-80f6-87e1-fd1c2a7a0f6e" class="">2️⃣ <strong>Dependency Injection</strong></p><ul id="196e8d61-387b-80ca-84c2-f3d0b3b9265e" class="bulleted-list"><li style="list-style-type:disc">Spring <strong>injects dependencies</strong> into the bean.</li></ul><p id="196e8d61-387b-80c1-96a4-d4f39c452e18" class="">3️⃣ <strong>Bean Initialization (</strong><code><strong>@PostConstruct</strong></code><strong>)</strong></p><ul id="196e8d61-387b-8064-bec2-f5380474e619" class="bulleted-list"><li style="list-style-type:disc">Called <strong>after</strong> the bean is created &amp; dependencies are injected.</li></ul><p id="196e8d61-387b-8064-8e08-e23752e97c5c" class="">4️⃣ <strong>Bean Usage</strong></p><ul id="196e8d61-387b-80e2-b43d-f1c7ef0ed84b" class="bulleted-list"><li style="list-style-type:disc">The bean is <strong>actively used</strong> in the application.</li></ul><p id="196e8d61-387b-80f6-a1a4-c1fa773d448d" class="">5️⃣ <strong>Bean Destruction (</strong><code><strong>@PreDestroy</strong></code><strong>)</strong></p><ul id="196e8d61-387b-8021-847b-e565b83b125f" class="bulleted-list"><li style="list-style-type:disc">Called <strong>before the application shuts down</strong>.</li></ul><h3 id="196e8d61-387b-80c6-b436-ec1796bec3b2" class=""><strong>👀 Example: Using </strong><code><strong>@PostConstruct</strong></code><strong> &amp; </strong><code><strong>@PreDestroy</strong></code></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="196e8d61-387b-807f-a1ce-c8afdf139d49" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">
+@Component
+public class Apple {
+    @PostConstruct
+    public void beforeUse() {
+        System.out.println(&quot;🍏 Apple bean is ready to use!&quot;);
+    }
+
+    @PreDestroy
+    public void beforeDestroy() {
+        System.out.println(&quot;🚮 Apple bean is being destroyed!&quot;);
+    }
+}
+
+</code></pre><p id="196e8d61-387b-80f0-b1d0-cf3533a95e6a" class=""><strong>🔹 Output:</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="196e8d61-387b-80c8-b179-e2d177e53f2e" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">🍏 Apple bean is ready to use!
+(Eating apple...)
+🚮 Apple bean is being destroyed!
+
+</code></pre><hr id="196e8d61-387b-807e-a1d5-ff7a71e0e05f"/><h2 id="196e8d61-387b-8063-a149-c410b1a82f36" class=""><strong>🌀 Bean Scopes in Spring Boot</strong></h2><p id="196e8d61-387b-80c8-928d-fbfa35923e7c" class="">Defines <strong>how beans are created and managed</strong>.</p><table id="196e8d61-387b-8055-beb8-ed17df539cde" class="simple-table"><tbody><tr id="196e8d61-387b-8060-bde4-ef89c1eff1a6"><td id="[nqo" class="">Scope</td><td id="USVq" class="">Description</td></tr><tr id="196e8d61-387b-809c-8d83-f3961d206ee5"><td id="[nqo" class=""><code>singleton</code></td><td id="USVq" class=""><strong>(Default)</strong> One instance shared across the entire application</td></tr><tr id="196e8d61-387b-8023-b748-d3cf3a44d844"><td id="[nqo" class=""><code>prototype</code></td><td id="USVq" class="">New bean instance is created <strong>each time it is requested</strong></td></tr><tr id="196e8d61-387b-803a-85d8-efcec39e3fb7"><td id="[nqo" class=""><code>request</code></td><td id="USVq" class="">A <strong>new bean</strong> is created for <strong>every HTTP request</strong></td></tr><tr id="196e8d61-387b-8003-8dbf-d8a804fb7952"><td id="[nqo" class=""><code>session</code></td><td id="USVq" class="">A <strong>new bean</strong> is created for <strong>each user session</strong></td></tr><tr id="196e8d61-387b-80fc-9352-d48f08b13d13"><td id="[nqo" class=""><code>websocket</code></td><td id="USVq" class="">A <strong>new bean</strong> is created per WebSocket connection</td></tr></tbody></table><h3 id="196e8d61-387b-8049-b162-cd867e29d339" class=""><strong>🛠️ Example: Singleton vs Prototype</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="196e8d61-387b-80f2-816c-cfc0dd3e410b" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@Component
+@Scope(&quot;singleton&quot;) // Default behavior
+public class Apple { ... }
+
+</code></pre><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="196e8d61-387b-804c-ae3f-f86dee16f8b1" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@Component
+@Scope(&quot;prototype&quot;) // Creates a new bean each time
+public class Orange { ... }
+
+</code></pre><p id="196e8d61-387b-8091-ba1d-e80b62eb94a1" class=""><strong>📌 Singleton (Default)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="196e8d61-387b-805e-9818-e8082040117a" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@Autowired
+private Apple apple1;
+
+@Autowired
+private Apple apple2;
+
+// Both references will be the same!
+
+</code></pre><p id="196e8d61-387b-805e-830b-d96190c1f0ec" class=""><strong>📌 Prototype</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="196e8d61-387b-8057-b103-d0ba389344bb" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@Autowired
+private Orange orange1;
+
+@Autowired
+private Orange orange2;
+
+// Both references will be different!
+
+</code></pre><hr id="196e8d61-387b-80cc-ac5c-cd80da7781e9"/><h2 id="196e8d61-387b-8052-a4cf-d425e284f955" class=""><strong>🚀 Key Takeaways</strong></h2><p id="196e8d61-387b-805f-af81-faacdcd86c89" class="">✅ <strong>Beans are managed objects</strong> that Spring Boot <strong>instantiates, assembles, and manages</strong>.</p><p id="196e8d61-387b-8037-9745-cd85eaa1cbdd" class="">✅ <strong>Spring Boot automatically injects beans</strong>, so we <strong>don’t need to use </strong><code><strong>new</strong></code><strong> keyword</strong>.</p><p id="196e8d61-387b-8014-a5a3-e54bc9188852" class="">✅ <strong>Stereotype annotations (</strong><code><strong>@Component</strong></code><strong>, </strong><code><strong>@Service</strong></code><strong>, </strong><code><strong>@Repository</strong></code><strong>, </strong><code><strong>@Controller</strong></code><strong>)</strong> help register beans automatically.</p><p id="196e8d61-387b-808c-96f2-ec369e3de29f" class="">✅ <strong>Beans follow a lifecycle</strong> (<code>@PostConstruct</code> and <code>@PreDestroy</code> can be used to hook into it).</p><p id="196e8d61-387b-8056-a538-f69ad59fab4b" class="">✅ <strong>Beans can have different scopes</strong>, but <strong>singleton</strong> is the default.</p><hr id="196e8d61-387b-80b9-adf1-c83cc0d72f7f"/><h2 id="196e8d61-387b-8023-97c1-d5cf2489b9d6" class=""><strong>🎯 Quick Interview Revision</strong></h2><h3 id="196e8d61-387b-80bd-8dab-d44d62965003" class=""><strong>Q1: What is a Bean in Spring Boot?</strong></h3><ul id="196e8d61-387b-8001-be31-d69e60b9c778" class="bulleted-list"><li style="list-style-type:disc">A managed object <strong>instantiated, assembled, and maintained</strong> by the <strong>Spring IoC container</strong>.</li></ul><h3 id="196e8d61-387b-80df-8fd7-c092f190b030" class=""><strong>Q2: How do you define a Bean?</strong></h3><ul id="196e8d61-387b-800b-a747-cf0633f8ecc3" class="bulleted-list"><li style="list-style-type:disc"><strong>Using </strong><code><strong>@Component</strong></code><strong> annotation</strong>.</li></ul><ul id="196e8d61-387b-8090-bc8b-fcfba981492f" class="bulleted-list"><li style="list-style-type:disc"><strong>Using </strong><code><strong>@Bean</strong></code><strong> inside a </strong><code><strong>@Configuration</strong></code><strong> class</strong>.</li></ul><h3 id="196e8d61-387b-8082-9fc3-c1f0d4cdcd08" class=""><strong>Q3: What is the default scope of a Bean?</strong></h3><ul id="196e8d61-387b-806d-a01d-f741f0492939" class="bulleted-list"><li style="list-style-type:disc"><code><strong>singleton</strong></code> – only <strong>one instance</strong> of the bean is created and shared.</li></ul><h3 id="196e8d61-387b-80d3-aafa-d6944398760b" class=""><strong>Q4: What are different bean scopes?</strong></h3><ul id="196e8d61-387b-8069-b69c-c3286e7d52b9" class="bulleted-list"><li style="list-style-type:disc"><strong>singleton</strong> (default), <strong>prototype</strong>, <strong>request</strong>, <strong>session</strong>, <strong>websocket</strong>.</li></ul><h3 id="196e8d61-387b-806d-8af8-c3da1777db08" class=""><strong>Q5: What are </strong><code><strong>@PostConstruct</strong></code><strong> and </strong><code><strong>@PreDestroy</strong></code><strong>?</strong></h3><ul id="196e8d61-387b-80c6-bc37-d06aaf8a54d8" class="bulleted-list"><li style="list-style-type:disc"><code>@PostConstruct</code>: <strong>Executed after the bean is created</strong>.</li></ul><ul id="196e8d61-387b-809b-a59f-ef553f5e3faa" class="bulleted-list"><li style="list-style-type:disc"><code>@PreDestroy</code>: <strong>Executed before the bean is destroyed</strong>.</li></ul><hr id="196e8d61-387b-80bd-9778-ed1cb69d7b56"/><p id="196e8d61-387b-804b-b9d4-daf0845a65ae" class="">🎉 <strong>That’s it! You now have a solid understanding of Spring Boot Beans!</strong> 🚀</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

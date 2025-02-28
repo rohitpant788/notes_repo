@@ -1,0 +1,785 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>2.5 PUT, PATCH and DELETE Mappings in Spring Web MVC</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-transparentGray { background-color: undefined; }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="19ae8d61-387b-807e-b3c1-f197f4cc681d" class="page sans"><header><h1 class="page-title">2.5 PUT, PATCH and DELETE Mappings in Spring Web MVC</h1><p class="page-description"></p></header><div class="page-body"><h2 id="19ae8d61-387b-800f-990b-d0044f2bff1d" class=""><strong>Understanding Different HTTP Mappings</strong></h2><p id="19ae8d61-387b-8092-86c1-ee9e270c9d9d" class="">In this section, we will explore different HTTP mappings in Spring Boot, such as <strong>PUT</strong>, <strong>PATCH</strong>, and <strong>DELETE</strong>, and how to implement them following industry standards.</p><hr id="19ae8d61-387b-80e6-bc4a-d4f964741093"/><h2 id="19ae8d61-387b-8090-9fcf-cb0e9ac42471" class=""><strong>1. Recap of Layers in a Spring Boot Application</strong></h2><ul id="19ae8d61-387b-80bc-b4dd-e9c629013c3d" class="bulleted-list"><li style="list-style-type:disc"><strong>Persistence Layer</strong>: Handles database operations (Repository layer).</li></ul><ul id="19ae8d61-387b-8025-aa6b-f1812e31bf4d" class="bulleted-list"><li style="list-style-type:disc"><strong>Service Layer</strong>: Contains business logic.</li></ul><ul id="19ae8d61-387b-803b-895f-d11742fdda27" class="bulleted-list"><li style="list-style-type:disc"><strong>Presentation Layer</strong>: Handles HTTP requests (Controller layer).</li></ul><h3 id="19ae8d61-387b-80ad-b9d5-fe11939a2ed5" class=""><strong>Previously Implemented</strong></h3><p id="19ae8d61-387b-8041-8f1f-e67317416a78" class="">✔ <strong>GET Mapping</strong> (Retrieve data)</p><p id="19ae8d61-387b-8013-b305-c688db01cf5e" class="">✔ <strong>POST Mapping</strong> (Create new data)</p><h3 id="19ae8d61-387b-8043-93c1-dbb76b6e78f3" class=""><strong>Now Implementing</strong></h3><p id="19ae8d61-387b-80b7-9039-ea2c38d8bed0" class="">✔ <strong>PUT Mapping</strong> (Update entire entity)</p><p id="19ae8d61-387b-8073-97b3-e705915e5afa" class="">✔ <strong>PATCH Mapping</strong> (Partially update entity)</p><p id="19ae8d61-387b-8004-893b-fe074cc7229a" class="">✔ <strong>DELETE Mapping</strong> (Remove entity)</p><hr id="19ae8d61-387b-80b9-adc8-c04cae3afa7d"/><h2 id="19ae8d61-387b-80a1-b0d2-f1bfda1df693" class=""><strong>2. PUT Mapping - Updating the Entire Entity</strong></h2><h3 id="19ae8d61-387b-8081-b4bf-e957d92721a6" class=""><strong>When to use </strong><code><strong>@PutMapping</strong></code><strong>?</strong></h3><ul id="19ae8d61-387b-8075-a974-da2823a3d80c" class="bulleted-list"><li style="list-style-type:disc">Used to update <strong>the entire entity</strong>.</li></ul><ul id="19ae8d61-387b-8030-9249-d1f3ebdf32d8" class="bulleted-list"><li style="list-style-type:disc">If an entity exists, it updates all its fields.</li></ul><ul id="19ae8d61-387b-8026-b6dd-cfc88f221854" class="bulleted-list"><li style="list-style-type:disc">If an entity doesn’t exist, it creates a new one.</li></ul><h3 id="19ae8d61-387b-8038-9710-d789d16e5a7a" class=""><strong>Example: Understanding PUT</strong></h3><h3 id="19ae8d61-387b-80cf-9c52-d7d8c845654f" class=""><strong>Scenario</strong></h3><ol type="1" id="19ae8d61-387b-8041-ad7e-d90226ce89e0" class="numbered-list" start="1"><li>Employee <strong>ID: 1</strong> → Name: <strong>Ram</strong></li></ol><ol type="1" id="19ae8d61-387b-800b-ad0b-d72d78fb7142" class="numbered-list" start="2"><li><strong>Updating</strong> ID: 1 → Name: <strong>Shyam</strong></li></ol><ol type="1" id="19ae8d61-387b-8061-9f69-fa367c54ce0d" class="numbered-list" start="3"><li><strong>Result</strong>: Employee ID remains the same, but all data is replaced.</li></ol><h3 id="19ae8d61-387b-8095-a63e-fa1f9b9fc6eb" class=""><strong>Implementation of PUT Mapping</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19ae8d61-387b-806a-a1be-cfba85fdd2a7" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">
+@PutMapping(&quot;/employees/{id}&quot;)
+public ResponseEntity&lt;EmployeeDTO&gt; updateEmployeeById(
+        @PathVariable Long id,
+        @RequestBody EmployeeDTO employeeDTO) {
+
+    EmployeeDTO updatedEmployee = employeeService.updateEmployeeById(id, employeeDTO);
+    return ResponseEntity.ok(updatedEmployee);
+}
+
+</code></pre><ul id="19ae8d61-387b-801c-8ae9-fd6cc4346262" class="bulleted-list"><li style="list-style-type:disc"><code>@PutMapping(&quot;/employees/{id}&quot;)</code> → Maps PUT requests.</li></ul><ul id="19ae8d61-387b-80d9-b69c-e9f30e7baac0" class="bulleted-list"><li style="list-style-type:disc"><code>@PathVariable Long id</code> → Extracts ID from the URL.</li></ul><ul id="19ae8d61-387b-809d-b31d-e58ba6547985" class="bulleted-list"><li style="list-style-type:disc"><code>@RequestBody EmployeeDTO employeeDTO</code> → Extracts JSON data from the request body.</li></ul><ul id="19ae8d61-387b-8045-9d25-e921ef494c55" class="bulleted-list"><li style="list-style-type:disc">Calls <code>updateEmployeeById(id, employeeDTO)</code> in the service layer.</li></ul><h3 id="19ae8d61-387b-809f-b608-fceecf418546" class=""><strong>Service Layer Implementation</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19ae8d61-387b-80c5-bf24-dc05c090f342" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">
+public EmployeeDTO updateEmployeeById(Long id, EmployeeDTO employeeDTO) {
+    EmployeeEntity employeeEntity = modelMapper.map(employeeDTO, EmployeeEntity.class);
+    employeeEntity.setId(id);  // Ensure ID is retained
+    EmployeeEntity savedEntity = employeeRepository.save(employeeEntity);
+    return modelMapper.map(savedEntity, EmployeeDTO.class);
+}
+
+</code></pre><p id="19ae8d61-387b-80b0-a489-e5ac46840466" class=""><strong>Behavior:</strong></p><ul id="19ae8d61-387b-8027-b3fb-f6d2b92c1449" class="bulleted-list"><li style="list-style-type:disc">Converts <code>DTO</code> → <code>Entity</code></li></ul><ul id="19ae8d61-387b-803e-b30a-cf4d9def7a5d" class="bulleted-list"><li style="list-style-type:disc">Saves entity using <code>employeeRepository.save(employeeEntity)</code>.</li></ul><ul id="19ae8d61-387b-8090-8d8f-ea587337cd29" class="bulleted-list"><li style="list-style-type:disc">If an entity exists, updates it.</li></ul><ul id="19ae8d61-387b-8049-ac01-e050e96e58c5" class="bulleted-list"><li style="list-style-type:disc">If not, creates a new one.</li></ul><hr id="19ae8d61-387b-80c8-bbe3-d2d612acbbd2"/><h2 id="19ae8d61-387b-80f9-9513-c4f4c21a8ad9" class=""><strong>3. PATCH Mapping - Partially Updating an Entity</strong></h2><h3 id="19ae8d61-387b-803f-8627-c595a63223aa" class=""><strong>When to use </strong><code><strong>@PatchMapping</strong></code><strong>?</strong></h3><ul id="19ae8d61-387b-80f6-9f54-e2f139934fe2" class="bulleted-list"><li style="list-style-type:disc">Used when only a few fields need to be updated.</li></ul><ul id="19ae8d61-387b-8097-9e5e-f94c8b276041" class="bulleted-list"><li style="list-style-type:disc">Prevents overwriting other fields.</li></ul><ul id="19ae8d61-387b-8072-bbc0-fe4fa9b2b2bf" class="bulleted-list"><li style="list-style-type:disc">Accepts a <strong>dynamic set of fields</strong>.</li></ul><h3 id="19ae8d61-387b-80a9-bf7e-f1a137ba75c7" class=""><strong>Problem with PUT (Why PATCH is Needed?)</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19ae8d61-387b-807f-9aae-edfa1a76792d" class="code"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">json
+CopyEdit
+{
+  &quot;name&quot;: &quot;XYZ&quot;
+}
+
+</code></pre><p id="19ae8d61-387b-80f0-b317-c6eef5c06992" class=""><strong>Expected:</strong> Only <code>name</code> updates.</p><p id="19ae8d61-387b-804e-8807-fbf6de15038b" class=""><strong>Issue with PUT:</strong> Other fields (email, age, etc.) become <code>null</code>.</p><p id="19ae8d61-387b-8001-986c-f1001189dd75" class=""><strong>Solution:</strong> Use <strong>PATCH</strong> to update only provided fields.</p><h3 id="19ae8d61-387b-80c5-b1aa-d658f60ef8dc" class=""><strong>Implementation of PATCH Mapping</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19ae8d61-387b-802d-86f7-c0f0dc74ac22" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@PatchMapping(&quot;/employees/{id}&quot;)
+public ResponseEntity&lt;EmployeeDTO&gt; updatePartialEmployeeById(
+        @PathVariable Long id,
+        @RequestBody Map&lt;String, Object&gt; updates) {
+
+    EmployeeDTO updatedEmployee = employeeService.updatePartialEmployeeById(id, updates);
+    return updatedEmployee != null ? ResponseEntity.ok(updatedEmployee) : ResponseEntity.notFound().build();
+}
+
+</code></pre><ul id="19ae8d61-387b-800b-b148-d57b2bef982d" class="bulleted-list"><li style="list-style-type:disc"><code>@PatchMapping(&quot;/employees/{id}&quot;)</code> → Maps PATCH requests.</li></ul><ul id="19ae8d61-387b-8004-ada4-cb383eb3e817" class="bulleted-list"><li style="list-style-type:disc"><code>@RequestBody Map&lt;String, Object&gt; updates</code> → Allows dynamic updates.</li></ul><h3 id="19ae8d61-387b-8052-be78-c0c79efe6117" class=""><strong>Service Layer Implementation</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19ae8d61-387b-8040-8fbc-c9d93b689f20" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+public EmployeeDTO updatePartialEmployeeById(Long id, Map&lt;String, Object&gt; updates) {
+    Optional&lt;EmployeeEntity&gt; optionalEmployee = employeeRepository.findById(id);
+
+    if (optionalEmployee.isEmpty()) {
+        return null;
+    }
+
+    EmployeeEntity employeeEntity = optionalEmployee.get();
+
+    updates.forEach((key, value) -&gt; {
+        Field field = ReflectionUtils.findField(EmployeeEntity.class, key);
+        if (field != null) {
+            field.setAccessible(true);
+            ReflectionUtils.setField(field, employeeEntity, value);
+        }
+    });
+
+    EmployeeEntity savedEntity = employeeRepository.save(employeeEntity);
+    return modelMapper.map(savedEntity, EmployeeDTO.class);
+}
+
+</code></pre><p id="19ae8d61-387b-807d-ab8d-ced64fa14155" class=""><strong>Concepts Used:</strong><br/>✔ <br/><code>ReflectionUtils.findField()</code> → Dynamically finds fields.</p><p id="19ae8d61-387b-80ba-b81c-d063c961d3f6" class="">✔ <code>ReflectionUtils.setField()</code> → Updates fields dynamically.</p><hr id="19ae8d61-387b-803a-82dc-e5cbba53bca3"/><h2 id="19ae8d61-387b-80e9-b325-e94b813a1525" class=""><strong>4. DELETE Mapping - Removing an Entity</strong></h2><h3 id="19ae8d61-387b-805f-bf91-ce219affda6b" class=""><strong>When to use </strong><code><strong>@DeleteMapping</strong></code><strong>?</strong></h3><ul id="19ae8d61-387b-80a2-a996-f8e8243d08eb" class="bulleted-list"><li style="list-style-type:disc">Used to remove an entity from the database.</li></ul><h3 id="19ae8d61-387b-805b-a8be-eb929a812a14" class=""><strong>Implementation of DELETE Mapping</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19ae8d61-387b-805a-a682-f8fad3a7dbf7" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">
+@DeleteMapping(&quot;/employees/{id}&quot;)
+public ResponseEntity&lt;Boolean&gt; deleteEmployeeById(@PathVariable Long id) {
+    boolean deleted = employeeService.deleteEmployeeById(id);
+    return deleted ? ResponseEntity.ok(true) : ResponseEntity.notFound().build();
+}
+
+</code></pre><ul id="19ae8d61-387b-8079-acaa-e0513f814eae" class="bulleted-list"><li style="list-style-type:disc">Calls <code>deleteEmployeeById(id)</code> in the service layer.</li></ul><h3 id="19ae8d61-387b-8098-b6c3-c6ea5020d4f7" class=""><strong>Service Layer Implementation</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19ae8d61-387b-80c3-8721-c7d5abb682f2" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">
+public boolean deleteEmployeeById(Long id) {
+    if (!employeeRepository.existsById(id)) {
+        return false;
+    }
+    employeeRepository.deleteById(id);
+    return true;
+}
+
+</code></pre><ul id="19ae8d61-387b-8090-a318-e4a8386a7f8e" class="bulleted-list"><li style="list-style-type:disc"><code><strong>existsById(id)</strong></code> → Checks if the employee exists.</li></ul><ul id="19ae8d61-387b-80e0-9392-f2aaee6a7306" class="bulleted-list"><li style="list-style-type:disc"><code><strong>deleteById(id)</strong></code> → Deletes the employee.</li></ul><hr id="19ae8d61-387b-80db-a011-e3450fbac84f"/><h2 id="19ae8d61-387b-80d9-a373-ce3fe82dbfd7" class=""><strong>5. Handling HTTP Status Codes Properly</strong></h2><p id="19ae8d61-387b-8075-acf4-d780435bb60a" class="">Instead of returning raw objects, <strong>ResponseEntity</strong> should be used to return proper HTTP status codes.</p><h3 id="19ae8d61-387b-80aa-94df-ccb8582b5beb" class=""><strong>Response Status Codes</strong></h3><table id="19ae8d61-387b-803c-b6f2-fb25d19e0d8e" class="simple-table"><tbody><tr id="19ae8d61-387b-8082-a357-fe1f29264c5b"><td id="I|&lt;W" class="">Status Code</td><td id="wVyL" class="">Meaning</td></tr><tr id="19ae8d61-387b-80e4-afe4-c217cfc817d1"><td id="I|&lt;W" class=""><code>200 OK</code></td><td id="wVyL" class="">Successful request</td></tr><tr id="19ae8d61-387b-8081-af37-c0eb47169f2c"><td id="I|&lt;W" class=""><code>201 Created</code></td><td id="wVyL" class="">Resource created successfully</td></tr><tr id="19ae8d61-387b-80ba-bdaa-d758d203db81"><td id="I|&lt;W" class=""><code>404 Not Found</code></td><td id="wVyL" class="">Resource not found</td></tr><tr id="19ae8d61-387b-802c-b783-e1da619f816b"><td id="I|&lt;W" class=""><code>500 Internal Server Error</code></td><td id="wVyL" class="">Server-side issue</td></tr></tbody></table><h3 id="19ae8d61-387b-8089-a631-db9b78ddcc3e" class=""><strong>Using ResponseEntity</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19ae8d61-387b-80ad-b198-e11638c316d2" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">
+public ResponseEntity&lt;EmployeeDTO&gt; getEmployeeById(Long id) {
+    Optional&lt;EmployeeDTO&gt; optionalEmployee = employeeRepository.findById(id)
+        .map(employee -&gt; modelMapper.map(employee, EmployeeDTO.class));
+
+    return optionalEmployee.map(ResponseEntity::ok)
+        .orElseGet(() -&gt; ResponseEntity.notFound().build());
+}
+
+</code></pre><ul id="19ae8d61-387b-808a-9d0b-c96813b0d45d" class="bulleted-list"><li style="list-style-type:disc">If employee exists → Returns <code>200 OK</code>.</li></ul><ul id="19ae8d61-387b-804f-8e4d-e70367b0152d" class="bulleted-list"><li style="list-style-type:disc">If not found → Returns <code>404 Not Found</code>.</li></ul><hr id="19ae8d61-387b-80d4-bcb0-c2a6d6a7290d"/><h2 id="19ae8d61-387b-8007-9bf8-fe98e2f8a42d" class=""><strong>6. Fixing Boolean Field Serialization Issue</strong></h2><h3 id="19ae8d61-387b-80c2-8f16-e6a5ef70aaa7" class=""><strong>Problem: </strong><code><strong>isActive</strong></code><strong> Field Serialization</strong></h3><ul id="19ae8d61-387b-8043-aa92-ea60cd76bbcf" class="bulleted-list"><li style="list-style-type:disc">JSON by default doesn’t recognize <strong>isActive</strong> correctly.</li></ul><ul id="19ae8d61-387b-80a2-839e-eb70f2023cc8" class="bulleted-list"><li style="list-style-type:disc">Causes <strong>serialization issues</strong>.</li></ul><h3 id="19ae8d61-387b-8095-972d-c3bfc4d7a10f" class=""><strong>Fix</strong></h3><p id="19ae8d61-387b-80f5-90e7-f240e318f4ab" class="">Use <code>@JsonProperty</code>:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19ae8d61-387b-80af-9f2f-d43cdd4051ba" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">
+@JsonProperty(&quot;is_active&quot;)
+private boolean isActive;
+
+</code></pre><ul id="19ae8d61-387b-80e5-b642-c1cc65e1c749" class="bulleted-list"><li style="list-style-type:disc">Ensures JSON recognizes it correctly.</li></ul><h3 id="19ae8d61-387b-80a6-8df2-f6a431d193f7" class=""><strong>Using Lombok for Getters/Setters</strong></h3><p id="19ae8d61-387b-80ec-8d4d-e7e281401a55" class="">Instead of manually writing getters/setters, use <strong>Lombok</strong>:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19ae8d61-387b-80b5-b55d-c7695c8742e3" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class EmployeeDTO {
+    private Long id;
+    private String name;
+    private String email;
+    private int age;
+    @JsonProperty(&quot;is_active&quot;)
+    private boolean isActive;
+}
+
+</code></pre><ul id="19ae8d61-387b-80bf-94e0-f891e04e726e" class="bulleted-list"><li style="list-style-type:disc"><strong>Reduces Boilerplate Code</strong>.</li></ul><ul id="19ae8d61-387b-8004-ab65-c732598ef076" class="bulleted-list"><li style="list-style-type:disc"><strong>Handles Serialization Properly</strong>.</li></ul><hr id="19ae8d61-387b-803e-af96-cc073df61c3f"/><h2 id="19ae8d61-387b-8092-a5f1-f929a700a7a0" class=""><strong>7. Summary - Quick Revision Before Interview</strong></h2><table id="19ae8d61-387b-8011-8e78-ff35a6964131" class="simple-table"><tbody><tr id="19ae8d61-387b-806e-be7f-f7b3b42f3650"><td id="MR?M" class="">Concept</td><td id="dF{~" class="">Explanation</td></tr><tr id="19ae8d61-387b-80a2-8495-eb4a790f4d75"><td id="MR?M" class=""><strong>GET Mapping</strong></td><td id="dF{~" class="">Retrieve data (Single/All)</td></tr><tr id="19ae8d61-387b-806c-b18e-f50901f503cc"><td id="MR?M" class=""><strong>POST Mapping</strong></td><td id="dF{~" class="">Create new entity</td></tr><tr id="19ae8d61-387b-803f-bf9a-cce7e1fe0ef5"><td id="MR?M" class=""><strong>PUT Mapping</strong></td><td id="dF{~" class="">Update entire entity (Creates if not exists)</td></tr><tr id="19ae8d61-387b-8040-ae38-fc500de2d595"><td id="MR?M" class=""><strong>PATCH Mapping</strong></td><td id="dF{~" class="">Partially update entity (Prevents data loss)</td></tr><tr id="19ae8d61-387b-803a-81d3-ec614a08cbe0"><td id="MR?M" class=""><strong>DELETE Mapping</strong></td><td id="dF{~" class="">Remove entity from DB</td></tr><tr id="19ae8d61-387b-8002-8fa5-e02afee545e6"><td id="MR?M" class=""><strong>ResponseEntity</strong></td><td id="dF{~" class="">Handles HTTP status codes properly</td></tr><tr id="19ae8d61-387b-80c8-a7bb-d25e161237ff"><td id="MR?M" class=""><strong>Reflection API</strong></td><td id="dF{~" class="">Used in PATCH for dynamic field updates</td></tr><tr id="19ae8d61-387b-8012-b7a7-e032a03f90ab"><td id="MR?M" class=""><strong>Lombok</strong></td><td id="dF{~" class="">Simplifies getters, setters, constructors</td></tr><tr id="19ae8d61-387b-80bc-86d9-dccee986c0de"><td id="MR?M" class=""><strong>JsonProperty</strong></td><td id="dF{~" class="">Fixes JSON serialization issues</td></tr><tr id="19ae8d61-387b-8082-8793-ddf778b9576e"><td id="MR?M" class=""><strong>Exception Handling</strong></td><td id="dF{~" class="">Not covered yet, but will handle errors gracefully</td></tr><tr id="19ae8d61-387b-804f-8b4d-c5c074dcc16f"><td id="MR?M" class=""><strong>Validation (Bean Validation)</strong></td><td id="dF{~" class="">Upcoming topic for ensuring input correctness</td></tr></tbody></table><hr id="19ae8d61-387b-808f-a621-dbf30763f0bc"/><h2 id="19ae8d61-387b-80df-9693-e22238b08cf5" class=""><strong>Next Steps</strong></h2><ul id="19ae8d61-387b-809d-9637-de7c25e62183" class="bulleted-list"><li style="list-style-type:disc">✅ Implemented <code>PUT</code>, <code>PATCH</code>, and <code>DELETE</code> mappings.</li></ul><ul id="19ae8d61-387b-8025-8a9b-dd7eda98547c" class="bulleted-list"><li style="list-style-type:disc">✅ Optimized REST API using <strong>ResponseEntity</strong>.</li></ul><ul id="19ae8d61-387b-803b-abc1-dcd02fafb3e7" class="bulleted-list"><li style="list-style-type:disc">🔜 Next: <strong>Exception Handling &amp; Input Validation (Bean Validation)</strong>.</li></ul><p id="19ae8d61-387b-808c-89f9-e0b59fb0ec1b" class="">These notes ensure you <strong>never have to revisit the video</strong> again! 🚀</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

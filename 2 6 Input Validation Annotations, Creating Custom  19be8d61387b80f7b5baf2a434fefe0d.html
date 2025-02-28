@@ -1,0 +1,786 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>2.6 Input Validation Annotations, Creating Custom Annotation for Validation</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-transparentGray { background-color: undefined; }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="19be8d61-387b-80f7-b5ba-f2a434fefe0d" class="page sans"><header><h1 class="page-title">2.6 Input Validation Annotations, Creating Custom Annotation for Validation</h1><p class="page-description"></p></header><div class="page-body"><h2 id="19be8d61-387b-805d-8e5e-dba9160120bd" class=""><strong>📌 Introduction</strong></h2><ul id="19be8d61-387b-8051-8223-d0303f69420c" class="bulleted-list"><li style="list-style-type:disc">So far, we&#x27;ve seen how <strong>CRUD operations</strong> work with REST APIs in Spring Boot.</li></ul><ul id="19be8d61-387b-809e-bfa3-f31ff25b3a45" class="bulleted-list"><li style="list-style-type:disc">Now, we focus on <strong>validating input data</strong> before it reaches the database.</li></ul><ul id="19be8d61-387b-8066-9115-fbba3f6d4f27" class="bulleted-list"><li style="list-style-type:disc"><strong>Why is validation important?</strong><ul id="19be8d61-387b-8099-94ad-f170f6527884" class="bulleted-list"><li style="list-style-type:circle">Prevents <strong>invalid data</strong> from being stored.</li></ul><ul id="19be8d61-387b-8071-a6e1-fb838e80a24b" class="bulleted-list"><li style="list-style-type:circle">Ensures data <strong>integrity</strong> (e.g., email must be valid, date of birth should be in the past).</li></ul></li></ul><ul id="19be8d61-387b-80ac-adfe-e75eb949c047" class="bulleted-list"><li style="list-style-type:disc"><strong>Key Concepts:</strong><ul id="19be8d61-387b-8095-8974-c368ebc18bc9" class="bulleted-list"><li style="list-style-type:circle"><strong>Built-in Spring Boot validations</strong></li></ul><ul id="19be8d61-387b-800b-9d90-fedafbc61e4a" class="bulleted-list"><li style="list-style-type:circle"><strong>Custom annotations for validation</strong></li></ul><ul id="19be8d61-387b-8029-be11-cc7f05ee5a6c" class="bulleted-list"><li style="list-style-type:circle"><strong>Ensuring correctness of input at the DTO layer</strong></li></ul></li></ul><hr id="19be8d61-387b-8086-a5cd-cc6e5e11592f"/><h2 id="19be8d61-387b-8090-92f0-c70082552ae1" class=""><strong>📍 Problem Statement</strong></h2><ul id="19be8d61-387b-8098-8191-c1761b1ab8b1" class="bulleted-list"><li style="list-style-type:disc">Currently, there’s <strong>no restriction</strong> on what data can be sent.</li></ul><ul id="19be8d61-387b-8058-824d-f98c43b3be54" class="bulleted-list"><li style="list-style-type:disc">Example:<ul id="19be8d61-387b-80ab-bf48-de87aa376ec9" class="bulleted-list"><li style="list-style-type:circle">A user can send <code>&quot;email&quot;: &quot;randomtext&quot;</code> → Stored in the DB.</li></ul><ul id="19be8d61-387b-8000-ae27-fdd6bd125822" class="bulleted-list"><li style="list-style-type:circle">We <strong>don&#x27;t want invalid</strong> emails or names to be saved.</li></ul><ul id="19be8d61-387b-8082-8357-dd049a1e8d5e" class="bulleted-list"><li style="list-style-type:circle">We should <strong>reject bad input at the controller level</strong> before reaching the service layer.</li></ul></li></ul><hr id="19be8d61-387b-802e-94ed-eb787a7687fa"/><h2 id="19be8d61-387b-806b-98c0-eaac8ff6f066" class=""><strong>✅ Adding Spring Boot Validation Dependency</strong></h2><ul id="19be8d61-387b-80d1-b5e5-c55f58afe506" class="bulleted-list"><li style="list-style-type:disc">To enable validation, we must <strong>add the following dependency</strong> in <code>pom.xml</code>:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19be8d61-387b-80e0-af77-e5b500079f35" class="code"><code class="language-XML" style="white-space:pre-wrap;word-break:break-all">xml
+CopyEdit
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-validation&lt;/artifactId&gt;
+&lt;/dependency&gt;
+
+</code></pre></li></ul><ul id="19be8d61-387b-807f-a81f-c8f7a3e0c475" class="bulleted-list"><li style="list-style-type:disc">After adding the dependency, <strong>refresh Maven</strong> to download it.</li></ul><hr id="19be8d61-387b-805b-bbb5-de269b5e0a96"/><h2 id="19be8d61-387b-8014-9caa-fd4984567ba3" class=""><strong>📌 Input Validation with Annotations</strong></h2><ul id="19be8d61-387b-80ff-ae4f-cee87fa16195" class="bulleted-list"><li style="list-style-type:disc">The <strong>DTO (Data Transfer Object)</strong> is the first entry point for validation.</li></ul><ul id="19be8d61-387b-8061-b454-e1ce3a6b15e8" class="bulleted-list"><li style="list-style-type:disc">We can use various <strong>Jakarta validation annotations</strong> inside DTO classes.</li></ul><h3 id="19be8d61-387b-800c-a0ef-da3dfb3e766b" class=""><strong>Common Annotations</strong></h3><table id="19be8d61-387b-800d-9853-d1d1933de191" class="simple-table"><tbody><tr id="19be8d61-387b-80ed-988d-fdec10bfcf5e"><td id="pWe]" class="">Annotation</td><td id="L_G`" class="">Purpose</td></tr><tr id="19be8d61-387b-80dd-a55a-e26c9eee51ba"><td id="pWe]" class=""><code>@NotNull</code></td><td id="L_G`" class="">Field <strong>cannot be null</strong></td></tr><tr id="19be8d61-387b-8096-a36b-c630b99854e9"><td id="pWe]" class=""><code>@NotEmpty</code></td><td id="L_G`" class="">Field <strong>cannot be empty</strong> (for Strings, Collections, Arrays)</td></tr><tr id="19be8d61-387b-80b4-b1ee-de885e177465"><td id="pWe]" class=""><code>@NotBlank</code></td><td id="L_G`" class="">Field <strong>cannot be blank</strong> (ignores spaces)</td></tr><tr id="19be8d61-387b-80e7-9acb-d09b4eedd1e3"><td id="pWe]" class=""><code>@Size(min, max)</code></td><td id="L_G`" class="">Ensures the field&#x27;s <strong>length</strong> falls within the range</td></tr><tr id="19be8d61-387b-8098-bd63-f79fc2293930"><td id="pWe]" class=""><code>@Email</code></td><td id="L_G`" class="">Ensures a valid <strong>email format</strong></td></tr><tr id="19be8d61-387b-802b-b7cd-c39a4d753792"><td id="pWe]" class=""><code>@Pattern(regex)</code></td><td id="L_G`" class="">Custom <strong>regex validation</strong></td></tr><tr id="19be8d61-387b-80a6-be48-dabf93ad5806"><td id="pWe]" class=""><code>@Min(value)</code></td><td id="L_G`" class="">Ensures a number is <strong>not smaller</strong> than the given value</td></tr><tr id="19be8d61-387b-80fd-8926-f333d68c0997"><td id="pWe]" class=""><code>@Max(value)</code></td><td id="L_G`" class="">Ensures a number is <strong>not greater</strong> than the given value</td></tr><tr id="19be8d61-387b-8093-a01e-c08a1b822df9"><td id="pWe]" class=""><code>@Past</code></td><td id="L_G`" class="">Ensures the date is <strong>in the past</strong></td></tr><tr id="19be8d61-387b-8099-aa08-e67a4dfee3ca"><td id="pWe]" class=""><code>@Future</code></td><td id="L_G`" class="">Ensures the date is <strong>in the future</strong></td></tr><tr id="19be8d61-387b-8008-8da1-cd9c4f733046"><td id="pWe]" class=""><code>@Positive</code></td><td id="L_G`" class="">Ensures number is <strong>greater than zero</strong></td></tr><tr id="19be8d61-387b-805d-860e-e625a85fea41"><td id="pWe]" class=""><code>@Negative</code></td><td id="L_G`" class="">Ensures number is <strong>less than zero</strong></td></tr><tr id="19be8d61-387b-8027-bb69-ee40f7acb860"><td id="pWe]" class=""><code>@Valid</code></td><td id="L_G`" class="">Recursively <strong>validates nested objects</strong></td></tr></tbody></table><hr id="19be8d61-387b-8031-bf31-c399c9dc822c"/><h2 id="19be8d61-387b-805f-a5b5-eacaf6fa3059" class=""><strong>📍 Implementing Validation in Employee DTO</strong></h2><h3 id="19be8d61-387b-8024-bf25-f0017065b7e1" class=""><strong>Step 1: Apply Validation Annotations</strong></h3><ul id="19be8d61-387b-802c-b0ce-c05b285495af" class="bulleted-list"><li style="list-style-type:disc">Example <strong>Employee DTO</strong> with validation:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19be8d61-387b-80d3-a51f-d181d9197cde" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+import jakarta.validation.constraints.*;
+
+public class EmployeeDTO {
+
+    @NotBlank(message = &quot;Name is required&quot;)
+    @Size(min = 3, max = 10, message = &quot;Number of characters in name should be in range 3 to 10&quot;)
+    private String name;
+
+    @NotBlank(message = &quot;Email is required&quot;)
+    @Email(message = &quot;Email should be a valid email&quot;)
+    private String email;
+
+    @Min(value = 18, message = &quot;Age cannot be less than 18&quot;)
+    @Max(value = 80, message = &quot;Age cannot be greater than 80&quot;)
+    private int age;
+
+    @Pattern(regexp = &quot;^(admin|user)$&quot;, message = &quot;Role can be either &#x27;admin&#x27; or &#x27;user&#x27;&quot;)
+    private String role;
+
+    @Positive(message = &quot;Salary should be a positive number&quot;)
+    private double salary;
+
+    @PastOrPresent(message = &quot;Date of joining cannot be in the future&quot;)
+    private LocalDate dateOfJoining;
+}
+
+</code></pre></li></ul><hr id="19be8d61-387b-8027-a234-c9f6df72d41a"/><h3 id="19be8d61-387b-8087-8156-fce53351f6cf" class=""><strong>Step 2: Enabling Validation in the Controller</strong></h3><ul id="19be8d61-387b-8096-be4e-c6a6a766d0e4" class="bulleted-list"><li style="list-style-type:disc">We need to <strong>tell Spring Boot to validate</strong> the incoming request.</li></ul><ul id="19be8d61-387b-80a0-8eb4-e2023949fb64" class="bulleted-list"><li style="list-style-type:disc">Add <code>@Valid</code> before the DTO in the controller:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19be8d61-387b-80d4-91b0-f82ea338acc8" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@PostMapping(&quot;/employees&quot;)
+public ResponseEntity&lt;String&gt; createEmployee(@Valid @RequestBody EmployeeDTO employee) {
+    return ResponseEntity.ok(&quot;Employee created successfully&quot;);
+}
+
+</code></pre></li></ul><ul id="19be8d61-387b-8006-b712-f4092f0f471c" class="bulleted-list"><li style="list-style-type:disc"><strong>Without </strong><code><strong>@Valid</strong></code>, validation will NOT work.</li></ul><hr id="19be8d61-387b-80cb-8477-dd7f83000eea"/><h2 id="19be8d61-387b-80ad-9e7e-f91b2675e411" class=""><strong>📌 Understanding Each Validation Annotation</strong></h2><h3 id="19be8d61-387b-8001-ba72-f1c87a411847" class=""><strong>1️⃣ </strong><code><strong>@NotNull</strong></code><strong>, </strong><code><strong>@NotEmpty</strong></code><strong>, </strong><code><strong>@NotBlank</strong></code></h3><table id="19be8d61-387b-8052-a414-f5331869c6c6" class="simple-table"><tbody><tr id="19be8d61-387b-80be-8353-c8519e4d33ff"><td id="r~tk" class="">Annotation</td><td id="&gt;WpD" class=""><strong>Checks for</strong></td><td id="m&gt;Yq" class=""><strong>Use Case</strong></td></tr><tr id="19be8d61-387b-8091-b7cb-e0324df0dd2f"><td id="r~tk" class=""><code>@NotNull</code></td><td id="&gt;WpD" class=""><strong>Only null values</strong></td><td id="m&gt;Yq" class="">Ensuring a field is <strong>present</strong> (e.g., <code>Integer age;</code>)</td></tr><tr id="19be8d61-387b-8008-9f94-c4286b3f6e1f"><td id="r~tk" class=""><code>@NotEmpty</code></td><td id="&gt;WpD" class="">Null + Empty (<code>&quot;&quot;</code>, <code>[]</code>)</td><td id="m&gt;Yq" class="">Ensuring a <strong>collection or string is not empty</strong></td></tr><tr id="19be8d61-387b-8028-9d26-cd6d42756cd9"><td id="r~tk" class=""><code>@NotBlank</code></td><td id="&gt;WpD" class="">Null + Empty + Whitespaces (<code>&quot; &quot;</code>)</td><td id="m&gt;Yq" class=""><strong>Best for validating strings</strong></td></tr></tbody></table><ul id="19be8d61-387b-8005-bb48-c16634be71b3" class="bulleted-list"><li style="list-style-type:disc"><strong>Example:</strong><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19be8d61-387b-80b0-9b01-f7077425ab34" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@NotBlank(message = &quot;Name cannot be blank&quot;)
+private String name;
+
+</code></pre></li></ul><hr id="19be8d61-387b-8016-a26d-c4b50004174d"/><h3 id="19be8d61-387b-807c-8a9b-d9e7ad6f17bd" class=""><strong>2️⃣ </strong><code><strong>@Size(min, max)</strong></code></h3><ul id="19be8d61-387b-80fe-ba54-dca837fc86ef" class="bulleted-list"><li style="list-style-type:disc">Ensures <strong>string length is within a given range</strong>.</li></ul><ul id="19be8d61-387b-800e-8d60-e1f405fcffd2" class="bulleted-list"><li style="list-style-type:disc"><strong>Example:</strong><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19be8d61-387b-8045-b3cc-e1e586dd3e51" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@Size(min = 3, max = 10, message = &quot;Name should be between 3 and 10 characters&quot;)
+private String name;
+
+</code></pre></li></ul><hr id="19be8d61-387b-8073-8995-e41177704acb"/><h3 id="19be8d61-387b-80d1-8301-c65742b845f6" class=""><strong>3️⃣ </strong><code><strong>@Min</strong></code><strong>, </strong><code><strong>@Max</strong></code></h3><ul id="19be8d61-387b-80c2-8cf9-feb3dac053aa" class="bulleted-list"><li style="list-style-type:disc">Ensures <strong>numeric values fall within the given range</strong>.</li></ul><ul id="19be8d61-387b-8087-b500-e3aead8ddefe" class="bulleted-list"><li style="list-style-type:disc"><strong>Example:</strong><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19be8d61-387b-80fd-aa59-cafcf9b1cb88" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@Min(value = 18, message = &quot;Age must be at least 18&quot;)
+@Max(value = 80, message = &quot;Age cannot exceed 80&quot;)
+private int age;
+
+</code></pre></li></ul><hr id="19be8d61-387b-80c4-ba63-ebc05d074f60"/><h3 id="19be8d61-387b-803c-abc1-f911953d82d6" class=""><strong>4️⃣ </strong><code><strong>@Email</strong></code></h3><ul id="19be8d61-387b-80f9-a19b-d49bd07aa2d8" class="bulleted-list"><li style="list-style-type:disc">Ensures <strong>proper email format</strong>.</li></ul><ul id="19be8d61-387b-809f-aed6-e3d8d94c1b19" class="bulleted-list"><li style="list-style-type:disc"><strong>Example:</strong><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19be8d61-387b-8007-8c05-e703f81afcd5" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@Email(message = &quot;Must be a valid email&quot;)
+private String email;
+
+</code></pre></li></ul><hr id="19be8d61-387b-8044-a91b-e7ab0cf913b6"/><h3 id="19be8d61-387b-806d-aea7-eda4b88c9a8d" class=""><strong>5️⃣ </strong><code><strong>@Pattern</strong></code><strong> for Regular Expressions</strong></h3><ul id="19be8d61-387b-8039-933d-d3f7b3ad32e0" class="bulleted-list"><li style="list-style-type:disc">Validates a <strong>custom pattern using regex</strong>.</li></ul><ul id="19be8d61-387b-8021-8f4e-e789aa0bd360" class="bulleted-list"><li style="list-style-type:disc"><strong>Example (Role can only be &#x27;admin&#x27; or &#x27;user&#x27;):</strong><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19be8d61-387b-800f-beaa-e740f5efa52a" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@Pattern(regexp = &quot;^(admin|user)$&quot;, message = &quot;Role must be &#x27;admin&#x27; or &#x27;user&#x27;&quot;)
+private String role;
+
+</code></pre></li></ul><hr id="19be8d61-387b-806a-b91c-f3ccd679b72f"/><h3 id="19be8d61-387b-8047-be6c-f700a1c366c4" class=""><strong>6️⃣ </strong><code><strong>@Past</strong></code><strong>, </strong><code><strong>@Future</strong></code><strong>, </strong><code><strong>@PastOrPresent</strong></code></h3><table id="19be8d61-387b-8003-9faf-d441753c88af" class="simple-table"><tbody><tr id="19be8d61-387b-8009-b184-d052fd457ab9"><td id="Az}a" class="">Annotation</td><td id="bpMw" class="">Ensures date is</td></tr><tr id="19be8d61-387b-808c-bee9-efe47f488a6c"><td id="Az}a" class=""><code>@Past</code></td><td id="bpMw" class=""><strong>Before today</strong></td></tr><tr id="19be8d61-387b-804c-9ed0-f679b4cf1b60"><td id="Az}a" class=""><code>@Future</code></td><td id="bpMw" class=""><strong>After today</strong></td></tr><tr id="19be8d61-387b-808a-ad2d-c4c8e0fda8dc"><td id="Az}a" class=""><code>@PastOrPresent</code></td><td id="bpMw" class=""><strong>Today or before</strong></td></tr></tbody></table><ul id="19be8d61-387b-809e-8033-fa4a2f99145e" class="bulleted-list"><li style="list-style-type:disc"><strong>Example (Date of Joining cannot be in the future):</strong><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19be8d61-387b-805b-8690-c0bdec2e2d65" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@PastOrPresent(message = &quot;Date of joining cannot be in the future&quot;)
+private LocalDate dateOfJoining;
+
+</code></pre></li></ul><hr id="19be8d61-387b-801c-95a8-c296a0a82857"/><h2 id="19be8d61-387b-80be-81be-fa56f419a8ff" class=""><strong>🚀 Creating Custom Validation</strong></h2><h3 id="19be8d61-387b-80e3-9f12-d558df778366" class=""><strong>Scenario: Role should only be &#x27;admin&#x27; or &#x27;user&#x27;</strong></h3><h3 id="19be8d61-387b-8065-8096-c1ffc7e9d8d0" class=""><strong>Step 1: Create a Custom Annotation</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19be8d61-387b-80e1-9304-e648296b1b96" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@Target({ElementType.FIELD})
+@Retention(RetentionPolicy.RUNTIME)
+@Constraint(validatedBy = EmployeeRoleValidator.class)
+public @interface EmployeeRoleValidation {
+    String message() default &quot;Role must be &#x27;admin&#x27; or &#x27;user&#x27;&quot;;
+    Class&lt;?&gt;[] groups() default {};
+    Class&lt;? extends Payload&gt;[] payload() default {};
+}
+
+</code></pre><h3 id="19be8d61-387b-80fa-97db-d6d2ebe6956a" class=""><strong>Step 2: Implement Custom Validator</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19be8d61-387b-80f3-9c1e-f7f2995db7e0" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+public class EmployeeRoleValidator implements ConstraintValidator&lt;EmployeeRoleValidation, String&gt; {
+
+    private static final List&lt;String&gt; VALID_ROLES = Arrays.asList(&quot;admin&quot;, &quot;user&quot;);
+
+    @Override
+    public boolean isValid(String role, ConstraintValidatorContext context) {
+        return role != null &amp;&amp; VALID_ROLES.contains(role.toLowerCase());
+    }
+}
+
+</code></pre><h3 id="19be8d61-387b-8064-97eb-f38b101158ae" class=""><strong>Step 3: Use the Custom Annotation</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19be8d61-387b-8031-9f14-e776791166fa" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@EmployeeRoleValidation
+private String role;
+
+</code></pre><hr id="19be8d61-387b-8052-adae-f2416908148a"/><h2 id="19be8d61-387b-80c2-9dac-f266db0adf51" class=""><strong>📌 Summary (Quick Interview Revision)</strong></h2><ol type="1" id="19be8d61-387b-80c0-a4cd-eb3e32b37b7f" class="numbered-list" start="1"><li><strong>Why validate input?</strong><ul id="19be8d61-387b-8036-b796-c860904e83fb" class="bulleted-list"><li style="list-style-type:disc">Prevents <strong>invalid data</strong> from being saved.</li></ul><ul id="19be8d61-387b-8012-afa3-e1bfde7d2596" class="bulleted-list"><li style="list-style-type:disc">Enhances <strong>data integrity and security</strong>.</li></ul></li></ol><ol type="1" id="19be8d61-387b-8050-abc9-ddd46627e179" class="numbered-list" start="2"><li><strong>How to enable validation?</strong><ul id="19be8d61-387b-80e0-87b4-cae70beeca42" class="bulleted-list"><li style="list-style-type:disc">Add <strong>Spring Boot Starter Validation</strong> dependency.</li></ul><ul id="19be8d61-387b-80a4-b708-e92c862803ba" class="bulleted-list"><li style="list-style-type:disc">Use <strong>Jakarta validation annotations</strong> in DTO.</li></ul></li></ol><ol type="1" id="19be8d61-387b-8085-800b-db26f1e20d63" class="numbered-list" start="3"><li><strong>Key Annotations &amp; Use Cases</strong><ul id="19be8d61-387b-8072-bb0d-d39473ed7888" class="bulleted-list"><li style="list-style-type:disc"><code>@NotBlank</code>, <code>@NotNull</code>, <code>@NotEmpty</code></li></ul><ul id="19be8d61-387b-8006-8116-c10776401a9c" class="bulleted-list"><li style="list-style-type:disc"><code>@Size(min, max)</code>, <code>@Min(value)</code>, <code>@Max(value)</code></li></ul><ul id="19be8d61-387b-8035-9c30-f7002a5547f9" class="bulleted-list"><li style="list-style-type:disc"><code>@Email</code>, <code>@Pattern(regex)</code></li></ul><ul id="19be8d61-387b-8047-9504-ee7c97a59f08" class="bulleted-list"><li style="list-style-type:disc"><code>@Past</code>, <code>@Future</code>, <code>@PastOrPresent</code></li></ul><ul id="19be8d61-387b-808c-85ae-d10aa9a1390e" class="bulleted-list"><li style="list-style-type:disc"><code>@Valid</code> (for nested object validation)</li></ul></li></ol><ol type="1" id="19be8d61-387b-8080-922a-f9b358db577f" class="numbered-list" start="4"><li><strong>How to create a custom validation?</strong><ul id="19be8d61-387b-80aa-9a73-ec8c6dc1ceff" class="bulleted-list"><li style="list-style-type:disc">Create a <strong>custom annotation</strong>.</li></ul><ul id="19be8d61-387b-8038-a4b2-c90755437279" class="bulleted-list"><li style="list-style-type:disc">Implement <strong>ConstraintValidator</strong>.</li></ul></li></ol><hr id="19be8d61-387b-80bc-9a39-e6057f9ee974"/><p id="19be8d61-387b-8062-9750-c76f257414c6" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

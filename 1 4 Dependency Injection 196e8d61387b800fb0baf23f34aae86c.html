@@ -1,0 +1,772 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>1.4 Dependency Injection</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-transparentGray { background-color: undefined; }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="196e8d61-387b-800f-b0ba-f23f34aae86c" class="page sans"><header><h1 class="page-title">1.4 Dependency Injection</h1><p class="page-description"></p></header><div class="page-body"><h2 id="196e8d61-387b-802a-8d43-d4c044dce930" class=""><strong>🔹 Introduction to Dependency Injection</strong></h2><ul id="196e8d61-387b-80c2-bf83-e90b57920ebd" class="bulleted-list"><li style="list-style-type:disc"><strong>What is Dependency Injection (DI)?</strong><ul id="196e8d61-387b-803e-a3eb-c9c62722b1ea" class="bulleted-list"><li style="list-style-type:circle">A <strong>design pattern</strong> used to achieve <strong>loose coupling</strong> in software applications.</li></ul><ul id="196e8d61-387b-807f-b766-fca6cc1aca96" class="bulleted-list"><li style="list-style-type:circle">Instead of creating dependencies manually, dependencies are <strong>injected</strong> from an external source.</li></ul><ul id="196e8d61-387b-80f6-b4bb-c2f4fcdd53d9" class="bulleted-list"><li style="list-style-type:circle"><strong>Spring Framework</strong> uses DI to manage object dependencies automatically.</li></ul></li></ul><ul id="196e8d61-387b-80d3-a5e8-dd52c6bbe4b3" class="bulleted-list"><li style="list-style-type:disc"><strong>Why is Dependency Injection Important?</strong><ul id="196e8d61-387b-80e9-8689-f6e376f6c0db" class="bulleted-list"><li style="list-style-type:circle"><strong>Removes manual dependency management</strong> (No need to create, maintain, or destroy objects).</li></ul><ul id="196e8d61-387b-80a0-b513-fc732484c2c7" class="bulleted-list"><li style="list-style-type:circle"><strong>Encourages modular and reusable code</strong>.</li></ul><ul id="196e8d61-387b-803a-8e81-de4553c5e342" class="bulleted-list"><li style="list-style-type:circle"><strong>Reduces tight coupling</strong>, making the application flexible and scalable.</li></ul></li></ul><ul id="196e8d61-387b-8051-8669-f619d2dc1442" class="bulleted-list"><li style="list-style-type:disc"><strong>Is Dependency Injection Only for Spring Boot?</strong><ul id="196e8d61-387b-8075-92e7-c8b7a11f195e" class="bulleted-list"><li style="list-style-type:circle">No! DI is a <strong>core concept</strong> of the <strong>Spring Framework</strong>, not limited to Spring Boot.</li></ul><ul id="196e8d61-387b-8050-932a-c0c5fdbd30ac" class="bulleted-list"><li style="list-style-type:circle">It is implemented using the <strong>IoC (Inversion of Control) Container</strong> to inject dependencies dynamically.</li></ul></li></ul><hr id="196e8d61-387b-8052-af5c-eddc61cb48ac"/><h2 id="196e8d61-387b-8098-af5a-d59674d6a2ec" class=""><strong>🔹 Understanding Dependency Injection with an Analogy</strong></h2><ul id="196e8d61-387b-80df-b00c-e4261ed3f0e4" class="bulleted-list"><li style="list-style-type:disc">Imagine <strong>Alice</strong>, a baker, wants to bake a <strong>chocolate cake</strong>.</li></ul><ul id="196e8d61-387b-8011-adbe-f718d4d88c5a" class="bulleted-list"><li style="list-style-type:disc">She <strong>depends</strong> on multiple <strong>ingredients</strong> (e.g., frosting, syrup).</li></ul><ul id="196e8d61-387b-8039-bff3-cf8663ace08e" class="bulleted-list"><li style="list-style-type:disc">Instead of fetching ingredients herself, she <strong>hires Bob</strong> to do this.</li></ul><ul id="196e8d61-387b-8060-840b-dfc11d120d72" class="bulleted-list"><li style="list-style-type:disc"><strong>Bob fetches the required ingredients</strong> as needed.</li></ul><h3 id="196e8d61-387b-8016-b76f-c7bd7a9c932f" class=""><strong>🛠️ Mapping This Analogy to Dependency Injection</strong></h3><table id="196e8d61-387b-805d-8f97-c02e7b3504c0" class="simple-table"><tbody><tr id="196e8d61-387b-809f-aaee-d0dc3aaf4932"><td id="~=W_" class=""><strong>Analogy Component</strong></td><td id="DFH{" class=""><strong>Spring Boot Component</strong></td></tr><tr id="196e8d61-387b-8083-871c-cd7e892bfd9e"><td id="~=W_" class="">Alice (Baker)</td><td id="DFH{" class="">Developer (Writes the code)</td></tr><tr id="196e8d61-387b-8003-8d9c-ed4eb7fe62cb"><td id="~=W_" class="">Cake</td><td id="DFH{" class="">Application</td></tr><tr id="196e8d61-387b-8092-920a-d4874336865e"><td id="~=W_" class="">Ingredients (Frosting, Syrup)</td><td id="DFH{" class="">Dependencies (Beans)</td></tr><tr id="196e8d61-387b-80a9-a480-caea841487b7"><td id="~=W_" class="">Bob (Helper)</td><td id="DFH{" class="">Spring DI Framework</td></tr><tr id="196e8d61-387b-8039-bd9c-fe23ccc51acc"><td id="~=W_" class="">Bakery</td><td id="DFH{" class="">Codebase</td></tr></tbody></table><p id="196e8d61-387b-80c4-bbb3-e92a811396ea" class="">✅ <strong>Now, Alice (Developer) can focus only on baking (writing business logic) while Bob (Spring DI) handles dependencies.</strong></p><p id="196e8d61-387b-8065-b497-fb01a1f23009" class="">✅ This reduces <strong>tight coupling</strong> and makes it easier to switch dependencies dynamically.</p><hr id="196e8d61-387b-802e-a6e6-ce8a70c80716"/><h2 id="196e8d61-387b-80ea-ad5a-e2995cec98e6" class=""><strong>🔹 Why Do We Need Dependency Injection?</strong></h2><ul id="196e8d61-387b-80e4-88eb-f1ffa45b1d4f" class="bulleted-list"><li style="list-style-type:disc"><strong>Without DI</strong>: Developers must manually manage objects, increasing complexity.</li></ul><ul id="196e8d61-387b-8003-9ae1-c556dbb81bd1" class="bulleted-list"><li style="list-style-type:disc"><strong>With DI</strong>: The framework <strong>automatically injects</strong> dependencies when required.</li></ul><h3 id="196e8d61-387b-80a6-8440-d937533f9c67" class=""><strong>✅ Benefits of Dependency Injection</strong></h3><ol type="1" id="196e8d61-387b-807a-bcfb-cb9a68c25096" class="numbered-list" start="1"><li><strong>Loosely Coupled Code</strong><ul id="196e8d61-387b-8076-8d5b-f7727d24252a" class="bulleted-list"><li style="list-style-type:disc">Components don’t directly depend on each other.</li></ul><ul id="196e8d61-387b-8085-b06c-f6e7068866a1" class="bulleted-list"><li style="list-style-type:disc">Allows swapping different implementations easily.</li></ul></li></ol><ol type="1" id="196e8d61-387b-8053-89e2-d24430c46f78" class="numbered-list" start="2"><li><strong>Better Maintainability</strong><ul id="196e8d61-387b-802d-8453-fb2064a5a6cb" class="bulleted-list"><li style="list-style-type:disc">Changes in dependencies do not require modifying dependent classes.</li></ul><ul id="196e8d61-387b-8010-a85e-c46e0efc0c2d" class="bulleted-list"><li style="list-style-type:disc">Reduces risk of bugs when modifying code.</li></ul></li></ol><ol type="1" id="196e8d61-387b-8060-aa40-fc4048f88ff0" class="numbered-list" start="3"><li><strong>Improved Testability</strong><ul id="196e8d61-387b-80b0-9f0e-d38a2ef85b29" class="bulleted-list"><li style="list-style-type:disc">Dependencies can be <strong>mocked</strong> during unit testing.</li></ul><ul id="196e8d61-387b-807f-b3de-cc9e63f2d5be" class="bulleted-list"><li style="list-style-type:disc">No need to set up real services or databases.</li></ul></li></ol><ol type="1" id="196e8d61-387b-80f0-9127-c5ad25120ebf" class="numbered-list" start="4"><li><strong>Flexible Configurations</strong><ul id="196e8d61-387b-8060-9569-cec5cdf690d7" class="bulleted-list"><li style="list-style-type:disc">External configurations (e.g., application.properties) manage dependencies.</li></ul><ul id="196e8d61-387b-8089-bb9e-f073fe68f0d4" class="bulleted-list"><li style="list-style-type:disc">Supports different environments (dev, test, prod).</li></ul></li></ol><hr id="196e8d61-387b-809c-b82a-e2d3c32c2cd0"/><h2 id="196e8d61-387b-8000-adac-d9eeffd0deae" class=""><strong>🔹 Official Definition of Dependency Injection</strong></h2><blockquote id="196e8d61-387b-8024-8307-ce13c57afc69" class="">&quot;Dependency Injection (DI) is a technique in which the Spring Framework manages object dependencies and injects them into components instead of creating them manually.&quot;</blockquote><ul id="196e8d61-387b-80a3-a2f3-dcce274916f2" class="bulleted-list"><li style="list-style-type:disc">Instead of components <strong>creating dependencies</strong>, the <strong>Spring IoC (Inversion of Control) container</strong> provides them.</li></ul><hr id="196e8d61-387b-804b-a573-ce4874f11163"/><h2 id="196e8d61-387b-8035-983d-f400b3e37dd5" class=""><strong>🔹 Implementing Dependency Injection in Spring Boot</strong></h2><h3 id="196e8d61-387b-8094-b25f-c12371d19555" class=""><strong>📌 Step 1: Creating a Service (DB Service)</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="196e8d61-387b-80ee-acdb-ebd03b1de60f" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@Service
+public class DBService {
+    public String getData() {
+        return &quot;Fetching Data...&quot;;
+    }
+}
+
+</code></pre><ul id="196e8d61-387b-806b-9a8f-d5af57dde51f" class="bulleted-list"><li style="list-style-type:disc"><code><strong>@Service</strong></code> annotation marks the class as a Spring-managed component.</li></ul><h3 id="196e8d61-387b-8097-b5b4-cd088e68a0f0" class=""><strong>📌 Step 2: Injecting the Service</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="196e8d61-387b-804a-ab0f-f5f6a7cea71d" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@RestController
+public class MyController {
+
+    @Autowired
+    private DBService dbService; // Dependency Injection
+
+    @GetMapping(&quot;/data&quot;)
+    public String fetchData() {
+        return dbService.getData();
+    }
+}
+
+</code></pre><ul id="196e8d61-387b-8050-93a4-ff7444bf0ec2" class="bulleted-list"><li style="list-style-type:disc"><code><strong>@Autowired</strong></code> automatically injects <code>DBService</code> into <code>MyController</code>.</li></ul><ul id="196e8d61-387b-8000-ad92-f00fc31e9848" class="bulleted-list"><li style="list-style-type:disc">The <strong>Spring IoC container</strong> initializes <code>DBService</code> and injects it wherever required.</li></ul><hr id="196e8d61-387b-80b5-9f3b-ca011ab4c718"/><h2 id="196e8d61-387b-807b-8f82-fb6efbeaac5d" class=""><strong>🔹 Types of Dependency Injection in Spring Boot</strong></h2><p id="196e8d61-387b-80c2-a467-e3dea27615a9" class="">Spring Boot supports three types of dependency injection:</p><ol type="1" id="196e8d61-387b-8093-8315-e90b992c5d98" class="numbered-list" start="1"><li><strong>Field Injection</strong></li></ol><ol type="1" id="196e8d61-387b-8067-b46b-e362767cca0b" class="numbered-list" start="2"><li><strong>Constructor Injection</strong> (Recommended)</li></ol><ol type="1" id="196e8d61-387b-8050-8543-f3b746856c5d" class="numbered-list" start="3"><li><strong>Setter Injection</strong></li></ol><hr id="196e8d61-387b-8052-86ba-cc4b73b203ef"/><h3 id="196e8d61-387b-8064-8f55-ce170ed87f61" class=""><strong>📌 1️⃣ Field Injection (Using </strong><code><strong>@Autowired</strong></code><strong>)</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="196e8d61-387b-80cc-9297-c3a46c9d4b95" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@Service
+public class MyService {
+
+    @Autowired  // Field Injection
+    private DBService dbService;
+
+    public String processData() {
+        return dbService.getData();
+    }
+}
+
+</code></pre><p id="196e8d61-387b-80f8-910a-f2c626963a32" class=""><strong>🚨 Drawback:</strong></p><ul id="196e8d61-387b-8017-83e0-cc739e4ed55d" class="bulleted-list"><li style="list-style-type:disc">Cannot use <code>final</code> keyword, making it harder to enforce immutability.</li></ul><ul id="196e8d61-387b-8077-b7a9-ea79ff154ab7" class="bulleted-list"><li style="list-style-type:disc"><strong>Not recommended</strong> for mandatory dependencies.</li></ul><hr id="196e8d61-387b-8066-bc75-f0f38bca19a7"/><h3 id="196e8d61-387b-80fc-bcfc-cc7691e3d363" class=""><strong>📌 2️⃣ Constructor Injection (Best Practice)</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="196e8d61-387b-80d9-a9ee-f72fcf25b1e0" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@Service
+public class MyService {
+    private final DBService dbService;
+
+    @Autowired
+    public MyService(DBService dbService) {  // Constructor Injection
+        this.dbService = dbService;
+    }
+
+    public String processData() {
+        return dbService.getData();
+    }
+}
+
+</code></pre><p id="196e8d61-387b-8097-bfdd-d478459c30bf" class="">✅ <strong>Advantages of Constructor Injection</strong>:</p><ul id="196e8d61-387b-8042-9fcf-c3170a2a8737" class="bulleted-list"><li style="list-style-type:disc"><strong>Enforces immutability</strong> (Can declare <code>final</code> fields).</li></ul><ul id="196e8d61-387b-8057-96e3-ed6629c4f598" class="bulleted-list"><li style="list-style-type:disc"><strong>Ensures mandatory dependencies are initialized</strong>.</li></ul><ul id="196e8d61-387b-806c-9be4-e0134ff5cd69" class="bulleted-list"><li style="list-style-type:disc"><strong>Easier unit testing</strong> (Allows passing mock dependencies).</li></ul><p id="196e8d61-387b-807b-91fa-e0f6d71da86a" class="">✅ <strong>Spring Boot 4+ supports constructor injection automatically (no need for </strong><code><strong>@Autowired</strong></code><strong>).</strong></p><hr id="196e8d61-387b-80c3-b513-c3a8b48c1afa"/><h2 id="196e8d61-387b-8015-9f8c-e2868c25b6bf" class=""><strong>🔹 Using Environment Variables for Dependency Injection in Spring Boot</strong></h2><p id="196e8d61-387b-80f4-a06e-fcd811fcdabb" class="">Spring Boot allows us to configure dependencies dynamically using <strong>environment variables</strong>, which are useful for <strong>deployment in different environments (dev, test, prod, etc.)</strong>.</p><h3 id="196e8d61-387b-8079-b17a-cfed9ce4d180" class=""><strong>📌 How Environment Variables Override Properties?</strong></h3><table id="196e8d61-387b-8038-a7d3-cc7b334d722c" class="simple-table"><tbody><tr id="196e8d61-387b-80c2-bfc8-ca43aed6b2f1"><td id="[ECV" class=""><code><strong>application.properties</strong></code><strong> Key</strong></td><td id="UO@o" class=""><strong>Corresponding Environment Variable</strong></td></tr><tr id="196e8d61-387b-800d-bc40-f92265a6ea31"><td id="[ECV" class=""><code>deploy.environment=development</code></td><td id="UO@o" class=""><code>DEPLOY_ENVIRONMENT=production</code></td></tr></tbody></table><hr id="196e8d61-387b-8026-b030-e6815dcdcaba"/><h3 id="196e8d61-387b-8096-b524-cd4b6698a936" class=""><strong>📌 Step 1: Define Property in </strong><code><strong>application.properties</strong></code></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="196e8d61-387b-808a-998c-d8516f21c6ca" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">properties
+CopyEdit
+deploy.environment=development
+
+</code></pre><p id="196e8d61-387b-80af-814b-f82e0059bc61" class="">By default, the application will load <strong>development configurations</strong>.</p><hr id="196e8d61-387b-809b-8ca0-e789806e50cf"/><h3 id="196e8d61-387b-80e5-96fd-cbea18d832a3" class=""><strong>📌 Step 2: Override Using Environment Variable</strong></h3><p id="196e8d61-387b-80d7-b36c-de9727fad8a8" class="">On <strong>Linux/macOS</strong>, use:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="196e8d61-387b-800c-90f4-e0b084bf11ff" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">bash
+CopyEdit
+export DEPLOY_ENVIRONMENT=production
+
+</code></pre><p id="196e8d61-387b-80d6-ba78-eb20dcd7bb29" class="">On <strong>Windows (CMD)</strong>, use:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="196e8d61-387b-8035-b341-c13cd10d6eca" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">cmd
+CopyEdit
+set DEPLOY_ENVIRONMENT=production
+
+</code></pre><p id="196e8d61-387b-8061-952b-f4dcb9c5cc3b" class="">On <strong>Windows (PowerShell)</strong>, use:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="196e8d61-387b-80ca-91fd-ed963fa0bd35" class="code"><code class="language-PowerShell" style="white-space:pre-wrap;word-break:break-all">powershell
+CopyEdit
+$env:DEPLOY_ENVIRONMENT=&quot;production&quot;
+
+</code></pre><p id="196e8d61-387b-80a3-b939-cb0669e6b52a" class="">✅ Now, the application will <strong>load production-specific dependencies</strong> instead of development.</p><hr id="196e8d61-387b-80f1-af4f-e3df8edd2301"/><h3 id="196e8d61-387b-8024-b9c9-f732b1b5aec0" class=""><strong>📌 Step 3: Use </strong><code><strong>@ConditionalOnProperty</strong></code><strong> to Load Beans Dynamically</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="196e8d61-387b-80cf-a62c-ed8d2b7e34ec" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@Component
+@ConditionalOnProperty(name = &quot;deploy.environment&quot;, havingValue = &quot;development&quot;)
+public class DevDatabase implements Database {
+    @Override
+    public String getData() {
+        return &quot;Development Database Data&quot;;
+    }
+}
+
+@Component
+@ConditionalOnProperty(name = &quot;deploy.environment&quot;, havingValue = &quot;production&quot;)
+public class ProdDatabase implements Database {
+    @Override
+    public String getData() {
+        return &quot;Production Database Data&quot;;
+    }
+}
+
+</code></pre><p id="196e8d61-387b-809d-9815-f662a378c15e" class="">✅ <strong>Spring Boot will now pick the correct database bean based on the </strong><code><strong>DEPLOY_ENVIRONMENT</strong></code><strong> environment variable!</strong></p><hr id="196e8d61-387b-805a-abb1-c8f13530e93c"/><h2 id="196e8d61-387b-807e-9ea4-fbde65643a3e" class=""><strong>🔹 Summary</strong></h2><table id="196e8d61-387b-803f-b5f3-e71ac9840b83" class="simple-table"><tbody><tr id="196e8d61-387b-805b-8432-c92a16ad7d00"><td id="n_mC" class=""><strong>Feature</strong></td><td id="a`h&lt;" class=""><strong>Description</strong></td></tr><tr id="196e8d61-387b-80ca-847a-ea4fcdcb3762"><td id="n_mC" class=""><strong>What is DI?</strong></td><td id="a`h&lt;" class="">A technique where the Spring IoC container manages dependencies.</td></tr><tr id="196e8d61-387b-8039-b211-e76ee4dc40dc"><td id="n_mC" class=""><strong>Why DI?</strong></td><td id="a`h&lt;" class="">Achieves <strong>loose coupling</strong>, <strong>better maintainability</strong>, and <strong>testability</strong>.</td></tr><tr id="196e8d61-387b-8007-9ba0-e7bfdf3a8fed"><td id="n_mC" class=""><strong>Types of DI?</strong></td><td id="a`h&lt;" class="">Field Injection, Constructor Injection (Best Practice), Setter Injection.</td></tr><tr id="196e8d61-387b-8040-b690-e8ce0fece54f"><td id="n_mC" class=""><strong>Best Practice?</strong></td><td id="a`h&lt;" class="">Use <strong>Constructor Injection</strong> (supports <code>final</code> fields).</td></tr><tr id="196e8d61-387b-80eb-84ff-f9cbd289ab54"><td id="n_mC" class=""><strong>Loose Coupling?</strong></td><td id="a`h&lt;" class="">Achieved via interfaces and configuration files.</td></tr><tr id="196e8d61-387b-8027-8135-d6e781142fa4"><td id="n_mC" class=""><strong>Switching Beans?</strong></td><td id="a`h&lt;" class="">Use <code>@ConditionalOnProperty</code> or environment variables.</td></tr></tbody></table><hr id="196e8d61-387b-8085-a46b-f57f534d51e9"/><h3 id="196e8d61-387b-8007-959d-d47a1f634da4" class=""><strong>🔥 Key Takeaway</strong></h3><p id="196e8d61-387b-80ef-b04e-ddb6fd76426a" class="">🔹 <strong>Never hardcode environment-specific configurations in the code!</strong></p><p id="196e8d61-387b-8026-992f-ff86e91db6ee" class="">🔹 Always use <strong>environment variables</strong> to dynamically inject configurations and ensure smooth <strong>deployment in different environments</strong>.</p><p id="196e8d61-387b-80ac-a604-c3969c5f505d" class="">🔹 <strong>Spring Boot simplifies DI</strong> with built-in support for <strong>Bean Management</strong> and <strong>Auto Configuration</strong>.</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

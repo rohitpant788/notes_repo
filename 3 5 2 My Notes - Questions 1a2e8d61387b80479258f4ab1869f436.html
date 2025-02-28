@@ -1,0 +1,1183 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>3.5.2 My Notes - Questions</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-transparentGray { background-color: undefined; }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1a2e8d61-387b-8047-9258-f4ab1869f436" class="page sans"><header><h1 class="page-title">3.5.2 My Notes - Questions</h1><p class="page-description"></p></header><div class="page-body"><ul id="1a2e8d61-387b-80f0-99a9-cff55edd2788" class="toggle"><li><details open=""><summary>What does @ Data  annotation do ?</summary><p id="1a2e8d61-387b-8005-89f0-dcbc78d02719" class="">When you use <code>@Data</code> on a class, Lombok automatically generates:</p><ol type="1" id="1a2e8d61-387b-80d8-9cdb-ffa1024afa64" class="numbered-list" start="1"><li><strong>Getters and Setters</strong> for all fields.</li></ol><ol type="1" id="1a2e8d61-387b-801d-97ed-f4b595ff5c23" class="numbered-list" start="2"><li><code><strong>toString()</strong></code><strong> Method</strong> for easy debugging.</li></ol><ol type="1" id="1a2e8d61-387b-80fc-b98d-d24950742fb2" class="numbered-list" start="3"><li><code><strong>equals()</strong></code><strong> and </strong><code><strong>hashCode()</strong></code><strong> Methods</strong> for object comparison.</li></ol><ol type="1" id="1a2e8d61-387b-8032-a7ce-c0089693cf71" class="numbered-list" start="4"><li><strong>A No-Argument Constructor</strong> if no other constructors are defined.</li></ol><h3 id="1a2e8d61-387b-801f-9627-c8b648a4ec1d" class=""><strong>Example Usage</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-80fc-bcbe-f12d50154634" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">import lombok.Data;
+
+@Data
+public class Person {
+    private String name;
+    private int age;
+}
+
+</code></pre><h3 id="1a2e8d61-387b-80ff-9896-c9e8a67689bc" class=""><strong>Equivalent Java Code Without Lombok</strong></h3><p id="1a2e8d61-387b-8057-b007-f79d99d3a85b" class="">Without Lombok, you&#x27;d have to manually write:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-80b8-b3c3-cd5afdf3a676" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+public class Person {
+    private String name;
+    private int age;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return &quot;Person{name=&#x27;&quot; + name + &quot;&#x27;, age=&quot; + age + &quot;}&quot;;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return age == person.age &amp;&amp; Objects.equals(name, person.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, age);
+    }
+}
+
+</code></pre><p id="1a2e8d61-387b-80a0-a71d-f910d8aa1fc1" class="">Using <code>@Data</code> saves a lot of code!</p><hr id="1a2e8d61-387b-8065-9c7b-f51115b1a697"/><h3 id="1a2e8d61-387b-8037-96b1-e05c544d1ae0" class=""><strong>Key Features of </strong><code><strong>@Data</strong></code></h3><ol type="1" id="1a2e8d61-387b-8084-9370-c4ca63d83825" class="numbered-list" start="1"><li><strong>Generates Getters &amp; Setters</strong> – Provides standard getter and setter methods.</li></ol><ol type="1" id="1a2e8d61-387b-8010-a857-ca074fb7b233" class="numbered-list" start="2"><li><strong>Implements </strong><code><strong>toString()</strong></code> – Prints object details conveniently.</li></ol><ol type="1" id="1a2e8d61-387b-80ad-a869-eecde17e503c" class="numbered-list" start="3"><li><strong>Implements </strong><code><strong>equals()</strong></code><strong> and </strong><code><strong>hashCode()</strong></code> – Ensures proper object comparison.</li></ol><ol type="1" id="1a2e8d61-387b-80f5-97e0-d3e026685189" class="numbered-list" start="4"><li><strong>Default Constructor</strong> – Creates a no-args constructor automatically.</li></ol><hr id="1a2e8d61-387b-804c-9934-d5eb66205d1f"/><h3 id="1a2e8d61-387b-809f-80ed-db9b868f0e61" class=""><strong>When to Use </strong><code><strong>@Data</strong></code><strong>?</strong></h3><ul id="1a2e8d61-387b-8064-b75f-ccb6513e671b" class="bulleted-list"><li style="list-style-type:disc">When you need a <strong>POJO (Plain Old Java Object)</strong> with standard methods.</li></ul><ul id="1a2e8d61-387b-8047-ae46-e70fdbc6c2e3" class="bulleted-list"><li style="list-style-type:disc">When you want to reduce boilerplate code.</li></ul><ul id="1a2e8d61-387b-80f9-8e51-e87e454f5c24" class="bulleted-list"><li style="list-style-type:disc">When you&#x27;re working with <strong>DTOs (Data Transfer Objects)</strong> or <strong>Entity Classes</strong>.</li></ul><h3 id="1a2e8d61-387b-80d9-99e1-e8d2ba62346e" class=""><strong>When NOT to Use </strong><code><strong>@Data</strong></code><strong>?</strong></h3><ul id="1a2e8d61-387b-805d-8297-c0ba3a52d9a8" class="bulleted-list"><li style="list-style-type:disc">If your class has <strong>custom business logic</strong> that overrides <code>equals()</code> or <code>hashCode()</code>, using <code>@Data</code> might not be the best choice.</li></ul><ul id="1a2e8d61-387b-80ec-b5ae-c44e3c698c9d" class="bulleted-list"><li style="list-style-type:disc">If your class has <strong>immutable fields</strong>, use <code>@Value</code> instead.</li></ul><h3 id="1a2e8d61-387b-80bc-8a71-ea0a5ef2100a" class=""><strong>Common Alternatives to </strong><code><strong>@Data</strong></code></h3><table id="1a2e8d61-387b-8047-8094-e85a307496f0" class="simple-table"><tbody><tr id="1a2e8d61-387b-80e8-bcce-f8000eba0f47"><td id="]OpN" class="">Annotation</td><td id="Y{vs" class="">Purpose</td></tr><tr id="1a2e8d61-387b-807f-bdf6-e243b312b866"><td id="]OpN" class=""><code>@Getter</code></td><td id="Y{vs" class="">Generates only getters</td></tr><tr id="1a2e8d61-387b-80d7-99ec-d1ea6da9c9ae"><td id="]OpN" class=""><code>@Setter</code></td><td id="Y{vs" class="">Generates only setters</td></tr><tr id="1a2e8d61-387b-8080-8351-ffcb7ab990d0"><td id="]OpN" class=""><code>@ToString</code></td><td id="Y{vs" class="">Generates <code>toString()</code></td></tr><tr id="1a2e8d61-387b-8068-adc4-d55f63b85976"><td id="]OpN" class=""><code>@EqualsAndHashCode</code></td><td id="Y{vs" class="">Generates <code>equals()</code> and <code>hashCode()</code></td></tr><tr id="1a2e8d61-387b-8001-aff3-eff2e54c695a"><td id="]OpN" class=""><code>@Value</code></td><td id="Y{vs" class="">Makes class immutable (final fields, no setters)</td></tr></tbody></table><p id="1a2e8d61-387b-80ec-b30c-ddf65cc3722b" class="">
+</p></details></li></ul><p id="1a2e8d61-387b-806c-810a-c4e4da731e63" class="">
+</p><ul id="1a2e8d61-387b-80e4-833a-e20e61edbefa" class="toggle"><li><details open=""><summary>So If I am using @ Data annotation , does it means i can skip @ NoArgsConstructor ?</summary><p id="1a2e8d61-387b-80c6-b898-cc81a0fab199" class="">Yes, if you are using <code>@Data</code> from <strong>Lombok</strong>, then you <strong>do not need to explicitly declare</strong> <code>@NoArgsConstructor</code>, unless your use case specifically requires it.</p><h3 id="1a2e8d61-387b-80cc-a3f6-f51414c4a914" class=""><strong>Why?</strong></h3><ul id="1a2e8d61-387b-8029-b6ab-e7b18561724c" class="bulleted-list"><li style="list-style-type:disc">By default, <code>@Data</code> <strong>provides a no-argument constructor</strong> <strong>only if</strong> there are <strong>no final fields</strong> in the class.</li></ul><ul id="1a2e8d61-387b-8000-9f1f-f3aa592a3030" class="bulleted-list"><li style="list-style-type:disc">If your class has <strong>final fields</strong>, Lombok <strong>does not generate a no-args constructor</strong> (because final fields must be initialized).</li></ul><ul id="1a2e8d61-387b-8044-b685-fe25c9c86d52" class="bulleted-list"><li style="list-style-type:disc">If you explicitly need a <strong>no-args constructor</strong>, you should use <code>@NoArgsConstructor</code>.</li></ul><hr id="1a2e8d61-387b-8082-a459-e385a2a65b13"/><h3 id="1a2e8d61-387b-8026-9d0f-d7a8beec1113" class=""><strong>Example 1: When </strong><code><strong>@Data</strong></code><strong> Alone is Enough</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-80c5-91d3-d757780cb054" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+import lombok.Data;
+
+@Data
+public class Employee {
+    private String name;
+    private int age;
+}
+
+</code></pre><p id="1a2e8d61-387b-80d9-aff4-e44f2317c0ab" class="">✅ In this case, Lombok <strong>automatically generates</strong>:</p><ul id="1a2e8d61-387b-8029-98eb-e293ac0a43e4" class="bulleted-list"><li style="list-style-type:disc">A <strong>no-argument constructor</strong> (<code>public Employee() {}</code>).</li></ul><ul id="1a2e8d61-387b-80c6-8c8b-dd839425b0cd" class="bulleted-list"><li style="list-style-type:disc">Getters, setters, <code>toString()</code>, <code>equals()</code>, and <code>hashCode()</code>.</li></ul><hr id="1a2e8d61-387b-8038-86a1-d270b16e80c2"/><h3 id="1a2e8d61-387b-8068-a087-fc01ef2639fe" class=""><strong>Example 2: When You Need </strong><code><strong>@NoArgsConstructor</strong></code></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-807f-ab5a-fd54517d1ecd" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+public class Employee {
+    private String name;
+    private int age;
+}
+
+</code></pre><p id="1a2e8d61-387b-808f-b369-f3933c298258" class="">✅ Here, explicitly adding <code>@NoArgsConstructor</code> <strong>is redundant</strong> because <code>@Data</code> already provides it.</p><hr id="1a2e8d61-387b-8077-8998-e7ec91fb5d72"/><h3 id="1a2e8d61-387b-8085-86d4-e93a7cb9546c" class=""><strong>Example 3: When </strong><code><strong>@NoArgsConstructor</strong></code><strong> is Required</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-80ef-a2c1-cfbf200332df" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor  // Required because of final fields
+public class Employee {
+    private final String name;
+    private final int age;
+}
+
+</code></pre><p id="1a2e8d61-387b-80e2-8509-e605a6d640ca" class="">🚨 <strong>Without </strong><code><strong>@NoArgsConstructor</strong></code><strong>, Lombok will not generate a no-args constructor</strong> because <code>name</code> and <code>age</code> are <code>final</code>.</p><hr id="1a2e8d61-387b-80bb-b64b-c72cce76ad09"/><h3 id="1a2e8d61-387b-80ad-b647-d2345cf47c01" class=""><strong>Conclusion</strong></h3><table id="1a2e8d61-387b-8096-ada2-ca4709506ccf" class="simple-table"><tbody><tr id="1a2e8d61-387b-8028-a4e3-ff730b66c1e0"><td id="sqwg" class="">Case</td><td id="]RU?" class=""><code>@Data</code> Alone</td><td id="&gt;AuX" class=""><code>@NoArgsConstructor</code> Needed?</td></tr><tr id="1a2e8d61-387b-8096-a08d-c593fbc3e15d"><td id="sqwg" class="">No final fields</td><td id="]RU?" class="">✅ No-arg constructor is generated</td><td id="&gt;AuX" class="">❌ Not needed</td></tr><tr id="1a2e8d61-387b-808a-86dd-ff4ef15fdbca"><td id="sqwg" class="">Contains final fields</td><td id="]RU?" class="">❌ No-arg constructor <strong>not</strong> generated</td><td id="&gt;AuX" class="">✅ Required</td></tr></tbody></table><p id="1a2e8d61-387b-8046-afe4-ce7a6b91a824" class="">🔹 <strong>If your class has final fields, use </strong><code><strong>@NoArgsConstructor</strong></code><strong> explicitly.</strong></p><p id="1a2e8d61-387b-808b-8acc-f5d52f7b6430" class="">🔹 <strong>If your class has non-final fields, </strong><code><strong>@Data</strong></code><strong> is enough.</strong></p></details></li></ul><p id="1a2e8d61-387b-80e0-8c0b-d6cb2f3509b9" class="">
+</p><ul id="1a2e8d61-387b-80e1-871b-fcbe877c97c9" class="toggle"><li><details open=""><summary>In JPA Entity class, there are two more annotations. One is @ Entity, other is  @ Table. So, why do we require these two? Can&#x27;t simply @ Table annotation works? Or do we require both?</summary><p id="1a2e8d61-387b-8085-8de1-e6eaea1a9f61" class="">n a <strong>JPA (Java Persistence API) entity class</strong>, both <code>@Entity</code> and <code>@Table</code> annotations serve different purposes, and you <strong>cannot replace </strong><code><strong>@Entity</strong></code><strong> with </strong><code><strong>@Table</strong></code>. You require both, but <code>@Table</code> is optional.</p><hr id="1a2e8d61-387b-8011-b124-f643e06a5db3"/><h3 id="1a2e8d61-387b-805d-a287-d43f352aec6e" class=""><strong>1️⃣ </strong><code><strong>@Entity</strong></code><strong> Annotation (Required)</strong></h3><ul id="1a2e8d61-387b-80a0-8370-e85ec1bdfa7a" class="bulleted-list"><li style="list-style-type:disc"><strong>Purpose</strong>: Marks a Java class as a <strong>JPA Entity</strong>, meaning it is mapped to a database table.</li></ul><ul id="1a2e8d61-387b-8030-bf5d-ee812072bd33" class="bulleted-list"><li style="list-style-type:disc"><strong>Mandatory</strong>: Without <code>@Entity</code>, Hibernate (or any JPA provider) <strong>won’t recognize the class</strong> as a database entity.</li></ul><ul id="1a2e8d61-387b-809b-9c30-cb910f028db0" class="bulleted-list"><li style="list-style-type:disc"><strong>Default Table Name</strong>: If <code>@Table</code> is <strong>not specified</strong>, the table name defaults to the <strong>class name</strong>.</li></ul><p id="1a2e8d61-387b-8080-95d6-fbec6f9cec1a" class="">✅ <strong>Example (Without </strong><code><strong>@Table</strong></code><strong>)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-8085-b5f6-c90e60e911f8" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+import jakarta.persistence.Entity;
+
+@Entity
+public class Employee {
+    private Long id;
+    private String name;
+}
+
+</code></pre><p id="1a2e8d61-387b-80f1-9158-f017611e9099" class="">🔹 <strong>Here, </strong><code><strong>Employee</strong></code><strong> is an entity, and the corresponding table will be </strong><code><strong>Employee</strong></code><strong> (default behavior).</strong></p><p id="1a2e8d61-387b-80f4-ac23-da393e9a70ba" class="">🔹 <strong>You cannot omit </strong><code><strong>@Entity</strong></code><strong>, as it is required for JPA to recognize the class.</strong></p><hr id="1a2e8d61-387b-803f-9495-dea1d64ffac8"/><h3 id="1a2e8d61-387b-8010-ae5e-c65a61e42479" class=""><strong>2️⃣ </strong><code><strong>@Table</strong></code><strong> Annotation (Optional)</strong></h3><ul id="1a2e8d61-387b-8025-a11e-df57910b7f1e" class="bulleted-list"><li style="list-style-type:disc"><strong>Purpose</strong>: Specifies the <strong>table name</strong> in the database.</li></ul><ul id="1a2e8d61-387b-807d-b565-f365360f2a2d" class="bulleted-list"><li style="list-style-type:disc"><strong>Optional</strong>: Used only when you want to override the <strong>default table name</strong>.</li></ul><ul id="1a2e8d61-387b-807d-9496-c2ff9146c02d" class="bulleted-list"><li style="list-style-type:disc"><strong>Custom Schema Support</strong>: Allows specifying a schema.</li></ul><p id="1a2e8d61-387b-8001-8fff-f0cd4a8efb33" class="">✅ <strong>Example (With </strong><code><strong>@Table</strong></code><strong>)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-8063-a9c9-c31ac0945a65" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = &quot;EMPLOYEES&quot;, schema = &quot;HR&quot;)
+public class Employee {
+    private Long id;
+    private String name;
+}
+
+</code></pre><p id="1a2e8d61-387b-80ff-a70c-fcfa15433674" class="">🔹 <strong>Now, the table name is </strong><code><strong>EMPLOYEES</strong></code><strong> instead of the default </strong><code><strong>Employee</strong></code>.</p><p id="1a2e8d61-387b-808c-844f-c60bcf423412" class="">🔹 <strong>The table is part of the </strong><code><strong>HR</strong></code><strong> schema.</strong></p><hr id="1a2e8d61-387b-8099-adfb-f1b4f3369aae"/><h3 id="1a2e8d61-387b-80da-bfb6-c49235a219b9" class=""><strong>Can We Use </strong><code><strong>@Table</strong></code><strong> Without </strong><code><strong>@Entity</strong></code><strong>?</strong></h3><p id="1a2e8d61-387b-80fd-9dc8-d3ba41d63978" class="">🚨 <strong>No!</strong></p><p id="1a2e8d61-387b-807f-ac2e-e6c644e2cd5a" class="">The <code>@Table</code> annotation only defines table metadata but does <strong>not</strong> mark a class as an entity.</p><p id="1a2e8d61-387b-8067-8198-c1f266e25fd9" class="">If you omit <code>@Entity</code>, Hibernate will <strong>ignore</strong> the class, and no table mapping will occur.</p><p id="1a2e8d61-387b-80a3-9265-ef19115df9ac" class="">✅ <strong>Correct Usage (Both </strong><code><strong>@Entity</strong></code><strong> and </strong><code><strong>@Table</strong></code><strong> Together)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-80e2-a626-c6a69643f956" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@Entity
+@Table(name = &quot;EMPLOYEES&quot;)
+public class Employee {
+    private Long id;
+    private String name;
+}
+
+</code></pre><p id="1a2e8d61-387b-8029-add1-e75f2c1f5773" class="">🚨 <strong>Incorrect Usage (Only </strong><code><strong>@Table</strong></code><strong> – Will Not Work)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-80fc-b15c-d2b50e26d445" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@Table(name = &quot;EMPLOYEES&quot;)
+public class Employee {
+    private Long id;
+    private String name;
+}
+
+</code></pre><p id="1a2e8d61-387b-8047-8c75-cd4646bae7c3" class="">🔹 <strong>This class is NOT an entity! Hibernate will ignore it.</strong></p><hr id="1a2e8d61-387b-80a8-b33b-f3ca592f5880"/><h3 id="1a2e8d61-387b-8051-9a73-d0ac0c1b8e94" class=""><strong>Final Answer: Why Do We Need Both?</strong></h3><table id="1a2e8d61-387b-808f-9e8a-c4360f85e7d8" class="simple-table"><tbody><tr id="1a2e8d61-387b-8006-8913-d13c2892a136"><td id="FxwT" class="">Annotation</td><td id="ZoA^" class="">Required?</td><td id="Pkw:" class="">Purpose</td></tr><tr id="1a2e8d61-387b-80e4-bd5c-d7795230f4c7"><td id="FxwT" class=""><code>@Entity</code></td><td id="ZoA^" class="">✅ <strong>Yes</strong></td><td id="Pkw:" class="">Marks the class as an entity, allowing JPA to manage it.</td></tr><tr id="1a2e8d61-387b-801a-b1c8-dafe93123184"><td id="FxwT" class=""><code>@Table</code></td><td id="ZoA^" class="">❌ No (Optional)</td><td id="Pkw:" class="">Used to <strong>override</strong> the default table name and schema.</td></tr></tbody></table><ul id="1a2e8d61-387b-80e7-aa98-f93e820708ea" class="bulleted-list"><li style="list-style-type:disc">You <strong>must</strong> use <code>@Entity</code> for JPA to recognize the class.</li></ul><ul id="1a2e8d61-387b-80a6-80a5-f80cd2644fe8" class="bulleted-list"><li style="list-style-type:disc"><code>@Table</code> is <strong>only needed</strong> if you want a <strong>custom table name</strong> or <strong>schema</strong>.</li></ul></details></li></ul><p id="1a2e8d61-387b-803f-87a7-fc331e147fe1" class="">
+</p><ul id="1a2e8d61-387b-80be-b15c-e8ae478c0551" class="toggle"><li><details open=""><summary>Why do we have the <code>@Repository</code> annotation in repository interfaces that extend <code>JpaRepository</code>? Can I replace it with <code>@Component</code> or <code>@Service</code>? What was the need for creating the <code>@Repository</code> annotation if <code>@Component</code> or <code>@Service</code> also serves the purpose?</summary><h3 id="1a2e8d61-387b-8086-b0e4-ff43b9fcd248" class=""><strong>Why Do We Use </strong><code><strong>@Repository</strong></code><strong> in Spring Data JPA?</strong></h3><p id="1a2e8d61-387b-80ac-ab79-eb4187449d4f" class="">In Spring, the <code>@Repository</code> annotation is used <strong>to mark a class as a Data Access Object (DAO)</strong> that interacts with the database. It is part of <strong>Spring’s Stereotype Annotations</strong>, just like <code>@Component</code>, <code>@Service</code>, and <code>@Controller</code>.</p><h3 id="1a2e8d61-387b-809c-b016-f99962da38a9" class=""><strong>1️⃣ Why Do We Need </strong><code><strong>@Repository</strong></code><strong>?</strong></h3><ul id="1a2e8d61-387b-80fe-a84f-fb62bd18af20" class="bulleted-list"><li style="list-style-type:disc"><strong>Exception Translation</strong>: <code>@Repository</code> <strong>automatically converts database exceptions</strong> (like <code>SQLException</code>) into <strong>Spring&#x27;s DataAccessException</strong>, making error handling more consistent.</li></ul><ul id="1a2e8d61-387b-80ec-a1ec-f75e5fadf033" class="bulleted-list"><li style="list-style-type:disc"><strong>Component Scanning</strong>: Spring automatically <strong>detects</strong> and registers repositories as beans.</li></ul><ul id="1a2e8d61-387b-80ac-a493-f9beb50b0eab" class="bulleted-list"><li style="list-style-type:disc"><strong>Clear Semantics</strong>: It indicates that the class is a <strong>data access layer</strong> component.</li></ul><h3 id="1a2e8d61-387b-8078-aef1-c5ea3f527a67" class=""><strong>2️⃣ Example Usage of </strong><code><strong>@Repository</strong></code></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-805a-b989-c5bb048e84bb" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface EmployeeRepository extends JpaRepository&lt;Employee, Long&gt; {
+    Employee findByName(String name);
+}
+
+</code></pre><p id="1a2e8d61-387b-80a4-b006-da60d7bdb580" class="">🔹 This marks <code>EmployeeRepository</code> as a <strong>Spring-managed bean</strong> and enables JPA functionalities.</p><hr id="1a2e8d61-387b-80e7-bd37-d289d1f922d0"/><h3 id="1a2e8d61-387b-80de-812b-dfbabd7ec9eb" class=""><strong>3️⃣ Can We Replace </strong><code><strong>@Repository</strong></code><strong> with </strong><code><strong>@Component</strong></code><strong> or </strong><code><strong>@Service</strong></code><strong>?</strong></h3><h3 id="1a2e8d61-387b-8018-90aa-ff4bb3acc254" class=""><strong>✅ Yes, technically you can, but you shouldn’t!</strong></h3><ul id="1a2e8d61-387b-80cc-91e4-c09eaf485e38" class="bulleted-list"><li style="list-style-type:disc"><code>@Component</code> will allow Spring to detect the repository, but <strong>you lose exception translation</strong>.</li></ul><ul id="1a2e8d61-387b-80c0-9d61-de0671bff53c" class="bulleted-list"><li style="list-style-type:disc"><code>@Service</code> is meant for <strong>business logic, not data access</strong>.</li></ul><ul id="1a2e8d61-387b-804e-a645-d00100be84af" class="bulleted-list"><li style="list-style-type:disc"><code>@Repository</code> is <strong>specifically designed</strong> for repositories.</li></ul><hr id="1a2e8d61-387b-806b-9603-dbb9d625d596"/><h3 id="1a2e8d61-387b-8065-b23a-c1f52c9f75e8" class=""><strong>4️⃣ Why Was </strong><code><strong>@Repository</strong></code><strong> Created If </strong><code><strong>@Component</strong></code><strong> Works?</strong></h3><ol type="1" id="1a2e8d61-387b-80f3-92cb-d49633a5a1e2" class="numbered-list" start="1"><li><strong>Specialized for DAOs</strong> – It clearly marks classes meant for <strong>database interactions</strong>.</li></ol><ol type="1" id="1a2e8d61-387b-800e-b94c-c24bd720da3b" class="numbered-list" start="2"><li><strong>Exception Handling</strong> – It enables <strong>Spring’s automatic exception translation</strong>, which <code>@Component</code> does not provide.</li></ol><ol type="1" id="1a2e8d61-387b-806b-ad68-e89ae9e3a135" class="numbered-list" start="3"><li><strong>Code Readability</strong> – Makes it clear that the interface is a <strong>repository</strong>, improving maintainability.</li></ol><hr id="1a2e8d61-387b-80af-a573-d255a8a2050e"/><h3 id="1a2e8d61-387b-807e-8a59-ceba221d3b7b" class=""><strong>5️⃣ Comparison: </strong><code><strong>@Repository</strong></code><strong> vs. </strong><code><strong>@Component</strong></code><strong> vs. </strong><code><strong>@Service</strong></code></h3><table id="1a2e8d61-387b-80c7-bd8e-e087fb4aecc7" class="simple-table"><tbody><tr id="1a2e8d61-387b-804d-bc4a-f7d1a64b794d"><td id=":A@{" class="">Annotation</td><td id="}gC{" class="">Purpose</td><td id="RGq}" class="">Exception Translation?</td><td id="krMi" class="">When to Use?</td></tr><tr id="1a2e8d61-387b-806f-8526-fa628f221990"><td id=":A@{" class=""><code>@Repository</code></td><td id="}gC{" class="">Data access layer (DAO)</td><td id="RGq}" class="">✅ Yes (JPA/Hibernate exceptions converted)</td><td id="krMi" class="">Use for database repositories</td></tr><tr id="1a2e8d61-387b-8050-9d2d-d318c84e8920"><td id=":A@{" class=""><code>@Service</code></td><td id="}gC{" class="">Business logic layer</td><td id="RGq}" class="">❌ No</td><td id="krMi" class="">Use for service classes (business logic)</td></tr><tr id="1a2e8d61-387b-802d-af95-c1c4dec93bc6"><td id=":A@{" class=""><code>@Component</code></td><td id="}gC{" class="">Generic Spring bean</td><td id="RGq}" class="">❌ No</td><td id="krMi" class="">Use for generic Spring-managed components</td></tr></tbody></table><hr id="1a2e8d61-387b-80a4-a241-f25cb1c2a650"/><h3 id="1a2e8d61-387b-80ed-b93d-e62fb523baca" class=""><strong>6️⃣ What Happens If We Don’t Use </strong><code><strong>@Repository</strong></code><strong>?</strong></h3><ul id="1a2e8d61-387b-80b3-b0ac-e30841a3eb7f" class="bulleted-list"><li style="list-style-type:disc">Spring <strong>will not apply exception translation</strong>, and database-related exceptions will be unchecked (<code>SQLException</code> instead of <code>DataAccessException</code>).</li></ul><ul id="1a2e8d61-387b-8038-8914-dd14e9eb6506" class="bulleted-list"><li style="list-style-type:disc">The repository will still work if you replace <code>@Repository</code> with <code>@Component</code>, but <strong>best practices suggest using </strong><code><strong>@Repository</strong></code><strong> for better clarity and maintainability</strong>.</li></ul><hr id="1a2e8d61-387b-80a5-856b-e1931693011e"/><h3 id="1a2e8d61-387b-8069-9b93-e72255d1143f" class=""><strong>Final Answer</strong></h3><p id="1a2e8d61-387b-805e-aadd-cf43d50f729a" class="">✅ <strong>Use </strong><code><strong>@Repository</strong></code><strong> for JPA Repositories.</strong></p><p id="1a2e8d61-387b-809a-bc10-d368add2a8fa" class="">✅ <code><strong>@Component</strong></code><strong> works but does not provide exception translation.</strong></p><p id="1a2e8d61-387b-804e-b97c-c915d718daf0" class="">❌ <strong>Do not use </strong><code><strong>@Service</strong></code><strong> for repositories, as it&#x27;s meant for business logic.</strong></p></details></li></ul><p id="1a2e8d61-387b-8077-9717-dd4f457dc465" class="">
+</p><ul id="1a2e8d61-387b-80ff-a609-ef0e8597d0da" class="toggle"><li><details open=""><summary>Let&#x27;s suppose I have two entities: one is <strong>Department</strong>, and the other is <strong>Employee</strong>. The relationship is that <strong>each department will have one manager who is an employee, but not every employee is necessarily a manager of a department</strong>. How would you establish this relationship between the two entities in JPA?</summary><hr id="1a2e8d61-387b-8064-bbf6-c2e88113edae"/><p id="1a2e8d61-387b-8085-9e36-f8abb04d6315" class="">
+</p><p id="1a2e8d61-387b-809c-898f-de87cbb79cd4" class="">
+</p><p id="1a2e8d61-387b-805f-90b8-de09b50a5e2a" class="">Since each department has <strong>one</strong> manager, but <strong>not every employee is a manager</strong>, this is a <strong>one-to-one relationship</strong> from the department&#x27;s perspective. However, an employee may or may not be associated as a manager with a department.</p><p id="1a2e8d61-387b-80be-9e77-eccbe38e61d4" class="">We can represent this in JPA using a <strong>unidirectional or bidirectional</strong> <code>@OneToOne</code> mapping.</p><hr id="1a2e8d61-387b-80bc-a46d-e8ff301f3fc9"/><h3 id="1a2e8d61-387b-80e4-a046-dbbe7096da94" class=""><strong>1️⃣ Establishing the Relationship (Recommended Approach)</strong></h3><p id="1a2e8d61-387b-80e6-9f60-fca1dbd2a9d3" class="">In the <strong>Department entity</strong>, we should establish a <code>@OneToOne</code> relationship where the <code>manager_id</code> refers to an <code>Employee</code>. The <code>@JoinColumn</code> ensures that the foreign key (<code>manager_id</code>) is stored in the <code>Department</code> table.</p><h3 id="1a2e8d61-387b-809e-bd87-f014f754a668" class=""><strong>Department Entity</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-8079-b872-c4bc770fbc88" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+import jakarta.persistence.*;
+
+@Entity
+public class Department {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+
+    @OneToOne
+    @JoinColumn(name = &quot;manager_id&quot;, unique = true)  // Foreign key
+    private Employee manager; // Refers to an Employee who is a manager
+
+    // Getters and Setters
+}
+
+</code></pre><p id="1a2e8d61-387b-8033-96a7-f586d7741b7a" class="">✅ <strong>Explanation:</strong></p><ul id="1a2e8d61-387b-8035-bee8-d6797ad16531" class="bulleted-list"><li style="list-style-type:disc"><code>@OneToOne</code> → Ensures that <strong>one department has exactly one manager</strong>.</li></ul><ul id="1a2e8d61-387b-802b-9998-e29b8f70df4d" class="bulleted-list"><li style="list-style-type:disc"><code>@JoinColumn(name = &quot;manager_id&quot;)</code> → Specifies that <code>manager_id</code> in the <code>Department</code> table is a <strong>foreign key</strong> referencing <code>Employee.id</code>.</li></ul><ul id="1a2e8d61-387b-80bc-af97-c630ffa72454" class="bulleted-list"><li style="list-style-type:disc"><code>unique = true</code> → Ensures that <strong>one employee can manage only one department at a time</strong>.</li></ul><hr id="1a2e8d61-387b-808b-a711-d6618fe06f30"/><h3 id="1a2e8d61-387b-80ff-badf-dbe020bd00e5" class=""><strong>Employee Entity</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-8059-b849-f3d3a0ceca9b" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">import jakarta.persistence.*;
+
+@Entity
+public class Employee {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+    private String position; // Can be &quot;Manager&quot; or any other role
+
+    // Getters and Setters
+}</code></pre><p id="1a2e8d61-387b-80b6-8a50-ededfb999bc2" class="">✅ <strong>Explanation:</strong></p><ul id="1a2e8d61-387b-80ab-893a-e3ce328b27ef" class="bulleted-list"><li style="list-style-type:disc">The <strong>Employee entity does not contain a reference to Department</strong> because not all employees are managers.</li></ul><ul id="1a2e8d61-387b-80ee-ad61-ee68c77b47d9" class="bulleted-list"><li style="list-style-type:disc">The <code>position</code> field can indicate whether an employee is a <strong>manager</strong> or not.</li></ul><hr id="1a2e8d61-387b-80ee-91d4-c2ed3ff7aebc"/><h3 id="1a2e8d61-387b-80ff-930b-cdfc73fb0011" class=""><strong>2️⃣ Database Schema Representation</strong></h3><p id="1a2e8d61-387b-803e-b710-df6f3bd7e2fa" class="">This relationship results in the following table structure:</p><h3 id="1a2e8d61-387b-80b2-bf71-ce7d78c0f63c" class=""><strong>Employee Table</strong></h3><table id="1a2e8d61-387b-806d-862d-f32c128cbc5b" class="simple-table"><tbody><tr id="1a2e8d61-387b-80fa-a65f-ff488aae0e1a"><td id="oDYo" class="">id</td><td id="mv{R" class="">name</td><td id="Ne]]" class="">position</td></tr><tr id="1a2e8d61-387b-80d4-88e7-fa538abd1c01"><td id="oDYo" class="">1</td><td id="mv{R" class="">Alice</td><td id="Ne]]" class="">Manager</td></tr><tr id="1a2e8d61-387b-80f8-bb21-eddbe08d2ffc"><td id="oDYo" class="">2</td><td id="mv{R" class="">Bob</td><td id="Ne]]" class="">Engineer</td></tr><tr id="1a2e8d61-387b-8044-b4a0-e9c6b68a017f"><td id="oDYo" class="">3</td><td id="mv{R" class="">Charlie</td><td id="Ne]]" class="">Analyst</td></tr></tbody></table><h3 id="1a2e8d61-387b-80ed-a90d-f25eb5d4c5ab" class=""><strong>Department Table</strong></h3><table id="1a2e8d61-387b-8075-809d-ee31d6f551ff" class="simple-table"><tbody><tr id="1a2e8d61-387b-8057-b81f-d2a44a69655e"><td id="iSkb" class="">id</td><td id="eUqb" class="">name</td><td id="hgxV" class="">manager_id</td></tr><tr id="1a2e8d61-387b-80aa-983f-cb1cb4abaa68"><td id="iSkb" class="">1</td><td id="eUqb" class="">IT</td><td id="hgxV" class="">1 (Alice)</td></tr><tr id="1a2e8d61-387b-8002-aec7-ea9096478bb6"><td id="iSkb" class="">2</td><td id="eUqb" class="">HR</td><td id="hgxV" class="">NULL</td></tr></tbody></table><p id="1a2e8d61-387b-8054-9b14-e648a13d77ca" class="">🔹 <strong>Only employees who are managers will have their IDs referenced in the </strong><code><strong>Department</strong></code><strong> table.</strong></p><p id="1a2e8d61-387b-809d-b651-e7c3eabb4d62" class="">🔹 <strong>Bob and Charlie are employees, but they are not managers, so they won’t be referenced in the </strong><code><strong>Department</strong></code><strong> table.</strong></p><hr id="1a2e8d61-387b-80af-97d3-e09d259a0f0b"/><h3 id="1a2e8d61-387b-80ee-bdad-c649203205fb" class=""><strong>3️⃣ Optional: Making It Bidirectional (If Needed)</strong></h3><p id="1a2e8d61-387b-80c9-8aa5-ce082414f981" class="">If you want to allow an <code>Employee</code> entity to see which <code>Department</code> they manage, you can add a <strong>mappedBy</strong> property in <code>Employee</code>.</p><h3 id="1a2e8d61-387b-8022-adca-c611743ade71" class=""><strong>Updated Employee Entity (Bidirectional)</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-80ff-baec-d8cccdce95d2" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">import jakarta.persistence.*;
+
+@Entity
+public class Employee {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+    private String position;
+
+    @OneToOne(mappedBy = &quot;manager&quot;) // Bidirectional mapping
+    private Department department;
+
+    // Getters and Setters
+}
+
+</code></pre><p id="1a2e8d61-387b-806e-b4c6-f5eaef03e185" class="">✅ <strong>Now, we can access an employee’s department (if they are a manager).</strong></p><p id="1a2e8d61-387b-8026-8478-c81e9c424946" class=""><em><mark class="highlight-blue"><mark class="highlight-red_background"><strong><span style="border-bottom:0.05em solid">Please note mappedBy tells this relationship is already mapped by manager field in Department entity. and there is no need to create a separate column in Employee table for manager. </span></strong></mark></mark></em></p><hr id="1a2e8d61-387b-80d2-b4fb-f898f01e1b73"/><h3 id="1a2e8d61-387b-8035-8c31-e4aa7cbb3825" class=""><strong>4️⃣ Summary:</strong></h3><table id="1a2e8d61-387b-800d-a510-c089c0bfdb8f" class="simple-table"><tbody><tr id="1a2e8d61-387b-8066-987a-cfe9f832e6d7"><td id="^^kl" class="">Relationship</td><td id="SN{T" class="">Annotation Used</td><td id="|J@l" class="">Explanation</td></tr><tr id="1a2e8d61-387b-80c4-b47a-ed6520d8020a"><td id="^^kl" class=""><strong>One Department → One Manager</strong></td><td id="SN{T" class=""><code>@OneToOne</code> (in <code>Department</code>)</td><td id="|J@l" class="">Each department has <strong>one</strong> manager who is an employee.</td></tr><tr id="1a2e8d61-387b-8039-9f0e-f92a2a88aefc"><td id="^^kl" class=""><strong>An Employee May or May Not Be a Manager</strong></td><td id="SN{T" class="">No explicit mapping in <code>Employee</code></td><td id="|J@l" class="">Since not all employees are managers, <code>Employee</code> doesn&#x27;t require a reference to <code>Department</code>.</td></tr><tr id="1a2e8d61-387b-800b-b6b2-f1e8ed61fa3a"><td id="^^kl" class=""><strong>Foreign Key Handling</strong></td><td id="SN{T" class=""><code>@JoinColumn(name = &quot;manager_id&quot;)</code></td><td id="|J@l" class="">Ensures <code>manager_id</code> in <code>Department</code> refers to an <code>Employee</code>.</td></tr><tr id="1a2e8d61-387b-8052-b741-d781921e3502"><td id="^^kl" class=""><strong>Uni vs. Bidirectional</strong></td><td id="SN{T" class=""><code>mappedBy = &quot;manager&quot;</code> (Optional)</td><td id="|J@l" class="">If bidirectional, <code>Employee</code> can see the <code>Department</code> they manage.</td></tr></tbody></table><hr id="1a2e8d61-387b-80bf-9b69-e59d548c2d01"/><h3 id="1a2e8d61-387b-80b5-96c1-f672834f6696" class=""><strong>Final Answer:</strong></h3><p id="1a2e8d61-387b-8093-aa5c-ee940d49070d" class="">To model the relationship where <strong>each department has one manager who is an employee, but not every employee is a manager</strong>, use <strong>a </strong><code><strong>@OneToOne</strong></code><strong> mapping in the </strong><code><strong>Department</strong></code><strong> entity with </strong><code><strong>@JoinColumn(name = &quot;manager_id&quot;)</strong></code>. This keeps the relationship efficient while maintaining integrity.</p></details></li></ul><p id="1a2e8d61-387b-801f-955b-eb7007e6e658" class="">
+</p><ul id="1a2e8d61-387b-800a-ba4b-de09629eeaab" class="toggle"><li><details open=""><summary>Why is <code>Optional&lt;T&gt;</code> used in <code>findById()</code>?</summary><p id="1a2e8d61-387b-8047-a96f-e060c4edde21" class=""><strong>❌ Problem Without Using </strong><code><strong>Optional</strong></code></p><p id="1a2e8d61-387b-8052-b9c8-d0ccfbadfa44" class="">Imagine you retrieve a department by its ID, but it <strong>might not exist</strong>. Without <code>Optional</code>, you might handle it like this:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-803e-bbcc-e007695715c8" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">Department department = departmentRepository.findById(id);
+if (department == null) {
+    throw new EntityNotFoundException(&quot;Department not found&quot;);
+}</code></pre><p id="1a2e8d61-387b-80ca-a4a2-c8eb4bd8e67b" class="">🚨 <strong>Difficulties:</strong></p><ul id="1a2e8d61-387b-80f9-bb6f-caf0ee604216" class="bulleted-list"><li style="list-style-type:disc">If you forget to check for <code>null</code>, it leads to a <code><strong>NullPointerException (NPE)</strong></code> at runtime.</li></ul><ul id="1a2e8d61-387b-800d-988e-d39034d229a4" class="bulleted-list"><li style="list-style-type:disc">Requires <strong>manual null-checking</strong> everywhere.</li></ul><h3 id="1a2e8d61-387b-80bd-9910-d80adee30a98" class=""><strong>✅ Solution Using </strong><code><strong>Optional&lt;T&gt;</strong></code></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-80f6-ace9-d83f22263cb4" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">Optional&lt;Department&gt; department = departmentRepository.findById(id);</code></pre><ul id="1a2e8d61-387b-804c-ba45-c0924652c2c7" class="bulleted-list"><li style="list-style-type:disc">Now, <code>department</code> is either <strong>present or empty</strong>, preventing accidental <code>null</code> access.</li></ul><ul id="1a2e8d61-387b-805b-953f-c049e64229e9" class="bulleted-list"><li style="list-style-type:disc">Makes it <strong>explicit</strong> that the entity may not exist.</li></ul><p id="1a2e8d61-387b-8065-8c71-ea738d7188a6" class="">📌 <strong>With </strong><code><strong>Optional</strong></code><strong>, null-checking is built into the API, reducing NPE risks!</strong></p></details></li></ul><ul id="1a2e8d61-387b-8058-930b-fe895df1c0aa" class="toggle"><li><details open=""><summary></summary></details></li></ul><ul id="1a2e8d61-387b-8062-a028-d76ac442e3d5" class="toggle"><li><details open=""><summary>What is the difference between <code>flatMap()</code> and <code>map()</code> in <code>Optional&lt;T&gt;</code>?</summary><h3 id="1a2e8d61-387b-8070-98a2-d869a3bfd2fb" class=""><strong>❌ Problem: Using </strong><code><strong>map()</strong></code><strong> Incorrectly</strong></h3><p id="1a2e8d61-387b-8081-8712-e5535877e6be" class="">If we use <code>map()</code> to retrieve the employee inside the department lookup:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-80c8-a8f1-c3cf6b6ae767" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">Optional&lt;Optional&lt;Employee&gt;&gt; manager = departmentRepository.findById(id).map(Department::getManager);</code></pre><p id="1a2e8d61-387b-80d8-81c7-edff302f218d" class="">🚨 <strong>Difficulties:</strong></p><ul id="1a2e8d61-387b-8069-8107-da961fab14fa" class="bulleted-list"><li style="list-style-type:disc">This results in <code>Optional&lt;Optional&lt;Employee&gt;&gt;</code>, making it hard to use.</li></ul><ul id="1a2e8d61-387b-80a5-846b-fd2c7aa534f0" class="bulleted-list"><li style="list-style-type:disc">We have <strong>nested Optionals</strong>, which require extra handling to extract the value.</li></ul><h3 id="1a2e8d61-387b-8051-b25d-cb5ebe57fe31" class=""><strong>✅ Solution Using </strong><code><strong>flatMap()</strong></code></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-8030-911c-f5c4b355b90e" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">Optional&lt;Employee&gt; manager = departmentRepository.findById(id).flatMap(Department::getManager);</code></pre><p id="1a2e8d61-387b-8072-8294-e9e00677ff0a" class="">📌 <strong>With </strong><code><strong>flatMap()</strong></code><strong>, the inner </strong><code><strong>Optional&lt;Employee&gt;</strong></code><strong> is automatically &quot;flattened&quot;, making it easier to work with.</strong></p></details></li></ul><p id="1a2e8d61-387b-801b-b279-ff7f79006583" class="">
+</p><ul id="1a2e8d61-387b-807d-b3e8-d5a53244c6e0" class="toggle"><li><details open=""><summary>How do you safely update an entity retrieved as <code>Optional&lt;T&gt;</code>?</summary><h3 id="1a2e8d61-387b-80f1-8f68-d3e43cbb6295" class=""><strong>❌ Problem Without Using </strong><code><strong>Optional</strong></code></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-809f-b7e5-ff99201fea0c" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">
+Department department = departmentRepository.findById(departmentId);
+Employee employee = employeeRepository.findById(employeeId);
+
+if (department == null || employee == null) {
+    throw new RuntimeException(&quot;Department or Employee not found&quot;);
+}
+
+department.setManager(employee);
+departmentRepository.save(department);</code></pre><p id="1a2e8d61-387b-8026-bc3d-ca6225fad0b0" class="">🚨 <strong>Difficulties:</strong></p><ul id="1a2e8d61-387b-80e4-b40b-f171068cc0a0" class="bulleted-list"><li style="list-style-type:disc">Requires multiple <code>if</code> checks.</li></ul><ul id="1a2e8d61-387b-80eb-a1bd-fc26d0a2a24e" class="bulleted-list"><li style="list-style-type:disc">Higher chance of <strong>forgetting a null check</strong>, leading to <code>NullPointerException</code>.</li></ul><h3 id="1a2e8d61-387b-8052-a9eb-e5fc0b68c5b9" class=""><strong>✅ Solution Using </strong><code><strong>Optional</strong></code></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-80bd-b6f7-c7974c098b69" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">public Department assignManager(Long departmentId, Long employeeId) {
+    return departmentRepository.findById(departmentId)
+        .flatMap(department -&gt; employeeRepository.findById(employeeId)
+            .map(employee -&gt; {
+                department.setManager(employee);
+                return departmentRepository.save(department);
+            })
+        ).orElseThrow(() -&gt; new EntityNotFoundException(&quot;Department or Employee not found&quot;));
+}</code></pre><p id="1a2e8d61-387b-8082-bb1b-c0819f22e02d" class="">📌 <strong>With </strong><code><strong>Optional</strong></code><strong>, we elegantly handle null cases without extra </strong><code><strong>if</strong></code><strong> statements.</strong></p></details></li></ul><p id="1a2e8d61-387b-8016-abf9-c264bc02f8a3" class="">
+</p><ul id="1a2e8d61-387b-8035-9657-c0c6ffdeb238" class="toggle"><li><details open=""><summary>When should you use <code>map()</code> instead of <code>flatMap()</code>?</summary><h3 id="1a2e8d61-387b-8066-aaa9-efa378a09164" class=""><strong>❌ Problem: Using </strong><code><strong>flatMap()</strong></code><strong> When </strong><code><strong>map()</strong></code><strong> Is Enough</strong></h3><p id="1a2e8d61-387b-8075-b064-f1f99360945d" class="">If we only need to extract an employee’s name:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-80e9-a26d-e3b3d183e2e1" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">
+Optional&lt;String&gt; employeeName = employeeRepository.findById(employeeId).flatMap(Employee::getName);
+
+</code></pre><p id="1a2e8d61-387b-801b-b455-c1c7e3630c52" class="">🚨 <strong>Difficulties:</strong></p><ul id="1a2e8d61-387b-802a-85cd-cd5c96cef9b1" class="bulleted-list"><li style="list-style-type:disc">This fails because <code>getName()</code> returns <code>String</code>, not <code>Optional&lt;String&gt;</code>.</li></ul><ul id="1a2e8d61-387b-8019-8287-d3f742f13a30" class="bulleted-list"><li style="list-style-type:disc"><code>flatMap()</code> requires a function returning <code>Optional&lt;T&gt;</code>.</li></ul><h3 id="1a2e8d61-387b-803d-857e-d91ba4d4daac" class=""><strong>✅ Correct Approach Using </strong><code><strong>map()</strong></code></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-8011-a882-f35e810d5b52" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">Optional&lt;String&gt; employeeName = employeeRepository.findById(employeeId).map(Employee::getName);</code></pre><p id="1a2e8d61-387b-809b-9b9b-e7edaffd1f69" class="">📌 <strong>Use </strong><code><strong>map()</strong></code><strong> when transforming values inside </strong><code><strong>Optional</strong></code><strong>, and </strong><code><strong>flatMap()</strong></code><strong> when dealing with nested Optionals!</strong></p></details></li></ul><p id="1a2e8d61-387b-80d9-8e06-f4cff12a5f85" class="">
+</p><ul id="1a2e8d61-387b-806a-b8a2-d5242e102d5b" class="toggle"><li><details open=""><summary>How can you handle missing entities when updating data?</summary><h3 id="1a2e8d61-387b-8040-b20d-c1197cd56172" class=""><strong>❌ Problem Without Proper Handling</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-807b-bc2e-f17500c3c890" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">public Department assignManager(Long departmentId, Long employeeId) {
+    Department department = departmentRepository.findById(departmentId).get();
+    Employee employee = employeeRepository.findById(employeeId).get();
+
+    department.setManager(employee);
+    return departmentRepository.save(department);
+}</code></pre><p id="1a2e8d61-387b-8077-9718-d7074fa5f5b6" class="">🚨 <strong>Difficulties:</strong></p><ul id="1a2e8d61-387b-80f4-94e8-dc7d6a0767fc" class="bulleted-list"><li style="list-style-type:disc"><code>.get()</code> <strong>throws </strong><code><strong>NoSuchElementException</strong></code> if the entity is missing.</li></ul><ul id="1a2e8d61-387b-800b-b621-cb65fef61062" class="bulleted-list"><li style="list-style-type:disc">Can cause <strong>runtime failures in production</strong>.</li></ul><h3 id="1a2e8d61-387b-8008-9d5d-ddeaa037a007" class=""><strong>✅ Solution Using </strong><code><strong>orElseThrow()</strong></code></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-80eb-a44c-fc322967535d" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+public Department assignManager(Long departmentId, Long employeeId) {
+    Department department = departmentRepository.findById(departmentId)
+        .orElseThrow(() -&gt; new EntityNotFoundException(&quot;Department not found&quot;));
+
+    Employee employee = employeeRepository.findById(employeeId)
+        .orElseThrow(() -&gt; new EntityNotFoundException(&quot;Employee not found&quot;));
+
+    department.setManager(employee);
+    return departmentRepository.save(department);
+}</code></pre><p id="1a2e8d61-387b-8065-97a1-c9f78e7762ef" class="">📌 <strong>With </strong><code><strong>orElseThrow()</strong></code><strong>, we explicitly handle missing entities without crashing the application.</strong></p></details></li></ul><p id="1a2e8d61-387b-803d-a700-ec5592771026" class="">
+</p><ul id="1a2e8d61-387b-8009-89c6-ed9fdc3710ee" class="toggle"><li><details open=""><summary>Let&#x27;s suppose I have two relationships in my entity class:  <br/>One-to-One (<br/><code>@OneToOne</code>)  One-to-Many (<code>@OneToMany</code>)    <br/>Which relationship will be <br/><strong>eagerly loaded</strong> by default, and which one will be <strong>lazily loaded</strong>?<br/><br/><br/></summary><p id="1a2e8d61-387b-80b1-8399-fdace2c6ba9a" class="">By default, <strong>JPA follows these loading strategies for relationships</strong>:</p><table id="1a2e8d61-387b-809d-912c-deb3528f9d5d" class="simple-table"><tbody><tr id="1a2e8d61-387b-800c-acf8-f608aaec713d"><td id="m_Fw" class="">Relationship Type</td><td id="EbSH" class="">Default Fetch Type</td></tr><tr id="1a2e8d61-387b-80d3-a40a-e16904b91d2b"><td id="m_Fw" class=""><code>@OneToOne</code></td><td id="EbSH" class=""><strong>EAGER</strong> (by default)</td></tr><tr id="1a2e8d61-387b-809b-9dbe-e355e0188f57"><td id="m_Fw" class=""><code>@OneToMany</code></td><td id="EbSH" class=""><strong>LAZY</strong> (by default)</td></tr></tbody></table><hr id="1a2e8d61-387b-80a8-97ec-f9eadf0c2104"/><h3 id="1a2e8d61-387b-8098-8390-d3f1ba7662e2" class=""><strong>1️⃣ One-to-One (</strong><code><strong>@OneToOne</strong></code><strong>) → Eager Loading by Default</strong></h3><h3 id="1a2e8d61-387b-80ba-89c5-d88b7ccdc6f5" class=""><strong>Example:</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-8057-9d9f-d415ca8da80f" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">
+@Entity
+public class Department {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+
+    @OneToOne
+    @JoinColumn(name = &quot;manager_id&quot;)
+    private Employee manager; // One manager per department
+
+}
+</code></pre><p id="1a2e8d61-387b-8063-8ae1-d53df4b45ff9" class="">🔹 <strong>Default Behavior:</strong> When a <code>Department</code> is fetched, its <code>manager</code> <strong>is loaded immediately (EAGER fetching)</strong>.</p><p id="1a2e8d61-387b-8059-9527-ef5b7e1afde5" class="">🔹 <strong>Problem with Eager Loading:</strong> If we only need the <code>Department</code>, but it always loads the <code>Employee</code>, it could lead to unnecessary database queries and performance overhead.</p><p id="1a2e8d61-387b-8081-9afb-f20a06f2e9ee" class="">✅ <strong>Solution:</strong> Explicitly mark it as <code>LAZY</code> if needed.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-8001-9f5c-cd94f43bd888" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">@OneToOne(fetch = FetchType.LAZY)
+@JoinColumn(name = &quot;manager_id&quot;)
+private Employee manager;</code></pre><hr id="1a2e8d61-387b-8008-9860-de584e30a8c6"/><h3 id="1a2e8d61-387b-80fb-b8e9-e066f72c5a60" class=""><strong> One-to-Many (</strong><code><strong>@OneToMany</strong></code><strong>) → Lazy Loading by Default</strong></h3><h3 id="1a2e8d61-387b-80fa-9eda-f4b05aa083ec" class=""><strong>Example:</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-801b-8c4d-ee44f9a76f36" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">@Entity
+public class Department {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+
+    @OneToMany(mappedBy = &quot;department&quot;)
+    private List&lt;Employee&gt; employees; // One department has many employees
+
+}</code></pre><p id="1a2e8d61-387b-80ae-a2f3-c8af959c67b7" class=""> <strong>Default Behavior:</strong> When a <code>Department</code> is fetched, the <code>employees</code> list <strong>is NOT loaded immediately</strong>. It is fetched <strong>only when accessed</strong> (Lazy Loading).</p><p id="1a2e8d61-387b-8038-a35c-ea5bf4bb8f04" class="">🔹 <strong>Why Lazy by Default?</strong> Since a department can have many employees, eager loading could cause <strong>huge performance issues</strong> by fetching unnecessary records.</p><p id="1a2e8d61-387b-8041-acff-ffa53a6e0a4a" class="">✅ <strong>Solution:</strong> If eager loading is required, explicitly set it as:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-8046-91eb-e819cda8a6db" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">@OneToMany(mappedBy = &quot;department&quot;, fetch = FetchType.EAGER)
+private List&lt;Employee&gt; employees;</code></pre><p id="1a2e8d61-387b-806e-b74d-e67e8e251f67" class=""> <strong>Warning:</strong> Setting <code>@OneToMany(fetch = FetchType.EAGER)</code> can cause the <strong>N+1 query problem</strong>, leading to performance degradation.</p><hr id="1a2e8d61-387b-80d4-823c-e7274c764c14"/><h3 id="1a2e8d61-387b-807f-bed4-e98f5f289a85" class=""><strong>3️⃣ Summary Table: Fetch Type Behavior</strong></h3><table id="1a2e8d61-387b-8013-8965-ec03b6d49836" class="simple-table"><tbody><tr id="1a2e8d61-387b-8070-b730-de61a3f5082b"><td id="~Y&lt;=" class="">Relationship Type</td><td id="Das?" class="">Default Fetch Type</td><td id="uRxI" class="">Reason</td></tr><tr id="1a2e8d61-387b-80b0-be6a-dede4238c67e"><td id="~Y&lt;=" class=""><code>@OneToOne</code></td><td id="Das?" class=""><strong>EAGER</strong></td><td id="uRxI" class="">Assumes only <strong>one</strong> associated object, so loads it immediately.</td></tr><tr id="1a2e8d61-387b-80d7-a17e-d464321d59a5"><td id="~Y&lt;=" class=""><code>@OneToMany</code></td><td id="Das?" class=""><strong>LAZY</strong></td><td id="uRxI" class="">Assumes a <strong>large collection</strong>, so avoids loading unless needed.</td></tr></tbody></table><hr id="1a2e8d61-387b-8007-8ffc-da0c72cd1f43"/><h3 id="1a2e8d61-387b-800e-a5df-c5a8102e50f1" class=""><strong>4️⃣ Best Practices</strong></h3><ul id="1a2e8d61-387b-80f6-9fe8-d5e740a84047" class="bulleted-list"><li style="list-style-type:disc"><strong>Prefer </strong><code><strong>LAZY</strong></code><strong> loading whenever possible</strong> to avoid performance issues.</li></ul><ul id="1a2e8d61-387b-802f-b0c4-e64dbc5af924" class="bulleted-list"><li style="list-style-type:disc"><strong>For </strong><code><strong>@OneToOne</strong></code><strong>, change to </strong><code><strong>LAZY</strong></code> if you don’t always need the related entity.</li></ul><ul id="1a2e8d61-387b-80af-938b-fbc88da4203f" class="bulleted-list"><li style="list-style-type:disc"><strong>For </strong><code><strong>@OneToMany</strong></code><strong>, keep it </strong><code><strong>LAZY</strong></code> and use <code>JOIN FETCH</code> in queries when necessary.</li></ul><p id="1a2e8d61-387b-80e5-be71-ebf8f7dc827e" class="">
+</p><p id="1a2e8d61-387b-80d9-9a68-e44e89a03838" class="">
+</p><p id="1a2e8d61-387b-80e5-97f1-f45ca9b5557f" class=""><br/><br/><br/><br/><br/></p></details></li></ul><ul id="1a2e8d61-387b-800a-8195-d41240b08520" class="toggle"><li><details open=""><summary>If I don’t explicitly mention the fetch type in a <strong>bidirectional</strong> <code>@OneToOne</code> relationship where <code>Department</code> has a <strong>manager (Employee)</strong> reference and <code>Employee</code> has a <strong>department</strong> reference, will it create a <strong>recursive loop</strong>? <br/>If <br/><strong>yes</strong>, in what scenario does it happen?<br/>How does it occur in a <br/><strong>Spring Boot REST API</strong> when returning JSON?<br/>How can we <br/><strong>avoid this issue</strong> effectively?<br/><br/></summary><h3 id="1a2e8d61-387b-802d-8410-fa52d5f5196a" class=""><strong>1️⃣ Will It Create a Recursive Loop?</strong></h3><p id="1a2e8d61-387b-80f5-a08e-c05327b1e31e" class="">✅ <strong>Yes, a recursive loop occurs</strong> when serializing entities in a REST API <strong>without using DTOs or proper annotations</strong>.</p><p id="1a2e8d61-387b-809b-8052-ce91e878a9ec" class="">📌 <strong>The issue happens when:</strong></p><ul id="1a2e8d61-387b-803d-a9ac-f6869a5f82df" class="bulleted-list"><li style="list-style-type:disc">A <code>Department</code> is fetched and returned as JSON.</li></ul><ul id="1a2e8d61-387b-806c-b85a-d89e32567627" class="bulleted-list"><li style="list-style-type:disc">The <code>Department</code> entity has a reference to <code>Employee</code> (manager).</li></ul><ul id="1a2e8d61-387b-80f5-8714-e587c075ca78" class="bulleted-list"><li style="list-style-type:disc">The <code>Employee</code> entity also has a reference back to <code>Department</code>.</li></ul><ul id="1a2e8d61-387b-80f4-b1ab-c113fbe5d721" class="bulleted-list"><li style="list-style-type:disc">The serialization process <strong>keeps looping infinitely</strong>, leading to <code><strong>StackOverflowError</strong></code>.</li></ul><hr id="1a2e8d61-387b-800d-8616-c2e861b10535"/><h2 id="1a2e8d61-387b-80f1-8c4f-f33d99fe2d22" class=""><strong>2️⃣ Scenario That Causes the Issue</strong></h2><h3 id="1a2e8d61-387b-80da-a1cb-ce2f6fe8b402" class=""><strong>Step 1: Entity Setup</strong></h3><h3 id="1a2e8d61-387b-80dc-9aa0-cd9d13e0a582" class=""><strong>Department Entity</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-8013-8dad-c25aeb23b91b" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@Entity
+public class Department {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+
+    @OneToOne
+    @JoinColumn(name = &quot;manager_id&quot;)  // By default, FetchType.EAGER
+    private Employee manager; // Circular reference with Employee
+
+    // Getters and Setters
+}
+
+</code></pre><h3 id="1a2e8d61-387b-800c-a2a7-e343a1047ecd" class=""><strong>Employee Entity</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-80b0-81d6-dc4d29fc4bc0" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">
+@Entity
+public class Employee {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+
+    @OneToOne(mappedBy = &quot;manager&quot;) // By default, FetchType.EAGER
+    private Department department; // Circular reference with Department
+
+    // Getters and Setters
+}
+
+</code></pre><hr id="1a2e8d61-387b-8046-9fb3-c8f405b32af2"/><h3 id="1a2e8d61-387b-809d-95d1-dd62e5f04524" class=""><strong>Step 2: REST Controller Without DTO</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-805c-98a0-d4497355e619" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">
+@RestController
+@RequestMapping(&quot;/departments&quot;)
+public class DepartmentController {
+
+    @Autowired
+    private DepartmentRepository departmentRepository;
+
+    @GetMapping(&quot;/{id}&quot;)
+    public Department getDepartment(@PathVariable Long id) {
+        return departmentRepository.findById(id)
+            .orElseThrow(() -&gt; new EntityNotFoundException(&quot;Department not found&quot;));
+    }
+}
+
+</code></pre><p id="1a2e8d61-387b-80e5-810d-e69568ca2131" class="">🚨 <strong>Issue:</strong></p><ul id="1a2e8d61-387b-806f-b2aa-c54c2d15e8d8" class="bulleted-list"><li style="list-style-type:disc">The response returns a <strong>Department object</strong>, which contains <code>manager (Employee)</code>.</li></ul><ul id="1a2e8d61-387b-8013-9a38-c60f5fc23bdb" class="bulleted-list"><li style="list-style-type:disc"><code>Employee</code> contains <code>department</code>, which again contains <code>manager</code>...</li></ul><ul id="1a2e8d61-387b-8029-a78a-ca51181ba1d2" class="bulleted-list"><li style="list-style-type:disc"><strong>Infinite recursion happens</strong>, causing a <code>StackOverflowError</code>.</li></ul><hr id="1a2e8d61-387b-802c-bbdf-cf0da7f8f1af"/><h3 id="1a2e8d61-387b-8092-b432-f8a09326e6e1" class=""><strong>Step 3: The Problematic JSON Response</strong></h3><p id="1a2e8d61-387b-8028-b3c1-c56fd0f364c7" class="">If a request is made to:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-80de-9cea-fb67ed89fc66" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">bash
+CopyEdit
+GET /departments/1
+
+</code></pre><p id="1a2e8d61-387b-8041-87ee-f2cee05177c9" class="">The expected JSON response <strong>should be</strong>:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-8023-ad0f-d66f5bed5710" class="code"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">
+{
+    &quot;id&quot;: 1,
+    &quot;name&quot;: &quot;IT Department&quot;,
+    &quot;manager&quot;: {
+        &quot;id&quot;: 100,
+        &quot;name&quot;: &quot;John Doe&quot;
+    }
+}
+
+</code></pre><p id="1a2e8d61-387b-80b9-82d2-ea93bfc9f627" class="">🚨 <strong>But in reality, the response never completes because of infinite recursion:</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-807f-aea4-d54a9667e1d4" class="code"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">
+{
+    &quot;id&quot;: 1,
+    &quot;name&quot;: &quot;IT Department&quot;,
+    &quot;manager&quot;: {
+        &quot;id&quot;: 100,
+        &quot;name&quot;: &quot;John Doe&quot;,
+        &quot;department&quot;: {
+            &quot;id&quot;: 1,
+            &quot;name&quot;: &quot;IT Department&quot;,
+            &quot;manager&quot;: {
+                &quot;id&quot;: 100,
+                &quot;name&quot;: &quot;John Doe&quot;,
+                &quot;department&quot;: {
+                    &quot;id&quot;: 1,
+                    &quot;name&quot;: &quot;IT Department&quot;,
+                    &quot;manager&quot;: { ... infinite recursion }
+                }
+            }
+        }
+    }
+}
+
+</code></pre><p id="1a2e8d61-387b-80a4-ab68-dc839ae33d9a" class="">📌 <strong>This leads to a </strong><code><strong>StackOverflowError</strong></code><strong> because the objects keep referencing each other indefinitely!</strong></p><hr id="1a2e8d61-387b-80b1-85b7-fc895f69f629"/><h2 id="1a2e8d61-387b-80e8-aa09-e89b21c6b0b6" class=""><strong>3️⃣ Solutions to Avoid Infinite Recursion</strong></h2><h3 id="1a2e8d61-387b-8004-9c4d-f74aedbffa81" class=""><strong>✅ Solution 1: Use </strong><code><strong>@JsonManagedReference</strong></code><strong> and </strong><code><strong>@JsonBackReference</strong></code></h3><p id="1a2e8d61-387b-8078-9ade-c290d4da2f47" class="">This approach <strong>breaks the infinite loop</strong> by ensuring only one direction is serialized.</p><h3 id="1a2e8d61-387b-80b5-9f11-cf190a43af7b" class=""><strong>Updated Department Entity</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-8094-91ca-c0a9e5a2b7e6" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@Entity
+public class Department {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+
+    @OneToOne
+    @JoinColumn(name = &quot;manager_id&quot;)
+    @JsonManagedReference  // Manages serialization
+    private Employee manager;
+}
+
+</code></pre><h3 id="1a2e8d61-387b-80c4-868b-edf4120d49e5" class=""><strong>Updated Employee Entity</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-803a-ac89-f3296f8db348" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@Entity
+public class Employee {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+
+    @OneToOne(mappedBy = &quot;manager&quot;)
+    @JsonBackReference  // Prevents infinite recursion
+    private Department department;
+}
+
+</code></pre><p id="1a2e8d61-387b-80b2-8d9f-e667309eaa19" class="">✅ <strong>Now, when serializing </strong><code><strong>Department</strong></code><strong>, it includes </strong><code><strong>manager (Employee)</strong></code><strong>, but does NOT serialize </strong><code><strong>department</strong></code><strong> inside </strong><code><strong>Employee</strong></code><strong>, breaking the recursion.</strong></p><hr id="1a2e8d61-387b-809c-a643-c5f878288450"/><h3 id="1a2e8d61-387b-8060-80b9-ffbbad7d8b46" class=""><strong>✅ Solution 2: Use </strong><code><strong>@JsonIgnore</strong></code><strong> to Prevent Recursion</strong></h3><p id="1a2e8d61-387b-8083-8aa8-c9dfa2a26de7" class="">Another simple solution is to <strong>ignore one side</strong> of the relationship.</p><h3 id="1a2e8d61-387b-80c0-96f7-e1ea944511ad" class=""><strong>Updated Employee Entity</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-8063-abe8-c58b914c49f0" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">@OneToOne(mappedBy = &quot;manager&quot;)
+@JsonIgnore // Prevents serialization of department inside Employee
+private Department department;
+
+</code></pre><p id="1a2e8d61-387b-806e-a23e-e6e84ba396a4" class="">✅ <strong>This ensures </strong><code><strong>Employee</strong></code><strong> never serializes </strong><code><strong>department</strong></code><strong>, avoiding recursion.</strong></p><p id="1a2e8d61-387b-8036-b44e-dd75378be4b1" class="">🚨 <strong>Downside:</strong> If you ever need to fetch <code>Employee.department</code>, it won’t be included in the response.</p><hr id="1a2e8d61-387b-80b3-872c-d5402b6aea9a"/><h3 id="1a2e8d61-387b-80bd-9466-eb07fa135821" class=""><strong>✅ Solution 3: Use </strong><code><strong>FetchType.LAZY</strong></code><strong> Instead of </strong><code><strong>EAGER</strong></code></h3><p id="1a2e8d61-387b-800a-abcc-f22a0972016f" class="">Changing the fetch type <strong>prevents unnecessary loading</strong> but does NOT fix the recursion alone.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-80d9-96d3-c9c840899d6a" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">@OneToOne(fetch = FetchType.LAZY)
+@JoinColumn(name = &quot;manager_id&quot;)
+private Employee manager;
+
+</code></pre><p id="1a2e8d61-387b-80a0-98f6-c793bb4fa89c" class="">🚨 <strong>Warning:</strong> This prevents <strong>automatic loading</strong>, but serialization can still cause recursion.</p><p id="1a2e8d61-387b-8004-bd2f-c7a661f3d7eb" class=""><strong>Combine it with </strong><code><strong>@JsonIgnore</strong></code><strong> or DTOs for a complete fix!</strong></p><hr id="1a2e8d61-387b-80f9-adb6-e6ce32fa5393"/><h3 id="1a2e8d61-387b-802e-8f0c-fe7b81a334c9" class=""><strong>✅ Solution 4: Use DTOs Instead of Direct Entity Serialization</strong></h3><p id="1a2e8d61-387b-8055-a5eb-f3384f49cb5b" class="">A <strong>better design approach</strong> is to <strong>never return entities in REST APIs</strong> but use <strong>DTOs</strong>.</p><h3 id="1a2e8d61-387b-8010-a83d-ddcdca0ea5b6" class=""><strong>Create a DTO Class</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-80d5-9bd9-f417eb52d67d" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+public class DepartmentDTO {
+    private Long id;
+    private String name;
+    private String managerName;
+
+    public DepartmentDTO(Department department) {
+        this.id = department.getId();
+        this.name = department.getName();
+        this.managerName = department.getManager() != null ? department.getManager().getName() : null;
+    }
+}
+
+</code></pre><h3 id="1a2e8d61-387b-8087-9d4b-dc0b656528c5" class=""><strong>Modify Controller to Use DTO</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-807d-b700-ef36c9abdaaa" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@RestController
+@RequestMapping(&quot;/departments&quot;)
+public class DepartmentController {
+
+    @Autowired
+    private DepartmentRepository departmentRepository;
+
+    @GetMapping(&quot;/{id}&quot;)
+    public DepartmentDTO getDepartment(@PathVariable Long id) {
+        Department department = departmentRepository.findById(id)
+            .orElseThrow(() -&gt; new EntityNotFoundException(&quot;Department not found&quot;));
+        return new DepartmentDTO(department);
+    }
+}
+
+</code></pre><p id="1a2e8d61-387b-808e-8573-e5bcf0d75cef" class="">✅ <strong>Now, recursion is completely avoided because only selected fields are included in the response.</strong></p><hr id="1a2e8d61-387b-803e-a36f-cecbad6999d4"/><h2 id="1a2e8d61-387b-80c6-bcfb-ea41fd862a92" class=""><strong>4️⃣ Updated Questionnaire for Interview</strong></h2><table id="1a2e8d61-387b-80e6-9e4d-e4a3ecf2195e" class="simple-table"><tbody><tr id="1a2e8d61-387b-8047-91be-d4f27e08cd47"><td id="m{JD" class="">Question</td><td id="|G\B" class="">Problem Without Fix</td><td id="IlU^" class="">Solution</td></tr><tr id="1a2e8d61-387b-8009-ac71-cd113909d966"><td id="m{JD" class=""><strong>Will an infinite recursion occur in bidirectional </strong><code><strong>@OneToOne</strong></code><strong> relationships?</strong></td><td id="|G\B" class="">Yes, because <code>Department → Employee → Department → Employee...</code> leads to <code>StackOverflowError</code>.</td><td id="IlU^" class="">Use <code>@JsonManagedReference</code> / <code>@JsonBackReference</code>, <code>@JsonIgnore</code>, or DTOs.</td></tr><tr id="1a2e8d61-387b-8022-9ef5-ca6bc3bf22c8"><td id="m{JD" class=""><strong>How does returning an entity in a Spring Boot REST API cause recursion?</strong></td><td id="|G\B" class="">When <code>Department</code> and <code>Employee</code> reference each other, serialization tries to serialize both indefinitely.</td><td id="IlU^" class="">Break recursion using annotations or DTOs.</td></tr><tr id="1a2e8d61-387b-8061-9b94-c0a9ece21811"><td id="m{JD" class=""><strong>Why does changing </strong><code><strong>FetchType.LAZY</strong></code><strong> not completely fix the recursion?</strong></td><td id="|G\B" class="">LAZY prevents automatic loading but doesn’t change JSON serialization behavior.</td><td id="IlU^" class="">Use <code>@JsonIgnore</code> or DTOs to control serialization.</td></tr><tr id="1a2e8d61-387b-80af-98ef-fea9f1b8f00d"><td id="m{JD" class=""><strong>What’s the best way to avoid infinite recursion in REST APIs?</strong></td><td id="|G\B" class="">Returning full entities exposes all relationships, causing recursion.</td><td id="IlU^" class="">Use DTOs instead of returning entities directly.</td></tr></tbody></table><hr id="1a2e8d61-387b-8076-b71c-fb1c9d8b97d3"/><h3 id="1a2e8d61-387b-8088-bb2a-dc3d4a17ed66" class=""><strong>Final Takeaways</strong></h3><ul id="1a2e8d61-387b-800a-8c01-e47b23d46036" class="bulleted-list"><li style="list-style-type:disc"><strong>By default, </strong><code><strong>@OneToOne</strong></code><strong> fetches EAGERLY</strong>, leading to recursion in bidirectional relationships.</li></ul><ul id="1a2e8d61-387b-8005-be3d-d3d9dfd60220" class="bulleted-list"><li style="list-style-type:disc"><strong>If entities are returned in REST APIs, infinite loops can occur</strong> due to serialization.</li></ul><ul id="1a2e8d61-387b-80ac-98d5-f016381bac37" class="bulleted-list"><li style="list-style-type:disc"><strong>Fix it using </strong><code><strong>@JsonManagedReference</strong></code><strong> / </strong><code><strong>@JsonBackReference</strong></code><strong>, </strong><code><strong>@JsonIgnore</strong></code><strong>, or DTOs.</strong></li></ul><ul id="1a2e8d61-387b-8071-b2a3-fa258fd5ad5a" class="bulleted-list"><li style="list-style-type:disc"><strong>Best practice:</strong> <strong>Use DTOs instead of returning entities directly.</strong></li></ul></details></li></ul><p id="1a2e8d61-387b-8018-884a-de62f2ced273" class="">
+</p><p id="1a2e8d61-387b-807d-a1de-cf3bf0cd5c18" class="">
+</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-80bf-bb20-c7fb7f0adb1a" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">DepartmentEntity departmentEntity = employeeEntity.map(
+    employee -&gt; employee.getManagedDepartment()
+).orElse(null);
+
+</code></pre><ul id="1a2e8d61-387b-8071-b7b5-f005de85d5fb" class="toggle"><li><details open=""><summary>In the above reference code, IntelliJ IDEA suggests that &quot;the lambda can be replaced with a method reference.&quot;<br/> &gt; What does this mean?<br/> &gt; What is the <br/><strong>benefit</strong> of using a method reference?<br/>&gt; What was the <br/><strong>initial problem</strong>, and how does using a method reference improve it?<br/><br/><br/></summary><h3 id="1a2e8d61-387b-80cd-82cf-cd043131ed6b" class=""><strong>1️⃣ Understanding the Initial Code with Lambda</strong></h3><ul id="1a2e8d61-387b-804e-a199-e3c957ec8dde" class="bulleted-list"><li style="list-style-type:disc"><code>employeeEntity</code> is an <code>Optional&lt;EmployeeEntity&gt;</code>.</li></ul><ul id="1a2e8d61-387b-8084-8706-f62e77f4855a" class="bulleted-list"><li style="list-style-type:disc"><code>map(employee -&gt; employee.getManagedDepartment())</code> applies <code>getManagedDepartment()</code> to the <code>EmployeeEntity</code> if present.</li></ul><ul id="1a2e8d61-387b-8058-b070-ee6b7fcbd8a3" class="bulleted-list"><li style="list-style-type:disc">If <code>employeeEntity</code> is empty, <code>orElse(null)</code> returns <code>null</code>.</li></ul><hr id="1a2e8d61-387b-80d7-91a6-ca0ff4c80dd8"/><h3 id="1a2e8d61-387b-80b9-97a8-c4655fe0bbfe" class=""><strong>2️⃣ What Does &quot;Can Be Replaced with Method Reference&quot; Mean?</strong></h3><p id="1a2e8d61-387b-80b0-a00a-faab7a8cb2c7" class="">Instead of using a lambda like:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-80dd-abdf-e512d3afbe59" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">employee -&gt; employee.getManagedDepartment()</code></pre><p id="1a2e8d61-387b-80ac-b56e-d00b39475f08" class="">You can <strong>replace it with a method reference</strong>:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-8026-9c3c-f2de3a4c67a8" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">DepartmentEntity departmentEntity = employeeEntity.map(EmployeeEntity::getManagedDepartment).orElse(null);</code></pre><p id="1a2e8d61-387b-80c3-b774-f61684335b80" class="">📌 <strong>Why is this possible?</strong></p><ul id="1a2e8d61-387b-8019-8de9-e92c4828d220" class="bulleted-list"><li style="list-style-type:disc">The lambda expression <code>employee -&gt; employee.getManagedDepartment()</code> <strong>is just calling an instance method on an object</strong>.</li></ul><ul id="1a2e8d61-387b-80c3-a29f-d176ce8743ad" class="bulleted-list"><li style="list-style-type:disc">The <code>map()</code> function expects a <strong>Function&lt;T, R&gt;</strong>, which is exactly what <code>EmployeeEntity::getManagedDepartment</code> represents.</li></ul><p id="1a2e8d61-387b-80c8-9855-f30c1499af53" class="">✅ <strong>So, IntelliJ suggests replacing it with a method reference for cleaner code.</strong></p><hr id="1a2e8d61-387b-8086-b370-db6a77b422bb"/><h3 id="1a2e8d61-387b-8072-8652-f73a5fd43b5a" class=""><strong>3️⃣ What Is the Benefit of Using Method Reference?</strong></h3><table id="1a2e8d61-387b-806f-be2a-f5c3041a9b4b" class="simple-table"><tbody><tr id="1a2e8d61-387b-8097-b69d-e3db328c3753"><td id="@pCe" class="">Feature</td><td id="EHDM" class="">Lambda (<code>-&gt;</code>)</td><td id="|Mv~" class="">Method Reference (<code>::</code>)</td></tr><tr id="1a2e8d61-387b-801d-95ad-de43af51d784"><td id="@pCe" class=""><strong>Readability</strong></td><td id="EHDM" class="">Slightly verbose</td><td id="|Mv~" class="">More concise</td></tr><tr id="1a2e8d61-387b-80be-8d14-d997a3fa5474"><td id="@pCe" class=""><strong>Performance</strong></td><td id="EHDM" class="">Same performance</td><td id="|Mv~" class="">Same performance</td></tr><tr id="1a2e8d61-387b-80ce-a1fc-fdb2848342d1"><td id="@pCe" class=""><strong>Code Simplicity</strong></td><td id="EHDM" class="">Requires extra syntax</td><td id="|Mv~" class="">Direct method reference</td></tr><tr id="1a2e8d61-387b-808b-9674-edc1bb5cfb5a"><td id="@pCe" class=""><strong>Maintainability</strong></td><td id="EHDM" class="">Might be unclear in large lambdas</td><td id="|Mv~" class="">More readable</td></tr></tbody></table><p id="1a2e8d61-387b-80a1-aa83-d147c22f2ce3" class="">🔹 <strong>Main Benefit</strong>: Method references <strong>make code cleaner, more readable, and concise</strong> without affecting performance.</p><hr id="1a2e8d61-387b-801b-86a4-d697ad5d4c65"/><h3 id="1a2e8d61-387b-8060-a284-c92b32f63d6c" class=""><strong>4️⃣ When Should You Use Method References?</strong></h3><ul id="1a2e8d61-387b-8051-a361-c55d25592a5d" class="bulleted-list"><li style="list-style-type:disc"><strong>If a lambda just calls a method</strong>, use a method reference.</li></ul><ul id="1a2e8d61-387b-8090-8ee8-e9b5ef3bb464" class="bulleted-list"><li style="list-style-type:disc">Example <strong>(Use method reference)</strong>:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-802c-8267-d8bd5b3cc49f" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">list.forEach(System.out::println); // Instead of list.forEach(s -&gt; System.out.println(s));</code></pre></li></ul><ul id="1a2e8d61-387b-800f-ac70-ce1debb87e7e" class="bulleted-list"><li style="list-style-type:disc">Example <strong>(Lambdas are needed when extra logic is required)</strong>:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-8074-9463-c5658efe800b" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">list.forEach(s -&gt; {
+    String formatted = &quot;[&quot; + s + &quot;]&quot;;
+    System.out.println(formatted);
+});
+
+</code></pre></li></ul><hr id="1a2e8d61-387b-8098-8763-e367d6500d52"/><h3 id="1a2e8d61-387b-80aa-aba8-e5309b6c37a7" class=""><strong>5️⃣ Final Answer:</strong></h3><ul id="1a2e8d61-387b-803b-a16e-d8c3d7faee31" class="bulleted-list"><li style="list-style-type:disc"><strong>Problem:</strong> The lambda expression <code>employee -&gt; employee.getManagedDepartment()</code> is unnecessarily verbose.</li></ul><ul id="1a2e8d61-387b-8043-a11f-f663531a1390" class="bulleted-list"><li style="list-style-type:disc"><strong>Solution:</strong> Replace it with <code>EmployeeEntity::getManagedDepartment</code>, making the code <strong>more concise and readable</strong>.</li></ul><ul id="1a2e8d61-387b-8077-bbe3-cc777c4054f1" class="bulleted-list"><li style="list-style-type:disc"><strong>Advantage:</strong> Method references improve <strong>code simplicity</strong> and <strong>readability</strong> without performance loss.</li></ul></details></li></ul><p id="1a2e8d61-387b-80ee-b677-cf120e7118d3" class=""><br/><br/></p><ul id="1a2e8d61-387b-80ca-9b7e-e9a047fb85a9" class="toggle"><li><details open=""><summary>What is the <code>@Builder</code> annotation in Java?<br/>Why do we use it?<br/>What are the <br/><strong>benefits</strong> of using it?<br/>What <br/><strong>problem does it solve</strong>?<br/>How does it work in the below reference code where <br/><code>@Builder</code> is used in <code>EmployeeEntity.java</code>?<br/><br/></summary><h3 id="1a2e8d61-387b-80a4-85ea-c4f43e4faada" class=""><strong>1️⃣ What is </strong><code><strong>@Builder</strong></code><strong>?</strong></h3><p id="1a2e8d61-387b-80e2-82bd-d1cee485d7ed" class=""><code>@Builder</code> is a <strong>Lombok annotation</strong> that <strong>automatically generates</strong> a <strong>Builder pattern</strong> for your class.</p><p id="1a2e8d61-387b-80ff-b607-ed5989e543d4" class="">📌 <strong>It allows you to create objects in a more flexible and readable way</strong> without needing a complex constructor.</p><p id="1a2e8d61-387b-80a2-98dc-f5837ff1100d" class="">✅ <strong>Example of </strong><code><strong>@Builder</strong></code><strong> in EmployeeEntity.java</strong></p><h3 id="1a2e8d61-387b-80a0-bd12-c86470c2ecd3" class=""><strong>Reference Code:</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-8047-aa08-dae9d241cce6" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">
+import lombok.Builder;
+import lombok.Data;
+
+@Data
+@Builder
+public class EmployeeEntity {
+    private Long id;
+    private String name;
+    private String position;
+}</code></pre><p id="1a2e8d61-387b-8043-96cc-d45bdade829a" class="">📌 <strong>What this does:</strong></p><ul id="1a2e8d61-387b-8001-b3d9-c270f97e2b1a" class="bulleted-list"><li style="list-style-type:disc"><code>@Data</code> generates <strong>getters, setters, </strong><code><strong>toString()</strong></code><strong>, </strong><code><strong>equals()</strong></code><strong>, and </strong><code><strong>hashCode()</strong></code>.</li></ul><ul id="1a2e8d61-387b-8059-865f-feac4b393c25" class="bulleted-list"><li style="list-style-type:disc"><code>@Builder</code> <strong>creates a builder pattern</strong> for constructing objects.</li></ul><hr id="1a2e8d61-387b-80f3-802c-efae0bedae46"/><h3 id="1a2e8d61-387b-8068-95e4-fe8a840b0293" class=""><strong>2️⃣ Problem Without </strong><code><strong>@Builder</strong></code></h3><p id="1a2e8d61-387b-804e-bc66-cc701fa1de9a" class="">Before <code>@Builder</code>, you had to <strong>manually write constructors</strong> or use <strong>setters</strong>:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-80b5-97b6-c72ec860787d" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">EmployeeEntity employee = new EmployeeEntity();
+employee.setId(1L);
+employee.setName(&quot;John Doe&quot;);
+employee.setPosition(&quot;Manager&quot;);</code></pre><p id="1a2e8d61-387b-801f-8bb9-e109977f9a33" class="">🚨 <strong>Problems:</strong></p><ul id="1a2e8d61-387b-80ec-a033-c57073a91d72" class="bulleted-list"><li style="list-style-type:disc">Too <strong>many setter calls</strong>, making the code <strong>less readable</strong>.</li></ul><ul id="1a2e8d61-387b-8049-bee6-e440ba6c4d8e" class="bulleted-list"><li style="list-style-type:disc"><strong>Immutable objects</strong> are difficult to create.</li></ul><hr id="1a2e8d61-387b-803e-b4c4-d984ab92f480"/><h3 id="1a2e8d61-387b-80f8-9013-fee968cfa64f" class=""><strong>3️⃣ Solution: Using </strong><code><strong>@Builder</strong></code></h3><p id="1a2e8d61-387b-8063-b4a6-db9556838099" class="">With <code>@Builder</code>, object creation is <strong>cleaner and more readable</strong>:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-80a0-a5fb-dffd705b68a2" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">EmployeeEntity employee = EmployeeEntity.builder()
+        .id(1L)
+        .name(&quot;John Doe&quot;)
+        .position(&quot;Manager&quot;)
+        .build();</code></pre><p id="1a2e8d61-387b-8055-9ee1-c250cc0985e8" class="">✅ <strong>Benefits of using </strong><code><strong>@Builder</strong></code></p><table id="1a2e8d61-387b-80c9-bb1b-f0fedae8cf2e" class="simple-table"><tbody><tr id="1a2e8d61-387b-8098-bac5-f2b6d0c8f4b5"><td id="Prl\" class="">Problem Without <code>@Builder</code></td><td id="xh}|" class="">Solution With <code>@Builder</code></td></tr><tr id="1a2e8d61-387b-8091-b5d0-eb916d8b5f91"><td id="Prl\" class="">Requires <strong>multiple setter calls</strong></td><td id="xh}|" class="">Uses <strong>chained method calls</strong>, making it cleaner</td></tr><tr id="1a2e8d61-387b-80f7-aa44-c1eae94e2410"><td id="Prl\" class=""><strong>Immutable objects</strong> are hard to create</td><td id="xh}|" class=""><strong>No need for setters</strong>, fields can be final</td></tr><tr id="1a2e8d61-387b-8051-b52b-fab5590631d2"><td id="Prl\" class="">Hard to <strong>track parameter order</strong> in constructors</td><td id="xh}|" class="">Named methods (<code>.id()</code>, <code>.name()</code>) improve clarity</td></tr></tbody></table><hr id="1a2e8d61-387b-80d4-a90c-ed839ff941df"/><h3 id="1a2e8d61-387b-801d-8839-ce282f1c9add" class=""><strong>4️⃣ What Problem Does </strong><code><strong>@Builder</strong></code><strong> Solve?</strong></h3><table id="1a2e8d61-387b-807c-9b2f-ed3f617d2ba5" class="simple-table"><tbody><tr id="1a2e8d61-387b-801e-a24a-e7c572612d21"><td id="BuMx" class="">Problem</td><td id="WP&lt;S" class="">How <code>@Builder</code> Solves It</td></tr><tr id="1a2e8d61-387b-80b0-b614-d05f19391134"><td id="BuMx" class=""><strong>Too many setter calls make object creation messy</strong></td><td id="WP&lt;S" class="">Allows <strong>chained, readable</strong> object creation</td></tr><tr id="1a2e8d61-387b-8022-bab0-e9e1c643d2c7"><td id="BuMx" class=""><strong>Constructors with many arguments are confusing</strong></td><td id="WP&lt;S" class="">Avoids <strong>long constructors</strong>, making code <strong>clearer</strong></td></tr><tr id="1a2e8d61-387b-80ff-b8a9-cf06a7acbf4e"><td id="BuMx" class=""><strong>Immutable objects require complex logic</strong></td><td id="WP&lt;S" class="">Works well with <code>@AllArgsConstructor</code> and <code>@Value</code></td></tr></tbody></table><hr id="1a2e8d61-387b-80a6-8308-dcdf57b5feed"/><h3 id="1a2e8d61-387b-80db-95d4-db7f6b9e33da" class=""><strong>5️⃣ How Does </strong><code><strong>@Builder</strong></code><strong> Work Internally?</strong></h3><p id="1a2e8d61-387b-8080-9523-edf9fbdb3b0c" class="">When you add <code>@Builder</code>, Lombok <strong>generates a static inner Builder class</strong> like this:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-80fe-9bb0-fbfa591f4ff4" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">public class EmployeeEntity {
+    private Long id;
+    private String name;
+    private String position;
+
+    public static class EmployeeEntityBuilder {
+        private Long id;
+        private String name;
+        private String position;
+
+        public EmployeeEntityBuilder id(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public EmployeeEntityBuilder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public EmployeeEntityBuilder position(String position) {
+            this.position = position;
+            return this;
+        }
+
+        public EmployeeEntity build() {
+            return new EmployeeEntity(id, name, position);
+        }
+    }
+
+    public static EmployeeEntityBuilder builder() {
+        return new EmployeeEntityBuilder();
+    }
+}
+
+</code></pre><p id="1a2e8d61-387b-8083-bc49-f065f4592310" class="">📌 <strong>Instead of writing this manually, </strong><code><strong>@Builder</strong></code><strong> generates it automatically!</strong></p><hr id="1a2e8d61-387b-80bf-8b37-d0da3850f0e0"/><h3 id="1a2e8d61-387b-8072-a48c-fce01ed5e053" class=""><strong>6️⃣ Can </strong><code><strong>@Builder</strong></code><strong> Work with Constructors?</strong></h3><p id="1a2e8d61-387b-8014-8d2b-d6c289d63552" class="">Yes! If your class has a <strong>constructor</strong>, <code>@Builder</code> works seamlessly:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-8078-aa3d-d378724612f9" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">@Data
+@Builder
+@AllArgsConstructor
+public class EmployeeEntity {
+    private final Long id;
+    private final String name;
+    private final String position;
+}
+
+</code></pre><p id="1a2e8d61-387b-80be-92d5-ee08b1b3bd2e" class="">✅ <strong>Now, fields can be </strong><code><strong>final</strong></code><strong>, making the class immutable.</strong></p><hr id="1a2e8d61-387b-801a-85f5-d5ebe5cf8657"/><h3 id="1a2e8d61-387b-80d3-addb-fa800603d5d5" class=""><strong>7️⃣ Summary</strong></h3><table id="1a2e8d61-387b-8001-951c-c384d0d80a50" class="simple-table"><tbody><tr id="1a2e8d61-387b-8087-8f70-d77fce9bac52"><td id="&lt;&gt;o\" class="">Feature</td><td id="i]IM" class="">Without <code>@Builder</code></td><td id="Rr;:" class="">With <code>@Builder</code></td></tr><tr id="1a2e8d61-387b-8077-80f9-fadc6fb8dc7e"><td id="&lt;&gt;o\" class="">Object Creation</td><td id="i]IM" class="">Requires <strong>setters</strong> or <strong>long constructors</strong></td><td id="Rr;:" class="">Uses <strong>chained method calls</strong></td></tr><tr id="1a2e8d61-387b-8086-9f58-fc26853acf6d"><td id="&lt;&gt;o\" class="">Code Readability</td><td id="i]IM" class="">Harder to read</td><td id="Rr;:" class="">More <strong>structured and clean</strong></td></tr><tr id="1a2e8d61-387b-80ad-8707-e65a94749696"><td id="&lt;&gt;o\" class="">Immutability</td><td id="i]IM" class="">Difficult to enforce</td><td id="Rr;:" class="">Works well with <code>final</code> fields</td></tr><tr id="1a2e8d61-387b-80bf-8b3e-e0e1ffcd1764"><td id="&lt;&gt;o\" class="">Constructor Overload</td><td id="i]IM" class="">Multiple constructors required</td><td id="Rr;:" class="">No need for multiple constructors</td></tr></tbody></table><hr id="1a2e8d61-387b-80fb-8874-ce5fe1603401"/><h3 id="1a2e8d61-387b-80f6-b9ab-c604bd6eaccf" class=""><strong>8️⃣ Final Answer</strong></h3><ul id="1a2e8d61-387b-800f-9c8a-c1a172c46fd4" class="bulleted-list"><li style="list-style-type:disc"><code>@Builder</code> in <code>EmployeeEntity.java</code> <strong>automatically generates the Builder pattern</strong>, making object creation <strong>easier and cleaner</strong>.</li></ul><ul id="1a2e8d61-387b-80e9-92de-dc38d99eaad8" class="bulleted-list"><li style="list-style-type:disc"><strong>Problem it solves:</strong> Avoids <strong>setters</strong>, makes objects <strong>immutable</strong>, and improves <strong>readability</strong>.</li></ul><ul id="1a2e8d61-387b-80bb-b80c-e2dd88ecb1eb" class="bulleted-list"><li style="list-style-type:disc"><strong>How it works:</strong> It <strong>creates a Builder class internally</strong>, allowing <strong>chained method calls</strong>.</li></ul><ul id="1a2e8d61-387b-804d-8164-c4785ba991e1" class="bulleted-list"><li style="list-style-type:disc"><strong>Best use case:</strong> When you need to <strong>construct objects in a flexible, readable way</strong>.</li></ul></details></li></ul><p id="1a2e8d61-387b-800d-afd8-e5b047792cb3" class="">
+</p><p id="1a2e8d61-387b-8035-9639-eb6b8660bb11" class=""> </p><p id="1a2e8d61-387b-80c9-94c4-dd886ba19363" class="">
+</p><p id="1a2e8d61-387b-8090-8e8d-eb88db04b103" class="">
+</p><p id="1a2e8d61-387b-80b8-abf0-cb0ac3e8a979" class="">
+</p><p id="1a2e8d61-387b-80fa-9c7e-e59f07d2388e" class="">
+</p><p id="1a2e8d61-387b-8051-9239-c2005fe39bce" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

@@ -1,0 +1,684 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>1.1 Introduction To Spring Framework and IOC Container</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-transparentGray { background-color: undefined; }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="195e8d61-387b-8009-9bdf-f63a29f29da7" class="page sans"><header><h1 class="page-title">1.1 Introduction To Spring Framework and IOC Container</h1><p class="page-description"></p></header><div class="page-body"><h2 id="195e8d61-387b-8034-ba58-d144f512dd5e" class=""><strong>🚀 Introduction to Spring Boot &amp; Spring Framework</strong></h2><ul id="195e8d61-387b-802d-8f31-e2b10d461743" class="bulleted-list"><li style="list-style-type:disc">This course will cover <strong>real-world applications</strong> with <strong>microservices, Kafka, and more</strong>.</li></ul><ul id="195e8d61-387b-80c1-a04c-f55de15ff371" class="bulleted-list"><li style="list-style-type:disc"><strong>Starting Point:</strong> Understanding <strong>Spring Framework</strong> before diving into <strong>Spring Boot</strong>.</li></ul><ul id="195e8d61-387b-8042-8ba4-e8c04093bcfd" class="bulleted-list"><li style="list-style-type:disc"><strong>Core Concepts Covered:</strong><ul id="195e8d61-387b-8086-bce2-c2cf31c3b6aa" class="bulleted-list"><li style="list-style-type:circle"><strong>Spring Framework:</strong> 🏗️ <strong>Beans, Dependency Injection, Auto Configuration</strong></li></ul><ul id="195e8d61-387b-8052-94ca-e3166a4d10b7" class="bulleted-list"><li style="list-style-type:circle"><strong>Spring Boot:</strong> 🚀 Creating <strong>scalable</strong> and <strong>production-ready</strong> applications.</li></ul></li></ul><ul id="195e8d61-387b-80be-83da-d492014f40c4" class="bulleted-list"><li style="list-style-type:disc">Designed to be a <strong>beginner-friendly</strong> course! No prior knowledge of Spring Boot required.</li></ul><hr id="195e8d61-387b-80ed-8369-df8a70ffbd5d"/><h2 id="195e8d61-387b-80e0-b3d1-da261dfd752a" class=""><strong>🛠️ Why Do Developers Need Spring Framework?</strong></h2><h3 id="195e8d61-387b-80c1-81ff-e8fd89dc6ca5" class=""><strong>👀 Before Spring Framework (Pre-2003)</strong></h3><ul id="195e8d61-387b-80d4-8076-ca5c6b47bcd3" class="bulleted-list"><li style="list-style-type:disc">Java developers were using <strong>Java Enterprise Edition (Java EE / J2EE)</strong> for web apps, batch processing, and authentication systems.</li></ul><ul id="195e8d61-387b-8023-b20d-d67b13114417" class="bulleted-list"><li style="list-style-type:disc"><strong>Main Problem:</strong> 🚨 <strong>Heavy Configuration Requirements!</strong><ul id="195e8d61-387b-80f1-bfb7-c94ba83caf30" class="bulleted-list"><li style="list-style-type:circle">Developers had to <strong>manually configure</strong>:<ul id="195e8d61-387b-80b8-902a-fd24bf28a4c0" class="bulleted-list"><li style="list-style-type:square">Servers 🖥️</li></ul><ul id="195e8d61-387b-8099-9510-f1f0fbed71b1" class="bulleted-list"><li style="list-style-type:square">Databases 🗄️</li></ul><ul id="195e8d61-387b-8025-9f0f-f24721fff5ec" class="bulleted-list"><li style="list-style-type:square">Logging, Authentication, Third-party Libraries 📑</li></ul></li></ul><ul id="195e8d61-387b-808e-ab28-c34178e48bcd" class="bulleted-list"><li style="list-style-type:circle">Could take <strong>2-3 months</strong> just to set up before writing business logic! 😨</li></ul></li></ul><h3 id="195e8d61-387b-80a3-9106-d4fc03462ff6" class=""><strong>🌱 Birth of Spring Framework (2003)</strong></h3><ul id="195e8d61-387b-8047-9a4b-eb8073be24f2" class="bulleted-list"><li style="list-style-type:disc">Created by <strong>Rod Johnson</strong> to <strong>simplify Java EE development</strong>.</li></ul><ul id="195e8d61-387b-80bb-865d-d5d3168a6de3" class="bulleted-list"><li style="list-style-type:disc"><strong>Spring Framework = A Butler for Developers 🏡</strong><ul id="195e8d61-387b-80a1-bd07-cb7426a91b40" class="bulleted-list"><li style="list-style-type:circle">Instead of setting up everything manually, Spring provides <strong>an assistant (IOC Container)</strong> to manage dependencies and configurations.</li></ul></li></ul><ul id="195e8d61-387b-80b9-b9a2-cae98db058e1" class="bulleted-list"><li style="list-style-type:disc"><strong>Key Features:</strong><ul id="195e8d61-387b-802b-82e3-d6c33e103e46" class="bulleted-list"><li style="list-style-type:circle"><strong>Inversion of Control (IOC) Container</strong> 🏗️</li></ul><ul id="195e8d61-387b-8021-b266-df0895aab1ad" class="bulleted-list"><li style="list-style-type:circle"><strong>Dependency Injection (DI)</strong></li></ul><ul id="195e8d61-387b-80c8-9688-f86bf06ed8ed" class="bulleted-list"><li style="list-style-type:circle"><strong>Aspect-Oriented Programming (AOP)</strong></li></ul><ul id="195e8d61-387b-8064-87c5-ceae7d7b16b3" class="bulleted-list"><li style="list-style-type:circle"><strong>Bean Management</strong></li></ul><ul id="195e8d61-387b-80e7-8648-d495033c68f9" class="bulleted-list"><li style="list-style-type:circle">Configuration using <strong>XML Files</strong>.</li></ul></li></ul><h3 id="195e8d61-387b-80f7-be54-e32e5a506214" class=""><strong>🚀 Evolution: Introduction of Spring Boot (2014)</strong></h3><ul id="195e8d61-387b-80e0-87a7-e13ce65baace" class="bulleted-list"><li style="list-style-type:disc"><strong>Spring Boot is built on top of Spring Framework</strong> (NOT a separate entity).</li></ul><ul id="195e8d61-387b-80ed-85a3-cc2b3017af8f" class="bulleted-list"><li style="list-style-type:disc"><strong>Solves the Configuration Problem:</strong> 🏠 <strong>Pre-configured “Fully Furnished House”</strong><ul id="195e8d61-387b-80c1-bd55-e88760221a42" class="bulleted-list"><li style="list-style-type:circle"><strong>Auto Configuration</strong></li></ul><ul id="195e8d61-387b-80cd-ab9c-cd0ef2f9fbd3" class="bulleted-list"><li style="list-style-type:circle"><strong>Starter Dependencies</strong></li></ul><ul id="195e8d61-387b-8048-b981-ef612884ef5a" class="bulleted-list"><li style="list-style-type:circle"><strong>Embedded Servers</strong></li></ul></li></ul><ul id="195e8d61-387b-80da-b12b-c13722228f8e" class="bulleted-list"><li style="list-style-type:disc"><strong>Outcome:</strong> ⏩ Developers could <strong>start coding business logic from Day 1!</strong></li></ul><hr id="195e8d61-387b-800c-85a8-d1a7ef8132aa"/><h2 id="195e8d61-387b-8003-935c-f290807ad9c9" class=""><strong>🔑 Key Concepts of Spring Framework</strong></h2><h3 id="195e8d61-387b-8011-8eee-d58b3488f5eb" class=""><strong>1️⃣ Inversion of Control (IOC) Container</strong> 🏗️</h3><ul id="195e8d61-387b-80d2-a14d-c1324f7cf2fb" class="bulleted-list"><li style="list-style-type:disc"><strong>IOC Container = The Brain 🧠 of Spring Framework</strong>.</li></ul><ul id="195e8d61-387b-8080-864b-d9dd2dd2b06d" class="bulleted-list"><li style="list-style-type:disc"><strong>Removes manual control</strong> from developers by:<ul id="195e8d61-387b-8054-8100-dedc9237ea82" class="bulleted-list"><li style="list-style-type:circle"><strong>Creating objects</strong> (Beans)</li></ul><ul id="195e8d61-387b-8099-a132-f6542de72e44" class="bulleted-list"><li style="list-style-type:circle"><strong>Injecting dependencies</strong> automatically</li></ul><ul id="195e8d61-387b-8064-ac07-d44a6a1fe2d4" class="bulleted-list"><li style="list-style-type:circle"><strong>Managing object lifecycle</strong>.</li></ul></li></ul><p id="195e8d61-387b-80aa-a62c-e38c6eeaf3ff" class="">🔍 <strong>Analogy:</strong></p><p id="195e8d61-387b-8072-9352-f5b80777854a" class="">Think of an <strong>Event-Driven System</strong>:</p><ul id="195e8d61-387b-80cb-8a2b-ed071adc770b" class="bulleted-list"><li style="list-style-type:disc">When you click a button, <strong>you don’t control</strong> which function runs – the system handles it.</li></ul><ul id="195e8d61-387b-8072-a1b8-cfc3191dd108" class="bulleted-list"><li style="list-style-type:disc">Similarly, <strong>IOC container manages</strong> object creation, dependencies, and execution.</li></ul><hr id="195e8d61-387b-805c-b438-f8b2d8c1cdad"/><h3 id="195e8d61-387b-80e7-9fa7-e7a8c766f167" class=""><strong>2️⃣ Dependency Injection (DI)</strong></h3><ul id="195e8d61-387b-8017-a983-defa25bb08bc" class="bulleted-list"><li style="list-style-type:disc"><strong>What?</strong> 🔄 Automatically injects <strong>one class into another</strong> instead of manually creating dependencies.</li></ul><ul id="195e8d61-387b-80fe-a290-c67d1c60f60b" class="bulleted-list"><li style="list-style-type:disc"><strong>Why?</strong> 🚀 Leads to a <strong>loosely coupled system</strong>, making applications easier to maintain and test.</li></ul><hr id="195e8d61-387b-80ac-b647-d70e771b14cc"/><h3 id="195e8d61-387b-80b5-8e31-d08e94015984" class=""><strong>3️⃣ Beans &amp; Bean Lifecycle</strong> 🌱</h3><ul id="195e8d61-387b-80d3-89fc-dcb6a26266a1" class="bulleted-list"><li style="list-style-type:disc"><strong>Beans = Java objects</strong> managed by Spring Framework.</li></ul><ul id="195e8d61-387b-8077-b381-eb5253193219" class="bulleted-list"><li style="list-style-type:disc"><strong>IOC Container creates and manages Beans</strong>.</li></ul><ul id="195e8d61-387b-8005-859d-d4614729273e" class="bulleted-list"><li style="list-style-type:disc"><strong>Lifecycle Steps:</strong><ol type="1" id="195e8d61-387b-80ed-bad6-fb9a5e78271a" class="numbered-list" start="1"><li><strong>Bean Instantiation</strong></li></ol><ol type="1" id="195e8d61-387b-802f-b42a-cbc17cfb628f" class="numbered-list" start="2"><li><strong>Dependency Injection</strong></li></ol><ol type="1" id="195e8d61-387b-80cf-9d01-c1d177d3328d" class="numbered-list" start="3"><li><strong>Post-processing &amp; Initialization</strong></li></ol><ol type="1" id="195e8d61-387b-801b-a94c-e11571ba7a29" class="numbered-list" start="4"><li><strong>Destruction when no longer needed</strong>.</li></ol></li></ul><hr id="195e8d61-387b-8073-9297-f82f45ff8cfb"/><h3 id="195e8d61-387b-8000-8c08-f2ae971a2744" class=""><strong>4️⃣ Aspect-Oriented Programming (AOP)</strong></h3><ul id="195e8d61-387b-8044-bd2e-f2320d4cc25b" class="bulleted-list"><li style="list-style-type:disc"><strong>What?</strong> 🔎 Allows adding <strong>cross-cutting concerns</strong> like <strong>logging, security, and transaction management</strong> <strong>without modifying core business logic</strong>.</li></ul><ul id="195e8d61-387b-8053-9f32-d12cf9eaa260" class="bulleted-list"><li style="list-style-type:disc"><strong>Why?</strong> 🚀 Improves <strong>code reusability</strong> and <strong>maintainability</strong>.</li></ul><hr id="195e8d61-387b-800d-a38f-d871fd44c1ce"/><h2 id="195e8d61-387b-8063-9da5-f45b93a93cd4" class=""><strong>🚀 Spring Boot vs Spring Framework</strong></h2><table id="195e8d61-387b-80c8-9cc4-f9885d03fa4f" class="simple-table"><tbody><tr id="195e8d61-387b-8033-a36a-ebca16d3ddcd"><td id="|~@O" class="">Feature</td><td id="PMEN" class="">Spring Framework 🏗️</td><td id="xb]M" class="">Spring Boot 🚀</td></tr><tr id="195e8d61-387b-80cd-86df-efc0c26989c8"><td id="|~@O" class=""><strong>Configuration</strong></td><td id="PMEN" class="">Manual (XML-based)</td><td id="xb]M" class="">Auto-configuration</td></tr><tr id="195e8d61-387b-8033-81b7-c0fb2e6bfe61"><td id="|~@O" class=""><strong>Dependency Management</strong></td><td id="PMEN" class="">Requires adding dependencies manually</td><td id="xb]M" class="">Starter dependencies handle it</td></tr><tr id="195e8d61-387b-80a0-a572-f227a478f99f"><td id="|~@O" class=""><strong>Embedded Server</strong></td><td id="PMEN" class="">Requires setting up Tomcat, Jetty, etc.</td><td id="xb]M" class="">Comes with an embedded server</td></tr><tr id="195e8d61-387b-8087-9739-df1bc158a221"><td id="|~@O" class=""><strong>Setup Time</strong></td><td id="PMEN" class=""><strong>7-10 days</strong></td><td id="xb]M" class=""><strong>Instant (Few Minutes!)</strong></td></tr></tbody></table><hr id="195e8d61-387b-8039-a479-e084a05848a9"/><h2 id="195e8d61-387b-80b2-9349-c6e508ed08aa" class=""><strong>🛠️ Components of Spring Boot</strong></h2><p id="195e8d61-387b-8034-b248-db5c636287cf" class="">1️⃣ <strong>Core Container:</strong> Dependency Injection, Beans, Application Context</p><p id="195e8d61-387b-8091-9240-ca33e7ab2405" class="">2️⃣ <strong>AOP (Aspect-Oriented Programming):</strong> Logging, Security, Transactions</p><p id="195e8d61-387b-802b-bd6c-df35ded4b0b5" class="">3️⃣ <strong>JDBC &amp; ORM:</strong> Simplified database interactions</p><p id="195e8d61-387b-801d-9f8f-f25e945de023" class="">4️⃣ <strong>Web Module:</strong> REST APIs, MVC framework</p><p id="195e8d61-387b-8094-aaec-c229f4094902" class="">5️⃣ <strong>Testing Module:</strong> Built-in test support</p><hr id="195e8d61-387b-80e5-9081-d3c90fd60ad3"/><h2 id="195e8d61-387b-80b0-a5ee-d6a1b6b65389" class=""><strong>📌 Final Thoughts</strong></h2><ul id="195e8d61-387b-807c-975e-fb3af19c48d4" class="bulleted-list"><li style="list-style-type:disc"><strong>Spring Boot makes Java development easier</strong> by reducing boilerplate code and configurations.</li></ul><ul id="195e8d61-387b-801d-b6dd-c46eb1685c2b" class="bulleted-list"><li style="list-style-type:disc"><strong>Core concepts like IOC, DI, Beans, and AOP</strong> are fundamental in understanding Spring Framework.</li></ul><ul id="195e8d61-387b-8056-86c0-fc3925619cac" class="bulleted-list"><li style="list-style-type:disc">In <strong>the next lecture</strong>, we will explore <strong>Beans and Dependency Injection in depth</strong>.</li></ul><p id="195e8d61-387b-80bb-97f4-eaf67dcf7216" class="">📌 <strong>KEY TAKEAWAY:</strong></p><p id="195e8d61-387b-804c-825f-dd80bd3cad38" class="">Spring Boot <strong>abstracts away the complexities</strong> of the Spring Framework, allowing developers to focus <strong>on business logic instead of configurations</strong>.</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

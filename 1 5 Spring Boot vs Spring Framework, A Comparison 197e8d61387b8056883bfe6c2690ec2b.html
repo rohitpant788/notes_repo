@@ -1,0 +1,693 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>1.5 Spring Boot vs Spring Framework, A Comparison</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-transparentGray { background-color: undefined; }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="197e8d61-387b-8056-883b-fe6c2690ec2b" class="page sans"><header><h1 class="page-title">1.5 Spring Boot vs Spring Framework, A Comparison</h1><p class="page-description"></p></header><div class="page-body"><h1 id="197e8d61-387b-80f9-848e-c2cb4b79e265" class=""><strong>Spring Boot vs Spring Framework: Understanding the Differences</strong></h1><p id="197e8d61-387b-8087-b5c4-d56e85554454" class=""><em>Spring Boot simplifies application development by providing auto-configuration, embedded servers, and dependency management, reducing boilerplate code.</em></p><hr id="197e8d61-387b-801c-9851-eae53afa74c3"/><h2 id="197e8d61-387b-804e-b214-c98871cf9566" class=""><strong>📌 Spring Boot &amp; Spring Framework Overview</strong></h2><ul id="197e8d61-387b-80c3-88e1-d5c23cdc6be5" class="bulleted-list"><li style="list-style-type:disc"><strong>Spring Framework</strong> was created in <strong>2003</strong> by <em>Roger Johnson</em> to provide a modular framework for Java applications.</li></ul><ul id="197e8d61-387b-80ec-9a7d-c3cefaf79d78" class="bulleted-list"><li style="list-style-type:disc"><strong>Spring Boot</strong> was developed in <strong>2014</strong> by <em>VMware</em> to simplify Spring applications with features like <strong>auto-configuration</strong> and <strong>starter dependencies</strong>.</li></ul><ul id="197e8d61-387b-8044-8d52-fd9a45eba40b" class="bulleted-list"><li style="list-style-type:disc">Spring Boot is built <strong>on top of</strong> Spring Framework, offering additional functionalities.</li></ul><p id="197e8d61-387b-8092-882a-c8f41416dd46" class="">📢 <strong>Key Takeaway</strong>:</p><p id="197e8d61-387b-8077-9a00-d2b654a42498" class="">➡ Spring Boot <strong>removes</strong> the need for manual configurations and makes microservice development easier.</p><hr id="197e8d61-387b-808a-ac13-eb2a3b4e5ba4"/><h2 id="197e8d61-387b-805f-909b-e2b109d4de6a" class=""><strong>🚀 Key Differences Between Spring Boot and Spring Framework</strong></h2><h3 id="197e8d61-387b-80f2-806f-d8acb3788c8e" class=""><strong>1️⃣ Starter Dependencies in Spring Boot</strong></h3><p id="197e8d61-387b-808e-8a9f-fa64c9b45ad3" class="">🔹 Spring Boot introduces <strong>starter dependencies</strong> to simplify project setup.</p><p id="197e8d61-387b-80a5-b7db-d4692192f797" class="">🔹 <strong>Spring Framework does not</strong> include starter dependencies, requiring manual dependency management.</p><p id="197e8d61-387b-804f-a403-fa17be609bd0" class="">🔹 Example:</p><ul id="197e8d61-387b-8066-88cc-cf8846326210" class="bulleted-list"><li style="list-style-type:disc"><strong>Spring Boot Starter Web Dependency</strong> → Provides built-in support for web applications.</li></ul><ul id="197e8d61-387b-809c-9fd0-f2236f9f853b" class="bulleted-list"><li style="list-style-type:disc"><strong>Spring Boot Starter Test Dependency</strong> → Supports testing with pre-configured settings.</li></ul><ul id="197e8d61-387b-80ab-9a15-dd55d0befa88" class="bulleted-list"><li style="list-style-type:disc"><strong>Spring Initializer</strong> → Allows adding dependencies easily while creating a project.</li></ul><p id="197e8d61-387b-80b0-9cef-de024d4a5a83" class="">📢 <strong>Advantage</strong>:</p><p id="197e8d61-387b-805a-9f9c-ffbf2c85c5fe" class="">✔ <strong>Reduces boilerplate code</strong> by providing pre-configured dependencies.</p><hr id="197e8d61-387b-80ec-9b69-c30313c95a93"/><h3 id="197e8d61-387b-806c-9cdc-ea10e655e6a7" class=""><strong>2️⃣ Auto-Configuration in Spring Boot</strong></h3><p id="197e8d61-387b-8027-a627-ec16404e5676" class="">🔹 One of the most powerful features of Spring Boot.</p><p id="197e8d61-387b-8071-84c3-ef54673b93e4" class="">🔹 Automatically configures dependencies based on what is available in the <strong>classpath</strong>.</p><p id="197e8d61-387b-8035-91c5-c7af964510f8" class="">🔹 Example Workflow:</p><ol type="1" id="197e8d61-387b-80b1-a727-c8458515e0c8" class="numbered-list" start="1"><li>Add a <strong>dependency</strong> in <code>pom.xml</code>.</li></ol><ol type="1" id="197e8d61-387b-808d-90ee-d372d332539c" class="numbered-list" start="2"><li><strong>Maven</strong> adds it to the <strong>classpath</strong>.</li></ol><ol type="1" id="197e8d61-387b-80fd-9023-e4afbf936625" class="numbered-list" start="3"><li>Spring Boot <strong>auto-configures</strong> the application using predefined configurations.</li></ol><p id="197e8d61-387b-8053-8f40-e00ca3b72195" class="">📢 <strong>Key Point</strong>:</p><p id="197e8d61-387b-8011-ac62-e7aa98abf5b7" class="">✔ <strong>Spring Boot loads configuration files automatically</strong>, whereas in Spring Framework, developers must manually configure each setting.</p><p id="197e8d61-387b-80a0-a83c-e3ade1b25dc2" class="">📌 <strong>Behind the Scenes</strong>:</p><ul id="197e8d61-387b-8004-bc82-cd1547bcc527" class="bulleted-list"><li style="list-style-type:disc">Spring Boot has a package: <code>spring-boot-autoconfigure</code></li></ul><ul id="197e8d61-387b-8048-83a6-ebc7c38a9319" class="bulleted-list"><li style="list-style-type:disc">Inside it, there is a <strong>meta-inf</strong> folder that contains:<ul id="197e8d61-387b-80f6-9002-c490024ac161" class="bulleted-list"><li style="list-style-type:circle"><strong>Auto-configuration imports</strong> → Defines which configurations should be loaded.</li></ul><ul id="197e8d61-387b-803f-951b-c6dfa4610030" class="bulleted-list"><li style="list-style-type:circle"><strong>Conditional configuration classes</strong> → Load only if specific conditions are met (e.g., a bean is missing).</li></ul></li></ul><p id="197e8d61-387b-807b-b195-e70b7fadfbbf" class="">📢 <strong>Advantage</strong>:</p><p id="197e8d61-387b-80ac-901f-d5e3fbe7cd1e" class="">✔ <strong>Simplifies project setup</strong> without needing to write complex configuration files.</p><p id="197e8d61-387b-8027-9e41-f7a8007fa53d" class="">🔜 Auto-configuration will be covered <strong>in the next lecture</strong> in greater detail.</p><hr id="197e8d61-387b-8007-b500-d0e32432fc4b"/><h3 id="197e8d61-387b-808f-ad09-e069d8f6dc05" class=""><strong>3️⃣ Externalized Configuration</strong></h3><p id="197e8d61-387b-80de-a62a-f6d3963b26c3" class="">🔹 Spring Boot allows configurations to be <strong>externalized</strong> using different property files.</p><p id="197e8d61-387b-8018-b610-f0aca5f08d1a" class="">🔹 Common property sources:</p><ul id="197e8d61-387b-80a7-9619-f5db3d5ddafe" class="bulleted-list"><li style="list-style-type:disc"><strong>application.properties</strong></li></ul><ul id="197e8d61-387b-80ee-a1fc-f37c2c788d6f" class="bulleted-list"><li style="list-style-type:disc"><strong>Environment variables</strong></li></ul><ul id="197e8d61-387b-808c-b388-fed7fed1a1c5" class="bulleted-list"><li style="list-style-type:disc"><strong>Command-line arguments</strong></li></ul><ul id="197e8d61-387b-804d-940f-c44b4eaecbfc" class="bulleted-list"><li style="list-style-type:disc"><strong>YAML files</strong></li></ul><p id="197e8d61-387b-8006-a733-d34866f19b97" class="">🔹 <strong>Spring Boot can load configurations from multiple sources</strong>, whereas in Spring Framework, configuration files need to be explicitly defined.</p><p id="197e8d61-387b-80e9-b87a-e16b24e155db" class="">📢 <strong>Advantage</strong>:</p><p id="197e8d61-387b-80de-a205-dfff7100be3c" class="">✔ Developers can use <strong>one codebase</strong> to support <strong>multiple configurations</strong> dynamically.</p><hr id="197e8d61-387b-80f7-b62c-d685530696fc"/><h3 id="197e8d61-387b-80a8-a31c-dee3f66f89ea" class=""><strong>4️⃣ Embedded Servers (Tomcat &amp; Jetty)</strong></h3><p id="197e8d61-387b-8096-b68f-d1fa99d17a5c" class="">🔹 <strong>Spring Boot provides built-in servers</strong>, while Spring Framework requires manual configuration.</p><p id="197e8d61-387b-80d4-a16d-e3ee3118bae0" class="">🔹 Example:</p><ul id="197e8d61-387b-8043-b112-e560d4f2ee39" class="bulleted-list"><li style="list-style-type:disc">If <code>spring-boot-starter-web</code> is added, it <strong>automatically</strong> includes <strong>Tomcat</strong>.</li></ul><ul id="197e8d61-387b-80b5-ab3a-f327636e1442" class="bulleted-list"><li style="list-style-type:disc">Inside <code>pom.xml</code>, the <strong>Spring Boot starter web dependency</strong> adds:<ul id="197e8d61-387b-8084-8993-f2c5fec12402" class="bulleted-list"><li style="list-style-type:circle">Embedded <strong>Tomcat</strong> or <strong>Jetty</strong>.</li></ul><ul id="197e8d61-387b-8053-a2ed-e069eb9652c2" class="bulleted-list"><li style="list-style-type:circle"><strong>Spring Web MVC</strong> dependency.</li></ul></li></ul><p id="197e8d61-387b-80f5-be69-fa73ea79df02" class="">📢 <strong>Advantage</strong>:</p><p id="197e8d61-387b-8074-9d7a-e9c552ec3dd5" class="">✔ <strong>No need to manually configure an external server</strong>—Spring Boot applications run <strong>independently</strong>.</p><hr id="197e8d61-387b-80d1-9291-ca1905666b7b"/><h3 id="197e8d61-387b-80d1-9b7a-e9593533649b" class=""><strong>5️⃣ Built-in Metrics &amp; Health Checks (Spring Boot Actuators)</strong></h3><p id="197e8d61-387b-80bb-97de-ec154a0d6b58" class="">🔹 <strong>Spring Boot Actuator</strong> provides <strong>pre-built</strong> endpoints for monitoring application health.</p><p id="197e8d61-387b-8060-a8e1-fb640b3a41e0" class="">🔹 Example:</p><ul id="197e8d61-387b-809c-a3f0-f14bb4e3b6a5" class="bulleted-list"><li style="list-style-type:disc"><code>/actuator/health</code> → Checks application health.</li></ul><ul id="197e8d61-387b-80b6-ad6e-dabf98ba539b" class="bulleted-list"><li style="list-style-type:disc"><code>/actuator/metrics</code> → Provides system metrics.</li></ul><p id="197e8d61-387b-802c-b4f9-db13089f4493" class="">🔹 <strong>Spring Framework does not provide these built-in monitoring features</strong>—developers must create endpoints manually.</p><p id="197e8d61-387b-801a-80bf-c981796be802" class="">📢 <strong>Advantage</strong>:</p><p id="197e8d61-387b-8036-a259-d8994cde7ee1" class="">✔ <strong>Production-ready monitoring with zero additional coding.</strong></p><hr id="197e8d61-387b-809b-a0d4-dfc288e6aef6"/><h3 id="197e8d61-387b-8017-8ac8-f20e848ecb05" class=""><strong>6️⃣ Dependency Management (Spring Boot Starter Parent)</strong></h3><p id="197e8d61-387b-804c-8c38-d35ef9458737" class="">🔹 <strong>Spring Boot manages dependency versions</strong> via <strong>Spring Boot Starter Parent</strong>.</p><p id="197e8d61-387b-80de-b4bd-f3262c4a5cbc" class="">🔹 Inside <code>pom.xml</code>:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="197e8d61-387b-80bb-a249-da1145848db6" class="code"><code class="language-XML" style="white-space:pre-wrap;word-break:break-all">xml
+CopyEdit
+&lt;parent&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+    &lt;version&gt;3.3.2&lt;/version&gt;
+&lt;/parent&gt;
+
+</code></pre><p id="197e8d61-387b-80dc-8396-eb496cfb5af5" class="">🔹 Benefits:</p><ul id="197e8d61-387b-80e2-8789-d3ef658da5b3" class="bulleted-list"><li style="list-style-type:disc"><strong>No need to manage version conflicts manually</strong>.</li></ul><ul id="197e8d61-387b-80d3-bd3c-ee110ca4b562" class="bulleted-list"><li style="list-style-type:disc"><strong>All dependencies are compatible</strong> with the parent version.</li></ul><p id="197e8d61-387b-8036-bd20-c4c44ec13860" class="">📢 <strong>Advantage</strong>:</p><p id="197e8d61-387b-8046-bba3-cad9f4957539" class="">✔ Developers <strong>only specify dependencies</strong>, and Spring Boot <strong>resolves version conflicts</strong> automatically.</p><hr id="197e8d61-387b-801e-8706-c6b49e381ff5"/><h2 id="197e8d61-387b-802d-9374-fdcb2a299ac4" class=""><strong>✨ Why Developers Prefer Spring Boot?</strong></h2><ul id="197e8d61-387b-8087-b78c-d02565a1af0b" class="bulleted-list"><li style="list-style-type:disc">✅ <strong>Eliminates boilerplate code</strong> – Focus on <strong>business logic</strong>.</li></ul><ul id="197e8d61-387b-8038-a4e8-ce06730b9b67" class="bulleted-list"><li style="list-style-type:disc">✅ <strong>Pre-configured dependencies</strong> – No manual setup required.</li></ul><ul id="197e8d61-387b-8072-b791-d2e1ad3d797b" class="bulleted-list"><li style="list-style-type:disc">✅ <strong>Auto-configuration</strong> – Saves time by reducing XML-based configuration.</li></ul><ul id="197e8d61-387b-80db-bb46-d08cd50ec0dd" class="bulleted-list"><li style="list-style-type:disc">✅ <strong>Embedded servers</strong> – No need to install and configure Tomcat/Jetty manually.</li></ul><ul id="197e8d61-387b-80b6-bfb7-cf05fe613150" class="bulleted-list"><li style="list-style-type:disc">✅ <strong>Actuators for monitoring</strong> – Easy <strong>health checks</strong> and <strong>metrics</strong>.</li></ul><ul id="197e8d61-387b-80a3-a4e0-f28fe174ed3b" class="bulleted-list"><li style="list-style-type:disc">✅ <strong>Simplified dependency management</strong> – <strong>Spring Boot Starter Parent</strong> handles versions.</li></ul><ul id="197e8d61-387b-8077-8cb3-ec68db8c213d" class="bulleted-list"><li style="list-style-type:disc">✅ <strong>Microservices-friendly</strong> – Ideal for <strong>modern distributed applications</strong>.</li></ul><hr id="197e8d61-387b-8016-837d-c96f82b5c79a"/><h2 id="197e8d61-387b-8066-99fe-cef26577d444" class=""><strong>📝 Summary for Quick Revision</strong></h2><table id="197e8d61-387b-806a-bc54-d1dea03df781" class="simple-table"><tbody><tr id="197e8d61-387b-8006-8eef-f6e323653292"><td id="hlXe" class="">Feature</td><td id="eq{]" class="">Spring Boot</td><td id=":~@c" class="">Spring Framework</td></tr><tr id="197e8d61-387b-8076-bc74-e93f384be1df"><td id="hlXe" class=""><strong>Starter Dependencies</strong></td><td id="eq{]" class="">✅ Available</td><td id=":~@c" class="">❌ Not available</td></tr><tr id="197e8d61-387b-8025-9594-c6bb53e20fc4"><td id="hlXe" class=""><strong>Auto-Configuration</strong></td><td id="eq{]" class="">✅ Yes</td><td id=":~@c" class="">❌ No</td></tr><tr id="197e8d61-387b-8024-ada3-c457f336ec62"><td id="hlXe" class=""><strong>Externalized Configurations</strong></td><td id="eq{]" class="">✅ Yes (e.g., <code>application.properties</code>)</td><td id=":~@c" class="">❌ Manual configuration required</td></tr><tr id="197e8d61-387b-8079-878b-ed1e08f4a96d"><td id="hlXe" class=""><strong>Embedded Servers</strong></td><td id="eq{]" class="">✅ Built-in (Tomcat, Jetty)</td><td id=":~@c" class="">❌ Manual setup required</td></tr><tr id="197e8d61-387b-8084-9c6d-f62234bca982"><td id="hlXe" class=""><strong>Built-in Actuator Monitoring</strong></td><td id="eq{]" class="">✅ Yes</td><td id=":~@c" class="">❌ No</td></tr><tr id="197e8d61-387b-8034-9c23-d5412ab2157d"><td id="hlXe" class=""><strong>Dependency Management</strong></td><td id="eq{]" class="">✅ Handled by <code>starter-parent</code></td><td id=":~@c" class="">❌ Manual version management</td></tr></tbody></table><hr id="197e8d61-387b-8036-a7c4-c01fa07ac884"/><h2 id="197e8d61-387b-80cf-bb0b-c4a9c78f6077" class=""><strong>🔮 What&#x27;s Next?</strong></h2><p id="197e8d61-387b-8033-8ba0-fc3af4399e23" class="">🔜 <strong>Next Lecture:</strong></p><ul id="197e8d61-387b-80d3-8a99-e04bb6741bd0" class="bulleted-list"><li style="list-style-type:disc">Deep dive into <strong>Auto-Configuration</strong> – Understanding how Spring Boot initializes components behind the scenes.</li></ul><ul id="197e8d61-387b-80a6-9c5a-cd2091b2d0ad" class="bulleted-list"><li style="list-style-type:disc">Exploring <strong>Maven</strong> and how it builds <strong>Spring Boot applications</strong>.</li></ul><hr id="197e8d61-387b-804c-987f-c328b27017a8"/><p id="197e8d61-387b-8073-8ad4-e031af5c6702" class="">🎯 <strong>Key Takeaways:</strong></p><ul id="197e8d61-387b-8035-8fea-da4f79f425fc" class="bulleted-list"><li style="list-style-type:disc">Spring Boot <strong>simplifies development</strong> by handling configuration, dependency management, and server setup.</li></ul><ul id="197e8d61-387b-80d2-8e96-ecb15fa378e5" class="bulleted-list"><li style="list-style-type:disc"><strong>Starter dependencies &amp; auto-configuration</strong> reduce boilerplate code.</li></ul><ul id="197e8d61-387b-805a-b9ac-d4601cb51dae" class="bulleted-list"><li style="list-style-type:disc"><strong>Embedded servers &amp; externalized configurations</strong> improve flexibility.</li></ul><ul id="197e8d61-387b-80ff-a595-d7b255948476" class="bulleted-list"><li style="list-style-type:disc"><strong>Actuators provide built-in monitoring</strong> for production applications.</li></ul><ul id="197e8d61-387b-80b2-8396-d970f1e53073" class="bulleted-list"><li style="list-style-type:disc"><strong>Dependency management is automated</strong>, reducing version conflicts.</li></ul><p id="197e8d61-387b-800f-b28d-fa1dde0facbc" class="">🚀 <strong>Spring Boot is the go-to choice for modern microservice development!</strong></p><hr id="197e8d61-387b-80ce-b80a-e688b0ef344e"/><p id="197e8d61-387b-80f5-b732-d4190aa4360e" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

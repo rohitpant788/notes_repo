@@ -1,0 +1,817 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>5.3.2 My Notes - Questions</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-transparentGray { background-color: undefined; }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1a6e8d61-387b-80dc-9cc6-cb3621fa0397" class="page sans"><header><h1 class="page-title">5.3.2 My Notes - Questions</h1><p class="page-description"></p></header><div class="page-body"><ul id="1a6e8d61-387b-802f-b04e-c58792d5bb42" class="toggle"><li><details open=""><summary>Detailed Explanation of Spring Security Authentication Flow ? </summary><p id="1a6e8d61-387b-80ff-abda-f2cba24e45b9" class="">In Spring Security, authentication is the process of verifying the identity of a user attempting to access a secured resource. Below is a <strong>detailed breakdown of the authentication flow</strong>, step by step.</p><hr id="1a6e8d61-387b-8095-ac87-d51d53f4d530"/><h3 id="1a6e8d61-387b-8038-bb7d-e1a41ccd1b96" class=""><strong>📍 1. Client Login Request</strong></h3><p id="1a6e8d61-387b-8002-9f75-c682363c7e7b" class="">
+</p><p id="1a6e8d61-387b-805b-8c0c-e43ec279a63a" class="">✔️ A <strong>client (user) sends a login request</strong> with their username and password to the application.</p><p id="1a6e8d61-387b-80cb-ad53-e974ee4de517" class="">✔️ The request <strong>first reaches the Spring Security filter chain</strong>, which consists of multiple security filters.</p><hr id="1a6e8d61-387b-80a2-b39c-f65c768a6ca1"/><h3 id="1a6e8d61-387b-8019-842f-ea28e5b8b61b" class=""><strong>📍 2. Security Filter Chain</strong></h3><p id="1a6e8d61-387b-809e-9e07-f7c2c1282a77" class="">✔️ The request <strong>passes through multiple security filters</strong>, including:</p><ul id="1a6e8d61-387b-8084-9d96-eb862469cbb1" class="bulleted-list"><li style="list-style-type:disc"><code>CorsFilter</code> → Handles Cross-Origin Resource Sharing (CORS)</li></ul><ul id="1a6e8d61-387b-80a4-8576-c3bc95256eea" class="bulleted-list"><li style="list-style-type:disc"><code>CsrfFilter</code> → Protects against Cross-Site Request Forgery attacks</li></ul><ul id="1a6e8d61-387b-8036-9f0e-d380c3042db5" class="bulleted-list"><li style="list-style-type:disc"><code>LogoutFilter</code> → Handles logout functionality</li></ul><ul id="1a6e8d61-387b-80f3-b96d-cf287470165e" class="bulleted-list"><li style="list-style-type:disc"><code>UsernamePasswordAuthenticationFilter</code> → Processes authentication requests</li></ul><ul id="1a6e8d61-387b-8046-9d30-f844c7f1cc80" class="bulleted-list"><li style="list-style-type:disc"><code>BearerTokenAuthenticationFilter</code> → Used in JWT-based authentication</li></ul><figure id="1a6e8d61-387b-8013-85bb-c9495fac9f8a" class="image"><a href="image%202.png"><img style="width:576px" src="image%202.png"/></a></figure><p id="1a6e8d61-387b-8047-b9d1-fca515ac4545" class="">✔️ The request is intercepted by <strong>DelegatingFilterProxy</strong>, which delegates it to <code>FilterChainProxy</code>.</p><p id="1a6e8d61-387b-80ce-82e1-fcbcae996539" class="">✔️ <code>FilterChainProxy</code> ensures the request <strong>flows through the necessary security filters</strong>.</p><hr id="1a6e8d61-387b-8073-a277-c6200f83aeef"/><h3 id="1a6e8d61-387b-80f2-9900-eda7ebac33d1" class=""><strong>📍 3. Authentication Manager &amp; Provider Manager</strong></h3><p id="1a6e8d61-387b-80e1-b1ef-d884158a80f3" class="">✔️ After passing through the filter chain, the request <strong>is handed over to the </strong><code><strong>AuthenticationManager</strong></code>.</p><p id="1a6e8d61-387b-80aa-b204-e3830341f478" class="">✔️ <code><strong>AuthenticationManager</strong></code> is just an <strong>interface</strong> that defines the method:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a6e8d61-387b-807b-8a0f-d05b6c71af79" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">Authentication authenticate(Authentication authentication);</code></pre><p id="1a6e8d61-387b-8088-b536-c5fae9e6242d" class="">✔️ <code>AuthenticationManager</code> is <strong>implemented by </strong><code><strong>ProviderManager</strong></code>, which <strong>delegates the authentication request</strong> to a list of authentication providers.</p><p id="1a6e8d61-387b-80c8-9353-d07883707f39" class="">✔️ <code><strong>ProviderManager</strong></code><strong> contains multiple authentication providers</strong>:</p><ul id="1a6e8d61-387b-807f-84fd-eb1fa1e58062" class="bulleted-list"><li style="list-style-type:disc"><code>DaoAuthenticationProvider</code> (Username &amp; Password Authentication)</li></ul><ul id="1a6e8d61-387b-80cd-a176-fcff95126fcf" class="bulleted-list"><li style="list-style-type:disc"><code>OAuth2AuthenticationProvider</code> (Google, Facebook, etc.)</li></ul><ul id="1a6e8d61-387b-8094-bf52-ed8789a574c7" class="bulleted-list"><li style="list-style-type:disc"><code>InMemoryAuthenticationProvider</code> (For testing purposes)</li></ul><p id="1a6e8d61-387b-8093-adb0-f67f821bdf90" class="">✔️ <code>ProviderManager</code> loops through each provider and <strong>calls the </strong><code><strong>authenticate()</strong></code><strong> method</strong> to check if any provider supports the authentication request.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a6e8d61-387b-80bf-be57-c705f23b5ebf" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">for (AuthenticationProvider provider : providers) {
+    if (provider.supports(auth.getClass())) {
+        return provider.authenticate(auth);
+    }
+}</code></pre><hr id="1a6e8d61-387b-8022-8b31-e95f60214699"/><h3 id="1a6e8d61-387b-802b-bcfb-ddec87995cb0" class=""><strong>📍 4. Authentication Provider Selection</strong></h3><p id="1a6e8d61-387b-80a4-b3d5-f6d411762cba" class="">✔️ If the user is logging in with <strong>username and password</strong>, <code>ProviderManager</code> <strong>chooses </strong><code><strong>DaoAuthenticationProvider</strong></code>.</p><p id="1a6e8d61-387b-80c7-b47f-e09dd6cfc8c8" class="">✔️ <code>DaoAuthenticationProvider</code> is responsible for <strong>fetching user details and validating credentials</strong>.</p><p id="1a6e8d61-387b-80a6-8206-f194d1285bba" class="">✔️ It <strong>calls </strong><code><strong>UserDetailsService</strong></code> to <strong>fetch user details</strong>.</p><hr id="1a6e8d61-387b-80a7-959a-d0d208fb1209"/><h3 id="1a6e8d61-387b-8071-a980-c59c7cdb674e" class=""><strong>📍 5. UserDetailsService Fetches User Data</strong></h3><p id="1a6e8d61-387b-8085-8b2f-d3a05489ee5c" class="">✔️ <code>DaoAuthenticationProvider</code> invokes <code>UserDetailsService</code> to <strong>retrieve user details from a data source (database or memory).</strong><br/>✔️ <br/><code><strong>UserDetailsService</strong></code><strong> is an interface</strong> with the method:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a6e8d61-387b-8070-af22-e3d6785a8705" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">UserDetails loadUserByUsername(String username);
+</code></pre><p id="1a6e8d61-387b-80a2-abd3-c0695c5b18c0" class="">✔️ The implementation of <code>UserDetailsService</code> <strong>fetches the user from the database</strong>:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a6e8d61-387b-8008-8cf4-fa40c709761a" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@Service
+public class UserService implements UserDetailsService {
+    private final UserRepository userRepository;
+
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        return userRepository.findByEmail(email)
+            .orElseThrow(() -&gt; new UsernameNotFoundException(&quot;User not found&quot;));
+    }
+}
+
+</code></pre><p id="1a6e8d61-387b-80fb-85d1-d2f2c308aa83" class="">✔️ The <strong>retrieved user details include</strong>:</p><ul id="1a6e8d61-387b-8039-8762-eac4a902b5e8" class="bulleted-list"><li style="list-style-type:disc"><strong>Username</strong> (Email)</li></ul><ul id="1a6e8d61-387b-8024-85ba-f5ec7a8f4658" class="bulleted-list"><li style="list-style-type:disc"><strong>Encoded Password</strong> (Hashed password stored in DB)</li></ul><ul id="1a6e8d61-387b-800b-8b01-f3436e10a91b" class="bulleted-list"><li style="list-style-type:disc"><strong>Authorities (Roles &amp; Permissions)</strong></li></ul><hr id="1a6e8d61-387b-80ca-8016-e42b7a470b61"/><h3 id="1a6e8d61-387b-802e-9d3f-ecc77ba8e4e4" class=""><strong>📍 6. Password Encoding &amp; Validation</strong></h3><p id="1a6e8d61-387b-8061-9139-cb1848afdac6" class="">✔️ After fetching user details, <code>DaoAuthenticationProvider</code> <strong>compares the entered password</strong> with the <strong>stored hashed password</strong> using a <code>PasswordEncoder</code>.</p><p id="1a6e8d61-387b-80e5-addd-eb75736c0947" class="">✔️ <strong>PasswordEncoder performs hashing</strong>:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a6e8d61-387b-8063-b7c4-f63ade992f9f" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">PasswordEncoder encoder = new BCryptPasswordEncoder();
+String encodedPassword = encoder.encode(&quot;password123&quot;);</code></pre><p id="1a6e8d61-387b-8054-8766-e8ba5e5b9bcd" class="">✔️ <strong>Password Matching</strong>:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a6e8d61-387b-80a4-b3c0-e9ff8c5ec19e" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">boolean matches = encoder.matches(&quot;password123&quot;, encodedPassword);</code></pre><p id="1a6e8d61-387b-80a2-8827-d9688391835e" class="">✔️ If the passwords <strong>match</strong>, authentication <strong>succeeds</strong>.</p><hr id="1a6e8d61-387b-8078-b642-d0bb5350358a"/><h3 id="1a6e8d61-387b-8031-bc55-d7410115c507" class=""><strong>📍 7. Authentication Success</strong></h3><p id="1a6e8d61-387b-8076-85ce-d84114bf5acc" class="">✔️ If authentication is <strong>successful</strong>, <code>DaoAuthenticationProvider</code> <strong>returns an authenticated </strong><code><strong>Authentication</strong></code><strong> object</strong>.</p><p id="1a6e8d61-387b-8047-b836-c8a5668a142c" class="">✔️ <code>ProviderManager</code> <strong>passes this object back to </strong><code><strong>AuthenticationManager</strong></code>, which <strong>stores it inside </strong><code><strong>SecurityContextHolder</strong></code>.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a6e8d61-387b-800b-ab30-cd63ba00a0f0" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">SecurityContextHolder.getContext().setAuthentication(authenticatedUser);</code></pre><p id="1a6e8d61-387b-8080-a6c0-d089b81c1243" class="">✔️ The <strong>authenticated user is now stored in the security context</strong> and can access secured resources.</p><figure id="1a6e8d61-387b-80ff-a06e-e0bde1ec357e" class="image"><a href="image%203.png"><img style="width:1296px" src="image%203.png"/></a></figure><hr id="1a6e8d61-387b-80bb-aa76-c03bebc6e3d8"/><h3 id="1a6e8d61-387b-80a2-8c4e-fc2a157dc2ef" class=""><strong>📍 8. Accessing Authenticated User in Application</strong></h3><p id="1a6e8d61-387b-8097-872c-d1293724e0c1" class="">✔️ Once authenticated, <strong>any controller/service can retrieve the logged-in user</strong>:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a6e8d61-387b-8034-b26d-e9d01ee0ee2f" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+UserDetails userDetails = (UserDetails) authentication.getPrincipal();</code></pre><p id="1a6e8d61-387b-80a0-b62f-f79c6177e31b" class="">✔️ The <strong>authenticated user details can be used for authorization</strong> (role-based access control).</p><hr id="1a6e8d61-387b-80a1-bd8e-f439fa5b3996"/><h2 id="1a6e8d61-387b-8001-ba6a-d04fd44f8468" class=""><strong>🔹 Final Summary: Authentication Flow in Spring Security</strong></h2><table id="1a6e8d61-387b-809a-b472-fead4f01c8c4" class="simple-table"><tbody><tr id="1a6e8d61-387b-8057-a15a-f266b2a47b2f"><td id="}Z[t" class="">Step</td><td id="MaFk" class="">Description</td></tr><tr id="1a6e8d61-387b-80df-b4e5-d320c7adf8d0"><td id="}Z[t" class=""><strong>1. User Login</strong></td><td id="MaFk" class="">Client sends a login request with username &amp; password</td></tr><tr id="1a6e8d61-387b-80f3-8817-f401a5f8a01c"><td id="}Z[t" class=""><strong>2. Security Filters</strong></td><td id="MaFk" class="">Request goes through Security Filter Chain (<code>UsernamePasswordAuthenticationFilter</code>)</td></tr><tr id="1a6e8d61-387b-80fa-bc1e-dcabdab423a3"><td id="}Z[t" class=""><strong>3. AuthenticationManager</strong></td><td id="MaFk" class=""><code>AuthenticationManager</code> delegates authentication to <code>ProviderManager</code></td></tr><tr id="1a6e8d61-387b-8024-a7d1-e17df58b9110"><td id="}Z[t" class=""><strong>4. ProviderManager</strong></td><td id="MaFk" class=""><code>ProviderManager</code> iterates through <code>AuthenticationProviders</code></td></tr><tr id="1a6e8d61-387b-8082-b26a-d28a7c2f9680"><td id="}Z[t" class=""><strong>5. DaoAuthenticationProvider</strong></td><td id="MaFk" class=""><code>DaoAuthenticationProvider</code> fetches user details via <code>UserDetailsService</code></td></tr><tr id="1a6e8d61-387b-80f2-be62-dc0a1fbf12f2"><td id="}Z[t" class=""><strong>6. UserDetailsService</strong></td><td id="MaFk" class="">Retrieves user from <strong>database/in-memory</strong></td></tr><tr id="1a6e8d61-387b-809a-8a4b-ce2ea0c93fdc"><td id="}Z[t" class=""><strong>7. Password Encoding</strong></td><td id="MaFk" class="">Encodes &amp; matches password using <code>PasswordEncoder</code></td></tr><tr id="1a6e8d61-387b-80cb-b59a-d0c894459f81"><td id="}Z[t" class=""><strong>8. Authentication Success</strong></td><td id="MaFk" class="">If successful, authenticated user is stored in <code>SecurityContextHolder</code></td></tr><tr id="1a6e8d61-387b-80b1-8d7c-c6ac8ca5e4e3"><td id="}Z[t" class=""><strong>9. Access Secured Resources</strong></td><td id="MaFk" class="">Authenticated user can access protected endpoints</td></tr></tbody></table><hr id="1a6e8d61-387b-805a-8c2c-d1408a20038f"/><h2 id="1a6e8d61-387b-80fe-8684-ec3087a6e890" class=""><strong>🔹 Security Best Practices</strong></h2></details></li></ul><p id="1a6e8d61-387b-80c2-8f67-f3833fb1b943" class="">
+</p><p id="1a6e8d61-387b-8025-84cf-cbcd884037b0" class="">
+</p><ul id="1a6e8d61-387b-80ee-a308-df7f72971f00" class="toggle"><li><details open=""><summary>Summary of Spring Security ?</summary><h3 id="1a6e8d61-387b-807f-8433-e05611f1e89e" class=""><strong>✅ Correct Points (Your Understanding is Right)</strong></h3><p id="1a6e8d61-387b-80f5-b2df-c22d1aaa2677" class="">1️⃣ <strong>Login Request Handling</strong></p><ul id="1a6e8d61-387b-8099-8296-cd9c3121f80e" class="bulleted-list"><li style="list-style-type:disc">When the <strong>user hits the login button</strong>, the request is received by the <strong>Spring application</strong> running inside the <strong>Tomcat server</strong>.</li></ul><ul id="1a6e8d61-387b-80bf-a0f6-dae6ff1c6303" class="bulleted-list"><li style="list-style-type:disc">The request contains <strong>username and password</strong>.</li></ul><p id="1a6e8d61-387b-8047-b392-caf4fb33bbb4" class="">2️⃣ <strong>Security Filter Chain Interception</strong></p><ul id="1a6e8d61-387b-8027-b3f9-e199bdaa9169" class="bulleted-list"><li style="list-style-type:disc">The request is <strong>first intercepted by security filters</strong>, which are <strong>automatically configured</strong> when we add <strong>Spring Security dependencies</strong>.</li></ul><ul id="1a6e8d61-387b-8037-b605-f858575f8224" class="bulleted-list"><li style="list-style-type:disc">The filters that play a role in the <strong>filter chain</strong> include:<ul id="1a6e8d61-387b-8090-a6c4-c4db4e45efe4" class="bulleted-list"><li style="list-style-type:circle"><code>CorsFilter</code></li></ul><ul id="1a6e8d61-387b-801e-828a-efd52b45b4a3" class="bulleted-list"><li style="list-style-type:circle"><code>CsrfFilter</code></li></ul><ul id="1a6e8d61-387b-80b7-a860-c7b1966f795f" class="bulleted-list"><li style="list-style-type:circle"><code>LogoutFilter</code></li></ul><ul id="1a6e8d61-387b-80af-800b-fdb51ca49dea" class="bulleted-list"><li style="list-style-type:circle"><code>UsernamePasswordAuthenticationFilter</code> (Handles <strong>Username/Password Authentication</strong>)</li></ul><ul id="1a6e8d61-387b-80c6-8621-fa3e56640b4b" class="bulleted-list"><li style="list-style-type:circle"><code>BearerTokenAuthenticationFilter</code> (Handles <strong>JWT Authentication</strong>)</li></ul></li></ul><p id="1a6e8d61-387b-80ee-baa5-d1a6bc4d4f41" class="">3️⃣ <strong>Role of </strong><code><strong>UsernamePasswordAuthenticationFilter</strong></code></p><ul id="1a6e8d61-387b-803b-bd58-fa90d1fb25f5" class="bulleted-list"><li style="list-style-type:disc"><code>UsernamePasswordAuthenticationFilter</code> is responsible for <strong>processing username-password-based authentication requests</strong>.</li></ul><ul id="1a6e8d61-387b-800c-9efe-e4daba2de89f" class="bulleted-list"><li style="list-style-type:disc">When the request reaches this filter, it <strong>delegates authentication</strong> to <strong>AuthenticationManager</strong>.</li></ul><p id="1a6e8d61-387b-8024-ad55-ffb820678e74" class="">4️⃣ <strong>AuthenticationManager &amp; ProviderManager</strong></p><ul id="1a6e8d61-387b-804d-b7dc-c4c823c7fd4d" class="bulleted-list"><li style="list-style-type:disc"><code><strong>AuthenticationManager</strong></code><strong> is an interface</strong> with a <strong>single method </strong><code><strong>authenticate()</strong></code>.</li></ul><ul id="1a6e8d61-387b-8092-a57a-f0dd9eecbaa1" class="bulleted-list"><li style="list-style-type:disc"><code>authenticate()</code> takes an <strong>Authentication object</strong> as an input.<ul id="1a6e8d61-387b-8043-9b9e-f7a4dfe25d8d" class="bulleted-list"><li style="list-style-type:circle"><strong>When it receives the object:</strong> It is <strong>NOT authenticated</strong>.</li></ul><ul id="1a6e8d61-387b-8005-a685-ea1d45809103" class="bulleted-list"><li style="list-style-type:circle"><strong>When it returns the object:</strong> It is <strong>authenticated</strong>.</li></ul></li></ul><ul id="1a6e8d61-387b-807f-8fce-e6e2150a7e2b" class="bulleted-list"><li style="list-style-type:disc"><strong>Implemented by </strong><code><strong>ProviderManager</strong></code>, which holds <strong>multiple </strong><code><strong>AuthenticationProviders</strong></code>.</li></ul><p id="1a6e8d61-387b-80a6-bf5b-dad65d0d88b9" class="">5️⃣ <strong>ProviderManager and Authentication Providers</strong></p><ul id="1a6e8d61-387b-80f9-8e14-e185c0b88df1" class="bulleted-list"><li style="list-style-type:disc"><code>ProviderManager</code> <strong>delegates authentication</strong> to an <strong>appropriate </strong><code><strong>AuthenticationProvider</strong></code> based on the authentication type.</li></ul><ul id="1a6e8d61-387b-809e-8d8b-dd19a125f586" class="bulleted-list"><li style="list-style-type:disc"><strong>Authentication Providers available</strong>:<ul id="1a6e8d61-387b-80ec-8b53-e96be8562723" class="bulleted-list"><li style="list-style-type:circle"><code>DaoAuthenticationProvider</code> → Username/Password authentication</li></ul><ul id="1a6e8d61-387b-8034-94e7-d14f2a00767a" class="bulleted-list"><li style="list-style-type:circle"><code>OAuth2AuthenticationProvider</code> → Google/Facebook authentication</li></ul><ul id="1a6e8d61-387b-80aa-8585-e0c5e898115d" class="bulleted-list"><li style="list-style-type:circle"><code>InMemoryAuthenticationProvider</code> → In-memory authentication</li></ul></li></ul><p id="1a6e8d61-387b-8005-86d6-e17bc4caa04a" class="">6️⃣ <strong>UserDetailsService Fetches User Data</strong></p><ul id="1a6e8d61-387b-8088-a3b1-e24aa67d5044" class="bulleted-list"><li style="list-style-type:disc"><code><strong>DaoAuthenticationProvider</strong></code><strong> invokes </strong><code><strong>UserDetailsService</strong></code> to fetch the user details from the database.</li></ul><ul id="1a6e8d61-387b-801f-8e57-cb16d7f0d3ed" class="bulleted-list"><li style="list-style-type:disc">The <strong>developer must implement </strong><code><strong>UserDetailsService</strong></code> and override <code>loadUserByUsername()</code> to fetch users from the database.</li></ul><ul id="1a6e8d61-387b-8078-a657-d6dbca14a513" class="bulleted-list"><li style="list-style-type:disc">A <code><strong>User Entity</strong></code> is created with fields like <code>id</code>, <code>username/email</code>, and <code>password</code>.</li></ul><p id="1a6e8d61-387b-80a4-bc29-fc3e1aa0b806" class="">7️⃣ <strong>Password Encoding and Matching</strong></p><ul id="1a6e8d61-387b-80cd-88f5-ce551c8c5306" class="bulleted-list"><li style="list-style-type:disc">The <strong>stored password in the database is encoded</strong> (hashed using BCrypt, PBKDF2, etc.).</li></ul><ul id="1a6e8d61-387b-807d-8d72-ea9f5dc5ee0c" class="bulleted-list"><li style="list-style-type:disc"><strong>Spring does NOT &quot;decrypt&quot; the password</strong> (because hashing is <strong>one-way encryption</strong>).</li></ul><ul id="1a6e8d61-387b-809a-b020-d3fd14c8e391" class="bulleted-list"><li style="list-style-type:disc">Instead, it <strong>encodes the password sent by the user</strong> using the <strong>same hashing algorithm</strong> and <strong>compares the hashes</strong>.</li></ul><p id="1a6e8d61-387b-808b-8ad2-e504aab8793b" class="">8️⃣ <strong>Authentication Success &amp; Security Context</strong></p><ul id="1a6e8d61-387b-80af-9da9-e5a791511b0b" class="bulleted-list"><li style="list-style-type:disc">If the password <strong>matches</strong>, <code>DaoAuthenticationProvider</code> returns an <strong>authenticated Authentication object</strong>.</li></ul><ul id="1a6e8d61-387b-801b-a7fc-ef5e1202bd3a" class="bulleted-list"><li style="list-style-type:disc">This object is <strong>stored in </strong><code><strong>SecurityContextHolder</strong></code> so that subsequent requests can retrieve the authenticated user.</li></ul><hr id="1a6e8d61-387b-8038-b83b-c3468b802de1"/><h3 id="1a6e8d61-387b-80db-9215-cc420899f33c" class=""><strong>⚠ Mildly Incorrect Points (Needs Refinement)</strong></h3><p id="1a6e8d61-387b-8048-9c59-f5eba477f6b4" class="">🔸 <strong>&quot;Authentication Provider delegates a request to the correct authentication provider class&quot;</strong></p><p id="1a6e8d61-387b-8037-ae12-ca9d782bd006" class="">✔ <strong>Correction:</strong></p><ul id="1a6e8d61-387b-8021-a421-fa82b102626e" class="bulleted-list"><li style="list-style-type:disc">The <code><strong>ProviderManager</strong></code> (not the Authentication Provider itself) is responsible for <strong>looping through multiple </strong><code><strong>AuthenticationProviders</strong></code> and picking the correct one.</li></ul><p id="1a6e8d61-387b-80f8-aded-f4b23c129e15" class="">🔸 <strong>&quot;DAO Authentication Provider fetches the user details and the encoded password&quot;</strong></p><p id="1a6e8d61-387b-8013-993e-f84306330d4d" class="">✔ <strong>Correction:</strong></p><ul id="1a6e8d61-387b-803d-928a-d1087b784181" class="bulleted-list"><li style="list-style-type:disc"><code>DaoAuthenticationProvider</code> <strong>asks </strong><code><strong>UserDetailsService</strong></code> to fetch <strong>user details</strong> (which includes the encoded password).</li></ul><ul id="1a6e8d61-387b-80bd-819d-e120d1643353" class="bulleted-list"><li style="list-style-type:disc">It <strong>does NOT fetch the encoded password on its own</strong>—it simply <strong>retrieves the user details from </strong><code><strong>UserDetailsService</strong></code>.</li></ul><p id="1a6e8d61-387b-800c-a3a9-ebb8b17b3653" class="">🔸 <strong>&quot;It decodes the password from the database&quot;</strong></p><p id="1a6e8d61-387b-801e-a23d-da5e0943c62c" class="">✔ <strong>Correction:</strong></p><ul id="1a6e8d61-387b-8067-b762-ec51810cfa22" class="bulleted-list"><li style="list-style-type:disc"><strong>Spring Security NEVER decodes passwords</strong> because <strong>passwords are hashed, not encrypted</strong>.</li></ul><ul id="1a6e8d61-387b-80d6-ac84-ef09cbcd6ed6" class="bulleted-list"><li style="list-style-type:disc">Instead, it <strong>takes the password entered by the user, encodes it using the same hashing algorithm (e.g., BCrypt), and compares the two hashes</strong>.</li></ul><p id="1a6e8d61-387b-8010-a804-e1c00b311b45" class="">🔸 <strong>&quot;Security Context Holder - </strong><code><strong>SecurityContextHolder.getContext().setAuthentication()</strong></code><strong> is called&quot;</strong></p><p id="1a6e8d61-387b-80d9-9579-ef68e77f2508" class="">✔ <strong>Correction:</strong></p><ul id="1a6e8d61-387b-8073-b053-c4acd1645872" class="bulleted-list"><li style="list-style-type:disc">This step <strong>does NOT happen inside </strong><code><strong>DaoAuthenticationProvider</strong></code>.</li></ul><ul id="1a6e8d61-387b-8003-89bc-de96f18a8090" class="bulleted-list"><li style="list-style-type:disc">Instead, <strong>Spring Security does this automatically</strong> <strong>after authentication is successful</strong>.</li></ul><hr id="1a6e8d61-387b-80e5-bf05-d3d53ef15093"/><h3 id="1a6e8d61-387b-8061-87f4-e2c010c72051" class=""><strong>❌ Incorrect Points (Needs Correction)</strong></h3><p id="1a6e8d61-387b-8010-905e-f58b01de731a" class="">❌ <strong>&quot;In-memory authentication provider is for H2 database&quot;</strong></p><p id="1a6e8d61-387b-803c-884a-db7de1f840be" class="">✔ <strong>Correction:</strong></p><ul id="1a6e8d61-387b-80fb-9d64-efe09fdd2d84" class="bulleted-list"><li style="list-style-type:disc"><strong>In-Memory Authentication Provider is NOT related to H2 or any database.</strong></li></ul><ul id="1a6e8d61-387b-8068-bafc-ce0b33bbcf29" class="bulleted-list"><li style="list-style-type:disc">It is used to <strong>store user credentials in memory</strong> for testing purposes.</li></ul><ul id="1a6e8d61-387b-8006-86db-dca522b9e3a1" class="bulleted-list"><li style="list-style-type:disc">Example:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a6e8d61-387b-8020-9386-c1b70b192054" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@Bean
+public UserDetailsService userDetailsService() {
+    UserDetails user = User.withDefaultPasswordEncoder()
+            .username(&quot;admin&quot;)
+            .password(&quot;password&quot;)
+            .roles(&quot;ADMIN&quot;)
+            .build();
+    return new InMemoryUserDetailsManager(user);
+}
+
+</code></pre></li></ul><p id="1a6e8d61-387b-807b-99c2-e1f00d33c64f" class="">❌ <strong>&quot;If authentication is successful, authentication provider returns authentication object which contains the user&quot;</strong></p><p id="1a6e8d61-387b-80e0-b2a4-f0106ee7ffdb" class="">✔ <strong>Correction:</strong></p><ul id="1a6e8d61-387b-8020-8e74-c029ba0c044c" class="bulleted-list"><li style="list-style-type:disc"><strong>The Authentication object does NOT store the User Entity itself.</strong></li></ul><ul id="1a6e8d61-387b-8031-b3f5-eec1fca42629" class="bulleted-list"><li style="list-style-type:disc">Instead, it stores an instance of <code>UserDetails</code>, which contains:<ul id="1a6e8d61-387b-80c3-86ce-efaeff73f884" class="bulleted-list"><li style="list-style-type:circle"><code>getUsername()</code></li></ul><ul id="1a6e8d61-387b-802b-af32-e3acdcba80a5" class="bulleted-list"><li style="list-style-type:circle"><code>getPassword()</code></li></ul><ul id="1a6e8d61-387b-8020-a874-d7d812b7e037" class="bulleted-list"><li style="list-style-type:circle"><code>getAuthorities()</code></li></ul><ul id="1a6e8d61-387b-803f-9c77-c2148ca6ac11" class="bulleted-list"><li style="list-style-type:circle"><strong>But NOT the actual </strong><code><strong>User</strong></code><strong> entity from the database.</strong></li></ul></li></ul><hr id="1a6e8d61-387b-8067-bb8e-dfd3fc91103a"/><h3 id="1a6e8d61-387b-8072-9845-f965338d5b92" class=""><strong>📌 Corrected Summary of Spring Security Authentication Flow</strong></h3><p id="1a6e8d61-387b-8007-a327-e0e548785272" class="">1️⃣ <strong>User clicks login button</strong> → Request with username &amp; password is sent to Spring Boot.</p><p id="1a6e8d61-387b-802d-ae68-f5e1cf50d81d" class="">2️⃣ <strong>Security Filters intercept the request</strong> → <code>UsernamePasswordAuthenticationFilter</code> forwards it to <code>AuthenticationManager</code>.</p><p id="1a6e8d61-387b-80fd-b74f-eb0a7a07dd1c" class="">3️⃣ <code><strong>AuthenticationManager</strong></code><strong> (implemented by </strong><code><strong>ProviderManager</strong></code><strong>) delegates authentication to an </strong><code><strong>AuthenticationProvider</strong></code>.</p><p id="1a6e8d61-387b-8096-8e55-f31db0d09bfb" class="">4️⃣ <code><strong>ProviderManager</strong></code><strong> iterates over all </strong><code><strong>AuthenticationProviders</strong></code><strong> and picks the correct one</strong>:</p><ul id="1a6e8d61-387b-80a8-99f1-dad04abb6bb5" class="bulleted-list"><li style="list-style-type:disc"><strong>For username/password authentication → </strong><code><strong>DaoAuthenticationProvider</strong></code></li></ul><ul id="1a6e8d61-387b-80d4-a713-dac1af3a6666" class="bulleted-list"><li style="list-style-type:disc"><strong>For Google/Facebook OAuth → </strong><code><strong>OAuth2AuthenticationProvider</strong></code></li></ul><ul id="1a6e8d61-387b-8028-b2f7-c4b9aa75c565" class="bulleted-list"><li style="list-style-type:disc"><strong>For in-memory users → </strong><code><strong>InMemoryAuthenticationProvider</strong></code>5️⃣ <code><strong>DaoAuthenticationProvider</strong></code><strong> calls </strong><code><strong>UserDetailsService</strong></code><strong> to fetch user details from the database</strong>.6️⃣ <strong>UserDetailsService returns a </strong><code><strong>UserDetails</strong></code><strong> object</strong> containing <strong>username, encoded password, and authorities</strong>.7️⃣ <strong>Password is compared using </strong><code><strong>PasswordEncoder.matches(rawPassword, encodedPassword)</strong></code>.8️⃣ <strong>If passwords match, authentication is successful</strong> → <code>DaoAuthenticationProvider</code> returns an <strong>authenticated Authentication object</strong>.9️⃣ <strong>Spring Security stores this object inside </strong><code><strong>SecurityContextHolder</strong></code>, making it available for future requests.🔟 <strong>User is now authenticated and can access protected resources</strong>.</li></ul><hr id="1a6e8d61-387b-8094-bf28-cfeea53c67cd"/><p id="1a6e8d61-387b-8004-8c0b-d60be7835fdd" class="">
+</p></details></li></ul><p id="1a6e8d61-387b-8040-83c9-dea5a0fbcd53" class="">
+</p><p id="1a6e8d61-387b-8013-9f17-c8e34f863a03" class="">
+</p><ul id="1a6e8d61-387b-80f4-9d1d-d72a4bd69385" class="toggle"><li><details open=""><summary><em>&quot;Suppose you have configured an in-memory authentication provider using </em><em><code>spring.security.user.name=admin</code></em><em> and </em><em><code>spring.security.user.password=pass</code></em><em>. Later, you define a custom </em><em><code>UserDetailsService</code></em><em>. What will happen to in-memory authentication? Will both authentication mechanisms work together, or will one override the other?&quot;<br/><br/>OR<br/><br/><br/></em><br/>&quot;A developer sets up Spring Security with in-memory authentication for testing. Later, they implement a <br/><code>UserDetailsService</code> to fetch users from a database. However, they notice that in-memory authentication is no longer working. What could be the reason, and how can they verify which authentication provider is being used?&quot;</summary><h3 id="1a6e8d61-387b-8069-b59a-cb93f0cb0ae3" class=""><strong>✅ Understanding In-Memory Authentication Provider</strong></h3><p id="1a6e8d61-387b-80e7-8033-e22f96261e67" class="">✔️ If you <strong>do not define any custom </strong><code><strong>UserDetailsService</strong></code>, Spring Security will <strong>fall back to its default in-memory authentication mechanism</strong>.</p><p id="1a6e8d61-387b-8038-adba-c6cfeee74dca" class="">✔️ Spring Security <strong>automatically configures an in-memory </strong><code><strong>UserDetailsService</strong></code> that <strong>creates a default user</strong> with:</p><ul id="1a6e8d61-387b-80c0-a5c5-d4cda68aa3f0" class="bulleted-list"><li style="list-style-type:disc"><strong>Username:</strong> <code>user</code></li></ul><ul id="1a6e8d61-387b-806e-9ba7-c1d56d331537" class="bulleted-list"><li style="list-style-type:disc"><strong>Password:</strong> Randomly generated and logged in the console.</li></ul><p id="1a6e8d61-387b-8001-806d-cccb425b40ba" class="">✔️ If you <strong>explicitly configure a username and password</strong> in <code>application.properties</code>:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a6e8d61-387b-802e-8b12-e590fb161e57" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">properties
+CopyEdit
+spring.security.user.name=rohit
+spring.security.user.password=pass
+
+</code></pre><p id="1a6e8d61-387b-80bb-bf5e-e00e952fad08" class="">Then <strong>Spring Security will use these credentials</strong> instead of the default user.</p><p id="1a6e8d61-387b-803a-b9e4-cabcf853eb03" class="">✔️ This is useful <strong>only for testing</strong> and should <strong>not be used in production</strong>.</p><hr id="1a6e8d61-387b-8061-89d3-f6bd51864676"/><h3 id="1a6e8d61-387b-80f5-ae56-f3b688b07ad9" class=""><strong>✅ What Happens When You Define a Custom </strong><code><strong>UserDetailsService</strong></code><strong>?</strong></h3><p id="1a6e8d61-387b-80f7-a733-ed05d7dc9243" class="">✔️ If you <strong>create your own </strong><code><strong>UserDetailsService</strong></code><strong> implementation</strong>, Spring Security will <strong>automatically disable in-memory authentication</strong> and instead <strong>use your DAO-based authentication</strong>.</p><p id="1a6e8d61-387b-8009-8f7a-e26e7bd20aa5" class="">✔ <strong>Example: Custom UserDetailsService</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a6e8d61-387b-80f6-87c7-e86bf53c6710" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@Service
+public class CustomUserDetailsService implements UserDetailsService {
+    @Autowired
+    private UserRepository userRepository;
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userRepository.findByEmail(username)
+            .orElseThrow(() -&gt; new UsernameNotFoundException(&quot;User not found&quot;));
+    }
+}
+
+</code></pre><p id="1a6e8d61-387b-8050-a501-de95fd163d5c" class="">✔ <strong>Once this is defined, Spring Security will no longer use in-memory authentication and will fetch users from the database.</strong></p><hr id="1a6e8d61-387b-8012-b515-f58ad33adf1c"/><h3 id="1a6e8d61-387b-80e7-aaad-dcb75277c00f" class=""><strong>📌 Final Confirmation of Your Understanding</strong></h3><table id="1a6e8d61-387b-804e-ba0d-ed920dbf4a88" class="simple-table"><tbody><tr id="1a6e8d61-387b-80f0-82c1-db1dcefb5e7f"><td id="GoYC" class="">Scenario</td><td id="mG|&gt;" class="">Which Authentication Provider is Used?</td></tr><tr id="1a6e8d61-387b-8025-8deb-d1de36da25fd"><td id="GoYC" class=""><strong>No </strong><code><strong>UserDetailsService</strong></code><strong> provided</strong></td><td id="mG|&gt;" class="">Uses <strong>In-Memory Authentication Provider</strong> with default/random credentials</td></tr><tr id="1a6e8d61-387b-80a4-b56d-fdf3ffb8e7b9"><td id="GoYC" class=""><strong>Username &amp; Password set in </strong><code><strong>application.properties</strong></code></td><td id="mG|&gt;" class="">Uses <strong>In-Memory Authentication Provider</strong> with specified credentials</td></tr><tr id="1a6e8d61-387b-80d0-a0c5-eddda9738e59"><td id="GoYC" class=""><strong>Custom </strong><code><strong>UserDetailsService</strong></code><strong> implemented</strong></td><td id="mG|&gt;" class="">Uses <strong>DAO Authentication Provider</strong>, fetching users from <strong>database</strong></td></tr></tbody></table><hr id="1a6e8d61-387b-8057-94ea-fea3bb5a901d"/><h3 id="1a6e8d61-387b-809a-8390-ec0933dec2d3" class=""><strong>✅ Your Understanding is Correct With This Refinement:</strong></h3><ul id="1a6e8d61-387b-802b-a327-df8be888b0db" class="bulleted-list"><li style="list-style-type:disc"><strong>If you don&#x27;t define </strong><code><strong>UserDetailsService</strong></code><strong> → In-memory authentication is used.</strong></li></ul><ul id="1a6e8d61-387b-80c1-a5e3-d33fee030554" class="bulleted-list"><li style="list-style-type:disc"><strong>If you specify credentials in </strong><code><strong>application.properties</strong></code><strong> → Those credentials are used instead of random ones.</strong></li></ul><ul id="1a6e8d61-387b-80ff-9b53-e133599cc4a1" class="bulleted-list"><li style="list-style-type:disc"><strong>If you define a custom </strong><code><strong>UserDetailsService</strong></code><strong> → Spring Security uses DAO-based authentication, fetching users from DB.</strong></li></ul><p id="1a6e8d61-387b-8094-9dfe-d8f5582cab0a" class="">✔ <strong>Final Verdict: You got it right!</strong> 🚀 Just keep in mind that <strong>in-memory authentication gets overridden</strong> once you define your own <code>UserDetailsService</code>.</p></details></li></ul><p id="1a6e8d61-387b-80e2-a959-d554887fe58b" class="">
+</p><p id="1a6e8d61-387b-800a-97a2-da637cef6e48" class="">
+</p><ul id="1a6e8d61-387b-8089-a081-f0908ab0e6e7" class="toggle"><li><details open=""><summary><strong>Q:</strong> <em>&quot;In a Spring Boot application, I want to support both in-memory users (for admin login) and database users (for regular authentication). How can I configure Spring Security so that both </em><em><code>InMemoryUserDetailsManager</code></em><em> and </em><em><code>DAOAuthenticationProvider</code></em><em> work together?&quot;</em></summary><h2 id="1a6e8d61-387b-800f-8a2a-c3a8ed1627ac" class=""><strong>✅ Solution: Configuring Both In-Memory and DAO Authentication in Spring Security</strong></h2><h3 id="1a6e8d61-387b-800d-b93b-dd3682fdb421" class=""><strong>📌 Steps to Achieve This:</strong></h3><p id="1a6e8d61-387b-80f9-8393-d03e8b1b868e" class="">1️⃣ <strong>Define an In-Memory Authentication Provider</strong> → For <strong>admin users</strong>.</p><p id="1a6e8d61-387b-80db-b08a-c81abf8845de" class="">2️⃣ <strong>Define a DAO Authentication Provider</strong> → To fetch <strong>regular users from the database</strong>.</p><p id="1a6e8d61-387b-8041-b1d1-f0f5421d8a73" class="">3️⃣ <strong>Configure the </strong><code><strong>AuthenticationManager</strong></code><strong> to use both providers</strong>.</p><p id="1a6e8d61-387b-80d5-a1f2-dbbeb5774c3a" class="">4️⃣ <strong>Ensure that Spring Security checks both providers</strong> when authenticating a user.</p><hr id="1a6e8d61-387b-802e-93c6-edb316ab8dc5"/><h3 id="1a6e8d61-387b-8058-b89e-cef51b9229fc" class=""><strong>🛠 Implementation in Spring Security 6</strong></h3><p id="1a6e8d61-387b-8044-b0e4-e234a529afde" class="">👉 <code><strong>SecurityConfig.java</strong></code><strong> (Spring Security Configuration)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a6e8d61-387b-809f-9ea0-df1d7ed22286" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig {
+
+    private final CustomUserDetailsService userDetailsService;
+    private final PasswordEncoder passwordEncoder;
+
+    @Autowired
+    public SecurityConfig(CustomUserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {
+        this.userDetailsService = userDetailsService;
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        return http
+            .csrf(AbstractHttpConfigurer::disable)
+            .authorizeHttpRequests(auth -&gt; auth
+                .requestMatchers(&quot;/admin/**&quot;).hasRole(&quot;ADMIN&quot;)  // Admin only routes
+                .requestMatchers(&quot;/user/**&quot;).hasRole(&quot;USER&quot;)    // Regular user routes
+                .anyRequest().authenticated()
+            )
+            .formLogin(withDefaults())  // Enable form-based login
+            .build();
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
+    }
+
+    @Bean
+    public UserDetailsService inMemoryUserDetailsService() {
+        UserDetails admin = User.builder()
+            .username(&quot;admin&quot;)
+            .password(passwordEncoder.encode(&quot;adminpass&quot;))
+            .roles(&quot;ADMIN&quot;)
+            .build();
+
+        return new InMemoryUserDetailsManager(admin);
+    }
+
+    @Bean
+    public DaoAuthenticationProvider daoAuthenticationProvider() {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(userDetailsService);
+        provider.setPasswordEncoder(passwordEncoder);
+        return provider;
+    }
+
+    @Bean
+    public AuthenticationProvider inMemoryAuthenticationProvider() {
+        return new InMemoryUserDetailsManager(
+            User.withUsername(&quot;admin&quot;)
+                .password(passwordEncoder.encode(&quot;adminpass&quot;))
+                .roles(&quot;ADMIN&quot;)
+                .build()
+        );
+    }
+
+    @Bean
+    public AuthenticationManager authManager(HttpSecurity http) throws Exception {
+        return http.getSharedObject(AuthenticationManagerBuilder.class)
+            .authenticationProvider(daoAuthenticationProvider())  // Database authentication
+            .authenticationProvider(inMemoryAuthenticationProvider())  // In-memory authentication
+            .build();
+    }
+}
+
+</code></pre><hr id="1a6e8d61-387b-8082-adc7-ef47e2e98b48"/><h2 id="1a6e8d61-387b-8086-826a-d4a61210f279" class=""><strong>✅ Explanation</strong></h2><p id="1a6e8d61-387b-8015-878e-cb052bd828f3" class="">1️⃣ <strong>Two </strong><code><strong>AuthenticationProvider</strong></code><strong>s are defined</strong>:</p><ul id="1a6e8d61-387b-802e-b235-f9c69c763d12" class="bulleted-list"><li style="list-style-type:disc"><code><strong>DaoAuthenticationProvider</strong></code> → Fetches users from the database (<code>CustomUserDetailsService</code>).</li></ul><ul id="1a6e8d61-387b-8011-82a1-e4ca965c71d1" class="bulleted-list"><li style="list-style-type:disc"><code><strong>InMemoryUserDetailsManager</strong></code> → Stores <code>admin</code> users in memory.</li></ul><p id="1a6e8d61-387b-80da-8364-ed899c044564" class="">2️⃣ <strong>Both providers are registered with the </strong><code><strong>AuthenticationManager</strong></code>, so Spring Security will:</p><ul id="1a6e8d61-387b-8026-9e89-f3b27e472006" class="bulleted-list"><li style="list-style-type:disc">First <strong>check in-memory authentication</strong> for admin users.</li></ul><ul id="1a6e8d61-387b-8053-802a-e5c517559166" class="bulleted-list"><li style="list-style-type:disc">If not found, <strong>check the database authentication</strong>.</li></ul><p id="1a6e8d61-387b-8022-bcd1-d61abc50f5f8" class="">3️⃣ <strong>Role-based access control is implemented</strong>:</p><ul id="1a6e8d61-387b-808f-8e3a-e4c47e05bead" class="bulleted-list"><li style="list-style-type:disc"><code>/admin/**</code> → Only accessible to users with <code>ADMIN</code> role.</li></ul><ul id="1a6e8d61-387b-8071-8305-e9e6600b7431" class="bulleted-list"><li style="list-style-type:disc"><code>/user/**</code> → Accessible to users with <code>USER</code> role.</li></ul><hr id="1a6e8d61-387b-8085-9fdb-dc84e9f2a77b"/><h2 id="1a6e8d61-387b-80c0-8f69-ebfc6ed3c3f6" class=""><strong>✅ How Authentication Works</strong></h2><p id="1a6e8d61-387b-801b-9abc-e92ae40ae915" class="">✔ <strong>Scenario 1: An admin logs in with username </strong><code><strong>admin</strong></code></p><ul id="1a6e8d61-387b-804d-8a0b-dca4f3e925ab" class="bulleted-list"><li style="list-style-type:disc">Spring Security first <strong>checks the in-memory authentication provider</strong>.</li></ul><ul id="1a6e8d61-387b-8033-837d-cb52ed36fba9" class="bulleted-list"><li style="list-style-type:disc">Since <code>admin</code> is stored in memory, authentication succeeds.</li></ul><p id="1a6e8d61-387b-8031-ac24-c747ea145ef2" class="">✔ <strong>Scenario 2: A regular user logs in with email </strong><code><strong>john@example.com</strong></code></p><ul id="1a6e8d61-387b-80ee-a13b-f0c8eb18a83a" class="bulleted-list"><li style="list-style-type:disc">Spring Security first <strong>checks the in-memory authentication provider</strong> → User <strong>not found</strong>.</li></ul><ul id="1a6e8d61-387b-80ed-8816-ff7502ce164a" class="bulleted-list"><li style="list-style-type:disc">Then, it checks <strong>database authentication (</strong><code><strong>DaoAuthenticationProvider</strong></code><strong>)</strong>.</li></ul><ul id="1a6e8d61-387b-80a5-90e9-ca8ed31992bf" class="bulleted-list"><li style="list-style-type:disc">If <code>john@example.com</code> exists in the database, authentication succeeds.</li></ul><hr id="1a6e8d61-387b-8055-a9fe-ff7b6d02044a"/><h2 id="1a6e8d61-387b-80d9-9a49-cfdcfbcad17b" class=""><strong>🛠 Supporting JWT-Based Authentication as Well</strong></h2><p id="1a6e8d61-387b-8001-8550-f42ad430c68b" class="">If you also want to support <strong>JWT-based authentication</strong> alongside in-memory and DAO authentication, you can add a <code>JwtAuthenticationFilter</code> before the <code>UsernamePasswordAuthenticationFilter</code>:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a6e8d61-387b-808f-888a-ec4f697794b7" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+
+</code></pre><hr id="1a6e8d61-387b-80cb-ab36-ed833a5b45f2"/><h2 id="1a6e8d61-387b-8068-9b17-c276d48dd152" class=""><strong>✅ Final Answer to the Interview Question</strong></h2><p id="1a6e8d61-387b-8023-9040-e44f08dfebdb" class="">📌 <strong>Question:</strong> <em>&quot;How can you configure Spring Security to support both in-memory authentication (for admin users) and database authentication (for regular users)?&quot;</em></p><p id="1a6e8d61-387b-80a7-8e2f-c3462e32e9e5" class="">📌 <strong>Answer:</strong><br/>✔ You need to configure <br/><strong>two authentication providers</strong>:</p><ul id="1a6e8d61-387b-80a1-a459-e0960b59328f" class="bulleted-list"><li style="list-style-type:disc"><strong>InMemoryUserDetailsManager</strong> for <strong>admin authentication</strong>.</li></ul><ul id="1a6e8d61-387b-8080-b8ec-ea122dc13cac" class="bulleted-list"><li style="list-style-type:disc"><strong>DaoAuthenticationProvider</strong> for <strong>database authentication</strong>.<br/>✔ Register <br/><strong>both providers in </strong><code><strong>AuthenticationManager</strong></code>.<br/>✔ Spring Security will <br/><strong>check both providers</strong> for authentication.<br/>✔ Implement <br/><strong>role-based access control (</strong><code><strong>hasRole(&quot;ADMIN&quot;)</strong></code><strong>, </strong><code><strong>hasRole(&quot;USER&quot;)</strong></code><strong>)</strong>.</li></ul><hr id="1a6e8d61-387b-80a7-a6d5-e832cb07517a"/><h2 id="1a6e8d61-387b-804a-be5d-eb30c79829ec" class=""><strong>✅ Key Takeaways</strong></h2><p id="1a6e8d61-387b-80ae-9f52-d31ee344da7f" class="">1️⃣ <strong>Spring Security allows multiple authentication providers</strong>.</p><p id="1a6e8d61-387b-80d6-8dbd-d343544b43b6" class="">2️⃣ <strong>Order matters</strong> → If an admin logs in, Spring first checks in-memory authentication.</p><p id="1a6e8d61-387b-805a-b892-ee89c806de1f" class="">3️⃣ <strong>Both authentication mechanisms can work together</strong>.</p><p id="1a6e8d61-387b-802e-9e77-e9f79b3aff01" class="">4️⃣ <strong>This approach is useful for applications needing both admin &amp; regular user authentication.</strong></p></details></li></ul></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

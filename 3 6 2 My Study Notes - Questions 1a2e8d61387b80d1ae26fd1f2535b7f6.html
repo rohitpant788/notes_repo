@@ -1,0 +1,823 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>3.6.2 My Study Notes - Questions</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-transparentGray { background-color: undefined; }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1a2e8d61-387b-80d1-ae26-fd1f2535b7f6" class="page sans"><header><h1 class="page-title">3.6.2 My Study Notes - Questions</h1><p class="page-description"></p></header><div class="page-body"><p id="1a2e8d61-387b-80b5-84f0-d88a958acb7e" class="">
+</p><p id="1a2e8d61-387b-80b7-938f-f886d659063c" class="">
+</p><ul id="1a2e8d61-387b-80bc-af19-c3935bc922c3" class="toggle"><li><details open=""><summary><strong>Question  1 : <br/><br/></strong>If I need to create a <strong>one-to-many</strong> relationship between <strong>Department</strong> and <strong>Employee</strong> (<strong>one department can have multiple employees</strong>):<br/>&gt; How do we decide who will own the relationship?<br/>&gt; Which table will have the foreign key?<br/>&gt; How is this decision made in JPA?<br/><br/></summary><hr id="1a2e8d61-387b-8034-b774-e0c0c12da97a"/><h2 id="1a2e8d61-387b-80d8-97d2-f550d5ae371a" class=""><strong>1️⃣ Understanding the One-to-Many Relationship</strong></h2><p id="1a2e8d61-387b-80c5-aece-dfe1c31423ae" class="">In a <strong>one-to-many</strong> relationship:</p><ul id="1a2e8d61-387b-8066-a526-cdb56b5a54ce" class="bulleted-list"><li style="list-style-type:disc"><strong>One Department can have multiple Employees</strong>.</li></ul><ul id="1a2e8d61-387b-80a3-a5e6-e5c012fcc1d3" class="bulleted-list"><li style="list-style-type:disc"><strong>Each Employee belongs to only one Department</strong>.</li></ul><p id="1a2e8d61-387b-8099-90a1-dff7fd50b0d9" class="">📌 <strong>Decision Rule:</strong></p><ul id="1a2e8d61-387b-80df-a357-dd5cde12e7d7" class="bulleted-list"><li style="list-style-type:disc">The entity that <strong>holds the foreign key</strong> in the database <strong>owns the relationship</strong>.</li></ul><ul id="1a2e8d61-387b-80d6-8daa-d4a4e96934df" class="bulleted-list"><li style="list-style-type:disc">In a <strong>one-to-many</strong> relationship, the <strong>&quot;many&quot; side</strong> (i.e., <code>Employee</code>) <strong>usually owns the relationship</strong> because it contains the foreign key.</li></ul><hr id="1a2e8d61-387b-80cd-994a-d7f6c22218eb"/><h2 id="1a2e8d61-387b-80e5-8e42-d0aaac5c8c0c" class=""><strong>2️⃣ Where Does the Foreign Key Go?</strong></h2><p id="1a2e8d61-387b-8025-b33f-fb1428b4834a" class="">✅ <strong>Best Practice:</strong></p><ul id="1a2e8d61-387b-803a-be8d-d485ed26c19b" class="bulleted-list"><li style="list-style-type:disc"><strong>Foreign key (</strong><code><strong>department_id</strong></code><strong>) should be in the </strong><code><strong>Employee</strong></code><strong> table.</strong></li></ul><ul id="1a2e8d61-387b-804f-b6f3-c70dc4062963" class="bulleted-list"><li style="list-style-type:disc">This avoids creating an unnecessary <strong>join table</strong>.</li></ul><ul id="1a2e8d61-387b-8069-a351-d89d5471af12" class="bulleted-list"><li style="list-style-type:disc">Improves <strong>query performance</strong> since lookups on <code>Employee</code> can be optimized.</li></ul><h3 id="1a2e8d61-387b-8024-93ae-e0b6f726b09e" class=""><strong>Table Structure in the Database</strong></h3><p id="1a2e8d61-387b-808d-8143-d418fa3b956d" class="">| <strong>Department Table</strong> |<br/>|----|--------------|<br/>| <br/><code>id</code> (PK) | <code>name</code> |</p><p id="1a2e8d61-387b-80dc-8c4d-cae47892f8e7" class="">| <strong>Employee Table</strong> |<br/>|----|------------|------------|<br/>| <br/><code>id</code> (PK) | <code>name</code> | <code>department_id</code> (FK) |</p><p id="1a2e8d61-387b-804a-9c3b-e146b9042920" class="">📌 <strong>Foreign Key (</strong><code><strong>department_id</strong></code><strong>) is stored in the </strong><code><strong>Employee</strong></code><strong> table, linking each employee to a department.</strong></p><hr id="1a2e8d61-387b-80fe-b168-ff4c9a30204e"/><h2 id="1a2e8d61-387b-80ae-bdae-d42eaf68931a" class=""><strong>3️⃣ JPA Implementation:</strong></h2><h3 id="1a2e8d61-387b-8030-9afd-f5118da5f552" class=""><strong>Department Entity (Owning Side)</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-80c6-b539-cb3506ece247" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@Entity
+public class Department {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+
+    @OneToMany(mappedBy = &quot;department&quot;, cascade = CascadeType.ALL)
+    private List&lt;Employee&gt; employees;
+
+    // Getters &amp; Setters
+}
+
+</code></pre><p id="1a2e8d61-387b-80d7-89e6-c87db9d5edde" class="">📌 <strong>Explanation:</strong></p><ul id="1a2e8d61-387b-8037-b87a-e6a3f903cc7f" class="bulleted-list"><li style="list-style-type:disc"><code>@OneToMany(mappedBy = &quot;department&quot;)</code> → <strong>Department does NOT own the relationship</strong> (mapped by <code>department</code> in <code>Employee</code>).</li></ul><ul id="1a2e8d61-387b-80af-8763-f543ea817edd" class="bulleted-list"><li style="list-style-type:disc"><code>cascade = CascadeType.ALL</code> → If a <code>Department</code> is deleted, all associated <code>Employees</code> are also deleted.</li></ul><ul id="1a2e8d61-387b-803e-b401-dc68ba8f9b6c" class="bulleted-list"><li style="list-style-type:disc"><code>employees</code> is a <strong>collection</strong> representing all employees under a department.</li></ul><hr id="1a2e8d61-387b-806c-9ce9-f54353feaff4"/><h3 id="1a2e8d61-387b-8075-a80a-fc6ede7b52bc" class=""><strong>Employee Entity (Owning Side - Holds Foreign Key)</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-8020-8893-e1be6593d969" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@Entity
+public class Employee {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+
+    @ManyToOne
+    @JoinColumn(name = &quot;department_id&quot;, nullable = false)
+    private Department department;
+
+    // Getters &amp; Setters
+}
+
+</code></pre><p id="1a2e8d61-387b-8071-b31a-ec2d6fcd8c80" class="">📌 <strong>Explanation:</strong></p><ul id="1a2e8d61-387b-8076-b45f-fc4ede7ba1ff" class="bulleted-list"><li style="list-style-type:disc"><code>@ManyToOne</code> → <strong>Employee owns the relationship</strong>.</li></ul><ul id="1a2e8d61-387b-8077-804f-ebf64a4583b9" class="bulleted-list"><li style="list-style-type:disc"><code>@JoinColumn(name = &quot;department_id&quot;)</code> → Creates a foreign key column (<code>department_id</code>) in the <code>Employee</code> table.</li></ul><ul id="1a2e8d61-387b-80e2-a1f0-edeed8d189fc" class="bulleted-list"><li style="list-style-type:disc"><code>nullable = false</code> → Every employee <strong>must belong to a department</strong>.</li></ul><hr id="1a2e8d61-387b-80f4-97d4-dd57fba295ae"/><h2 id="1a2e8d61-387b-809a-8c03-f9a51801ffd8" class=""><strong>4️⃣ How is the Decision Made?</strong></h2><table id="1a2e8d61-387b-809d-adc9-f827ac3d57ff" class="simple-table"><tbody><tr id="1a2e8d61-387b-80c2-9255-f31c4aaa1126"><td id="Tq|&lt;" class="">Decision Factor</td><td id="ZmF?" class="">Best Practice</td></tr><tr id="1a2e8d61-387b-806b-9609-ca2c22b0698b"><td id="Tq|&lt;" class=""><strong>Which side holds the foreign key?</strong></td><td id="ZmF?" class="">The <strong>&quot;many&quot; side (</strong><code><strong>Employee</strong></code><strong>)</strong> owns the foreign key (<code>department_id</code>)</td></tr><tr id="1a2e8d61-387b-80ac-81d8-d8dab40a6d10"><td id="Tq|&lt;" class=""><strong>Who owns the relationship?</strong></td><td id="ZmF?" class="">The <strong>&quot;many&quot; side (</strong><code><strong>Employee</strong></code><strong>)</strong> owns it with <code>@ManyToOne</code></td></tr><tr id="1a2e8d61-387b-8060-8965-d449e4651430"><td id="Tq|&lt;" class=""><strong>Who has </strong><code><strong>mappedBy</strong></code><strong>?</strong></td><td id="ZmF?" class="">The <strong>&quot;one&quot; side (</strong><code><strong>Department</strong></code><strong>)</strong> has <code>mappedBy=&quot;department&quot;</code></td></tr><tr id="1a2e8d61-387b-8036-ab8b-ff5c2879dfc3"><td id="Tq|&lt;" class=""><strong>Do we need a join table?</strong></td><td id="ZmF?" class="">❌ <strong>No,</strong> because a direct foreign key in <code>Employee</code> is better</td></tr></tbody></table><p id="1a2e8d61-387b-80b6-b9d9-f2763b172a3b" class="">🚀 <strong>Following this approach keeps the schema optimized, avoids redundant join tables, and ensures easy querying.</strong></p><hr id="1a2e8d61-387b-800c-ac64-ff688a40774d"/><h2 id="1a2e8d61-387b-809d-9cf8-e81d14ce8f94" class=""><strong>5️⃣ Alternative Approach: Using a Join Table (Less Efficient)</strong></h2><p id="1a2e8d61-387b-80f0-9120-fb87a39827c9" class="">📌 <strong>If we wanted a </strong><code><strong>@JoinTable</strong></code><strong> instead of a direct </strong><code><strong>@JoinColumn</strong></code><strong>, we could do this:</strong></p><h3 id="1a2e8d61-387b-808c-a42e-efc93ba6c889" class=""><strong>Department Entity (Owning Side)</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-8094-860a-e7000fb9ee1f" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@OneToMany
+@JoinTable(
+    name = &quot;department_employee&quot;,
+    joinColumns = @JoinColumn(name = &quot;department_id&quot;),
+    inverseJoinColumns = @JoinColumn(name = &quot;employee_id&quot;)
+)
+private List&lt;Employee&gt; employees;
+
+</code></pre><p id="1a2e8d61-387b-80d5-a67e-e7db01aa5607" class="">🚨 <strong>Drawbacks of </strong><code><strong>@JoinTable</strong></code><strong> in One-to-Many:</strong></p><ul id="1a2e8d61-387b-8045-b136-f4e7e0c6c60d" class="bulleted-list"><li style="list-style-type:disc">Creates an <strong>extra table (</strong><code><strong>department_employee</strong></code><strong>)</strong>.</li></ul><ul id="1a2e8d61-387b-807f-8c90-cf5b96ce18b1" class="bulleted-list"><li style="list-style-type:disc"><strong>Slower queries</strong> due to additional joins.</li></ul><ul id="1a2e8d61-387b-800e-80f0-c95ab81ecd3a" class="bulleted-list"><li style="list-style-type:disc"><strong>Unnecessary for One-to-Many</strong> (Best for Many-to-Many).</li></ul><p id="1a2e8d61-387b-80e7-86a0-c381ce2b77a1" class="">✅ <strong>For One-to-Many, </strong><code><strong>@JoinColumn</strong></code><strong> on the </strong><code><strong>@ManyToOne</strong></code><strong> side is better</strong>.</p><hr id="1a2e8d61-387b-80a1-9236-e62d20b99172"/><h2 id="1a2e8d61-387b-805a-acec-eaadbce9ac39" class=""><strong>6️⃣ Summary</strong></h2><table id="1a2e8d61-387b-805f-9aef-c22ace3fcfa7" class="simple-table"><tbody><tr id="1a2e8d61-387b-80ab-9d1e-fa3fadc3b1f1"><td id="gEMH" class="">Aspect</td><td id="Uqms" class="">Best Practice</td></tr><tr id="1a2e8d61-387b-80e2-91dc-ef968b25a8ac"><td id="gEMH" class=""><strong>Who owns the relationship?</strong></td><td id="Uqms" class=""><strong>Employee</strong> (<code>@ManyToOne</code> with <code>@JoinColumn</code>)</td></tr><tr id="1a2e8d61-387b-80da-b9d3-c5cf4940c07c"><td id="gEMH" class=""><strong>Where does the foreign key go?</strong></td><td id="Uqms" class=""><strong>Employee Table (</strong><code><strong>department_id</strong></code><strong>)</strong></td></tr><tr id="1a2e8d61-387b-8067-93b2-d8ce4a078f7a"><td id="gEMH" class=""><strong>How does </strong><code><strong>Department</strong></code><strong> reference </strong><code><strong>Employee</strong></code><strong>?</strong></td><td id="Uqms" class=""><code>@OneToMany(mappedBy = &quot;department&quot;)</code></td></tr><tr id="1a2e8d61-387b-8059-9f3b-e492c0fad8c6"><td id="gEMH" class=""><strong>Should we use a join table?</strong></td><td id="Uqms" class="">❌ No, direct foreign key is better</td></tr></tbody></table><h3 id="1a2e8d61-387b-80a4-b049-f9886b82da39" class=""><strong>Final Answer:</strong></h3><ul id="1a2e8d61-387b-802a-9a7e-e12cbedb2a88" class="bulleted-list"><li style="list-style-type:disc">The <strong>&quot;many&quot; side (</strong><code><strong>Employee</strong></code><strong>)</strong> owns the relationship.</li></ul><ul id="1a2e8d61-387b-80ae-8a20-e26d1867d957" class="bulleted-list"><li style="list-style-type:disc">The <strong>foreign key (</strong><code><strong>department_id</strong></code><strong>) is in the </strong><code><strong>Employee</strong></code><strong> table</strong>.</li></ul><ul id="1a2e8d61-387b-8097-b063-dab4405431e9" class="bulleted-list"><li style="list-style-type:disc">Use <code><strong>@OneToMany(mappedBy = &quot;department&quot;)</strong></code> in <code>Department</code>.</li></ul><ul id="1a2e8d61-387b-80b6-a2d8-f8e87d743a94" class="bulleted-list"><li style="list-style-type:disc">Use <code><strong>@ManyToOne @JoinColumn(name = &quot;department_id&quot;)</strong></code> in <code>Employee</code>.</li></ul></details></li></ul><p id="1a3e8d61-387b-8080-949a-d28fd69806a9" class="">
+</p><p id="1a3e8d61-387b-80c7-8bf8-c77a0d7d87f5" class="">
+</p><p id="1a2e8d61-387b-80ce-a2bf-da2583d64ff4" class="">
+</p><ul id="1a2e8d61-387b-807a-9779-ef8b01b75e3c" class="toggle"><li><details open=""><summary><strong>Question 2 : </strong><br/>In the below reference code, I am trying to <br/><strong>assign an employee to a department</strong> by:<br/>1. Retrieving the <br/><code>DepartmentEntity</code> using <code>findById(departmentId)</code>.<br/>2. Retrieving the <br/><code>EmployeeEntity</code> using <code>findById(employeeId)</code>.<br/>3. Adding the <br/><code>Employee</code> to <code>Department.getWorkers()</code> and saving the <code>Department</code> using <code>departmentRepository.save(department)</code>.<br/><br/><strong>Reference Code:<br/><br/></strong><code>Optional&lt;DepartmentEntity&gt; departmentEntity = departmentRepository.findById(departmentId);<br/>Optional&lt;EmployeeEntity&gt; employeeEntity = employeeRepository.findById(employeeId);<br/>return departmentEntity.flatMap(department -&gt;<br/>    employeeEntity.map(employee -&gt; {<br/>        department.getWorkers().add(employee);  // Adding employee to department&#x27;s worker list<br/>        return departmentRepository.save(department); // Saving the department<br/>    })<br/>)<br/></code>;<br/><br/><strong>Question:<br/>&gt; <br/></strong>Will this update the <code>department_id</code> in the <code>Employee</code> table?<br/>&gt; Will this correctly update the relationship?<br/></summary><p id="1a2e8d61-387b-80bb-851a-fdd429825993" class="">
+</p><h2 id="1a2e8d61-387b-80fc-9b01-c4d8239ef63c" class=""><strong>1️⃣ What Is Happening in This Code?</strong></h2><ul id="1a2e8d61-387b-80d6-ba5a-e5f5919ae8c9" class="bulleted-list"><li style="list-style-type:disc">We are <strong>fetching</strong> the <code>DepartmentEntity</code> and <code>EmployeeEntity</code> as <code>Optional&lt;T&gt;</code>.</li></ul><ul id="1a2e8d61-387b-8050-b0c8-c381af6cff58" class="bulleted-list"><li style="list-style-type:disc">We are using <code><strong>flatMap</strong></code><strong> and </strong><code><strong>map</strong></code> to ensure both entities exist before modifying them.</li></ul><ul id="1a2e8d61-387b-80b7-a518-eb10ccbcd90f" class="bulleted-list"><li style="list-style-type:disc">We are <strong>adding the </strong><code><strong>Employee</strong></code><strong> to the </strong><code><strong>Department&#x27;s</strong></code><strong> worker list (</strong><code><strong>getWorkers()</strong></code><strong>)</strong>.</li></ul><ul id="1a2e8d61-387b-8092-b40a-f19a62a43281" class="bulleted-list"><li style="list-style-type:disc">Finally, we are <strong>saving the </strong><code><strong>Department</strong></code><strong> using </strong><code><strong>departmentRepository.save(department)</strong></code>.</li></ul><hr id="1a2e8d61-387b-8006-ae7b-e0f6eea5807a"/><h2 id="1a2e8d61-387b-80bc-af6f-e0d9510fc985" class=""><strong>2️⃣ Will It Update </strong><code><strong>department_id</strong></code><strong> in the </strong><code><strong>Employee</strong></code><strong> Table?</strong></h2><p id="1a2e8d61-387b-8041-877c-fd934a0d422d" class="">❌ <strong>No, this will NOT update the </strong><code><strong>department_id</strong></code><strong> in the </strong><code><strong>Employee</strong></code><strong> table correctly.</strong></p><p id="1a2e8d61-387b-805c-9de4-f8f4ca42a626" class="">📌 <strong>Why?</strong></p><ul id="1a2e8d61-387b-8052-bc32-fc5191a79357" class="bulleted-list"><li style="list-style-type:disc">The <strong>foreign key (</strong><code><strong>department_id</strong></code><strong>) is stored in the </strong><code><strong>Employee</strong></code><strong> table</strong>, and <code>Employee</code> <strong>owns the relationship</strong>.</li></ul><ul id="1a2e8d61-387b-80b3-bd5e-f5102af3876c" class="bulleted-list"><li style="list-style-type:disc">Adding an <code>Employee</code> to <code>Department.getWorkers()</code> <strong>only modifies the </strong><code><strong>Department</strong></code><strong> object</strong>, but <strong>does NOT update the </strong><code><strong>department_id</strong></code><strong> in </strong><code><strong>Employee</strong></code>.</li></ul><ul id="1a2e8d61-387b-8023-bb36-f95cb5b56614" class="bulleted-list"><li style="list-style-type:disc">Since the <strong>relationship is owned by </strong><code><strong>Employee</strong></code>, changes must be made in the <code><strong>EmployeeEntity</strong></code>, not just in <code>Department</code>.</li></ul><p id="1a2e8d61-387b-8028-9c68-c8490db1e247" class="">🚨 <strong>Issue:</strong></p><ul id="1a2e8d61-387b-80ad-ab87-fd6e683c90b9" class="bulleted-list"><li style="list-style-type:disc"><code>department.getWorkers().add(employee)</code> only modifies the <strong>inverse side (</strong><code><strong>@OneToMany</strong></code><strong> list in </strong><code><strong>Department</strong></code><strong>)</strong>, but does <strong>not</strong> affect the owning side (<code>@ManyToOne</code> in <code>Employee</code>).</li></ul><p id="1a2e8d61-387b-8067-b0be-e0c5fb46b5c6" class="">✅ <strong>The correct way to update the relationship is to update the </strong><code><strong>Employee</strong></code><strong> entity.</strong></p><hr id="1a2e8d61-387b-80e0-accc-c9c98c5e8533"/><h2 id="1a2e8d61-387b-8083-bb46-f047d5e5417f" class=""><strong>3️⃣ Correct Way to Update </strong><code><strong>department_id</strong></code><strong> for Employee</strong></h2><p id="1a2e8d61-387b-8005-adef-ee5efb7847fd" class="">Since <code><strong>Employee</strong></code><strong> owns the relationship</strong>, we must <strong>set </strong><code><strong>department</strong></code><strong> inside </strong><code><strong>EmployeeEntity</strong></code> and then <strong>save the </strong><code><strong>Employee</strong></code>, NOT the <code>Department</code>.</p><h3 id="1a2e8d61-387b-801a-8fad-e56e04f51bbf" class=""><strong>Corrected Code:</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-8015-80a5-f88817f01d45" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+Optional&lt;DepartmentEntity&gt; departmentEntity = departmentRepository.findById(departmentId);
+Optional&lt;EmployeeEntity&gt; employeeEntity = employeeRepository.findById(employeeId);
+
+return departmentEntity.flatMap(department -&gt;
+    employeeEntity.map(employee -&gt; {
+        employee.setDepartment(department); // ✅ Correctly assigning department to employee
+        return employeeRepository.save(employee); // ✅ Saving Employee instead of Department
+    })
+);
+
+</code></pre><p id="1a2e8d61-387b-80b1-8b13-cbcae7d05dd4" class="">✅ <strong>Now, the </strong><code><strong>department_id</strong></code><strong> in the </strong><code><strong>Employee</strong></code><strong> table is correctly updated!</strong></p><p id="1a2e8d61-387b-8047-bf7d-e2079d0ea744" class="">📌 <strong>Key Fix:</strong></p><ul id="1a2e8d61-387b-803d-bb9b-fe45c4241eda" class="bulleted-list"><li style="list-style-type:disc">Instead of adding the employee to <code>department.getWorkers()</code>, we update the owning side by setting <code>employee.setDepartment(department)</code>.</li></ul><ul id="1a2e8d61-387b-80bd-893e-fb84a5a388de" class="bulleted-list"><li style="list-style-type:disc">Since <code>Employee</code> owns the relationship, saving <code>Employee</code> ensures that <code>department_id</code> is correctly updated in the database.</li></ul><hr id="1a2e8d61-387b-8036-9f79-cf57ec1a7328"/><h2 id="1a2e8d61-387b-80e0-95d7-f54623a2509c" class=""><strong>4️⃣ Why Doesn’t </strong><code><strong>departmentRepository.save(department)</strong></code><strong> Work?</strong></h2><p id="1a2e8d61-387b-8028-a48c-d7321406c305" class="">If we save the <code>Department</code> instead:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-804c-a6cf-f40e175a8623" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+return departmentRepository.save(department);
+
+</code></pre><p id="1a2e8d61-387b-8061-b44c-d16a97e23c84" class="">❌ This <strong>only updates the </strong><code><strong>Department</strong></code><strong> entity</strong>, but does <strong>not update the </strong><code><strong>department_id</strong></code><strong> in </strong><code><strong>Employee</strong></code>, because:</p><ul id="1a2e8d61-387b-808d-9a53-eec474d1010d" class="bulleted-list"><li style="list-style-type:disc">JPA <strong>only synchronizes the owning side</strong> (<code>@ManyToOne</code> in <code>Employee</code>), NOT the inverse (<code>@OneToMany</code> in <code>Department</code>).</li></ul><ul id="1a2e8d61-387b-8047-a33e-debb8caec110" class="bulleted-list"><li style="list-style-type:disc"><strong>The </strong><code><strong>workers</strong></code><strong> list in </strong><code><strong>Department</strong></code><strong> is just a mapped collection and does NOT dictate foreign keys.</strong></li></ul><hr id="1a2e8d61-387b-80c0-9a50-c6f16014789a"/><h2 id="1a2e8d61-387b-8054-a0ca-db3b9677fc62" class=""><strong>5️⃣ Summary</strong></h2><table id="1a2e8d61-387b-8068-95b7-f6b207a31626" class="simple-table"><tbody><tr id="1a2e8d61-387b-80c7-92d6-f6ebd1cee32c"><td id="eoAC" class="">Approach</td><td id="DOF}" class="">Does It Update <code>department_id</code> in Employee Table?</td><td id="s:h=" class="">Why?</td></tr><tr id="1a2e8d61-387b-8058-9da0-d912075405fc"><td id="eoAC" class=""><strong>Adding Employee to </strong><code><strong>department.getWorkers()</strong></code><strong> and saving </strong><code><strong>Department</strong></code></td><td id="DOF}" class="">❌ <strong>No</strong></td><td id="s:h=" class=""><code>Department.getWorkers()</code> is just a mapped list and does NOT update the foreign key</td></tr><tr id="1a2e8d61-387b-80e5-ae36-e1fb98d1eed2"><td id="eoAC" class=""><strong>Setting </strong><code><strong>employee.setDepartment(department)</strong></code><strong> and saving </strong><code><strong>Employee</strong></code></td><td id="DOF}" class="">✅ <strong>Yes</strong></td><td id="s:h=" class=""><code>Employee</code> owns the relationship, so changes must be made here</td></tr></tbody></table><h3 id="1a2e8d61-387b-80ab-8c43-fffee78e9998" class=""><strong>Final Answer</strong></h3><ul id="1a2e8d61-387b-807a-999b-e2eaff6c9796" class="bulleted-list"><li style="list-style-type:disc">❌ <strong>Your current code will NOT update </strong><code><strong>department_id</strong></code><strong> in </strong><code><strong>Employee</strong></code> because you are modifying the <strong>inverse (</strong><code><strong>@OneToMany</strong></code><strong>)</strong> side of the relationship.</li></ul><ul id="1a2e8d61-387b-80f4-863c-d6cdddc66aa4" class="bulleted-list"><li style="list-style-type:disc">✅ <strong>To properly update the relationship</strong>, use <code>employee.setDepartment(department)</code> and <strong>save the </strong><code><strong>EmployeeEntity</strong></code>.</li></ul></details></li></ul><p id="1a3e8d61-387b-80ca-a022-f4c9475d7ce6" class="">
+</p><p id="1a3e8d61-387b-80be-9afa-cfd6267e2f27" class="">
+</p><p id="1a2e8d61-387b-80a6-9625-c8cf0979402d" class="">
+</p><h3 id="1a3e8d61-387b-8004-a697-c475200a1c92" class=""><strong>Question 3:</strong></h3><p id="1a3e8d61-387b-804b-9c48-eeca56567e3f" class="">In the below reference code, I have a <strong>Many-to-Many</strong> relationship between <code>Department</code> and <code>Employee</code> (freelancers).</p><ol type="1" id="1a3e8d61-387b-80e1-b148-f26097f04f7d" class="numbered-list" start="1"><li>In <code>EmployeeEntity.java</code>, I <strong>own the relationship</strong> using <code>@ManyToMany</code> with <code>@JoinTable</code>.</li></ol><ol type="1" id="1a3e8d61-387b-8024-a1d9-e6bf3fb3ef6a" class="numbered-list" start="2"><li>In <code>DepartmentEntity.java</code>, I <strong>use </strong><code><strong>mappedBy</strong></code> to mark it as the <strong>inverse side</strong>.</li></ol><ol type="1" id="1a3e8d61-387b-80f1-9b36-c38bb65bd155" class="numbered-list" start="3"><li>In my <strong>service layer</strong>, I am saving the relationship using <code>departmentRepository.save(department)</code>, but it is <strong>not persisting</strong> in the database.</li></ol><h3 id="1a3e8d61-387b-80be-a3de-e94de6859c3c" class=""><strong>Reference Code</strong></h3><h3 id="1a3e8d61-387b-808a-b916-c12f7031cf8c" class=""><strong>EmployeeEntity (Owning Side)</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a3e8d61-387b-8084-8c44-df888d605e26" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">
+@Entity
+public class EmployeeEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+
+    @ManyToMany
+    @JoinTable(
+        name = &quot;freelancer_department_mapping&quot;,
+        joinColumns = @JoinColumn(name = &quot;employee_id&quot;),
+        inverseJoinColumns = @JoinColumn(name = &quot;department_id&quot;)
+    )
+    @JsonIgnore
+    private List&lt;DepartmentEntity&gt; departments;
+
+    // Getters &amp; Setters
+}
+
+</code></pre><h3 id="1a3e8d61-387b-80a2-9651-de4971b3bd97" class=""><strong>DepartmentEntity (Inverse Side)</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a3e8d61-387b-807d-ac14-d9428d980a96" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">
+@Entity
+public class DepartmentEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+
+    @ManyToMany(mappedBy = &quot;departments&quot;)
+    private List&lt;EmployeeEntity&gt; freelancers;
+
+    // Getters &amp; Setters
+}
+
+</code></pre><h3 id="1a3e8d61-387b-80ea-9fa7-fb8a6f7fc2a6" class=""><strong>Service Layer</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a3e8d61-387b-806d-b89f-d10186dcc5db" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">
+public DepartmentEntity assignFreelancerToDepartment(Long departmentId, Long employeeId) {
+    Optional&lt;DepartmentEntity&gt; departmentEntity = departmentRepository.findById(departmentId);
+    Optional&lt;EmployeeEntity&gt; employeeEntity = employeeRepository.findById(employeeId);
+
+    return departmentEntity.flatMap(department -&gt;
+        employeeEntity.map(employee -&gt; {
+            department.getFreelancers().add(employee); // Adding employee to department
+            return departmentRepository.save(department); // Saving department
+        })
+    ).orElseThrow(() -&gt; new EntityNotFoundException(&quot;Department or Employee not found&quot;));
+}
+
+</code></pre><h3 id="1a3e8d61-387b-808b-83a9-d789ebed9a0f" class=""><strong>Question:</strong></h3><ul id="1a3e8d61-387b-8035-9ef5-c49b21f99be8" class="bulleted-list"><li style="list-style-type:disc"><strong>Why is </strong><code><strong>departmentRepository.save(department)</strong></code><strong> not persisting the relationship in the database?</strong></li></ul><ul id="1a3e8d61-387b-8069-a07c-d17f9b839795" class="bulleted-list"><li style="list-style-type:disc"><strong>Is there something wrong with this approach?</strong></li></ul><p id="1a3e8d61-387b-807b-95dc-c3ee6e032bca" class="">
+</p><ul id="1a3e8d61-387b-8049-b37d-d23c92f416b1" class="toggle"><li><details open=""><summary>Answer</summary><h2 id="1a3e8d61-387b-8057-b817-eb84e1f3e23e" class=""><strong>1️⃣ What’s the Issue?</strong></h2><p id="1a3e8d61-387b-80ce-a1ff-e35c028f67a8" class="">🚨 <strong>Issue: </strong><code><strong>departmentRepository.save(department)</strong></code><strong> does NOT update the Many-to-Many relationship correctly</strong></p><ul id="1a3e8d61-387b-80b4-8fcc-dd2f00b40b4d" class="bulleted-list"><li style="list-style-type:disc"><strong>Many-to-Many relationships are owned by the entity that defines </strong><code><strong>@JoinTable</strong></code>.</li></ul><ul id="1a3e8d61-387b-80e8-9970-d33813c9896a" class="bulleted-list"><li style="list-style-type:disc"><strong>In this case, </strong><code><strong>EmployeeEntity</strong></code><strong> owns the relationship</strong>, meaning changes must be made in <code>EmployeeEntity</code>, NOT in <code>DepartmentEntity</code>.</li></ul><ul id="1a3e8d61-387b-808a-898d-d7d0bd42f7ed" class="bulleted-list"><li style="list-style-type:disc"><strong>JPA only synchronizes the owning side (</strong><code><strong>EmployeeEntity</strong></code><strong>), NOT the inverse side (</strong><code><strong>DepartmentEntity</strong></code><strong>).</strong></li></ul><p id="1a3e8d61-387b-80ab-981b-e65c4b7afff5" class="">📌 <strong>What’s happening?</strong></p><ul id="1a3e8d61-387b-8076-a269-ef9e84dee54e" class="bulleted-list"><li style="list-style-type:disc"><strong>You are modifying </strong><code><strong>DepartmentEntity</strong></code><strong> (the inverse side)</strong> and saving it.</li></ul><ul id="1a3e8d61-387b-8089-b013-d63fcb1dbc13" class="bulleted-list"><li style="list-style-type:disc"><strong>JPA ignores updates to </strong><code><strong>@OneToMany</strong></code><strong> and </strong><code><strong>@ManyToMany</strong></code><strong> collections on the inverse side</strong>.</li></ul><ul id="1a3e8d61-387b-8051-876e-eb22814422f3" class="bulleted-list"><li style="list-style-type:disc"><strong>The correct approach is to update </strong><code><strong>EmployeeEntity</strong></code><strong>, the owning side.</strong></li></ul><hr id="1a3e8d61-387b-8003-ba3f-f10f6037fec9"/><h2 id="1a3e8d61-387b-802d-8d19-c8e9e6143151" class=""><strong>2️⃣ Correct Approach: Save the Owning Side (</strong><code><strong>EmployeeEntity</strong></code><strong>)</strong></h2><p id="1a3e8d61-387b-809a-85e0-c41aa56e6167" class="">✅ Instead of saving <code>DepartmentEntity</code>, update <code><strong>EmployeeEntity</strong></code> and save it.</p><h3 id="1a3e8d61-387b-8004-8568-fd52ea21738d" class=""><strong>Corrected Service Layer Code</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a3e8d61-387b-804b-ad03-f8581b595418" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+public EmployeeEntity assignFreelancerToDepartment(Long departmentId, Long employeeId) {
+    Optional&lt;DepartmentEntity&gt; departmentEntity = departmentRepository.findById(departmentId);
+    Optional&lt;EmployeeEntity&gt; employeeEntity = employeeRepository.findById(employeeId);
+
+    return employeeEntity.flatMap(employee -&gt;
+        departmentEntity.map(department -&gt; {
+            employee.getDepartments().add(department); // ✅ Update the owning side
+            return employeeRepository.save(employee); // ✅ Save the owning side
+        })
+    ).orElseThrow(() -&gt; new EntityNotFoundException(&quot;Department or Employee not found&quot;));
+}
+
+</code></pre><p id="1a3e8d61-387b-80f3-a81f-ddd8bcce775a" class="">📌 <strong>Key Fix:</strong></p><ul id="1a3e8d61-387b-8078-a9b6-c4fe75649066" class="bulleted-list"><li style="list-style-type:disc"><strong>Modify the </strong><code><strong>departments</strong></code><strong> list in </strong><code><strong>EmployeeEntity</strong></code><strong> (the owning side).</strong></li></ul><ul id="1a3e8d61-387b-8048-9957-c412760c0de9" class="bulleted-list"><li style="list-style-type:disc"><strong>Save the </strong><code><strong>EmployeeEntity</strong></code><strong>, NOT </strong><code><strong>DepartmentEntity</strong></code><strong>.</strong></li></ul><ul id="1a3e8d61-387b-80b4-a826-de7145a757eb" class="bulleted-list"><li style="list-style-type:disc"><strong>Now, JPA correctly updates the Many-to-Many relationship in the </strong><code><strong>freelancer_department_mapping</strong></code><strong> table.</strong></li></ul><hr id="1a3e8d61-387b-80ae-ab67-e93667d8d4e5"/><h2 id="1a3e8d61-387b-80f0-a913-dd22854736a3" class=""><strong>3️⃣ Why Does Saving </strong><code><strong>DepartmentEntity</strong></code><strong> Not Work?</strong></h2><table id="1a3e8d61-387b-807e-a26a-dae1bc7b64ee" class="simple-table"><tbody><tr id="1a3e8d61-387b-8056-8010-d5b5490af85a"><td id="kG^=" class="">Approach</td><td id="\HHe" class="">Works?</td><td id="evaK" class="">Why?</td></tr><tr id="1a3e8d61-387b-80a0-ab55-c30dd141529d"><td id="kG^=" class=""><code>department.getFreelancers().add(employee)</code> then <code>departmentRepository.save(department)</code></td><td id="\HHe" class="">❌ <strong>No</strong></td><td id="evaK" class=""><code>DepartmentEntity</code> does NOT own the relationship, so JPA ignores changes.</td></tr><tr id="1a3e8d61-387b-80df-93c9-ebd8ddf38a75"><td id="kG^=" class=""><code>employee.getDepartments().add(department)</code> then <code>employeeRepository.save(employee)</code></td><td id="\HHe" class="">✅ <strong>Yes</strong></td><td id="evaK" class=""><code>EmployeeEntity</code> owns the relationship (<code>@JoinTable</code> is defined there), so JPA persists changes.</td></tr></tbody></table><p id="1a3e8d61-387b-80f2-8c95-e940261a280c" class="">🚨 <strong>JPA Only Synchronizes the Owning Side!</strong></p><ul id="1a3e8d61-387b-8020-b8ad-edf721561b6e" class="bulleted-list"><li style="list-style-type:disc">The <strong>inverse side (</strong><code><strong>DepartmentEntity</strong></code><strong>) is just a mapped collection</strong> and is <strong>NOT responsible for persisting changes</strong>.</li></ul><ul id="1a3e8d61-387b-803d-8db3-f7a2d088ce6a" class="bulleted-list"><li style="list-style-type:disc"><strong>Only modifications made to the owning side (</strong><code><strong>EmployeeEntity</strong></code><strong>) trigger database updates.</strong></li></ul><hr id="1a3e8d61-387b-8026-8491-f0b1fa70f0da"/><h2 id="1a3e8d61-387b-802e-be39-c647bdae1cc8" class=""><strong>4️⃣ Summary of Fix</strong></h2><table id="1a3e8d61-387b-809c-9193-caf3718d35d2" class="simple-table"><tbody><tr id="1a3e8d61-387b-8091-8140-d8ef46bd6386"><td id="mBX}" class="">Step</td><td id="TvqT" class="">Incorrect Approach</td><td id="e``]" class="">Correct Approach</td></tr><tr id="1a3e8d61-387b-80b1-9baf-fb2680b9868b"><td id="mBX}" class=""><strong>Modify Relationship</strong></td><td id="TvqT" class=""><code>department.getFreelancers().add(employee);</code></td><td id="e``]" class=""><code>employee.getDepartments().add(department);</code></td></tr><tr id="1a3e8d61-387b-8067-a214-d3f00d356216"><td id="mBX}" class=""><strong>Save Entity</strong></td><td id="TvqT" class=""><code>departmentRepository.save(department);</code></td><td id="e``]" class=""><code>employeeRepository.save(employee);</code></td></tr></tbody></table><p id="1a3e8d61-387b-8017-804c-f377515bbc0d" class="">✅ <strong>Final Answer:</strong></p><ul id="1a3e8d61-387b-808c-9fa7-c8d8a618caee" class="bulleted-list"><li style="list-style-type:disc">The <strong>owning side (</strong><code><strong>EmployeeEntity</strong></code><strong>) must be updated and saved</strong>, NOT the inverse side (<code>DepartmentEntity</code>).</li></ul><ul id="1a3e8d61-387b-8000-b6d3-fc864ec692ba" class="bulleted-list"><li style="list-style-type:disc"><strong>To persist the relationship, modify the </strong><code><strong>List&lt;DepartmentEntity&gt;</strong></code><strong> in </strong><code><strong>EmployeeEntity</strong></code><strong> and save </strong><code><strong>EmployeeEntity</strong></code>.</li></ul><ul id="1a3e8d61-387b-8001-b59a-e9f44c5a8650" class="bulleted-list"><li style="list-style-type:disc"><strong>JPA does NOT track changes in inverse collections (</strong><code><strong>mappedBy</strong></code><strong>).</strong></li></ul></details></li></ul><p id="1a3e8d61-387b-801a-b592-f55881fe03a5" class="">
+</p><p id="1a3e8d61-387b-80c6-a1b9-d395b7e76fb2" class="">
+</p><p id="1a3e8d61-387b-806f-b5bf-d607db611d0c" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

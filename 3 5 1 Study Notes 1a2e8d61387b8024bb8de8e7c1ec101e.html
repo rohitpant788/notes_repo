@@ -1,0 +1,770 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>3.5.1 Study Notes</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-transparentGray { background-color: undefined; }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1a2e8d61-387b-8024-bb8d-e8e7c1ec101e" class="page sans"><header><h1 class="page-title">3.5.1 Study Notes</h1><p class="page-description"></p></header><div class="page-body"><h2 id="1a2e8d61-387b-8004-8152-cb82ca36c598" class=""><strong>🔥 Introduction</strong></h2><ul id="1a2e8d61-387b-80e4-b369-df11945128b9" class="bulleted-list"><li style="list-style-type:disc"><strong>Spring Data JPA</strong> allows defining <strong>relationships</strong> between multiple entities in a relational database.</li></ul><ul id="1a2e8d61-387b-80b1-aae1-cc78f9b5c52f" class="bulleted-list"><li style="list-style-type:disc">In a <strong>real-world scenario</strong>, relationships exist between different entities:<ul id="1a2e8d61-387b-80b5-a55e-cba5a0c4aa2d" class="bulleted-list"><li style="list-style-type:circle">A <strong>college</strong> has multiple <strong>classrooms</strong>.</li></ul><ul id="1a2e8d61-387b-80f7-a5e5-e1bc0a7af392" class="bulleted-list"><li style="list-style-type:circle">A <strong>professor</strong> teaches multiple <strong>students</strong>.</li></ul><ul id="1a2e8d61-387b-80aa-9c4d-e94f13633992" class="bulleted-list"><li style="list-style-type:circle">A <strong>student</strong> takes multiple <strong>courses</strong>.</li></ul><ul id="1a2e8d61-387b-8090-86f0-d46882a85e03" class="bulleted-list"><li style="list-style-type:circle">A <strong>course</strong> is taken by multiple <strong>students</strong>.</li></ul></li></ul><ul id="1a2e8d61-387b-802e-97d5-f9cee25b16bb" class="bulleted-list"><li style="list-style-type:disc">These relationships are implemented using <strong>Spring Data JPA mappings</strong>.</li></ul><hr id="1a2e8d61-387b-807e-b0a2-dd2e46d2d6b8"/><h2 id="1a2e8d61-387b-80a6-84d7-c501b8fe23bb" class=""><strong>🛠️ Types of Relationships in Spring Data JPA</strong></h2><p id="1a2e8d61-387b-80fe-a32d-c5d0b8ab1e65" class="">Spring Data JPA supports <strong>four types of mappings</strong>:</p><p id="1a2e8d61-387b-8044-91a6-fd85a10edc9c" class="">1️⃣ <strong>One-to-One (</strong><code><strong>@OneToOne</strong></code><strong>)</strong></p><ul id="1a2e8d61-387b-8074-aa1d-c279a48d71d8" class="bulleted-list"><li style="list-style-type:disc">Example: <strong>A department has one manager.</strong></li></ul><ul id="1a2e8d61-387b-801a-b8e8-fd96c5f22d95" class="bulleted-list"><li style="list-style-type:disc">Each <strong>department</strong> must have a <strong>manager</strong>.</li></ul><ul id="1a2e8d61-387b-80ae-b87e-e3ce96ed5282" class="bulleted-list"><li style="list-style-type:disc">An <strong>employee</strong> can either be a <strong>manager</strong> or a regular employee.</li></ul><ul id="1a2e8d61-387b-804f-8898-e7b9a8606af0" class="bulleted-list"><li style="list-style-type:disc">Each department can have only one manager.</li></ul><p id="1a2e8d61-387b-80ac-9b03-e3a834f980bd" class="">2️⃣ <strong>One-to-Many (</strong><code><strong>@OneToMany</strong></code><strong>)</strong></p><ul id="1a2e8d61-387b-8084-8165-fdde0269b2ea" class="bulleted-list"><li style="list-style-type:disc">Example: <strong>A department has multiple employees.</strong></li></ul><ul id="1a2e8d61-387b-8040-baa9-e4e3e4fd7544" class="bulleted-list"><li style="list-style-type:disc">A <strong>single department</strong> can have <strong>multiple employees</strong>, but an <strong>employee</strong> belongs to <strong>one department</strong>.</li></ul><p id="1a2e8d61-387b-802c-ad97-c2e014ed9b17" class="">3️⃣ <strong>Many-to-One (</strong><code><strong>@ManyToOne</strong></code><strong>)</strong></p><ul id="1a2e8d61-387b-805c-8e8e-ceb0fe01cb72" class="bulleted-list"><li style="list-style-type:disc">Example: <strong>Each employee belongs to one department, but one department can have many employees.</strong></li></ul><ul id="1a2e8d61-387b-8059-985b-c59e8a05ae52" class="bulleted-list"><li style="list-style-type:disc">It is the reverse of <strong>One-to-Many mapping</strong>.</li></ul><p id="1a2e8d61-387b-8075-a27d-e181181f5833" class="">4️⃣ <strong>Many-to-Many (</strong><code><strong>@ManyToMany</strong></code><strong>)</strong></p><ul id="1a2e8d61-387b-80b8-ae08-f58e237e9321" class="bulleted-list"><li style="list-style-type:disc">Example: <strong>An employee can work on multiple projects, and a project can have multiple employees.</strong></li></ul><ul id="1a2e8d61-387b-80ea-a75e-f6783a353245" class="bulleted-list"><li style="list-style-type:disc">There is an <strong>intermediate mapping table</strong>.</li></ul><hr id="1a2e8d61-387b-8008-a369-de0403b61222"/><h2 id="1a2e8d61-387b-8033-bccc-de1731723be1" class=""><strong>📌 Understanding One-to-One Mapping (</strong><code><strong>@OneToOne</strong></code><strong>)</strong></h2><ul id="1a2e8d61-387b-8002-9090-ebc2c3a8cffd" class="bulleted-list"><li style="list-style-type:disc"><strong>One-to-One mapping</strong> establishes a direct <strong>association between two entities</strong>.</li></ul><ul id="1a2e8d61-387b-80be-aea3-d76e6262be07" class="bulleted-list"><li style="list-style-type:disc">Example: <strong>Each department has exactly one manager.</strong></li></ul><ul id="1a2e8d61-387b-80df-824e-d686aafc56b7" class="bulleted-list"><li style="list-style-type:disc">The <strong>foreign key</strong> is stored inside <strong>one entity</strong>.</li></ul><h3 id="1a2e8d61-387b-80c2-bcf4-e2ec8f17b1f7" class=""><strong>🛠️ Steps to Define One-to-One Mapping</strong></h3><ol type="1" id="1a2e8d61-387b-8048-acf9-ee81d67e5f38" class="numbered-list" start="1"><li><strong>Create Entities</strong> (<code>Department</code> and <code>Employee</code>).</li></ol><ol type="1" id="1a2e8d61-387b-8052-b20d-c4783c4573e9" class="numbered-list" start="2"><li><strong>Use </strong><code><strong>@OneToOne</strong></code><strong> Annotation</strong> to establish the relationship.</li></ol><ol type="1" id="1a2e8d61-387b-80a0-a971-ec17386d541d" class="numbered-list" start="3"><li><strong>Use </strong><code><strong>@JoinColumn</strong></code><strong> to specify the foreign key.</strong></li></ol><ol type="1" id="1a2e8d61-387b-8021-b53a-e6cf23983f66" class="numbered-list" start="4"><li><strong>Configure </strong><code><strong>fetch</strong></code><strong> and </strong><code><strong>cascade</strong></code><strong> properties.</strong></li></ol><hr id="1a2e8d61-387b-80bd-a31a-c447865b9334"/><h2 id="1a2e8d61-387b-8096-91fe-f47842ac9883" class=""><strong>📌 Creating Entities in Spring Data JPA</strong></h2><h3 id="1a2e8d61-387b-80f6-a527-c04e9eb9d874" class=""><strong>📝 Department Entity</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-8051-8eef-ceaa68c63812" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">@Entity
+public class Department {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String title;
+
+    @OneToOne
+    @JoinColumn(name = &quot;department_manager&quot;, unique = true)
+    private Employee manager;
+}</code></pre><p id="1a2e8d61-387b-80d1-be1d-cdc9ed73e3ea" class="">✔ <code><strong>@OneToOne</strong></code> → Defines a one-to-one relationship.</p><p id="1a2e8d61-387b-809c-910e-e9e5862a9402" class="">✔ <code><strong>@JoinColumn(name = &quot;department_manager&quot;)</strong></code> → Defines the foreign key column inside <code>Department</code>.</p><p id="1a2e8d61-387b-801b-a9e1-fb5c360483c3" class="">✔ <code><strong>unique = true</strong></code> → Ensures <strong>each department has a unique manager</strong>.</p><hr id="1a2e8d61-387b-802a-929f-e1ba0185967b"/><h3 id="1a2e8d61-387b-8093-8a39-d609aa0e4446" class=""><strong>📝 Employee Entity</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-80e8-9832-f64f3574bfe8" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">
+@Entity
+public class Employee {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+
+    @OneToOne(mappedBy = &quot;manager&quot;)
+    @JsonIgnore
+    private Department managedDepartment;
+}
+
+</code></pre><p id="1a2e8d61-387b-8099-b835-f7830b513404" class="">✔ <code><strong>@OneToOne(mappedBy = &quot;manager&quot;)</strong></code> → Indicates the <strong>inverse side</strong> of the relationship.</p><p id="1a2e8d61-387b-80ed-839e-fbe377192dd0" class="">✔ <code><strong>@JsonIgnore</strong></code> → Prevents <strong>infinite recursion</strong> when serializing to JSON.</p><hr id="1a2e8d61-387b-80f8-a326-daca890b62b0"/><h2 id="1a2e8d61-387b-80d6-a18c-e138e5a81c0f" class=""><strong>📌 Creating Database Tables</strong></h2><h3 id="1a2e8d61-387b-80dc-b94b-d945e002f68e" class=""><strong>Generated Tables in SQL</strong></h3><ul id="1a2e8d61-387b-80c1-9b16-f3beb4904c3f" class="bulleted-list"><li style="list-style-type:disc"><strong>Department Table (</strong><code><strong>departments</strong></code><strong>)</strong><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-80e7-9cc9-eac472cf6292" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">bash
+CopyEdit
+| id | title  | department_manager |
+|----|--------|--------------------|
+| 1  | HR     | 1                  |
+| 2  | IT     | 2                  |
+
+</code></pre><p id="1a2e8d61-387b-803d-a288-eb1c0a7b7944" class="">✔ The <strong>department_manager</strong> column is a <strong>foreign key</strong> referring to <strong>employee ID</strong>.</p></li></ul><ul id="1a2e8d61-387b-807d-9c42-d3eeaeb3e871" class="bulleted-list"><li style="list-style-type:disc"><strong>Employee Table (</strong><code><strong>employees</strong></code><strong>)</strong><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-80c6-8ea0-feb4c016ca08" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">pgsql
+CopyEdit
+| id | name |
+|----|------|
+| 1  | John |
+| 2  | Jane |
+
+</code></pre><p id="1a2e8d61-387b-80ea-81c3-dbc56bacb968" class="">✔ <strong>Employee does not store any foreign key</strong>.</p></li></ul><hr id="1a2e8d61-387b-8021-a430-ca89b9b27c7b"/><h2 id="1a2e8d61-387b-8041-8388-cb740563eb55" class=""><strong>📌 Creating Repositories (</strong><code><strong>JpaRepository</strong></code><strong>)</strong></h2><h3 id="1a2e8d61-387b-8046-a20a-c96936710cca" class=""><strong>📝 Department Repository</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-80d6-970b-c692260c4626" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">public interface DepartmentRepository extends JpaRepository&lt;Department, Long&gt; {
+}</code></pre><h3 id="1a2e8d61-387b-802d-82f2-fe446cd83e4c" class=""><strong>📝 Employee Repository</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-80f1-ba40-e61d29fb9a42" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">public interface EmployeeRepository extends JpaRepository&lt;Employee, Long&gt; {
+}</code></pre><hr id="1a2e8d61-387b-807c-b1c9-da3cc299ebd9"/><h2 id="1a2e8d61-387b-80f2-b082-f11e390adbb2" class=""><strong>📌 Creating Services (</strong><code><strong>Service Layer</strong></code><strong>)</strong></h2><h3 id="1a2e8d61-387b-80d6-b95e-d2b38cd8db11" class=""><strong>📝 Assigning a Manager to a Department</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-8070-bfe2-f6452866d07c" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">@Service
+public class DepartmentService {
+
+    private final DepartmentRepository departmentRepository;
+    private final EmployeeRepository employeeRepository;
+
+    @Autowired
+    public DepartmentService(DepartmentRepository departmentRepository, EmployeeRepository employeeRepository) {
+        this.departmentRepository = departmentRepository;
+        this.employeeRepository = employeeRepository;
+    }
+
+    public Department assignManagerToDepartment(Long departmentId, Long employeeId) {
+        Department department = departmentRepository.findById(departmentId)
+                                  .orElseThrow(() -&gt; new RuntimeException(&quot;Department not found&quot;));
+
+        Employee employee = employeeRepository.findById(employeeId)
+                              .orElseThrow(() -&gt; new RuntimeException(&quot;Employee not found&quot;));
+
+        department.setManager(employee);
+        return departmentRepository.save(department);
+    }
+}</code></pre><p id="1a2e8d61-387b-801d-811b-fa40696c2de7" class="">✔ <strong>Finds the department &amp; employee by ID.</strong></p><p id="1a2e8d61-387b-8022-ada2-d29f8a7fc2af" class="">✔ <strong>Assigns the employee as the department&#x27;s manager.</strong></p><p id="1a2e8d61-387b-806a-b0e8-c43c97406a86" class="">✔ <strong>Saves the updated department to the database.</strong></p><hr id="1a2e8d61-387b-80ab-81f1-ca4b114ce203"/><h2 id="1a2e8d61-387b-801f-835e-f1b752fc4118" class=""><strong>📌 Creating Controllers (</strong><code><strong>RestController</strong></code><strong>)</strong></h2><h3 id="1a2e8d61-387b-8043-9c26-cc60b49c2945" class=""><strong>📝 Assign Manager to Department (PUT API)</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-809a-ba35-cdcb8fac3252" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">@RestController
+@RequestMapping(&quot;/departments&quot;)
+public class DepartmentController {
+
+    private final DepartmentService departmentService;
+
+    @Autowired
+    public DepartmentController(DepartmentService departmentService) {
+        this.departmentService = departmentService;
+    }
+
+    @PutMapping(&quot;/{departmentId}/manager/{employeeId}&quot;)
+    public ResponseEntity&lt;Department&gt; assignManager(@PathVariable Long departmentId, @PathVariable Long employeeId) {
+        Department updatedDepartment = departmentService.assignManagerToDepartment(departmentId, employeeId);
+        return ResponseEntity.ok(updatedDepartment);
+    }
+}</code></pre><p id="1a2e8d61-387b-80f6-a823-cfc5b81e1d44" class="">✔ <strong>PUT API:</strong> <code>localhost:8080/departments/1/manager/2</code></p><p id="1a2e8d61-387b-8083-b87d-f5a640729224" class="">✔ <strong>Updates the department with a new manager.</strong></p><hr id="1a2e8d61-387b-8004-8327-d16dc4d9fa42"/><h2 id="1a2e8d61-387b-8055-adb5-e7c61b9df64d" class=""><strong>📌 Handling Recursive Serialization</strong></h2><p id="1a2e8d61-387b-806b-96b1-e84f930b5948" class=""><strong>Problem: Infinite Recursion in JSON Response</strong></p><ul id="1a2e8d61-387b-803f-8e6f-c5c4a0917701" class="bulleted-list"><li style="list-style-type:disc">If a department has a manager, and a manager has a department reference, <strong>it causes an infinite loop</strong> during serialization.</li></ul><h3 id="1a2e8d61-387b-80b8-990d-ec3f9a201a9e" class=""><strong>Solution: Use </strong><code><strong>@JsonIgnore</strong></code></h3><p id="1a2e8d61-387b-803b-aa15-d57e94f5c272" class="">✔ Add <code><strong>@JsonIgnore</strong></code> to prevent serialization issues in Employee entity.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-8031-9b35-fe28775aefbd" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">@OneToOne(mappedBy = &quot;manager&quot;)
+@JsonIgnore
+private Department managedDepartment;</code></pre><hr id="1a2e8d61-387b-809e-8874-c9ee969fb8df"/><h2 id="1a2e8d61-387b-8030-ac3a-d514cca8871b" class=""><strong>📌 Fetch Types in JPA</strong></h2><p id="1a2e8d61-387b-80dd-887d-e880677d462a" class=""><strong>Determines when related entities are fetched from the database.</strong><br/>1️⃣ <br/><strong>EAGER (Default for </strong><code><strong>@OneToOne</strong></code><strong>)</strong></p><ul id="1a2e8d61-387b-8066-9684-d6fbf22d8fdd" class="bulleted-list"><li style="list-style-type:disc"><strong>Loads related entities immediately</strong> when querying the parent entity.</li></ul><ul id="1a2e8d61-387b-8006-8557-f1e8d5233aaa" class="bulleted-list"><li style="list-style-type:disc"><strong>Downside</strong>: Unnecessary joins in queries (performance issues).</li></ul><p id="1a2e8d61-387b-800c-8b78-f83c96d94286" class="">2️⃣ <strong>LAZY (</strong><code><strong>fetch = FetchType.LAZY</strong></code><strong>)</strong></p><ul id="1a2e8d61-387b-806f-addf-c1f0fd5fedea" class="bulleted-list"><li style="list-style-type:disc"><strong>Loads related entities only when accessed</strong>.</li></ul><ul id="1a2e8d61-387b-801f-a038-d1d353f1514b" class="bulleted-list"><li style="list-style-type:disc"><strong>Recommended for large datasets</strong> to improve performance.</li></ul><p id="1a2e8d61-387b-8059-ad7c-d38db2d53f2e" class="">✔ <strong>Example: Lazy Fetch Type</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-800e-b83f-c7c37efbbe13" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">@OneToOne(fetch = FetchType.LAZY)
+private Employee manager;</code></pre><hr id="1a2e8d61-387b-8001-8167-fd7f2668ee8b"/><h2 id="1a2e8d61-387b-8060-a956-f3dc653d5f1a" class=""><strong>📌 Cascading Operations in JPA</strong></h2><ul id="1a2e8d61-387b-8055-8853-d192f602bebd" class="bulleted-list"><li style="list-style-type:disc">Defines how operations (persist, merge, remove) <strong>propagate</strong> from one entity to another.</li></ul><p id="1a2e8d61-387b-8061-a99f-d32ba5f044a1" class="">✔ <strong>Example: CascadeType.ALL</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a2e8d61-387b-806b-b38d-fc042e2c5233" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">@OneToOne(cascade = CascadeType.ALL)
+private Employee manager;</code></pre><ul id="1a2e8d61-387b-80f8-8d4e-e5ba10049a67" class="bulleted-list"><li style="list-style-type:disc"><strong>CascadeType.ALL</strong> → Any operation on <strong>Department</strong> also affects <strong>Employee</strong>.</li></ul><hr id="1a2e8d61-387b-8077-bd9d-d996e4fa12a8"/><h2 id="1a2e8d61-387b-8064-ad97-fe6e88da4adc" class=""><strong>🔹 Summary (Quick Revision)</strong></h2><p id="1a2e8d61-387b-8055-ab2e-eee034a3c19a" class="">✅ <strong>One-to-One Mapping (</strong><code><strong>@OneToOne</strong></code><strong>)</strong> allows <strong>direct relationships</strong> between two entities.</p><p id="1a2e8d61-387b-8087-abdc-ccfdb48f40d5" class="">✅ <strong>Foreign key (</strong><code><strong>@JoinColumn</strong></code><strong>)</strong> is placed in the <strong>owning entity</strong>.</p><p id="1a2e8d61-387b-806c-a0bd-e2ef2ac932df" class="">✅ <strong>Unidirectional Mapping</strong> → Only one entity knows about the relationship.</p><p id="1a2e8d61-387b-8029-bd5a-dd382d36d00c" class="">✅ <strong>Bidirectional Mapping</strong> → Both entities reference each other using <code>mappedBy</code>.</p><p id="1a2e8d61-387b-80d0-b61f-e2cedc33ceb4" class="">✅ <strong>Handling Recursive Serialization</strong> → Use <code>@JsonIgnore</code> to avoid infinite loops.</p><p id="1a2e8d61-387b-8015-a583-eede9ae9fb62" class="">✅ <strong>Fetching Strategies</strong> → <strong>Eager (default)</strong> loads immediately, <strong>Lazy</strong> loads on demand.</p><p id="1a2e8d61-387b-806d-abfd-ce4e7ed5dfbe" class="">✅ <strong>Cascade Operations</strong> → Define how changes in one entity affect the related entity.</p><hr id="1a2e8d61-387b-80f5-a939-c8d6c0506599"/><h3 id="1a2e8d61-387b-80e7-b1b6-f8bfdac2d92b" class=""><strong>💡 GIT Repo </strong></h3><ul id="1a2e8d61-387b-8043-8dc2-ccd514eaa788" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/rohitpant788/learning_java_full_stack/blob/main/week_3.5/dataMappingTutorial/src/main/java/com/rohit/tutorial/dataMapping/dataMappingTutorial/entities/DepartmentEntity.java#L26">https://github.com/rohitpant788/learning_java_full_stack/blob/main/week_3.5/dataMappingTutorial/src/main/java/com/rohit/tutorial/dataMapping/dataMappingTutorial/entities/DepartmentEntity.java#L26</a></li></ul><ul id="1a3e8d61-387b-8024-8f69-c3804eeca27e" class="bulleted-list"><li style="list-style-type:disc"></li></ul><p id="1a3e8d61-387b-80ec-b8cc-dcc866a9e5d1" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

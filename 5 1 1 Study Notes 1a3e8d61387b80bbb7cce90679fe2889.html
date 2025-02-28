@@ -1,0 +1,706 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>5.1.1 Study Notes</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-transparentGray { background-color: undefined; }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1a3e8d61-387b-80bb-b7cc-e90679fe2889" class="page sans"><header><h1 class="page-title">5.1.1 Study Notes</h1><p class="page-description"></p></header><div class="page-body"><hr id="1a3e8d61-387b-80dc-b1c3-dfbad3d64800"/><h2 id="1a3e8d61-387b-80af-8f62-fc20a39cbd0b" class=""><strong>🔐 Importance of Security in Applications</strong></h2><p id="1a3e8d61-387b-80bc-bbcf-fbe21ec68dbb" class="">Security is a <strong>fundamental aspect</strong> of any application. Without proper security measures:</p><p id="1a3e8d61-387b-80a2-93b3-df1d487e1945" class="">✅ User data can be <strong>compromised</strong>.</p><p id="1a3e8d61-387b-809c-921d-cb72106aafb0" class="">✅ Unauthorized users may <strong>access restricted areas</strong>.</p><p id="1a3e8d61-387b-80df-9df5-cf8f238835c9" class="">✅ Applications are exposed to <strong>financial and legal risks</strong>.</p><p id="1a3e8d61-387b-800a-8737-c8f5510bec9f" class="">Every modern application implements <strong>authentication and authorization</strong> to protect user data:</p><ul id="1a3e8d61-387b-809d-8bfe-c3626a401e8f" class="bulleted-list"><li style="list-style-type:disc">Users must <strong>authenticate</strong> themselves before accessing resources.</li></ul><ul id="1a3e8d61-387b-80db-afd4-e0445dcd865a" class="bulleted-list"><li style="list-style-type:disc">Different roles have <strong>restricted access</strong> (e.g., <strong>admin-only routes</strong> vs. <strong>user routes</strong>).</li></ul><p id="1a3e8d61-387b-80da-ab94-dc963a97a35c" class=""><strong>Example:</strong></p><ul id="1a3e8d61-387b-8040-90bd-d92db025a9ae" class="bulleted-list"><li style="list-style-type:disc">An <strong>Admin</strong> can access <strong>admin routes</strong>.</li></ul><ul id="1a3e8d61-387b-8065-addc-ffec09df5d2d" class="bulleted-list"><li style="list-style-type:disc">A <strong>normal user</strong> can access <strong>only general routes</strong>.</li></ul><ul id="1a3e8d61-387b-80b8-aa7e-f75a271de836" class="bulleted-list"><li style="list-style-type:disc">Unauthorized users <strong>should be blocked</strong> from accessing restricted data.</li></ul><p id="1a3e8d61-387b-80ae-83ea-d45f2b976ea5" class="">📢 <strong>Spring Security</strong> is a mini-framework within Spring Boot that helps in implementing security in applications.</p><hr id="1a3e8d61-387b-800c-af37-f358d9e92acc"/><h2 id="1a3e8d61-387b-80f4-b6df-e901ab043f77" class=""><strong>📚 Course Overview: Learning Spring Security</strong></h2><p id="1a3e8d61-387b-8092-8cae-f66bf4ef0184" class="">This course is divided into <strong>two modules</strong>:</p><h3 id="1a3e8d61-387b-80bc-9cb9-ce235ab8b1fe" class=""><strong>1️⃣ Module 1 - Authentication</strong></h3><ul id="1a3e8d61-387b-80dc-aae3-d713e72ef015" class="bulleted-list"><li style="list-style-type:disc">Understanding <strong>how authentication works</strong>.</li></ul><ul id="1a3e8d61-387b-8041-93e9-fd53de1c5bcb" class="bulleted-list"><li style="list-style-type:disc">Different authentication methods:<ul id="1a3e8d61-387b-803d-af83-fd394b26b519" class="bulleted-list"><li style="list-style-type:circle"><strong>Email &amp; Password</strong></li></ul><ul id="1a3e8d61-387b-8064-9a2d-d7b751c235ca" class="bulleted-list"><li style="list-style-type:circle"><strong>CSRF Token</strong></li></ul><ul id="1a3e8d61-387b-80a4-8e55-dcd43fe6aa68" class="bulleted-list"><li style="list-style-type:circle"><strong>JWT &amp; Refresh Tokens</strong></li></ul><ul id="1a3e8d61-387b-80d3-b76e-f3cba902d9fb" class="bulleted-list"><li style="list-style-type:circle"><strong>OAuth Authentication</strong> (Google, GitHub, Facebook, etc.)</li></ul></li></ul><h3 id="1a3e8d61-387b-8041-a9fd-d2fa8d14064f" class=""><strong>2️⃣ Module 2 - Authorization</strong></h3><ul id="1a3e8d61-387b-8025-93e6-e82b9a82c7d5" class="bulleted-list"><li style="list-style-type:disc">Assigning <strong>roles</strong> to users (e.g., Admin vs. Normal User).</li></ul><ul id="1a3e8d61-387b-8067-acfb-f6ae9b9bf310" class="bulleted-list"><li style="list-style-type:disc">Restricting access to <strong>routes based on roles</strong>.</li></ul><ul id="1a3e8d61-387b-80ec-8400-da03a2a78c3b" class="bulleted-list"><li style="list-style-type:disc">Ensuring <strong>only authorized personnel</strong> can access certain functionalities.</li></ul><hr id="1a3e8d61-387b-8080-8005-df0648cf8472"/><h1 id="1a3e8d61-387b-807b-b4c3-d74e97172056" class=""><strong>⚠️ Security Attacks &amp; Their Prevention</strong></h1><p id="1a3e8d61-387b-8079-b0c6-f20117a842c6" class="">In today&#x27;s session, we will focus on <strong>common security vulnerabilities</strong> that attackers can exploit and how Spring Security helps mitigate them.</p><h2 id="1a3e8d61-387b-806a-b969-e23a331ab9f7" class=""><strong>1️⃣ Cross-Site Request Forgery (CSRF) Attack</strong></h2><h3 id="1a3e8d61-387b-808f-9405-fcf7349458c3" class=""><strong>🛑 What is CSRF Attack?</strong></h3><p id="1a3e8d61-387b-809a-a1df-db01b2f22aeb" class="">A <strong>malicious user</strong> tricks an <strong>authenticated user</strong> into performing unwanted actions on a trusted website <strong>without their consent</strong>.</p><h3 id="1a3e8d61-387b-80e7-bd12-ed6497c8e76a" class=""><strong>⚡ How does it work?</strong></h3><ol type="1" id="1a3e8d61-387b-804a-9f1a-c2a35960af0b" class="numbered-list" start="1"><li><strong>User logs into a banking system.</strong><ul id="1a3e8d61-387b-806b-8450-d4e0b387dd74" class="bulleted-list"><li style="list-style-type:disc">A <strong>session ID</strong> is stored in cookies.</li></ul></li></ol><ol type="1" id="1a3e8d61-387b-80c9-a76f-c6b9884f6ad5" class="numbered-list" start="2"><li><strong>Attacker sends a malicious link</strong> via email or a fake website.</li></ol><ol type="1" id="1a3e8d61-387b-80e8-9985-c84ee68199f8" class="numbered-list" start="3"><li><strong>User unknowingly clicks the link</strong>, performing unintended actions (e.g., transferring money).</li></ol><ol type="1" id="1a3e8d61-387b-80e7-b97d-f1fe90b24fab" class="numbered-list" start="4"><li><strong>Browser automatically sends the stored session ID</strong>, making the bank think the request is legitimate.</li></ol><ol type="1" id="1a3e8d61-387b-8055-8c24-d5dce845915d" class="numbered-list" start="5"><li>The banking system <strong>processes the request</strong>, thinking it’s from the user.</li></ol><hr id="1a3e8d61-387b-806e-890b-d0d2d916ef4a"/><h3 id="1a3e8d61-387b-80e5-9771-d8a7dcaefe04" class=""><strong>🎯 Example: CSRF Attack on a Banking System</strong></h3><p id="1a3e8d61-387b-8000-9f19-ee38460a70cb" class="">📌 <strong>Scenario:</strong></p><p id="1a3e8d61-387b-8047-9464-f1bef751e153" class="">1️⃣ User logs into their <strong>banking website</strong> (e.g., <code>statebankofindia.com</code>).</p><p id="1a3e8d61-387b-8061-9346-db9f74754ff1" class="">2️⃣ The bank assigns a <strong>session ID</strong>, stored in cookies.</p><p id="1a3e8d61-387b-80d6-bc37-e37148d221e3" class="">3️⃣ Attacker <strong>sends a phishing email</strong> with a fake link:</p><ul id="1a3e8d61-387b-80cf-930a-c52a3f8f9ab3" class="bulleted-list"><li style="list-style-type:disc"><strong>Example:</strong> <code>Click here to claim your reward!</code></li></ul><ul id="1a3e8d61-387b-8043-b91a-d560bf8bca2a" class="bulleted-list"><li style="list-style-type:disc">This redirects to a <strong>fake banking website</strong> (<code>statebankofindla.com</code>, where &quot;i&quot; is replaced by &quot;l&quot;).4️⃣ User unknowingly <strong>clicks the link</strong> and logs in.5️⃣ The fake website sends a <strong>hidden request to transfer ₹5000</strong> to the attacker&#x27;s account.6️⃣ The <strong>browser sends the session ID automatically</strong>, thinking it’s a valid request.7️⃣ The bank system <strong>approves the transaction</strong> without the user&#x27;s knowledge.</li></ul><hr id="1a3e8d61-387b-8036-b62f-fcb6473119b5"/><h3 id="1a3e8d61-387b-80d6-a69a-f8cd1759369a" class=""><strong>🔒 How to Prevent CSRF Attacks?</strong></h3><p id="1a3e8d61-387b-80c2-a8e0-dbe8142b4b37" class="">Spring Security <strong>mitigates CSRF attacks using CSRF Tokens</strong>.</p><p id="1a3e8d61-387b-805b-912d-f1473dd8781b" class="">✅ <strong>CSRF Token-Based Protection</strong></p><ul id="1a3e8d61-387b-8048-bdc0-e629091c71bf" class="bulleted-list"><li style="list-style-type:disc">A unique <strong>CSRF token</strong> is issued during login.</li></ul><ul id="1a3e8d61-387b-8099-ad8d-fd355c67933d" class="bulleted-list"><li style="list-style-type:disc">This <strong>token is required</strong> for making <strong>state-changing requests</strong> (POST, PUT, DELETE).</li></ul><ul id="1a3e8d61-387b-80c8-ab28-d8ca3b428c08" class="bulleted-list"><li style="list-style-type:disc">Attackers <strong>cannot access the token</strong>, making the attack ineffective.</li></ul><p id="1a3e8d61-387b-8076-bee5-fb499dc388aa" class="">✅ <strong>Steps in CSRF Prevention</strong></p><p id="1a3e8d61-387b-80ed-a5c7-f8ddc696fd17" class="">1️⃣ <strong>User logs in</strong> → Server generates a <strong>CSRF token</strong> and sends it along with the session.</p><p id="1a3e8d61-387b-8023-a5e3-ed010bbda05b" class="">2️⃣ The <strong>CSRF token is stored in a hidden field</strong> inside the login form.</p><p id="1a3e8d61-387b-80fd-9067-fd70e5fcae0a" class="">3️⃣ When making requests, the <strong>CSRF token is sent along with the request</strong>.</p><p id="1a3e8d61-387b-80f0-baf2-d1aa3248aee5" class="">4️⃣ The server <strong>validates the token</strong> before processing the request.</p><p id="1a3e8d61-387b-8022-af09-edb11e932dcb" class="">5️⃣ If the <strong>CSRF token is missing or invalid</strong>, the request is <strong>rejected</strong>.</p><p id="1a3e8d61-387b-805c-a6a0-df9ef3d493e5" class="">📢 <strong>Spring Security enables CSRF protection by default</strong>, making it easier to defend against these attacks.</p><hr id="1a3e8d61-387b-8025-91ff-de4f09ca5927"/><h2 id="1a3e8d61-387b-8062-a743-e24c5f8ac78f" class=""><strong>2️⃣ Cross-Site Scripting (XSS) Attack</strong></h2><h3 id="1a3e8d61-387b-8050-8106-f6923bf8f31f" class=""><strong>🛑 What is an XSS Attack?</strong></h3><p id="1a3e8d61-387b-80b1-9384-e6d471683ac3" class="">An attacker <strong>injects malicious scripts</strong> into a web page, which then executes in the browser of unsuspecting users.</p><h3 id="1a3e8d61-387b-80cb-9e68-cf33b82431e2" class=""><strong>⚡ How does it work?</strong></h3><ol type="1" id="1a3e8d61-387b-80cd-acb8-ce83ef6f486d" class="numbered-list" start="1"><li><strong>Attacker injects a malicious script</strong> inside an input field (e.g., comments, search bar).</li></ol><ol type="1" id="1a3e8d61-387b-8095-8026-c11fe5e658aa" class="numbered-list" start="2"><li>The <strong>website does not sanitize the input</strong> and stores it.</li></ol><ol type="1" id="1a3e8d61-387b-80ca-b6b2-d7a45c83a7cc" class="numbered-list" start="3"><li>When another user views the page, the <strong>script executes automatically</strong>.</li></ol><ol type="1" id="1a3e8d61-387b-8075-8f78-e75a924dd803" class="numbered-list" start="4"><li>The attacker <strong>steals cookies, session data, or redirects users</strong> to malicious websites.</li></ol><h3 id="1a3e8d61-387b-80c3-85fd-f41a7549fa82" class=""><strong>🎯 Example: XSS Attack via Comments</strong></h3><p id="1a3e8d61-387b-8032-bdd1-ec55aaa24b22" class="">1️⃣ Attacker posts a comment:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a3e8d61-387b-8027-8d85-e9aff332e8aa" class="code"><code class="language-HTML" style="white-space:pre-wrap;word-break:break-all">
+&lt;script&gt;alert(&#x27;Your session has expired!&#x27;);&lt;/script&gt;
+
+</code></pre><p id="1a3e8d61-387b-8088-9e79-fab239a36b67" class="">2️⃣ Any user visiting the page will <strong>see the alert pop-up</strong>.</p><p id="1a3e8d61-387b-804c-adc9-f83962de79f8" class="">3️⃣ Instead of an alert, the attacker can inject <strong>stealth scripts</strong> to steal session tokens and send them to a hacker’s server.</p><hr id="1a3e8d61-387b-80ca-8b24-f46b87c67b35"/><h3 id="1a3e8d61-387b-8001-b54b-f4b322ba1905" class=""><strong>🔒 How to Prevent XSS Attacks?</strong></h3><p id="1a3e8d61-387b-804a-ac5b-f7ed069058f7" class="">✅ <strong>Input Validation:</strong></p><ul id="1a3e8d61-387b-80f4-ab72-d3d4fad6b412" class="bulleted-list"><li style="list-style-type:disc">Reject inputs containing <strong>HTML tags (</strong><code><strong>&lt;script&gt;</strong></code><strong>)</strong>.</li></ul><ul id="1a3e8d61-387b-805f-a9a3-e9e009c60f44" class="bulleted-list"><li style="list-style-type:disc">Use <strong>Spring Boot’s built-in validators</strong> like:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a3e8d61-387b-8025-878e-cf81e25f7fcd" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">
+@Pattern(regexp=&quot;^[a-zA-Z0-9 ]+$&quot;)
+
+</code></pre></li></ul><p id="1a3e8d61-387b-8034-8d0b-f7472f848010" class="">✅ <strong>Output Encoding:</strong></p><ul id="1a3e8d61-387b-80e1-8786-d300e2fb4eed" class="bulleted-list"><li style="list-style-type:disc">Convert special characters into safe HTML entities (<code>&lt;</code> → <code>&amp;lt;</code>, <code>&gt;</code> → <code>&amp;gt;</code>).</li></ul><ul id="1a3e8d61-387b-8032-b134-fcbcfdef1624" class="bulleted-list"><li style="list-style-type:disc"><strong>Example in Java:</strong><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a3e8d61-387b-805a-95d6-e43874f07b66" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">
+HtmlUtils.htmlEscape(userInput);
+
+</code></pre></li></ul><p id="1a3e8d61-387b-8069-b699-d87daabca9bb" class="">✅ <strong>Use Content Security Policy (CSP):</strong></p><ul id="1a3e8d61-387b-8033-b88e-c2450e0c1750" class="bulleted-list"><li style="list-style-type:disc">Restrict where scripts can be executed.</li></ul><p id="1a3e8d61-387b-80df-98d0-c8542aa6d3d2" class="">📢 <strong>Spring Security provides built-in protections against XSS.</strong></p><hr id="1a3e8d61-387b-80be-8c52-c29473073632"/><h2 id="1a3e8d61-387b-8074-b0a3-e88be313efb4" class=""><strong>3️⃣ SQL Injection Attack</strong></h2><h3 id="1a3e8d61-387b-80fa-8f83-fd735f8c10a4" class=""><strong>🛑 What is SQL Injection?</strong></h3><p id="1a3e8d61-387b-802e-a759-cb732b939d4a" class="">An attacker injects <strong>malicious SQL queries</strong> into an input field, making the application <strong>execute unintended database queries</strong>.</p><h3 id="1a3e8d61-387b-809a-a28b-c4b1b7ab5994" class=""><strong>⚡ How does it work?</strong></h3><ol type="1" id="1a3e8d61-387b-80f0-96d4-db11edf4703d" class="numbered-list" start="1"><li><strong>Application has a vulnerable query</strong>:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a3e8d61-387b-8017-8e62-d937b046b633" class="code"><code class="language-SQL" style="white-space:pre-wrap;word-break:break-all">
+SELECT * FROM users WHERE username = &#x27;input&#x27;;
+
+</code></pre></li></ol><ol type="1" id="1a3e8d61-387b-8007-8685-d42fe1c04aa5" class="numbered-list" start="2"><li>Attacker enters:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a3e8d61-387b-800c-98de-e978482d089a" class="code"><code class="language-SQL" style="white-space:pre-wrap;word-break:break-all">
+&#x27;&#x27; OR &#x27;1&#x27;=&#x27;1
+
+</code></pre></li></ol><ol type="1" id="1a3e8d61-387b-8053-b844-e949de539157" class="numbered-list" start="3"><li>The query becomes:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a3e8d61-387b-8064-b863-dba6fcb85a3d" class="code"><code class="language-SQL" style="white-space:pre-wrap;word-break:break-all">
+SELECT * FROM users WHERE username = &#x27;&#x27; OR &#x27;1&#x27;=&#x27;1&#x27;;
+
+</code></pre></li></ol><ol type="1" id="1a3e8d61-387b-80e8-9b4e-f384fe42ebeb" class="numbered-list" start="4"><li>Since <strong>1=1 is always TRUE</strong>, all users’ data is exposed.</li></ol><hr id="1a3e8d61-387b-803c-9d04-ef52896b2ce9"/><h3 id="1a3e8d61-387b-8025-9388-f7b961f3cbf8" class=""><strong>🔒 How to Prevent SQL Injection?</strong></h3><p id="1a3e8d61-387b-80dd-8412-e13ace98e52e" class="">✅ <strong>Use Prepared Statements:</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a3e8d61-387b-80b5-8382-ef605ce1dc0f" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">
+PreparedStatement stmt = conn.prepareStatement(&quot;SELECT * FROM users WHERE username = ?&quot;);
+stmt.setString(1, userInput);
+
+</code></pre><p id="1a3e8d61-387b-8051-9087-ea03ba388986" class="">✅ <strong>Use ORM (Hibernate) to avoid raw SQL queries.</strong></p><p id="1a3e8d61-387b-80f3-8a1e-cc953e4b3b40" class="">✅ <strong>Sanitize user input and validate all inputs.</strong></p><p id="1a3e8d61-387b-8019-8a15-c987ac27ae66" class="">📢 <strong>Spring Security works with ORM frameworks like Hibernate to protect against SQL Injection.</strong></p><hr id="1a3e8d61-387b-801c-ad1b-d94d2ce3c12e"/><h1 id="1a3e8d61-387b-8089-95b0-eedd3db4a1ab" class=""><strong>📌 Summary for Quick Revision</strong></h1><table id="1a3e8d61-387b-80ae-8caa-d3fd0931608c" class="simple-table"><tbody><tr id="1a3e8d61-387b-80f9-bb7e-e171e4027d52"><td id="=BZ=" class=""><strong>Attack Type</strong></td><td id="AkcD" class=""><strong>Description</strong></td><td id="~;Ma" class=""><strong>Prevention</strong></td></tr><tr id="1a3e8d61-387b-804f-8ec8-d5b3f11af4cc"><td id="=BZ=" class=""><strong>CSRF</strong></td><td id="AkcD" class="">Trick user into making unwanted requests</td><td id="~;Ma" class="">Use <strong>CSRF Tokens</strong></td></tr><tr id="1a3e8d61-387b-809a-a86a-d301dc79d42a"><td id="=BZ=" class=""><strong>XSS</strong></td><td id="AkcD" class="">Inject <strong>malicious scripts</strong> into web pages</td><td id="~;Ma" class=""><strong>Input Validation, Output Encoding, CSP</strong></td></tr><tr id="1a3e8d61-387b-80f8-be61-fbe549b9ba69"><td id="=BZ=" class=""><strong>SQL Injection</strong></td><td id="AkcD" class="">Inject SQL code to manipulate queries</td><td id="~;Ma" class=""><strong>Prepared Statements, ORM, Input Validation</strong></td></tr></tbody></table><h3 id="1a3e8d61-387b-805b-ace2-d2f955b5c6da" class=""><strong>🔹 Key Takeaways:</strong></h3><p id="1a3e8d61-387b-80ee-b72f-d27296b1e219" class="">✅ <strong>CSRF</strong> attacks exploit <strong>browser trust</strong>—use <strong>tokens</strong> to prevent them.</p><p id="1a3e8d61-387b-8072-9d6b-ea13a3d9605a" class="">✅ <strong>XSS</strong> attacks <strong>inject malicious scripts</strong>—sanitize <strong>input &amp; output</strong>.</p><p id="1a3e8d61-387b-80da-a8f1-f2bbb787c862" class="">✅ <strong>SQL Injection</strong> manipulates queries—use <strong>prepared statements &amp; ORM</strong>.</p><h3 id="1a3e8d61-387b-8026-a330-cdfd64210d06" class=""><strong>Next Steps 🚀</strong></h3><ul id="1a3e8d61-387b-8068-ada7-cc7ce5fdcce0" class="bulleted-list"><li style="list-style-type:disc">In the <strong>next session</strong>, we will look at <strong>Spring Security implementation</strong> with code examples.</li></ul><ul id="1a3e8d61-387b-802f-9f83-f1b7203d096f" class="bulleted-list"><li style="list-style-type:disc">We will see <strong>how CSRF tokens are implemented in Spring Boot</strong>.</li></ul></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
