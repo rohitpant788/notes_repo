@@ -17,6 +17,7 @@ def clean_file_name(filename):
 
 # Function to generate the index.html file
 def generate_index():
+    # Get all HTML files inside the /notion folder
     notion_files = []
     for root, _, files in os.walk(NOTION_FOLDER):
         for file in files:
@@ -24,22 +25,27 @@ def generate_index():
                 relative_path = os.path.join(root, file).replace("\\", "/")  # Ensure compatibility with Windows
                 notion_files.append(relative_path)
 
-    # Default file to load
+    # Default file to load (SpringBoot Basics or the first available file)
     default_file = next((file for file in notion_files if "SpringBoot - Basics" in file), None)
     default_file = default_file if default_file else (notion_files[0] if notion_files else "")
 
+    # Start writing the index.html file
     with open(INDEX_FILE, "w", encoding="utf-8") as f:
         f.write(f"""<!DOCTYPE html>
 <html lang="en">
 <head>
     <title>My Notion Notes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        /* General Styling */
         body {{
             font-family: 'Poppins', sans-serif;
-            margin: 0;
             background: #f8f9fa;
             color: #333;
+            display: flex;
+            overflow: hidden;
         }}
 
         /* Top Navbar */
@@ -48,8 +54,11 @@ def generate_index():
             color: white;
             padding: 12px 20px;
             font-weight: bold;
-            display: flex;
-            align-items: center;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
         }}
 
         .navbar a {{
@@ -58,19 +67,19 @@ def generate_index():
             margin-right: 15px;
         }}
 
-        .navbar a:hover {{
-            text-decoration: underline;
-        }}
-
         /* Sidebar */
         #sidebar {{
-            width: 250px;
+            width: 280px;
             background: white;
             padding: 20px;
             height: 100vh;
             position: fixed;
             border-right: 1px solid #ddd;
             overflow-y: auto;
+            resize: horizontal;
+            overflow-x: hidden;
+            min-width: 200px;
+            max-width: 500px;
         }}
 
         #sidebar h4 {{
@@ -91,13 +100,24 @@ def generate_index():
             font-weight: bold;
         }}
 
+        /* Draggable Sidebar Handle */
+        #sidebar-resizer {{
+            width: 5px;
+            background: #ccc;
+            cursor: ew-resize;
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+        }}
+
         /* Main Content */
         #main-content {{
-            margin-left: 270px;
+            flex-grow: 1;
             padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            margin-left: 300px;
+            transition: margin-left 0.2s ease-in-out;
+            width: calc(100% - 300px);
         }}
 
         #content-frame {{
@@ -123,18 +143,28 @@ def generate_index():
         }}
 
         .dark-mode #content-frame {{
-            background: #252525 !important;
+           background: transparent !important;
+        }}
+
+        /* Override Notion Styles */
+        iframe {{
+            width: 100%;
+            height: 85vh;
+            border: none;
+        }}
+        
+        iframe::-webkit-scrollbar {{
+            display: none; /* Hide scrollbars */
+        }}
+
+        .dark-mode iframe {{
+            filter: invert(0.9);
         }}
 
     </style>
     <script>
         function loadPage(url) {{
             document.getElementById("content-frame").src = url;
-            document.getElementById("content-frame").style.display = "block";
-        }}
-
-        function loadHome() {{
-            loadPage("{default_file}");
         }}
 
         function toggleDarkMode() {{
@@ -142,28 +172,59 @@ def generate_index():
             localStorage.setItem("darkMode", document.body.classList.contains("dark-mode") ? "enabled" : "disabled");
         }}
 
-        window.onload = function() {{
-            loadPage("{default_file}");  // Load default file on page load
+        // Draggable Sidebar Logic
+        document.addEventListener("DOMContentLoaded", function() {{
+            const sidebar = document.getElementById("sidebar");
+            const mainContent = document.getElementById("main-content");
+            const resizer = document.getElementById("sidebar-resizer");
 
+            let isResizing = false;
+
+            resizer.addEventListener("mousedown", function(event) {{
+                isResizing = true;
+                document.addEventListener("mousemove", resizeSidebar);
+                document.addEventListener("mouseup", stopResizing);
+            }});
+
+            function resizeSidebar(event) {{
+                if (isResizing) {{
+                    let newWidth = event.clientX;
+                    if (newWidth >= 200 && newWidth <= 500) {{
+                        sidebar.style.width = newWidth + "px";
+                        mainContent.style.marginLeft = (newWidth + 20) + "px";
+                        mainContent.style.width = "calc(100% - " + (newWidth + 20) + "px)";
+                    }}
+                }}
+            }}
+
+            function stopResizing() {{
+                isResizing = false;
+                document.removeEventListener("mousemove", resizeSidebar);
+                document.removeEventListener("mouseup", stopResizing);
+            }}
+        }});
+
+        window.onload = function() {{
+            loadPage("{default_file}");
             if (localStorage.getItem("darkMode") === "enabled") {{
-                toggleDarkMode();
+                document.body.classList.add("dark-mode");
             }}
         }};
     </script>
 </head>
 <body>
     <div class="navbar">
-        <a href="#" onclick="loadHome()">🏠 Home</a>
-        <a href="#">📘 Rohit's Notes</a>
+        <a href="#" onclick="loadPage('{default_file}')">🏠 Home</a>
         <a href="#" onclick="toggleDarkMode()">🌙 Dark Mode</a>
     </div>
 
     <div id="sidebar">
+        <div id="sidebar-resizer"></div>
         <h4>📂 Notes</h4>
         <ul class="list-unstyled">
 """)
 
-        # Add all notes as a flat list in the sidebar
+        # Add all notes as styled sidebar links
         for file in sorted(notion_files):
             display_name = clean_file_name(os.path.basename(file))  # Clean filename
             f.write(f'<li><a href="#" class="text-dark" onclick="loadPage(\'{file}\')">{display_name}</a></li>\n')
@@ -184,7 +245,8 @@ def generate_index():
 </html>
 """)
 
-    print(f"✅ index.html generated with 'SpringBoot - Basics' as the default page!")
+    print(f"✅ index.html has been successfully generated with {len(notion_files)} notes!")
 
+# Run the function
 if __name__ == "__main__":
     generate_index()
