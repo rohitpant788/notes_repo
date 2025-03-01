@@ -2,170 +2,117 @@
 <html lang="en">
 <head>
     <title>My Notion Notes</title>
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* General Styles */
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
-            display: flex;
             background: #f8f9fa;
             color: #333;
-            transition: background 0.3s, color 0.3s;
         }
 
-        /* Sidebar Styling */
-        #sidebar {
-            width: 280px;
-            background: #2C3E50;
+        /* Top Navbar */
+        .navbar {
+            background: #3949AB;
             color: white;
+            padding: 12px 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        /* Sidebar */
+        #sidebar {
+            width: 250px;
+            background: white;
             padding: 20px;
             height: 100vh;
             position: fixed;
+            border-right: 1px solid #ddd;
             overflow-y: auto;
-            transition: background 0.3s;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
         }
 
-        #sidebar h2 {
-            color: #F8F9FA;
-            font-size: 22px;
+        #sidebar h4 {
+            color: #3949AB;
+            font-size: 20px;
             margin-bottom: 15px;
-            text-align: center;
         }
 
-        #sidebar .note-link {
-            display: block;
-            background: #34495E;
-            padding: 10px;
-            border-radius: 6px;
-            margin-bottom: 6px;
+        #sidebar a {
             text-decoration: none;
-            color: white;
-            font-weight: 500;
-            text-align: left;
-            transition: background 0.3s ease-in-out;
+            display: block;
+            padding: 8px 0;
+            color: #333;
         }
 
-        #sidebar .note-link:hover {
-            background: #1ABC9C;
-            color: white;
+        #sidebar a:hover {
+            color: #3949AB;
+            font-weight: bold;
         }
 
         /* Main Content */
         #main-content {
-            flex-grow: 1;
+            margin-left: 270px;
             padding: 20px;
-            margin-left: 280px; /* Matches sidebar width */
-            width: calc(100% - 280px);
-            transition: background 0.3s, color 0.3s;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
         }
 
         #content-frame {
-            width: 95%;
-            height: 90vh;
+            width: 100%;
+            height: 85vh;
             border: none;
             background: white;
-            transition: background 0.3s;
-            border-radius: 8px;
-            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
         }
 
-        /* Dark Mode Toggle Button */
-        #dark-mode-toggle {
-            position: fixed;
-            top: 10px;
-            right: 20px;
-            padding: 8px 15px;
-            border: none;
-            background: #2C3E50;
-            color: white;
-            cursor: pointer;
-            border-radius: 5px;
-            font-size: 14px;
-            transition: background 0.3s;
+        /* Dark Mode */
+        .dark-mode {
+            background: #181818 !important;
+            color: white !important;
         }
 
-        #dark-mode-toggle:hover {
-            background: #1A252F;
+        .dark-mode .navbar, .dark-mode #sidebar {
+            background: #212121 !important;
+            color: white !important;
         }
 
-        /* Dark Mode Styles */
-        body.dark-mode {
-            background: #181818;
-            color: #f8f9fa;
+        .dark-mode a {
+            color: white !important;
         }
 
-        #sidebar.dark-mode {
-            background: #1A252F;
+        .dark-mode #content-frame {
+            background: #252525 !important;
         }
 
-        #sidebar .note-link.dark-mode {
-            background: #343A40;
-            color: #f8f9fa;
-        }
-
-        #sidebar .note-link.dark-mode:hover {
-            background: #1ABC9C;
-            color: white;
-        }
-
-        #main-content.dark-mode {
-            background: #252525;
-            color: #f8f9fa;
-        }
-
-        #content-frame.dark-mode {
-            background: #252525;
-        }
-
-        #dark-mode-toggle.dark-mode {
-            background: #F1C40F;
-            color: black;
-        }
-
-        /* Improve readability */
-        body.dark-mode p,
-        body.dark-mode li,
-        body.dark-mode h1,
-        body.dark-mode h2,
-        body.dark-mode h3,
-        body.dark-mode h4,
-        body.dark-mode h5,
-        body.dark-mode h6 {
-            color: #ffffff !important;
-        }
     </style>
     <script>
         function loadPage(url) {
             document.getElementById("content-frame").src = url;
+            document.getElementById("content-frame").style.display = "block";
         }
 
-        // Dark Mode Toggle
-        function toggleDarkMode() {
-            const elements = [
-                document.body, 
-                document.getElementById("sidebar"), 
-                document.getElementById("main-content"), 
-                document.getElementById("content-frame"), 
-                document.getElementById("dark-mode-toggle")
-            ];
-
-            elements.forEach(el => el.classList.toggle("dark-mode"));
-
-            // Save user preference
-            const isDarkMode = document.body.classList.contains("dark-mode");
-            localStorage.setItem("darkMode", isDarkMode ? "enabled" : "disabled");
-        }
-
-        // Load dark mode preference
-        window.onload = function() {
+        function loadHome() {
             loadPage("notion/SpringBoot - Basics 195e8d61387b806fb4bcc38e9cd3e8b2.html");
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+            localStorage.setItem("darkMode", document.body.classList.contains("dark-mode") ? "enabled" : "disabled");
+        }
+
+        window.onload = function() {
+            loadPage("notion/SpringBoot - Basics 195e8d61387b806fb4bcc38e9cd3e8b2.html");  // Load default file on page load
 
             if (localStorage.getItem("darkMode") === "enabled") {
                 toggleDarkMode();
@@ -174,66 +121,70 @@
     </script>
 </head>
 <body>
-    <button id="dark-mode-toggle" class="btn btn-sm btn-dark" onclick="toggleDarkMode()">🌙 Dark Mode</button>
+    <div class="navbar">
+        <a href="#" onclick="loadHome()">🏠 Home</a>
+        <a href="#">📘 Rohit's Notes</a>
+        <a href="#" onclick="toggleDarkMode()">🌙 Dark Mode</a>
+    </div>
 
     <div id="sidebar">
-        <h2>📂 Notes</h2>
+        <h4>📂 Notes</h4>
         <ul class="list-unstyled">
-<li><a href="#" class="note-link" onclick="loadPage('notion/1 - Introduction To Spring Boot 195e8d61387b80cca947e3c4ab5fa046.html')">1 Introduction To Spring Boot</a></li>
-<li><a href="#" class="note-link" onclick="loadPage('notion/1 1 Introduction To Spring Framework and IOC Conta 195e8d61387b80099bdff63a29f29da7.html')">1 1 Introduction To Spring Framework and IOC Conta</a></li>
-<li><a href="#" class="note-link" onclick="loadPage('notion/1 2 Setting Up A Spring Boot Project 195e8d61387b80958abef10f532a1a15.html')">1 2 Setting Up A Spring Boot Project</a></li>
-<li><a href="#" class="note-link" onclick="loadPage('notion/1 3 Beans 195e8d61387b802aab7aca4e8865af3e.html')">1 3 Beans</a></li>
-<li><a href="#" class="note-link" onclick="loadPage('notion/1 4 Dependency Injection 196e8d61387b800fb0baf23f34aae86c.html')">1 4 Dependency Injection</a></li>
-<li><a href="#" class="note-link" onclick="loadPage('notion/1 5 Spring Boot vs Spring Framework, A Comparison 197e8d61387b8056883bfe6c2690ec2b.html')">1 5 Spring Boot vs Spring Framework, A Comparison</a></li>
-<li><a href="#" class="note-link" onclick="loadPage('notion/1 6 AutoConfiguration and Spring Boot Internal Flo 197e8d61387b80ada291fa0f49847ef7.html')">1 6 AutoConfiguration and Spring Boot Internal Flo</a></li>
-<li><a href="#" class="note-link" onclick="loadPage('notion/1 7 Maven Build Tool 197e8d61387b800e8ddfc5a0e3665614.html')">1 7 Maven Build Tool</a></li>
-<li><a href="#" class="note-link" onclick="loadPage('notion/2 - Spring Boot MVC and RESTful APIs 197e8d61387b80bb96abdd82f1d96008.html')">2 Spring Boot MVC and RESTful APIs</a></li>
-<li><a href="#" class="note-link" onclick="loadPage('notion/2 1 Introduction To Spring Boot Web MVC, MVC Archi 198e8d61387b80ebb7f5f7db8c591c31.html')">2 1 Introduction To Spring Boot Web MVC, MVC Archi</a></li>
-<li><a href="#" class="note-link" onclick="loadPage('notion/2 2 The Presentation Layer, DTO and Controllers 199e8d61387b80d986f9db612876e08f.html')">2 2 The Presentation Layer, DTO and Controllers</a></li>
-<li><a href="#" class="note-link" onclick="loadPage('notion/2 3 The Persistence Layer and JPA Repository 199e8d61387b804bbbcefbe6e9768da7.html')">2 3 The Persistence Layer and JPA Repository</a></li>
-<li><a href="#" class="note-link" onclick="loadPage('notion/2 4 The Service Layer, Writing our Business Logic 199e8d61387b8067928ddae6c0f5db19.html')">2 4 The Service Layer, Writing our Business Logic</a></li>
-<li><a href="#" class="note-link" onclick="loadPage('notion/2 5 PUT, PATCH and DELETE Mappings in Spring Web M 19ae8d61387b807eb3c1f197f4cc681d.html')">2 5 PUT, PATCH and DELETE Mappings in Spring Web M</a></li>
-<li><a href="#" class="note-link" onclick="loadPage('notion/2 6 Input Validation Annotations, Creating Custom  19be8d61387b80f7b5baf2a434fefe0d.html')">2 6 Input Validation Annotations, Creating Custom</a></li>
-<li><a href="#" class="note-link" onclick="loadPage('notion/2 7 Exception Handling in Spring Boot Web MVC 19be8d61387b808da750c002eea97efd.html')">2 7 Exception Handling in Spring Boot Web MVC</a></li>
-<li><a href="#" class="note-link" onclick="loadPage('notion/2 8 Transforming API response in Spring Web MVC 19be8d61387b80c9ab5cf66c0b121335.html')">2 8 Transforming API response in Spring Web MVC</a></li>
-<li><a href="#" class="note-link" onclick="loadPage('notion/2 9 Java 8 Lambda And Stream API 19ce8d61387b808f8966eb7c031eb944.html')">2 9 Java 8 Lambda And Stream API</a></li>
-<li><a href="#" class="note-link" onclick="loadPage('notion/3 - Hibernate and Spring Boot Data JPA 19ce8d61387b80089a4af1a802a62dab.html')">3 Hibernate and Spring Boot Data JPA</a></li>
-<li><a href="#" class="note-link" onclick="loadPage('notion/3 1 Installing MySQL for Database and DBeaver for  19ce8d61387b80cca4e6e17298fd05bd.html')">3 1 Installing MySQL for Database and DBeaver for</a></li>
-<li><a href="#" class="note-link" onclick="loadPage('notion/3 2 Hibernate ORM, JPA, Entities and Tables in Spr 19ce8d61387b806e96aff8bcd56ff161.html')">3 2 Hibernate ORM, JPA, Entities and Tables in Spr</a></li>
-<li><a href="#" class="note-link" onclick="loadPage('notion/3 3 Spring Data Jpa Interfaces and Dynamic Query M 19ce8d61387b80e5a606ce9e12495208.html')">3 3 Spring Data Jpa Interfaces and Dynamic Query M</a></li>
-<li><a href="#" class="note-link" onclick="loadPage('notion/3 4 Sorting and Pagination in Spring Data Jpa 19fe8d61387b80da8085d49e90ffd781.html')">3 4 Sorting and Pagination in Spring Data Jpa</a></li>
-<li><a href="#" class="note-link" onclick="loadPage('notion/3 5 1 Study Notes 1a2e8d61387b8024bb8de8e7c1ec101e.html')">3 5 1 Study Notes</a></li>
-<li><a href="#" class="note-link" onclick="loadPage('notion/3 5 2 My Notes - Questions 1a2e8d61387b80479258f4ab1869f436.html')">3 5 2 My Notes Questions</a></li>
-<li><a href="#" class="note-link" onclick="loadPage('notion/3 5 Spring Data Jpa Mappings Part 1 - One To One M 1a2e8d61387b8040901eeee7e8d97271.html')">3 5 Spring Data Jpa Mappings Part 1 One To One M</a></li>
-<li><a href="#" class="note-link" onclick="loadPage('notion/3 6 1 Study Notes 1a2e8d61387b80eeb187f7937a297832.html')">3 6 1 Study Notes</a></li>
-<li><a href="#" class="note-link" onclick="loadPage('notion/3 6 2 My Study Notes - Questions 1a2e8d61387b80d1ae26fd1f2535b7f6.html')">3 6 2 My Study Notes Questions</a></li>
-<li><a href="#" class="note-link" onclick="loadPage('notion/3 6 Spring Data Jpa Mapping Part 2 - One To Many,  1a2e8d61387b80af9307fb252c077524.html')">3 6 Spring Data Jpa Mapping Part 2 One To Many,</a></li>
-<li><a href="#" class="note-link" onclick="loadPage('notion/5 1 1 Study Notes 1a3e8d61387b80bbb7cce90679fe2889.html')">5 1 1 Study Notes</a></li>
-<li><a href="#" class="note-link" onclick="loadPage('notion/5 1 2 My Notes - Questions 1a3e8d61387b80bc8decf9c7e32e757b.html')">5 1 2 My Notes Questions</a></li>
-<li><a href="#" class="note-link" onclick="loadPage('notion/5 1 Security Attacks like CSRF, XSS, SQL Injection 1a3e8d61387b8057a4eacb36e6ef3a3e.html')">5 1 Security Attacks like CSRF, XSS, SQL Injection</a></li>
-<li><a href="#" class="note-link" onclick="loadPage('notion/5 2 1 Study Notes 1a5e8d61387b804fb6f0d97006425e09.html')">5 2 1 Study Notes</a></li>
-<li><a href="#" class="note-link" onclick="loadPage('notion/5 2 2 My Notes - Questions 1a5e8d61387b801da467cdf77f33b5bf.html')">5 2 2 My Notes Questions</a></li>
-<li><a href="#" class="note-link" onclick="loadPage('notion/5 2 Internal Working of Spring Security, Part 1 1a5e8d61387b801a99f5fd175345c9e8.html')">5 2 Internal Working of Spring Security, Part 1</a></li>
-<li><a href="#" class="note-link" onclick="loadPage('notion/5 3 1 Study Notes 1a6e8d61387b807e888ffd6fc3649e9d.html')">5 3 1 Study Notes</a></li>
-<li><a href="#" class="note-link" onclick="loadPage('notion/5 3 2 My Notes - Questions 1a6e8d61387b80dc9cc6cb3621fa0397.html')">5 3 2 My Notes Questions</a></li>
-<li><a href="#" class="note-link" onclick="loadPage('notion/5 3 Internal Working of Spring Security, Part 2 -  1a6e8d61387b80a397f2cc2f6d5daebe.html')">5 3 Internal Working of Spring Security, Part 2</a></li>
-<li><a href="#" class="note-link" onclick="loadPage('notion/5 4 1 Study Notes 1a6e8d61387b80d48a1ec5da4a4b2ad7.html')">5 4 1 Study Notes</a></li>
-<li><a href="#" class="note-link" onclick="loadPage('notion/5 4 2 My Notes - Questions 1a6e8d61387b80939bf4e5ee7b1d3084.html')">5 4 2 My Notes Questions</a></li>
-<li><a href="#" class="note-link" onclick="loadPage('notion/5 4 Spring Security Web Config - SecurityFilterCha 1a6e8d61387b80ed9fddcf54dd0b8774.html')">5 4 Spring Security Web Config SecurityFilterCha</a></li>
-<li><a href="#" class="note-link" onclick="loadPage('notion/5 5 1 Study Notes 1a6e8d61387b80989953f435efc9bcb2.html')">5 5 1 Study Notes</a></li>
-<li><a href="#" class="note-link" onclick="loadPage('notion/5 5 2 My Notes Question 1a6e8d61387b8023a02cebf37af7fca6.html')">5 5 2 My Notes Question</a></li>
-<li><a href="#" class="note-link" onclick="loadPage('notion/5 5 Understanding JWT, Creation and Verification o 1a6e8d61387b803cba15d23564f34521.html')">5 5 Understanding JWT, Creation and Verification o</a></li>
-<li><a href="#" class="note-link" onclick="loadPage('notion/5 6 1 Study Notes 1a8e8d61387b80cf8aa7ded7c9149d55.html')">5 6 1 Study Notes</a></li>
-<li><a href="#" class="note-link" onclick="loadPage('notion/5 6 2 My Notes- Questions 1a8e8d61387b80e1961ef5eb528191b1.html')">5 6 2 My Notes Questions</a></li>
-<li><a href="#" class="note-link" onclick="loadPage('notion/5 6 Sign Up and Login using JWT 1a8e8d61387b804099e3c8b2fb2cef9b.html')">5 6 Sign Up and Login using JWT</a></li>
-<li><a href="#" class="note-link" onclick="loadPage('notion/5 Spring Security Fundamentals 1a3e8d61387b80359b7fd0a248fb9e89.html')">5 Spring Security Fundamentals</a></li>
-<li><a href="#" class="note-link" onclick="loadPage('notion/SpringBoot - Basics 195e8d61387b806fb4bcc38e9cd3e8b2.html')">SpringBoot Basics</a></li>
+<li><a href="#" class="text-dark" onclick="loadPage('notion/1 - Introduction To Spring Boot 195e8d61387b80cca947e3c4ab5fa046.html')">1 Introduction To Spring Boot</a></li>
+<li><a href="#" class="text-dark" onclick="loadPage('notion/1 1 Introduction To Spring Framework and IOC Conta 195e8d61387b80099bdff63a29f29da7.html')">1 1 Introduction To Spring Framework and IOC Conta</a></li>
+<li><a href="#" class="text-dark" onclick="loadPage('notion/1 2 Setting Up A Spring Boot Project 195e8d61387b80958abef10f532a1a15.html')">1 2 Setting Up A Spring Boot Project</a></li>
+<li><a href="#" class="text-dark" onclick="loadPage('notion/1 3 Beans 195e8d61387b802aab7aca4e8865af3e.html')">1 3 Beans</a></li>
+<li><a href="#" class="text-dark" onclick="loadPage('notion/1 4 Dependency Injection 196e8d61387b800fb0baf23f34aae86c.html')">1 4 Dependency Injection</a></li>
+<li><a href="#" class="text-dark" onclick="loadPage('notion/1 5 Spring Boot vs Spring Framework, A Comparison 197e8d61387b8056883bfe6c2690ec2b.html')">1 5 Spring Boot vs Spring Framework, A Comparison</a></li>
+<li><a href="#" class="text-dark" onclick="loadPage('notion/1 6 AutoConfiguration and Spring Boot Internal Flo 197e8d61387b80ada291fa0f49847ef7.html')">1 6 AutoConfiguration and Spring Boot Internal Flo</a></li>
+<li><a href="#" class="text-dark" onclick="loadPage('notion/1 7 Maven Build Tool 197e8d61387b800e8ddfc5a0e3665614.html')">1 7 Maven Build Tool</a></li>
+<li><a href="#" class="text-dark" onclick="loadPage('notion/2 - Spring Boot MVC and RESTful APIs 197e8d61387b80bb96abdd82f1d96008.html')">2 Spring Boot MVC and RESTful APIs</a></li>
+<li><a href="#" class="text-dark" onclick="loadPage('notion/2 1 Introduction To Spring Boot Web MVC, MVC Archi 198e8d61387b80ebb7f5f7db8c591c31.html')">2 1 Introduction To Spring Boot Web MVC, MVC Archi</a></li>
+<li><a href="#" class="text-dark" onclick="loadPage('notion/2 2 The Presentation Layer, DTO and Controllers 199e8d61387b80d986f9db612876e08f.html')">2 2 The Presentation Layer, DTO and Controllers</a></li>
+<li><a href="#" class="text-dark" onclick="loadPage('notion/2 3 The Persistence Layer and JPA Repository 199e8d61387b804bbbcefbe6e9768da7.html')">2 3 The Persistence Layer and JPA Repository</a></li>
+<li><a href="#" class="text-dark" onclick="loadPage('notion/2 4 The Service Layer, Writing our Business Logic 199e8d61387b8067928ddae6c0f5db19.html')">2 4 The Service Layer, Writing our Business Logic</a></li>
+<li><a href="#" class="text-dark" onclick="loadPage('notion/2 5 PUT, PATCH and DELETE Mappings in Spring Web M 19ae8d61387b807eb3c1f197f4cc681d.html')">2 5 PUT, PATCH and DELETE Mappings in Spring Web M</a></li>
+<li><a href="#" class="text-dark" onclick="loadPage('notion/2 6 Input Validation Annotations, Creating Custom  19be8d61387b80f7b5baf2a434fefe0d.html')">2 6 Input Validation Annotations, Creating Custom</a></li>
+<li><a href="#" class="text-dark" onclick="loadPage('notion/2 7 Exception Handling in Spring Boot Web MVC 19be8d61387b808da750c002eea97efd.html')">2 7 Exception Handling in Spring Boot Web MVC</a></li>
+<li><a href="#" class="text-dark" onclick="loadPage('notion/2 8 Transforming API response in Spring Web MVC 19be8d61387b80c9ab5cf66c0b121335.html')">2 8 Transforming API response in Spring Web MVC</a></li>
+<li><a href="#" class="text-dark" onclick="loadPage('notion/2 9 Java 8 Lambda And Stream API 19ce8d61387b808f8966eb7c031eb944.html')">2 9 Java 8 Lambda And Stream API</a></li>
+<li><a href="#" class="text-dark" onclick="loadPage('notion/3 - Hibernate and Spring Boot Data JPA 19ce8d61387b80089a4af1a802a62dab.html')">3 Hibernate and Spring Boot Data JPA</a></li>
+<li><a href="#" class="text-dark" onclick="loadPage('notion/3 1 Installing MySQL for Database and DBeaver for  19ce8d61387b80cca4e6e17298fd05bd.html')">3 1 Installing MySQL for Database and DBeaver for</a></li>
+<li><a href="#" class="text-dark" onclick="loadPage('notion/3 2 Hibernate ORM, JPA, Entities and Tables in Spr 19ce8d61387b806e96aff8bcd56ff161.html')">3 2 Hibernate ORM, JPA, Entities and Tables in Spr</a></li>
+<li><a href="#" class="text-dark" onclick="loadPage('notion/3 3 Spring Data Jpa Interfaces and Dynamic Query M 19ce8d61387b80e5a606ce9e12495208.html')">3 3 Spring Data Jpa Interfaces and Dynamic Query M</a></li>
+<li><a href="#" class="text-dark" onclick="loadPage('notion/3 4 Sorting and Pagination in Spring Data Jpa 19fe8d61387b80da8085d49e90ffd781.html')">3 4 Sorting and Pagination in Spring Data Jpa</a></li>
+<li><a href="#" class="text-dark" onclick="loadPage('notion/3 5 1 Study Notes 1a2e8d61387b8024bb8de8e7c1ec101e.html')">3 5 1 Study Notes</a></li>
+<li><a href="#" class="text-dark" onclick="loadPage('notion/3 5 2 My Notes - Questions 1a2e8d61387b80479258f4ab1869f436.html')">3 5 2 My Notes Questions</a></li>
+<li><a href="#" class="text-dark" onclick="loadPage('notion/3 5 Spring Data Jpa Mappings Part 1 - One To One M 1a2e8d61387b8040901eeee7e8d97271.html')">3 5 Spring Data Jpa Mappings Part 1 One To One M</a></li>
+<li><a href="#" class="text-dark" onclick="loadPage('notion/3 6 1 Study Notes 1a2e8d61387b80eeb187f7937a297832.html')">3 6 1 Study Notes</a></li>
+<li><a href="#" class="text-dark" onclick="loadPage('notion/3 6 2 My Study Notes - Questions 1a2e8d61387b80d1ae26fd1f2535b7f6.html')">3 6 2 My Study Notes Questions</a></li>
+<li><a href="#" class="text-dark" onclick="loadPage('notion/3 6 Spring Data Jpa Mapping Part 2 - One To Many,  1a2e8d61387b80af9307fb252c077524.html')">3 6 Spring Data Jpa Mapping Part 2 One To Many,</a></li>
+<li><a href="#" class="text-dark" onclick="loadPage('notion/5 1 1 Study Notes 1a3e8d61387b80bbb7cce90679fe2889.html')">5 1 1 Study Notes</a></li>
+<li><a href="#" class="text-dark" onclick="loadPage('notion/5 1 2 My Notes - Questions 1a3e8d61387b80bc8decf9c7e32e757b.html')">5 1 2 My Notes Questions</a></li>
+<li><a href="#" class="text-dark" onclick="loadPage('notion/5 1 Security Attacks like CSRF, XSS, SQL Injection 1a3e8d61387b8057a4eacb36e6ef3a3e.html')">5 1 Security Attacks like CSRF, XSS, SQL Injection</a></li>
+<li><a href="#" class="text-dark" onclick="loadPage('notion/5 2 1 Study Notes 1a5e8d61387b804fb6f0d97006425e09.html')">5 2 1 Study Notes</a></li>
+<li><a href="#" class="text-dark" onclick="loadPage('notion/5 2 2 My Notes - Questions 1a5e8d61387b801da467cdf77f33b5bf.html')">5 2 2 My Notes Questions</a></li>
+<li><a href="#" class="text-dark" onclick="loadPage('notion/5 2 Internal Working of Spring Security, Part 1 1a5e8d61387b801a99f5fd175345c9e8.html')">5 2 Internal Working of Spring Security, Part 1</a></li>
+<li><a href="#" class="text-dark" onclick="loadPage('notion/5 3 1 Study Notes 1a6e8d61387b807e888ffd6fc3649e9d.html')">5 3 1 Study Notes</a></li>
+<li><a href="#" class="text-dark" onclick="loadPage('notion/5 3 2 My Notes - Questions 1a6e8d61387b80dc9cc6cb3621fa0397.html')">5 3 2 My Notes Questions</a></li>
+<li><a href="#" class="text-dark" onclick="loadPage('notion/5 3 Internal Working of Spring Security, Part 2 -  1a6e8d61387b80a397f2cc2f6d5daebe.html')">5 3 Internal Working of Spring Security, Part 2</a></li>
+<li><a href="#" class="text-dark" onclick="loadPage('notion/5 4 1 Study Notes 1a6e8d61387b80d48a1ec5da4a4b2ad7.html')">5 4 1 Study Notes</a></li>
+<li><a href="#" class="text-dark" onclick="loadPage('notion/5 4 2 My Notes - Questions 1a6e8d61387b80939bf4e5ee7b1d3084.html')">5 4 2 My Notes Questions</a></li>
+<li><a href="#" class="text-dark" onclick="loadPage('notion/5 4 Spring Security Web Config - SecurityFilterCha 1a6e8d61387b80ed9fddcf54dd0b8774.html')">5 4 Spring Security Web Config SecurityFilterCha</a></li>
+<li><a href="#" class="text-dark" onclick="loadPage('notion/5 5 1 Study Notes 1a6e8d61387b80989953f435efc9bcb2.html')">5 5 1 Study Notes</a></li>
+<li><a href="#" class="text-dark" onclick="loadPage('notion/5 5 2 My Notes Question 1a6e8d61387b8023a02cebf37af7fca6.html')">5 5 2 My Notes Question</a></li>
+<li><a href="#" class="text-dark" onclick="loadPage('notion/5 5 Understanding JWT, Creation and Verification o 1a6e8d61387b803cba15d23564f34521.html')">5 5 Understanding JWT, Creation and Verification o</a></li>
+<li><a href="#" class="text-dark" onclick="loadPage('notion/5 6 1 Study Notes 1a8e8d61387b80cf8aa7ded7c9149d55.html')">5 6 1 Study Notes</a></li>
+<li><a href="#" class="text-dark" onclick="loadPage('notion/5 6 2 My Notes- Questions 1a8e8d61387b80e1961ef5eb528191b1.html')">5 6 2 My Notes Questions</a></li>
+<li><a href="#" class="text-dark" onclick="loadPage('notion/5 6 Sign Up and Login using JWT 1a8e8d61387b804099e3c8b2fb2cef9b.html')">5 6 Sign Up and Login using JWT</a></li>
+<li><a href="#" class="text-dark" onclick="loadPage('notion/5 Spring Security Fundamentals 1a3e8d61387b80359b7fd0a248fb9e89.html')">5 Spring Security Fundamentals</a></li>
+<li><a href="#" class="text-dark" onclick="loadPage('notion/SpringBoot - Basics 195e8d61387b806fb4bcc38e9cd3e8b2.html')">SpringBoot Basics</a></li>
 
         </ul>
     </div>
 
     <div id="main-content">
-        <iframe id="content-frame" class="rounded shadow-lg"></iframe>
+        <iframe id="content-frame"></iframe>
     </div>
 
     <!-- Bootstrap JS -->

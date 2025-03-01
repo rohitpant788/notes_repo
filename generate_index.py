@@ -17,7 +17,6 @@ def clean_file_name(filename):
 
 # Function to generate the index.html file
 def generate_index():
-    # Get all HTML files inside the /notion folder
     notion_files = []
     for root, _, files in os.walk(NOTION_FOLDER):
         for file in files:
@@ -27,178 +26,124 @@ def generate_index():
 
     # Default file to load
     default_file = next((file for file in notion_files if "SpringBoot - Basics" in file), None)
-    default_file = default_file if default_file else notion_files[0]  # Load first file if "SpringBoot - Basics" is missing
+    default_file = default_file if default_file else (notion_files[0] if notion_files else "")
 
-    # Start writing the index.html file
     with open(INDEX_FILE, "w", encoding="utf-8") as f:
         f.write(f"""<!DOCTYPE html>
 <html lang="en">
 <head>
     <title>My Notion Notes</title>
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* General Styles */
         body {{
             font-family: 'Poppins', sans-serif;
             margin: 0;
-            display: flex;
             background: #f8f9fa;
             color: #333;
-            transition: background 0.3s, color 0.3s;
         }}
 
-        /* Sidebar Styling */
-        #sidebar {{
-            width: 280px;
-            background: #2C3E50;
+        /* Top Navbar */
+        .navbar {{
+            background: #3949AB;
             color: white;
+            padding: 12px 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }}
+
+        .navbar a {{
+            color: white;
+            text-decoration: none;
+            margin-right: 15px;
+        }}
+
+        .navbar a:hover {{
+            text-decoration: underline;
+        }}
+
+        /* Sidebar */
+        #sidebar {{
+            width: 250px;
+            background: white;
             padding: 20px;
             height: 100vh;
             position: fixed;
+            border-right: 1px solid #ddd;
             overflow-y: auto;
-            transition: background 0.3s;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
         }}
 
-        #sidebar h2 {{
-            color: #F8F9FA;
-            font-size: 22px;
+        #sidebar h4 {{
+            color: #3949AB;
+            font-size: 20px;
             margin-bottom: 15px;
-            text-align: center;
         }}
 
-        #sidebar .note-link {{
-            display: block;
-            background: #34495E;
-            padding: 10px;
-            border-radius: 6px;
-            margin-bottom: 6px;
+        #sidebar a {{
             text-decoration: none;
-            color: white;
-            font-weight: 500;
-            text-align: left;
-            transition: background 0.3s ease-in-out;
+            display: block;
+            padding: 8px 0;
+            color: #333;
         }}
 
-        #sidebar .note-link:hover {{
-            background: #1ABC9C;
-            color: white;
+        #sidebar a:hover {{
+            color: #3949AB;
+            font-weight: bold;
         }}
 
         /* Main Content */
         #main-content {{
-            flex-grow: 1;
+            margin-left: 270px;
             padding: 20px;
-            margin-left: 280px; /* Matches sidebar width */
-            width: calc(100% - 280px);
-            transition: background 0.3s, color 0.3s;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
         }}
 
         #content-frame {{
-            width: 95%;
-            height: 90vh;
+            width: 100%;
+            height: 85vh;
             border: none;
             background: white;
-            transition: background 0.3s;
-            border-radius: 8px;
-            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
         }}
 
-        /* Dark Mode Toggle Button */
-        #dark-mode-toggle {{
-            position: fixed;
-            top: 10px;
-            right: 20px;
-            padding: 8px 15px;
-            border: none;
-            background: #2C3E50;
-            color: white;
-            cursor: pointer;
-            border-radius: 5px;
-            font-size: 14px;
-            transition: background 0.3s;
+        /* Dark Mode */
+        .dark-mode {{
+            background: #181818 !important;
+            color: white !important;
         }}
 
-        #dark-mode-toggle:hover {{
-            background: #1A252F;
+        .dark-mode .navbar, .dark-mode #sidebar {{
+            background: #212121 !important;
+            color: white !important;
         }}
 
-        /* Dark Mode Styles */
-        body.dark-mode {{
-            background: #181818;
-            color: #f8f9fa;
+        .dark-mode a {{
+            color: white !important;
         }}
 
-        #sidebar.dark-mode {{
-            background: #1A252F;
+        .dark-mode #content-frame {{
+            background: #252525 !important;
         }}
 
-        #sidebar .note-link.dark-mode {{
-            background: #343A40;
-            color: #f8f9fa;
-        }}
-
-        #sidebar .note-link.dark-mode:hover {{
-            background: #1ABC9C;
-            color: white;
-        }}
-
-        #main-content.dark-mode {{
-            background: #252525;
-            color: #f8f9fa;
-        }}
-
-        #content-frame.dark-mode {{
-            background: #252525;
-        }}
-
-        #dark-mode-toggle.dark-mode {{
-            background: #F1C40F;
-            color: black;
-        }}
-
-        /* Improve readability */
-        body.dark-mode p,
-        body.dark-mode li,
-        body.dark-mode h1,
-        body.dark-mode h2,
-        body.dark-mode h3,
-        body.dark-mode h4,
-        body.dark-mode h5,
-        body.dark-mode h6 {{
-            color: #ffffff !important;
-        }}
     </style>
     <script>
         function loadPage(url) {{
             document.getElementById("content-frame").src = url;
+            document.getElementById("content-frame").style.display = "block";
         }}
 
-        // Dark Mode Toggle
-        function toggleDarkMode() {{
-            const elements = [
-                document.body, 
-                document.getElementById("sidebar"), 
-                document.getElementById("main-content"), 
-                document.getElementById("content-frame"), 
-                document.getElementById("dark-mode-toggle")
-            ];
-
-            elements.forEach(el => el.classList.toggle("dark-mode"));
-
-            // Save user preference
-            const isDarkMode = document.body.classList.contains("dark-mode");
-            localStorage.setItem("darkMode", isDarkMode ? "enabled" : "disabled");
-        }}
-
-        // Load dark mode preference
-        window.onload = function() {{
+        function loadHome() {{
             loadPage("{default_file}");
+        }}
+
+        function toggleDarkMode() {{
+            document.body.classList.toggle("dark-mode");
+            localStorage.setItem("darkMode", document.body.classList.contains("dark-mode") ? "enabled" : "disabled");
+        }}
+
+        window.onload = function() {{
+            loadPage("{default_file}");  // Load default file on page load
 
             if (localStorage.getItem("darkMode") === "enabled") {{
                 toggleDarkMode();
@@ -207,17 +152,21 @@ def generate_index():
     </script>
 </head>
 <body>
-    <button id="dark-mode-toggle" class="btn btn-sm btn-dark" onclick="toggleDarkMode()">🌙 Dark Mode</button>
+    <div class="navbar">
+        <a href="#" onclick="loadHome()">🏠 Home</a>
+        <a href="#">📘 Rohit's Notes</a>
+        <a href="#" onclick="toggleDarkMode()">🌙 Dark Mode</a>
+    </div>
 
     <div id="sidebar">
-        <h2>📂 Notes</h2>
+        <h4>📂 Notes</h4>
         <ul class="list-unstyled">
 """)
 
-        # Add all notes as styled sidebar buttons
+        # Add all notes as a flat list in the sidebar
         for file in sorted(notion_files):
             display_name = clean_file_name(os.path.basename(file))  # Clean filename
-            f.write(f'<li><a href="#" class="note-link" onclick="loadPage(\'{file}\')">{display_name}</a></li>\n')
+            f.write(f'<li><a href="#" class="text-dark" onclick="loadPage(\'{file}\')">{display_name}</a></li>\n')
 
         # Close sidebar and add main content area
         f.write(f"""
@@ -225,7 +174,7 @@ def generate_index():
     </div>
 
     <div id="main-content">
-        <iframe id="content-frame" class="rounded shadow-lg"></iframe>
+        <iframe id="content-frame"></iframe>
     </div>
 
     <!-- Bootstrap JS -->
@@ -235,8 +184,7 @@ def generate_index():
 </html>
 """)
 
-    print(f"✅ index.html has been successfully generated with {len(notion_files)} notes!")
+    print(f"✅ index.html generated with 'SpringBoot - Basics' as the default page!")
 
-# Run the function
 if __name__ == "__main__":
     generate_index()
