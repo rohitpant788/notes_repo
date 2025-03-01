@@ -1,0 +1,706 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>5.6.2 My Notes- Questions</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-transparentGray { background-color: undefined; }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1a8e8d61-387b-80e1-961e-f5eb528191b1" class="page sans"><header><h1 class="page-title">5.6.2 My Notes- Questions</h1><p class="page-description"></p></header><div class="page-body"><p id="1a8e8d61-387b-80bd-9cf8-f2c12d28f5f9" class="">
+</p><h3 id="1a8e8d61-387b-8086-8eb3-ef8d06e9bce0" class=""><strong>Question:</strong></h3><p id="1a8e8d61-387b-8049-b1da-f40685978627" class="">In a <strong>signup API</strong>, the user enters <strong>name, email, and password</strong>, and we use <strong>BCrypt</strong> to encode the password before storing it in the database.</p><ul id="1a8e8d61-387b-80b0-aa35-eca603ae95c9" class="bulleted-list"><li style="list-style-type:disc">If someone has <strong>DBA (Database Administrator) access</strong>, can they simply use BCrypt to <strong>decrypt</strong> the stored password?</li></ul><ul id="1a8e8d61-387b-8010-b553-c7e8b6bab2af" class="bulleted-list"><li style="list-style-type:disc">Is <strong>BCrypt encryption</strong> reversible?</li></ul><ul id="1a8e8d61-387b-80cb-b7cf-ff3b9c05a638" class="bulleted-list"><li style="list-style-type:disc">How does <strong>BCrypt protect passwords</strong>, and why is it considered secure?</li></ul><hr id="1a8e8d61-387b-8024-95e3-e21eafd37e16"/><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3;margin:0"><strong>Answer:</strong></summary><div class="indented"><h3 id="1a8e8d61-387b-8018-8972-cc9f21c972d5" class=""><strong>1️⃣ Can a DBA Decrypt a Stored BCrypt Password?</strong></h3><p id="1a8e8d61-387b-8022-afe9-d21a36bff7b2" class="">❌ <strong>No, a DBA (or anyone) CANNOT simply decrypt a BCrypt password because BCrypt is NOT reversible.</strong></p><p id="1a8e8d61-387b-8081-8489-e300b9703b4f" class="">📌 <strong>Why?</strong></p><ul id="1a8e8d61-387b-8095-9e0b-f12428c6688f" class="bulleted-list"><li style="list-style-type:disc"><strong>BCrypt is a one-way hashing algorithm</strong>, not encryption.</li></ul><ul id="1a8e8d61-387b-8030-a1bc-faf92b7966e4" class="bulleted-list"><li style="list-style-type:disc">Unlike encryption (which is reversible with a key), <strong>hashing is designed to be irreversible</strong>.</li></ul><ul id="1a8e8d61-387b-809d-be89-de257472f62c" class="bulleted-list"><li style="list-style-type:disc">Even if a DBA has access to the database, they <strong>cannot retrieve the original password</strong> from a hashed value.</li></ul><p id="1a8e8d61-387b-80f2-a4a5-c608e9e759b8" class="">✅ <strong>Example: Storing a Password Using BCrypt</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a8e8d61-387b-8013-a48d-e788d6e9ce17" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+String hashedPassword = encoder.encode(&quot;mySecurePassword&quot;);
+System.out.println(hashedPassword);
+
+</code></pre><p id="1a8e8d61-387b-803d-80ef-d31c79427368" class="">📌 <strong>Output (Hash Stored in Database)</strong>:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a8e8d61-387b-8036-b82a-fa391cf614b7" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">$2a$10$wK9kF0C7bEw4aZtLZqgFoO3I6Bd4aNnqNhi/N9sLZ0jE1ZVnDX6Oq
+</code></pre><p id="1a8e8d61-387b-8067-b50f-e748b37cf7c2" class="">🚨 <strong>Important:</strong></p><ul id="1a8e8d61-387b-804c-afc8-df42d070e240" class="bulleted-list"><li style="list-style-type:disc"><strong>This hash cannot be reversed back into the original password.</strong></li></ul><ul id="1a8e8d61-387b-80b1-bf39-fe345fb1cad4" class="bulleted-list"><li style="list-style-type:disc">Even if a DBA sees this hash, they <strong>cannot convert it back to </strong><code><strong>&quot;mySecurePassword&quot;</strong></code>.</li></ul><hr id="1a8e8d61-387b-805a-8301-c3e1ed346a4f"/><h3 id="1a8e8d61-387b-8032-9159-c543c84f6af3" class=""><strong>2️⃣ How Does BCrypt Protect Passwords?</strong></h3><p id="1a8e8d61-387b-80ec-8d63-cd67c68deed5" class="">✅ <strong>BCrypt is designed to resist brute-force attacks using two key techniques:</strong></p><table id="1a8e8d61-387b-80e6-88b4-eee6bb379708" class="simple-table"><tbody><tr id="1a8e8d61-387b-8066-a1bf-c781d9dfb951"><td id="gC;&lt;" class="">Feature</td><td id="ibMS" class="">Explanation</td></tr><tr id="1a8e8d61-387b-80d3-a920-ea9b788c773e"><td id="gC;&lt;" class=""><strong>Salt</strong></td><td id="ibMS" class="">Each password hash is generated with a <strong>random salt</strong>, making each hash unique. Even if two users have the same password, their hashes will be different.</td></tr><tr id="1a8e8d61-387b-80a9-ae3b-de3d15ace0c5"><td id="gC;&lt;" class=""><strong>Adaptive Work Factor (Cost Factor)</strong></td><td id="ibMS" class="">BCrypt allows setting a <strong>work factor (e.g., 10, 12, 14)</strong>, making it computationally expensive to brute-force.</td></tr></tbody></table><p id="1a8e8d61-387b-808e-801b-cf124de2d77c" class="">✅ <strong>Example: How Salting Works</strong><br/>If two users have the same password <br/><code>&quot;password123&quot;</code>, the stored hashes will still be different:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a8e8d61-387b-8063-a60a-eb44df7a130e" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">
+$2a$10$hGjkZbF3iLw5Q6ZtLZqgF9hN9sA1XYE4zQZCdDkKUz6eOf0bGpZ7q
+$2a$10$K6sXHf7iM4Bd6LZtLZqgF3YQzQZCdDkKUz6eOf0bGpX123OiGpZ7a
+
+</code></pre><p id="1a8e8d61-387b-8047-b1c4-e228bf658fce" class="">📌 <strong>Even though both users entered </strong><code><strong>&quot;password123&quot;</strong></code><strong>, their stored hashes are completely different</strong> because of <strong>salting</strong>.</p><hr id="1a8e8d61-387b-8083-93f1-e8e8a144fafb"/><h3 id="1a8e8d61-387b-8085-9542-c80125ac3b1c" class=""><strong>3️⃣ Why Can’t a DBA or Attacker Reverse BCrypt?</strong></h3><table id="1a8e8d61-387b-8038-8c1c-e5204f433e51" class="simple-table"><tbody><tr id="1a8e8d61-387b-80da-b4ce-fd652caf5cf0"><td id="|exR" class=""><strong>Reason</strong></td><td id="WHOy" class="" style="width:669px"><strong>Explanation</strong></td></tr><tr id="1a8e8d61-387b-8043-be90-ed12924b6a21"><td id="|exR" class=""><strong>One-Way Hashing</strong></td><td id="WHOy" class="" style="width:669px">BCrypt <strong>does NOT store encrypted passwords</strong>, it stores <strong>hashed passwords</strong> that <strong>cannot be reversed</strong>.</td></tr><tr id="1a8e8d61-387b-8056-bd91-c540fcaaf806"><td id="|exR" class=""><strong>Random Salt</strong></td><td id="WHOy" class="" style="width:669px">Even if an attacker gets access to the database, <strong>each password has a unique salt</strong>, making precomputed attack methods (rainbow tables) useless.</td></tr><tr id="1a8e8d61-387b-808d-9e20-f12a931f7ff1"><td id="|exR" class=""><strong>Work Factor (Cost Factor)</strong></td><td id="WHOy" class="" style="width:669px">The work factor makes brute-force attacks <strong>computationally expensive</strong>, slowing down attackers significantly.</td></tr></tbody></table><p id="1a8e8d61-387b-80b8-b4a3-c3b78e46f46d" class="">🚨 <strong>If a DBA sees the password hashes, they cannot simply reverse them to get the original passwords.</strong></p><p id="1a8e8d61-387b-805c-800e-e9e0f604cf57" class="">✅ The only way to verify a password is to <strong>hash the user’s input again and compare it</strong>.</p><hr id="1a8e8d61-387b-80ac-8534-fc19d4a68394"/><h3 id="1a8e8d61-387b-8000-82ad-f2cbc1461b04" class=""><strong>4️⃣ How Does Password Verification Work?</strong></h3><p id="1a8e8d61-387b-8037-91c2-de711eb8dae0" class="">When a user logs in:</p><ol type="1" id="1a8e8d61-387b-80d7-8602-d47b826f3852" class="numbered-list" start="1"><li>The user enters their password.</li></ol><ol type="1" id="1a8e8d61-387b-8080-8d3e-eee8756da085" class="numbered-list" start="2"><li>The backend <strong>hashes the input password with BCrypt</strong>.</li></ol><ol type="1" id="1a8e8d61-387b-8035-a5b3-d40295aa6980" class="numbered-list" start="3"><li>The new hash is <strong>compared to the stored hash</strong>.</li></ol><p id="1a8e8d61-387b-802f-95be-ecdcba7d5c8e" class="">📌 <strong>Example: Verifying a Password in Java</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1a8e8d61-387b-80ea-bae4-d72d9d1978d7" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+// Store this hash in the database during signup
+String storedHash = encoder.encode(&quot;mySecurePassword&quot;);
+
+// User enters password at login
+String inputPassword = &quot;mySecurePassword&quot;;
+
+// Check if the entered password matches the stored hash
+boolean isMatch = encoder.matches(inputPassword, storedHash);
+System.out.println(&quot;Password Match: &quot; + isMatch);
+
+</code></pre><p id="1a8e8d61-387b-80e3-be08-f2cf8c74976a" class="">✅ <strong>If the password is correct, </strong><code><strong>matches()</strong></code><strong> will return </strong><code><strong>true</strong></code><strong>.</strong></p><p id="1a8e8d61-387b-80a8-beef-eb98b11f2bbc" class="">🚨 <strong>Notice:</strong></p><ul id="1a8e8d61-387b-807d-86a2-e09c590a00db" class="bulleted-list"><li style="list-style-type:disc">We <strong>never decrypt</strong> the stored password.</li></ul><ul id="1a8e8d61-387b-80e6-9d92-f347343a75bb" class="bulleted-list"><li style="list-style-type:disc">Instead, we <strong>rehash the input</strong> and compare the hashes.</li></ul><hr id="1a8e8d61-387b-80ab-b492-c0a4882a6b50"/><h3 id="1a8e8d61-387b-807e-b59c-f9684ebf5bc0" class=""><strong>5️⃣ Can a DBA or Attacker Crack the Password?</strong></h3><p id="1a8e8d61-387b-80ac-ab14-d65bf501d092" class="">If an attacker gets the database, they <strong>cannot decrypt the hashes</strong>, but they could:</p><ul id="1a8e8d61-387b-80d4-9f28-c9282b6c4ce1" class="bulleted-list"><li style="list-style-type:disc"><strong>Try to brute-force it</strong> (but the cost factor makes this slow).</li></ul><ul id="1a8e8d61-387b-8080-a6c6-e18167e860f7" class="bulleted-list"><li style="list-style-type:disc"><strong>Use dictionary attacks</strong> (if users have weak passwords).</li></ul><ul id="1a8e8d61-387b-80e8-a723-dd298156d290" class="bulleted-list"><li style="list-style-type:disc"><strong>Use precomputed tables</strong> (but salt makes this ineffective).</li></ul><p id="1a8e8d61-387b-80f4-a9e5-e5ae83b308b5" class="">✅ <strong>How to Protect Against This?</strong></p><ul id="1a8e8d61-387b-8006-a491-eebcd98c27a9" class="bulleted-list"><li style="list-style-type:disc"><strong>Use a strong work factor</strong> (e.g., <code>BCryptPasswordEncoder(12)</code>).</li></ul><ul id="1a8e8d61-387b-8028-9843-e146060a247c" class="bulleted-list"><li style="list-style-type:disc"><strong>Force strong passwords</strong> (e.g., 12+ characters, mix of letters, numbers, symbols).</li></ul><ul id="1a8e8d61-387b-80b7-99a8-ffd9a3082503" class="bulleted-list"><li style="list-style-type:disc"><strong>Rate-limit login attempts</strong> to slow down brute-force attacks.</li></ul><hr id="1a8e8d61-387b-80ce-9041-e62699bda9e1"/><h3 id="1a8e8d61-387b-80ab-872a-c2391c98dbfc" class=""><strong>6️⃣ Summary</strong></h3><table id="1a8e8d61-387b-804b-ac5a-fd958da1b16a" class="simple-table"><tbody><tr id="1a8e8d61-387b-80af-9faa-ce85a6b338e9"><td id="\tt|" class="" style="width:331px">Question</td><td id="U&gt;jx" class="" style="width:462px">Answer</td></tr><tr id="1a8e8d61-387b-8084-bfc2-d8ef2b983162"><td id="\tt|" class="" style="width:331px"><strong>Can a DBA decrypt a BCrypt password?</strong></td><td id="U&gt;jx" class="" style="width:462px">❌ <strong>No, BCrypt hashing is one-way and cannot be reversed.</strong></td></tr><tr id="1a8e8d61-387b-80f7-9548-d653163b05bb"><td id="\tt|" class="" style="width:331px"><strong>How does BCrypt protect passwords?</strong></td><td id="U&gt;jx" class="" style="width:462px">Uses <strong>salting + cost factor</strong> to make brute-force attacks infeasible.</td></tr><tr id="1a8e8d61-387b-80f7-8395-e2cdedcc9534"><td id="\tt|" class="" style="width:331px"><strong>How does password verification work?</strong></td><td id="U&gt;jx" class="" style="width:462px">The input password is <strong>rehashed and compared to the stored hash</strong>.</td></tr><tr id="1a8e8d61-387b-80b0-9080-f703f3c588b0"><td id="\tt|" class="" style="width:331px"><strong>What happens if an attacker gets access to the database?</strong></td><td id="U&gt;jx" class="" style="width:462px">They <strong>cannot reverse the hashes</strong>, only try brute-force attacks (which are extremely slow).</td></tr></tbody></table><p id="1a8e8d61-387b-80bd-bd76-e9f8d0aa72d2" class="">✅ <strong>Final Answer:</strong></p><ul id="1a8e8d61-387b-8005-a5f6-e00287818f08" class="bulleted-list"><li style="list-style-type:disc"><strong>BCrypt is not encryption</strong>, it’s a <strong>one-way hash</strong>, so passwords <strong>cannot be decrypted</strong>.</li></ul><ul id="1a8e8d61-387b-808a-a43c-f061103f9454" class="bulleted-list"><li style="list-style-type:disc"><strong>Even if a DBA has database access, they cannot retrieve original passwords</strong> from the hashes.</li></ul><ul id="1a8e8d61-387b-80e9-bd4c-f2fe95e8802f" class="bulleted-list"><li style="list-style-type:disc"><strong>Passwords are verified by rehashing and comparing</strong>, not by decrypting.</li></ul></div></details></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
