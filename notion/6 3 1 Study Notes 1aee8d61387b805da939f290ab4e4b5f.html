@@ -1,0 +1,765 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>6.3.1 Study Notes</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-transparentGray { background-color: undefined; }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1aee8d61-387b-805d-a939-f290ab4e4b5f" class="page sans"><header><h1 class="page-title">6.3.1 Study Notes</h1><p class="page-description"></p></header><div class="page-body"><h3 id="1aee8d61-387b-8036-b680-eaabaf591f19" class="">📌 <strong>Why Do We Need Session Management?</strong></h3><ul id="1aee8d61-387b-809a-8f45-dcf2d2da71ae" class="bulleted-list"><li style="list-style-type:disc">Prevents users from sharing credentials and abusing services.</li></ul><ul id="1aee8d61-387b-803d-b7e3-c8a366a2a790" class="bulleted-list"><li style="list-style-type:disc">Ensures controlled access, e.g., limiting to <strong>one active session per user</strong>.</li></ul><ul id="1aee8d61-387b-80b2-8221-f344b95eab9d" class="bulleted-list"><li style="list-style-type:disc">Helps <strong>track and manage user sessions</strong> to maintain security.</li></ul><h3 id="1aee8d61-387b-8008-a8ba-eca7d148440b" class="">📌 <strong>JWT &amp; Session Management</strong></h3><ul id="1aee8d61-387b-80e5-a063-f574fc1fc5de" class="bulleted-list"><li style="list-style-type:disc"><strong>JWT (JSON Web Token) is stateless</strong> – typically, we don&#x27;t manage sessions in a database.</li></ul><ul id="1aee8d61-387b-80a7-9328-fa034c946e2a" class="bulleted-list"><li style="list-style-type:disc">To <strong>restrict multiple active sessions</strong>, we need to <strong>store session information in a database</strong>.</li></ul><ul id="1aee8d61-387b-80a6-9ee0-f2a90b84e83b" class="bulleted-list"><li style="list-style-type:disc">We track:<ul id="1aee8d61-387b-8095-b15e-fb68683ad140" class="bulleted-list"><li style="list-style-type:circle"><strong>Session ID</strong></li></ul><ul id="1aee8d61-387b-805e-aaee-f13d4aa9c5ab" class="bulleted-list"><li style="list-style-type:circle"><strong>Refresh Token</strong></li></ul><ul id="1aee8d61-387b-80ab-98a3-ec40f5bc8a1a" class="bulleted-list"><li style="list-style-type:circle"><strong>User ID</strong></li></ul><ul id="1aee8d61-387b-80b0-8651-dd49caf45462" class="bulleted-list"><li style="list-style-type:circle"><strong>Last Used Time</strong></li></ul></li></ul><hr id="1aee8d61-387b-8067-ac27-e057cd80c057"/><h2 id="1aee8d61-387b-80c5-a23f-f3eca88eccbe" class=""><strong>🔥 How Session Management Works?</strong></h2><h3 id="1aee8d61-387b-8052-b061-d1a1b5301a65" class=""><strong>Scenario: Restricting to 1 Active Session</strong></h3><p id="1aee8d61-387b-80de-9b11-c54de6a52367" class="">1️⃣ <strong>User logs in</strong> → Creates a <strong>session in DB</strong>.</p><p id="1aee8d61-387b-8008-a262-f502f3297248" class="">2️⃣ If <strong>another login attempt</strong> occurs:</p><ul id="1aee8d61-387b-8080-840d-e43f2a33eaf5" class="bulleted-list"><li style="list-style-type:disc"><strong>Check session limit</strong> (e.g., 1 session allowed).</li></ul><ul id="1aee8d61-387b-8079-9e8b-e1873d66b1f3" class="bulleted-list"><li style="list-style-type:disc">If <strong>session exists</strong>, <strong>delete the previous session</strong>.</li></ul><ul id="1aee8d61-387b-805e-bc6b-cecba9ac53e7" class="bulleted-list"><li style="list-style-type:disc">Create <strong>new session</strong> → Issue fresh JWT.</li></ul><p id="1aee8d61-387b-803c-89af-d84a6fe6fa35" class="">3️⃣ <strong>When JWT expires</strong>:</p><ul id="1aee8d61-387b-8009-be96-fba674b9a7fd" class="bulleted-list"><li style="list-style-type:disc">Verify <strong>refresh token</strong>.</li></ul><ul id="1aee8d61-387b-80ba-9aaa-f7ca0d0a6d91" class="bulleted-list"><li style="list-style-type:disc">If <strong>session exists</strong> → Issue <strong>new access token</strong>.</li></ul><ul id="1aee8d61-387b-805f-8587-e228333b9ddc" class="bulleted-list"><li style="list-style-type:disc">If <strong>session does not exist</strong> → Force <strong>new login</strong>.</li></ul><hr id="1aee8d61-387b-80b3-aaf0-e83ee309c6a8"/><h2 id="1aee8d61-387b-803f-af87-d15337e9da09" class=""><strong>🖼 Session Management Flow Diagram</strong></h2><p id="1aee8d61-387b-80a9-aac3-dbe0a5de24fd" class="">This diagram visually represents how session management works in <strong>Spring Security using JWT</strong>.</p><p id="1aee8d61-387b-800b-90c1-f45315c8a42f" class="">📌 <strong>Key Flow:</strong></p><ul id="1aee8d61-387b-800a-b0bf-e1e314338288" class="bulleted-list"><li style="list-style-type:disc"><strong>Client</strong> sends username &amp; password.</li></ul><ul id="1aee8d61-387b-80af-bc87-c2179ed32fed" class="bulleted-list"><li style="list-style-type:disc"><strong>Server</strong> validates credentials &amp; generates tokens.</li></ul><ul id="1aee8d61-387b-80f1-8419-fbef4a05d192" class="bulleted-list"><li style="list-style-type:disc"><strong>SessionService</strong> checks session limit:<ul id="1aee8d61-387b-8073-8c4a-d0bf5f82ae3a" class="bulleted-list"><li style="list-style-type:circle">✅ If within limit → <strong>Create a session</strong>.</li></ul><ul id="1aee8d61-387b-808f-9fc3-f01f2ae04d19" class="bulleted-list"><li style="list-style-type:circle">❌ If exceeded → <strong>Delete the oldest session</strong>.<br/><br/></li></ul></li></ul><p id="1aee8d61-387b-80ab-9a2c-c60871e3a2e0" class="">🔽 <strong>See the below diagram for a clear understanding:<br/><br/></strong></p><figure id="1aee8d61-387b-809a-89d2-e38b1f25d79e" class="image"><a href="image%209.png"><img style="width:1488px" src="image%209.png"/></a></figure><hr id="1aee8d61-387b-80d7-bafb-f7396a129d37"/><h2 id="1aee8d61-387b-80d7-8d63-fd4e1159774f" class=""><strong>🛠 Implementing Session Management</strong></h2><h3 id="1aee8d61-387b-80c6-9dbd-e1f6d443d178" class=""><strong>1️⃣ Create Database Schema for Sessions</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1aee8d61-387b-8083-932d-cf5024e0e7a1" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+CopyEdit
+@Entity
+public class Session {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne
+    private User user;   // Maps to user entity
+
+    private String refreshToken;
+    private LocalDateTime lastUsedAt;
+}
+
+</code></pre><h3 id="1aee8d61-387b-809d-bf18-c0f9583259ba" class=""><strong>2️⃣ Create a Repository</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1aee8d61-387b-808f-b655-e374f116a4e8" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">
+@Repository
+public interface SessionRepository extends JpaRepository&lt;Session, Long&gt; {
+    List&lt;Session&gt; findByUser(User user);
+    Optional&lt;Session&gt; findByRefreshToken(String refreshToken);
+}
+
+</code></pre><hr id="1aee8d61-387b-802d-9bc7-e00a954f67d3"/><h2 id="1aee8d61-387b-80b4-b677-fb7f3eb6c5df" class=""><strong>3️⃣ Implementing Session Service</strong></h2><h3 id="1aee8d61-387b-8068-a01d-f060600ce1df" class=""><strong>✅ Generating a New Session</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1aee8d61-387b-80cb-893d-d40a55ebcee8" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">
+@Service
+public class SessionService {
+    private final SessionRepository sessionRepository;
+    private final int SESSION_LIMIT = 2;  // Max active sessions
+
+    public void generateNewSession(User user, String refreshToken) {
+        List&lt;Session&gt; userSessions = sessionRepository.findByUser(user);
+
+        if (userSessions.size() &gt;= SESSION_LIMIT) {
+            // Remove least recently used session
+            userSessions.sort(Comparator.comparing(Session::getLastUsedAt));
+            sessionRepository.delete(userSessions.get(0));
+        }
+
+        // Create a new session
+        Session newSession = new Session();
+        newSession.setUser(user);
+        newSession.setRefreshToken(refreshToken);
+        newSession.setLastUsedAt(LocalDateTime.now());
+
+        sessionRepository.save(newSession);
+    }
+}
+
+</code></pre><hr id="1aee8d61-387b-809a-964f-c0d76e7f7bf7"/><h2 id="1aee8d61-387b-8022-8eab-e410d924d145" class=""><strong>4️⃣ Validating Session Before Refresh</strong></h2><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1aee8d61-387b-8047-bf3a-dcebe17f774f" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">
+public void validateSession(String refreshToken) {
+    Session session = sessionRepository.findByRefreshToken(refreshToken)
+            .orElseThrow(() -&gt; new SessionAuthenticationException(&quot;Invalid Session&quot;));
+
+    // Update session timestamp
+    session.setLastUsedAt(LocalDateTime.now());
+    sessionRepository.save(session);
+}
+
+</code></pre><hr id="1aee8d61-387b-80d9-9786-d3bfed27ea45"/><h2 id="1aee8d61-387b-80d7-a382-eabfa8fbc82b" class=""><strong>5️⃣ Integrating with Authentication Flow</strong></h2><h3 id="1aee8d61-387b-8000-9a51-cab97cd8854d" class=""><strong>🌟 Updating Login API</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1aee8d61-387b-809f-99a5-edf60541edaa" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">
+public AuthResponse login(LoginRequest request) {
+    User user = userService.authenticate(request.getUsername(), request.getPassword());
+
+    String accessToken = jwtService.generateAccessToken(user);
+    String refreshToken = jwtService.generateRefreshToken(user);
+
+    // Create a new session
+    sessionService.generateNewSession(user, refreshToken);
+
+    return new AuthResponse(accessToken, refreshToken);
+}
+
+</code></pre><h3 id="1aee8d61-387b-8007-b4f0-c0b9355a7419" class=""><strong>🌟 Updating Token Refresh API</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1aee8d61-387b-80c2-81e0-fb3c0c591203" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">
+public AuthResponse refreshToken(String refreshToken) {
+    // Validate token and session
+    jwtService.validateRefreshToken(refreshToken);
+    sessionService.validateSession(refreshToken);
+
+    // Generate new access token
+    String newAccessToken = jwtService.generateAccessToken(user);
+    return new AuthResponse(newAccessToken, refreshToken);
+}
+
+</code></pre><hr id="1aee8d61-387b-8061-b596-ecc47d561289"/><h2 id="1aee8d61-387b-80c5-b95b-f4c0497dc947" class=""><strong>🎯 Testing the Flow</strong></h2><h3 id="1aee8d61-387b-80c0-b2ad-d76bba3f8eba" class=""><strong>1️⃣ User Logs In (Session Created)</strong></h3><p id="1aee8d61-387b-80af-8173-c8543bc3c49c" class="">✅ Check <strong>sessions table</strong> → New session entry added.</p><h3 id="1aee8d61-387b-8057-b18d-e17341f3ca0b" class=""><strong>2️⃣ Another Login Attempt</strong></h3><p id="1aee8d61-387b-8058-af25-e2957551d8be" class="">✅ Old session <strong>deleted</strong>, new session created.</p><h3 id="1aee8d61-387b-80ea-a1ba-fd0a6658a9b5" class=""><strong>3️⃣ Using Refresh Token</strong></h3><p id="1aee8d61-387b-8059-bd5b-f82a77c4bd72" class="">✅ If <strong>session exists</strong>, new access token is issued.</p><p id="1aee8d61-387b-80d2-9ca7-f5f92ff886e2" class="">❌ If <strong>session is deleted</strong>, user must re-login.</p><h3 id="1aee8d61-387b-8032-b1d8-d49ca2a4ec47" class=""><strong>4️⃣ Trying to Exceed Session Limit</strong></h3><p id="1aee8d61-387b-80bc-ad68-c83979b6224b" class="">✅ <strong>Oldest session is deleted</strong> when new session is created.</p><hr id="1aee8d61-387b-80b4-a9f5-c04eb49994c1"/><h2 id="1aee8d61-387b-802f-90b6-ef732ea510a2" class=""><strong>📌 Homework (Enhancements)</strong></h2><p id="1aee8d61-387b-800e-a53a-ff8299837c1b" class="">🔹 <strong>Create Logout API</strong> → Delete session on logout.</p><p id="1aee8d61-387b-8065-bf98-faaa9bf34b42" class="">🔹 <strong>Dynamic Session Limits</strong> → Different users can have different session limits.</p><p id="1aee8d61-387b-803e-bd40-cccfe8062aec" class="">🔹 <strong>Store Session Count in Subscription Entity</strong> instead of hardcoding limit.</p><hr id="1aee8d61-387b-80df-888f-c04cf348a7ec"/><h2 id="1aee8d61-387b-8091-bc71-d82bcae1b3cc" class=""><strong>⚡ Summary (Quick Revision for Interviews)</strong></h2><p id="1aee8d61-387b-804e-892e-d23084f59143" class="">1️⃣ <strong>Why Manage Sessions?</strong> → Prevents credential sharing, limits active logins.</p><p id="1aee8d61-387b-8014-b8be-d22bd57c7745" class="">2️⃣ <strong>How?</strong> → Store <strong>session details in DB</strong> &amp; track refresh tokens.</p><p id="1aee8d61-387b-803d-b72d-dc557121ff73" class="">3️⃣ <strong>Key Steps:</strong></p><ul id="1aee8d61-387b-80a8-b3b1-d69b21995a5a" class="bulleted-list"><li style="list-style-type:disc"><strong>Login:</strong> Create a new session, delete old session if limit exceeded.</li></ul><ul id="1aee8d61-387b-80fe-866f-ff971835132c" class="bulleted-list"><li style="list-style-type:disc"><strong>Refresh Token:</strong> Check session before issuing new token.</li></ul><ul id="1aee8d61-387b-8089-a8a7-e1f57e5ee446" class="bulleted-list"><li style="list-style-type:disc"><strong>Session Expiry:</strong> No session = No refresh token allowed.<br/><br/></li></ul><p id="1aee8d61-387b-8009-a7f7-ca5e6c543aa7" class="">4️⃣ <strong>Database Tables:</strong> Store <strong>session ID, refresh token, user ID, last used time</strong>.</p><p id="1aee8d61-387b-80d7-9df2-c02815fae40b" class="">5️⃣ <strong>Enhancements:</strong> Logout API, dynamic session limits.</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

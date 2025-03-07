@@ -1,0 +1,828 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>6.2.1 Study Notes</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-transparentGray { background-color: undefined; }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1ade8d61-387b-8084-919a-dd4e3f2794b1" class="page sans"><header><h1 class="page-title">6.2.1 Study Notes</h1><p class="page-description"></p></header><div class="page-body"><h2 id="1ade8d61-387b-806e-9b3e-fea88e3038a3" class=""><strong>🔹 Introduction to OAuth 2 Client Authentication</strong></h2><p id="1ade8d61-387b-80fb-a148-ceaa22ee40a6" class="">OAuth 2.0 Client Authentication allows applications to <strong><span style="border-bottom:0.05em solid">authenticate users using third-party authorization servers</span></strong> such as <strong>Google, Facebook, GitHub, etc.</strong> instead of relying on traditional username and password authentication.</p><p id="1ade8d61-387b-80d0-b1b2-fd2813a50609" class="">🔹 <strong>Traditional Authentication Flow (Email &amp; Password)</strong></p><ul id="1ade8d61-387b-8024-bb57-f37697b6b61b" class="bulleted-list"><li style="list-style-type:disc">User enters email and password.</li></ul><ul id="1ade8d61-387b-8072-95c9-d361dbb75ca2" class="bulleted-list"><li style="list-style-type:disc">The password is encrypted and stored in the database.</li></ul><ul id="1ade8d61-387b-80ba-9bf0-cc1748132207" class="bulleted-list"><li style="list-style-type:disc">The application verifies credentials and authenticates the user.</li></ul><p id="1ade8d61-387b-80f0-a1ff-d3b0f795ebb3" class="">🔹 <strong>OAuth 2.0 Authentication Flow</strong></p><ul id="1ade8d61-387b-803a-a4b9-deab8f6256fa" class="bulleted-list"><li style="list-style-type:disc">Instead of managing user credentials, the app <strong>delegates authentication</strong> to an external provider (Google, GitHub, etc.).</li></ul><ul id="1ade8d61-387b-803e-b409-de4576a6587c" class="bulleted-list"><li style="list-style-type:disc">The provider handles authentication and returns a <strong>token</strong> with user details.</li></ul><ul id="1ade8d61-387b-8059-833d-c6b19e3d4466" class="bulleted-list"><li style="list-style-type:disc">The application then uses this token to authenticate the user and provide access.</li></ul><hr id="1ade8d61-387b-804e-b08f-fd4c0b2e5c75"/><h2 id="1ade8d61-387b-8064-8671-c5f6db88e732" class=""><strong>🔹 Setting Up OAuth 2 Client in Spring Boot</strong></h2><p id="1aee8d61-387b-805d-90eb-e15d7cdba089" class="">
+</p><h3 id="1ade8d61-387b-809c-a403-f0e260317321" class=""><strong>1️⃣ Adding Dependencies</strong></h3><p id="1ade8d61-387b-8037-bd99-d53dcd1b4567" class="">To use OAuth 2 Client, add the following dependency in <code>pom.xml</code>:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1ade8d61-387b-803f-a2b5-cdafb5123e8a" class="code"><code class="language-XML" style="white-space:pre-wrap;word-break:break-all">&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-oauth2-client&lt;/artifactId&gt;
+&lt;/dependency&gt;</code></pre><p id="1ade8d61-387b-8033-bb3e-e1d81dad03b5" class="">📌 <strong>Important:</strong> Refresh <strong>Maven</strong> after adding the dependency to download required packages.</p><hr id="1ade8d61-387b-805f-889a-c894892d1277"/><h3 id="1ade8d61-387b-80f1-a0f5-e713ea34c17a" class=""><strong>2️⃣ Configuring OAuth 2 Client</strong></h3><p id="1ade8d61-387b-809d-a909-fd79b16e7a50" class="">Configuration is done in the <code>application.properties</code> or <code>application.yaml</code> file.</p><h3 id="1ade8d61-387b-8013-aed4-c34eed0e9663" class=""><strong>Using </strong><code><strong>application.properties</strong></code></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1ade8d61-387b-8063-9f0f-f0887d5f9f2b" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">spring.security.oauth2.client.registration.google.client-id=YOUR_CLIENT_ID
+spring.security.oauth2.client.registration.google.client-secret=YOUR_CLIENT_SECRET
+</code></pre><h3 id="1ade8d61-387b-8059-bd67-d692421a1339" class=""><strong>Using </strong><code><strong>application.yaml</strong></code><strong> (Recommended)</strong></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1ade8d61-387b-809d-803d-f3b0a89f7996" class="code"><code class="language-YAML" style="white-space:pre-wrap;word-break:break-all">spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: YOUR_CLIENT_ID
+            client-secret: YOUR_CLIENT_SECRET</code></pre><p id="1ade8d61-387b-80ad-b06c-e79cf6df52f9" class="">🛑 <strong>Why YAML?</strong></p><ul id="1ade8d61-387b-8085-ae86-e8dcc6b60a8f" class="bulleted-list"><li style="list-style-type:disc">Avoids redundant key-value pairs.</li></ul><ul id="1ade8d61-387b-80bf-bb60-cfa25c5aab59" class="bulleted-list"><li style="list-style-type:disc">Easier to read and manage.</li></ul><p id="1afe8d61-387b-80b0-9c80-e1d0887a4c4f" class="">
+</p><hr id="1afe8d61-387b-80b3-9ed8-d94c5ead3db0"/><h2 id="1afe8d61-387b-8048-ab66-d244f60e09ab" class=""><strong>🔹 Updating WebSecurityConfig for OAuth2 Authentication</strong></h2><p id="1afe8d61-387b-807e-aa70-c478629120d6" class="">After adding OAuth2 dependencies and configuring the client ID and secret, we need to <strong>update </strong><code><strong>WebSecurityConfig</strong></code> to enable OAuth2 authentication.</p><h3 id="1afe8d61-387b-802c-aa73-d27ed7fa1a66" class=""><strong>1️⃣ Modify </strong><code><strong>WebSecurityConfig</strong></code></h3><p id="1afe8d61-387b-8053-87e7-f4233fbd84f0" class="">Update the security configuration to allow OAuth2 authentication:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1afe8d61-387b-80a7-b5b5-e675933870b2" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">@Configuration
+@EnableWebSecurity
+@AllArgsConstructor
+public class WebSecurityConfig {
+
+    private final JwtAuthFilter jwtAuthFilter;
+    private final OAuth2SuccessHandler oAuth2SuccessHandler;
+    
+    private static final String[] publicRoutes = {
+            &quot;/error&quot;, &quot;/auth/**&quot;, &quot;/home.html&quot;
+    };
+
+    @Bean
+    SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity
+                .authorizeHttpRequests(
+                        auth -&gt; auth
+                                .requestMatchers(publicRoutes).permitAll()
+                                //.requestMatchers(HttpMethod.GET, &quot;/posts/**&quot;).permitAll()
+                                .requestMatchers(HttpMethod.POST, &quot;/posts/**&quot;)
+                                    .hasAnyRole(ADMIN.name(),CREATOR.name())
+                                .anyRequest().authenticated())
+                .csrf(AbstractHttpConfigurer::disable)
+                .sessionManagement(sessionConfig -&gt; sessionConfig
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+                .oauth2Login(oauth2Config -&gt; oauth2Config
+                        .failureUrl(&quot;/login?error=true&quot;)
+                        .successHandler(oAuth2SuccessHandler)
+                );
+        ;
+
+        return httpSecurity.build();
+    }
+
+
+
+    @Bean
+    AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
+    }
+}
+
+</code></pre><h3 id="1afe8d61-387b-80fd-b019-cf23fd42b1e3" class=""><strong>2️⃣ Explanation</strong></h3><ul id="1afe8d61-387b-8032-b309-f024f7613d9d" class="bulleted-list"><li style="list-style-type:disc"><code><strong>@EnableWebSecurity</strong></code>: Enables Spring Security.</li></ul><ul id="1afe8d61-387b-8034-9a58-e4313c83d584" class="bulleted-list"><li style="list-style-type:disc"><code><strong>securityFilterChain(HttpSecurity http)</strong></code>:<ul id="1afe8d61-387b-804f-872c-c3bbb5acfe9f" class="bulleted-list"><li style="list-style-type:circle">Disables <strong>CSRF protection</strong> (optional).</li></ul><ul id="1afe8d61-387b-8077-a884-f349b80760f0" class="bulleted-list"><li style="list-style-type:circle">Allows unrestricted access to <code>/</code> and <code>/home</code>.</li></ul><ul id="1afe8d61-387b-80e7-b54a-e1855ce05448" class="bulleted-list"><li style="list-style-type:circle">Requires <strong>authentication for all other requests</strong>.</li></ul><ul id="1afe8d61-387b-80b1-b56b-f5f27df4a68e" class="bulleted-list"><li style="list-style-type:circle">Configures <strong>OAuth2 login</strong>:<ul id="1afe8d61-387b-8056-b706-ea06a517cc5a" class="bulleted-list"><li style="list-style-type:square">Uses a <strong>custom success handler</strong> (<code>OAuth2SuccessHandler</code>).</li></ul><ul id="1afe8d61-387b-8055-bcc0-e6d5e5c0bf30" class="bulleted-list"><li style="list-style-type:square">Redirects to <code>/login?error=true</code> in case of failure.</li></ul></li></ul></li></ul><p id="1afe8d61-387b-80e2-8c92-db37380eeeea" class="">✅ <strong>Why is this needed?</strong><br/><br/><strong><span style="border-bottom:0.05em solid">Without this</span></strong> configuration, <strong><span style="border-bottom:0.05em solid">Spring Security won&#x27;t handle OAuth2 authentication requests properly.</span></strong></p><hr id="1ade8d61-387b-80cf-905d-e3dadc1e35d6"/><h2 id="1ade8d61-387b-808e-ad4d-e537ff98f26e" class=""><strong>🔹 Setting Up Google OAuth 2.0 Credentials</strong></h2><h3 id="1ade8d61-387b-80b2-b55c-f29ad712d76b" class=""><strong>Step 1: Google Cloud Console Setup</strong></h3><ol type="1" id="1ade8d61-387b-8074-b80b-df7446d6c0dd" class="numbered-list" start="1"><li>Go to <strong>Google Cloud Console</strong>.</li></ol><ol type="1" id="1ade8d61-387b-8070-9f2c-fe2570258979" class="numbered-list" start="2"><li><strong>Create a new project</strong> (or use an existing one).</li></ol><ol type="1" id="1ade8d61-387b-8021-a815-c9ca5ff06597" class="numbered-list" start="3"><li>Navigate to <strong>APIs &amp; Services &gt; Credentials</strong>.</li></ol><ol type="1" id="1ade8d61-387b-80a9-ae7d-c98f86538d3d" class="numbered-list" start="4"><li>Click <strong>Create Credentials &gt; OAuth 2.0 Client ID</strong>.</li></ol><h3 id="1ade8d61-387b-8047-b5bf-c36a70148841" class=""><strong>Step 2: Configure OAuth Consent Screen</strong></h3><ul id="1ade8d61-387b-802d-b14d-cf6cb753659d" class="bulleted-list"><li style="list-style-type:disc">Choose <strong>External</strong> (if users outside your organization will log in).</li></ul><ul id="1ade8d61-387b-80ce-a075-f7651e368d79" class="bulleted-list"><li style="list-style-type:disc">Enter <strong>App Name, Support Email, and Developer Email</strong>.</li></ul><ul id="1ade8d61-387b-80eb-90fd-ff61f0e21568" class="bulleted-list"><li style="list-style-type:disc">Define <strong>OAuth Scopes</strong>:<ul id="1ade8d61-387b-80a9-9f8c-e96a9a2721e1" class="bulleted-list"><li style="list-style-type:circle">✅ Non-sensitive scopes: Profile, Email.</li></ul><ul id="1ade8d61-387b-8009-963e-d49179cc917d" class="bulleted-list"><li style="list-style-type:circle">❌ Sensitive scopes: Gmail, Calendar (require Google approval).</li></ul></li></ul><h3 id="1ade8d61-387b-8046-a5c5-f100855cbbd9" class=""><strong>Step 3: Create OAuth Client ID</strong></h3><ul id="1ade8d61-387b-806d-adf1-d9346cbf832a" class="bulleted-list"><li style="list-style-type:disc">Choose <strong>Web Application</strong> as the Application Type.</li></ul><ul id="1ade8d61-387b-805f-9e7e-ef2e3575adca" class="bulleted-list"><li style="list-style-type:disc">Set <strong>Authorized Redirect URIs</strong>:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1ade8d61-387b-80e5-894a-e0451fabb967" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">http://localhost:8080/login/oauth2/code/google</code></pre><p id="1ade8d61-387b-805c-89c7-c6ed86e16b58" class="">(Spring Security automatically handles this URL.)</p></li></ul><ul id="1ade8d61-387b-80a1-b2c9-dba3c16b6fd2" class="bulleted-list"><li style="list-style-type:disc">Click <strong>Create</strong> → Copy <strong>Client ID &amp; Secret</strong>.</li></ul><hr id="1ade8d61-387b-80cd-a027-f4476a556d44"/><h2 id="1ade8d61-387b-806b-a261-d5be2dd9df64" class=""><strong>🔹 OAuth 2 Authentication Workflow</strong></h2><p id="1ade8d61-387b-8095-a0a1-c20f96ee7d38" class="">📌 <strong>How it Works</strong> (End-to-End Flow)<br/><br/>1️⃣ User clicks <br/><strong>Google Login Button</strong>.</p><figure id="1aee8d61-387b-8031-ac93-fa18551f1b37" class="image"><a href="image%204.png"><img style="width:1472.9375px" src="image%204.png"/></a></figure><p id="1aee8d61-387b-80d6-bd5f-e35956890751" class="">
+</p><p id="1aee8d61-387b-800c-8f71-ecd832fb5d78" class="">
+</p><p id="1ade8d61-387b-8074-b32f-eb2893782fe2" class="">2️⃣ The app redirects to:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1ade8d61-387b-802c-9525-dbfc67ca6afb" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">/oauth2/authorization/google</code></pre><figure id="1aee8d61-387b-80b6-83ff-e71592cc8734" class="image"><a href="image%205.png"><img style="width:1472.921875px" src="image%205.png"/></a></figure><p id="1aee8d61-387b-8071-9315-de53cad3c7ec" class="">
+</p><p id="1aee8d61-387b-80fa-9ac2-e39f032657ca" class="">
+</p><p id="1aee8d61-387b-803b-91ac-ed91dd78ab99" class="">
+</p><p id="1ade8d61-387b-801b-b602-d42526fbe322" class="">3️⃣ Spring Security connects with <strong>Google Authorization Server</strong>.</p><p id="1afe8d61-387b-807d-ab43-e62ddcae62c6" class="">
+</p><p id="1afe8d61-387b-809c-8127-d9320fbd82e3" class=""><br/>4️⃣ Google prompts the user for <br/><strong>credentials &amp; consent</strong>.</p><figure id="1afe8d61-387b-80df-a62d-ef84f27f3ba1" class="image"><a href="image%206.png"><img style="width:1472.984375px" src="image%206.png"/></a></figure><p id="1afe8d61-387b-809a-99f1-d566ac42bc16" class=""><br/><br/><br/><br/><br/><br/>5️⃣ On success, Google redirects to:<br/></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1ade8d61-387b-803e-abd8-ce75bde0f5bb" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">/login/oauth2/code/google?state=STATE&amp;code=AUTH_CODE</code></pre><figure id="1afe8d61-387b-800c-9688-e1da9ffe409a" class="image"><a href="image%207.png"><img style="width:1472.9375px" src="image%207.png"/></a></figure><p id="1afe8d61-387b-809d-9707-c5604ed5ab39" class="">
+</p><p id="1afe8d61-387b-80b5-9368-f4d9fdc289e7" class="">
+</p><p id="1ade8d61-387b-80c0-a892-e1f58b4656bd" class="">6️⃣ Spring Security <strong>exchanges AUTH_CODE for tokens</strong>.<br/>7️⃣ Google returns:<br/></p><ul id="1ade8d61-387b-809c-869c-ddda16a34333" class="bulleted-list"><li style="list-style-type:disc"><strong>Access Token</strong> (short-lived)</li></ul><ul id="1ade8d61-387b-8060-9e1c-f6760eccae10" class="bulleted-list"><li style="list-style-type:disc"><strong>Refresh Token</strong> (long-lived)</li></ul><p id="1aee8d61-387b-80e8-a03e-d7066a2c3e36" class="">8️⃣ Spring Security <strong>authenticates the user</strong>.<br/>9️⃣ The <br/><strong>OAuth2SuccessHandler</strong> triggers and:</p><ul id="1ade8d61-387b-8098-828e-f51a86c7cd0d" class="bulleted-list"><li style="list-style-type:disc">Retrieves <strong>user details from the token</strong>.</li></ul><ul id="1ade8d61-387b-80d8-a81f-dcfb4fd543fe" class="bulleted-list"><li style="list-style-type:disc">Generates <strong>Access Token (AT) &amp; Refresh Token (RT)</strong>.</li></ul><ul id="1ade8d61-387b-80f1-937e-e06c80335dbc" class="bulleted-list"><li style="list-style-type:disc"><strong>Saves RT in cookies</strong>.</li></ul><ul id="1ade8d61-387b-800e-b6cb-c82f97f39b7f" class="bulleted-list"><li style="list-style-type:disc">Redirects user to <strong>frontend</strong> with AT.<strong><br/><br/></strong></li></ul><hr id="1ade8d61-387b-8033-a1a8-c8c40041cad3"/><p id="1ade8d61-387b-8085-9cff-f4df754404c7" class="">📌 <strong>How it Works</strong> (End-to-End Flow)<br/>1️⃣ User clicks <br/><strong>Google Login Button</strong>.</p><p id="1ade8d61-387b-8068-acd6-c7249a04b19a" class="">2️⃣ The app redirects to:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1ade8d61-387b-8010-ae22-df43f2aec072" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">/oauth2/authorization/google</code></pre><p id="1ade8d61-387b-80ab-bc42-d7e41677192c" class="">3️⃣ Spring Security connects with <strong>Google Authorization Server</strong>.<br/>4️⃣ Google prompts the user for <br/><strong>credentials &amp; consent</strong>.<br/>5️⃣ On success, Google redirects to:<br/></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1ade8d61-387b-80c4-a446-ddb392ed065a" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">/login/oauth2/code/google?state=STATE&amp;code=AUTH_CODE</code></pre><p id="1ade8d61-387b-806d-b71f-eecf8951191a" class="">6️⃣ Spring Security <strong>exchanges AUTH_CODE for tokens</strong>.<br/>7️⃣ Google returns:<br/></p><ul id="1ade8d61-387b-800d-8f6f-e75d7bb60c21" class="bulleted-list"><li style="list-style-type:disc"><strong>Access Token</strong> (short-lived)</li></ul><ul id="1ade8d61-387b-8069-862e-f0ca2bebfd3e" class="bulleted-list"><li style="list-style-type:disc"><strong>Refresh Token</strong> (long-lived)<br/><br/></li></ul><p id="1afe8d61-387b-80c6-a18e-c59a7711f851" class="">8️⃣ Spring Security <strong>authenticates the user</strong>.<br/>9️⃣ The <br/><strong>OAuth2SuccessHandler</strong> triggers and:</p><ul id="1ade8d61-387b-8063-bb50-f28652eb1035" class="bulleted-list"><li style="list-style-type:disc">Retrieves <strong>user details from the token</strong>.</li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1afe8d61-387b-8097-a7fd-e57e6be72ff1" class="code"><code class="language-Java">        OAuth2AuthenticationToken token = (OAuth2AuthenticationToken) authentication;
+        DefaultOAuth2User oAuth2User = (DefaultOAuth2User) token.getPrincipal();
+        
+        String email = oAuth2User.getAttribute(&quot;email&quot;);
+        User user = userService.getUserByEmail(email);
+        
+        
+        if(user == null) {
+            User newUser = User.builder()
+                    .name(oAuth2User.getAttribute(&quot;name&quot;))
+                    .email(email)
+                    .build();
+
+            user = userService.save(newUser);
+        }</code></pre><p id="1afe8d61-387b-80fe-b369-e8592e5779b5" class=""><br/><br/></p><ul id="1ade8d61-387b-807e-9a45-ffcee508ecaf" class="bulleted-list"><li style="list-style-type:disc">Generates <strong>Access Token (AT) &amp; Refresh Token (RT)</strong>.</li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1afe8d61-387b-809c-bea7-f25ce12ad345" class="code"><code class="language-Java">        String accessToken = jwtService.generateAccessToken(user);
+        String refreshToken = jwtService.generateRefreshToken(user);</code></pre><ul id="1ade8d61-387b-8041-956f-f9dfb796a708" class="bulleted-list"><li style="list-style-type:disc"><strong>Saves RT in cookies</strong>.</li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1afe8d61-387b-80ec-9c10-df857436fbf9" class="code"><code class="language-Java">        Cookie cookie = new Cookie(&quot;refreshToken&quot;, refreshToken);
+        cookie.setHttpOnly(true);
+        cookie.setSecure(&quot;production&quot;.equals(deployEnv));
+        response.addCookie(cookie);</code></pre><ul id="1ade8d61-387b-8070-ab59-ea3bd3ef23e3" class="bulleted-list"><li style="list-style-type:disc">Redirects user to <strong>frontend</strong> with AT.</li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1afe8d61-387b-80b3-b264-ef565eabc750" class="code"><code class="language-Java">        String frontEndUrl = &quot;http://localhost:8080/home.html?token=&quot;+accessToken;
+
+        response.sendRedirect(frontEndUrl);</code></pre><figure id="1ade8d61-387b-80f9-ae05-f6e902a16d30" class="image"><a href="image%208.png"><img style="width:1488px" src="image%208.png"/></a></figure><hr id="1ade8d61-387b-8031-a24b-de8e94192503"/><h2 id="1ade8d61-387b-80c7-809a-e5019a06a32e" class=""><strong>🔹 Implementing OAuth2 Success Handler</strong></h2><h3 id="1ade8d61-387b-804f-9a75-cebe76bc3d22" class=""><strong>1️⃣ Create </strong><code><strong>OAuth2SuccessHandler</strong></code></h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1ade8d61-387b-80bd-aaa4-cdf37dd14b56" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">@Component
+@RequiredArgsConstructor
+@Slf4j
+public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
+    private final UserService userService;
+    private final JwtService jwtService;
+
+
+    @Value(&quot;${deploy.env}&quot;)
+    private String deployEnv;
+
+    @Override
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+                                         Authentication authentication) throws IOException, ServletException {
+
+        OAuth2AuthenticationToken token = (OAuth2AuthenticationToken) authentication;
+        DefaultOAuth2User oAuth2User = (DefaultOAuth2User) token.getPrincipal();
+
+        String email = oAuth2User.getAttribute(&quot;email&quot;);
+
+        User user = userService.getUserByEmail(email);
+
+        if(user == null) {
+            User newUser = User.builder()
+                    .name(oAuth2User.getAttribute(&quot;name&quot;))
+                    .email(email)
+                    .build();
+
+            user = userService.save(newUser);
+        }
+
+        String accessToken = jwtService.generateAccessToken(user);
+        String refreshToken = jwtService.generateRefreshToken(user);
+
+        Cookie cookie = new Cookie(&quot;refreshToken&quot;, refreshToken);
+        cookie.setHttpOnly(true);
+        cookie.setSecure(&quot;production&quot;.equals(deployEnv));
+        response.addCookie(cookie);
+
+        String frontEndUrl = &quot;http://localhost:8080/home.html?token=&quot;+accessToken;
+
+        response.sendRedirect(frontEndUrl);
+    }
+
+}</code></pre><p id="1ade8d61-387b-80ba-9993-d7e32ee6d4f3" class="">📌 <strong>Key Responsibilities:</strong></p><ul id="1ade8d61-387b-805f-81ac-ead75d0ac911" class="bulleted-list"><li style="list-style-type:disc">Retrieves user details.</li></ul><ul id="1ade8d61-387b-805d-a21b-f66eeea4a95f" class="bulleted-list"><li style="list-style-type:disc">Checks if user exists; if not, creates a new user.</li></ul><ul id="1ade8d61-387b-8092-9613-e4141e26ff06" class="bulleted-list"><li style="list-style-type:disc">Generates <strong>JWT tokens</strong>.</li></ul><ul id="1ade8d61-387b-8009-81c1-c8259ff8050d" class="bulleted-list"><li style="list-style-type:disc">Saves the <strong>refresh token</strong> in a cookie.</li></ul><ul id="1ade8d61-387b-805b-abf7-e7226a34e4dc" class="bulleted-list"><li style="list-style-type:disc">Redirects user to frontend with <strong>access token</strong>.</li></ul><hr id="1ade8d61-387b-809b-b5e3-f90c7aa576e1"/><h2 id="1ade8d61-387b-8015-9138-c66f6c620bde" class=""><strong>🔹 Supporting Facebook &amp; GitHub Authentication</strong></h2><p id="1ade8d61-387b-804d-a64d-e6cdf286faaf" class="">To add <strong>Facebook &amp; GitHub login</strong>, simply extend <code>application.yaml</code>:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1ade8d61-387b-80cc-9ae4-fae114d26f58" class="code"><code class="language-YAML" style="white-space:pre-wrap;word-break:break-all">spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: YOUR_GOOGLE_CLIENT_ID
+            client-secret: YOUR_GOOGLE_CLIENT_SECRET
+          github:
+            client-id: YOUR_GITHUB_CLIENT_ID
+            client-secret: YOUR_GITHUB_CLIENT_SECRET
+          facebook:
+            client-id: YOUR_FACEBOOK_CLIENT_ID
+            client-secret: YOUR_FACEBOOK_CLIENT_SECRET
+
+</code></pre><p id="1ade8d61-387b-80c8-91fc-e43de5ba4ae6" class="">✅ <strong>Result:</strong></p><p id="1ade8d61-387b-805f-836d-da8b48b1fc50" class="">On <code>/login</code>, you will now see <strong>Google, GitHub, and Facebook login buttons</strong>!</p><hr id="1ade8d61-387b-807b-b72e-fb69dcbf97de"/><h1 id="1ade8d61-387b-8068-8bfd-d9b550a398c9" class=""><strong>🔹 Summary: Quick Interview Revision</strong></h1><p id="1ade8d61-387b-802c-b144-ef54e1e32215" class="">✅ <strong>OAuth 2 Client Authentication Flow:</strong></p><ol type="1" id="1ade8d61-387b-8014-900e-dd46d23caf07" class="numbered-list" start="1"><li>User clicks <strong>Login with Google</strong>.</li></ol><ol type="1" id="1ade8d61-387b-80f7-9aa6-e654768a2583" class="numbered-list" start="2"><li>App redirects to <strong>Google Authorization Server</strong>.</li></ol><ol type="1" id="1ade8d61-387b-808b-9f2c-eec5b4096674" class="numbered-list" start="3"><li>Google asks for <strong>credentials &amp; consent</strong>.</li></ol><ol type="1" id="1ade8d61-387b-8023-b091-dc282b0b03b3" class="numbered-list" start="4"><li>Google returns <strong>AUTH_CODE</strong>.</li></ol><ol type="1" id="1ade8d61-387b-80bd-a4c8-c2e395fd8cb6" class="numbered-list" start="5"><li>App exchanges AUTH_CODE for <strong>Access &amp; Refresh Tokens</strong>.</li></ol><ol type="1" id="1ade8d61-387b-80f8-b3c9-d87e43fe15cc" class="numbered-list" start="6"><li>App <strong>authenticates user</strong> and sets RT in cookies.</li></ol><ol type="1" id="1ade8d61-387b-8021-b877-e7ecdb90760e" class="numbered-list" start="7"><li>App redirects user to frontend with <strong>Access Token</strong>.</li></ol><p id="1ade8d61-387b-8014-8d6c-de5471694e75" class="">✅ <strong>Spring Security OAuth 2 Setup Steps:</strong></p><ol type="1" id="1ade8d61-387b-801c-99bb-f40796820da4" class="numbered-list" start="1"><li>Add <code><strong>spring-boot-starter-oauth2-client</strong></code> dependency.</li></ol><ol type="1" id="1ade8d61-387b-80ed-9a32-fe90ae326b58" class="numbered-list" start="2"><li>Configure <strong>OAuth Client ID &amp; Secret</strong> in <code>application.yaml</code>.</li></ol><ol type="1" id="1ade8d61-387b-80eb-a5b2-ebcb9d99f0dc" class="numbered-list" start="3"><li>Set up <strong>WebSecurityConfig</strong> to use OAuth2 login.</li></ol><ol type="1" id="1ade8d61-387b-807a-aba9-d0c2450b5124" class="numbered-list" start="4"><li>Implement <strong>OAuth2SuccessHandler</strong> to process tokens.</li></ol><ol type="1" id="1ade8d61-387b-8078-8057-d1e123f7e848" class="numbered-list" start="5"><li>Store <strong>refresh tokens in cookies</strong> and <strong>access token in response</strong>.</li></ol><ol type="1" id="1ade8d61-387b-8096-9da6-d02bc0099bec" class="numbered-list" start="6"><li>Redirect user to frontend.</li></ol><p id="1ade8d61-387b-80b7-bec7-d2ebdfca2ae3" class="">✅ <strong>OAuth2SuccessHandler Responsibilities:</strong></p><ul id="1ade8d61-387b-8020-be1d-f7c13fd8880a" class="bulleted-list"><li style="list-style-type:disc">Extracts user details from OAuth2 token.</li></ul><ul id="1ade8d61-387b-8030-94cd-df020919e6a8" class="bulleted-list"><li style="list-style-type:disc">Creates a new user if not present.</li></ul><ul id="1ade8d61-387b-8085-9f28-ef6c0be42b77" class="bulleted-list"><li style="list-style-type:disc">Generates <strong>JWT access &amp; refresh tokens</strong>.</li></ul><ul id="1ade8d61-387b-80b2-92da-ccef48a6d1df" class="bulleted-list"><li style="list-style-type:disc">Saves <strong>refresh token in a cookie</strong>.</li></ul><ul id="1ade8d61-387b-804c-a12c-ea13dc5a0ad6" class="bulleted-list"><li style="list-style-type:disc">Redirects user to frontend with access token.</li></ul><hr id="1ade8d61-387b-80ac-bd42-c4371eb1ccca"/></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
